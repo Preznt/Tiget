@@ -1,3 +1,4 @@
+/* global */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,10 +9,17 @@ html {
   height: 100vh;
 }
 body,
-section.schedule.container {
+section {
   width: 100%;
   height: 100%;
 }
+button {
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+/* schedule */
 section.schedule.container {
   overflow: hidden;
   display: flex;
@@ -19,29 +27,6 @@ section.schedule.container {
   align-items: center;
   justify-content: center;
 }
-div.schedule.top_box {
-  position: relative;
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-div.schedule.number_box {
-  display: flex;
-  flex-direction: column;
-}
-h2.year,
-h1.month {
-  text-align: center;
-  width: 5em;
-}
-
-button.today {
-  position: absolute;
-  top: 50%;
-  right: 0;
-}
-
 /* 
 cf)
 한 요소에 margin-left: auto 를 주게 되면 
@@ -49,6 +34,68 @@ cf)
 나머지 요소들은 전부 왼쪽으로 붙는다.
 부모 요소에 적용한 자식 요소들의 가운데 정렬은 무시된다.
 */
+
+div.schedule.top_box {
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh 0;
+}
+div.schedule.number_box {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h2.year,
+h1.month {
+  text-align: center;
+  user-select: none;
+}
+h1.month {
+  font-size: 3em;
+}
+button.prev,
+button.next {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+button.prev {
+  border-left: 15px solid transparent;
+  border-right: 15px solid black;
+}
+button.next {
+  border-left: 15px solid black;
+  border-right: 15px solid transparent;
+}
+button.prev:hover {
+  border-right-color: orange;
+}
+button.next:hover {
+  border-left-color: orange;
+}
+button.today {
+  position: absolute;
+  top: calc(50% - 15px);
+  right: 0;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 60px;
+  height: 30px;
+  background-color: transparent;
+  font-weight: 700;
+}
+button.today:hover {
+  border-color: orange;
+  color: orange;
+  box-shadow: 0 0 4px orange;
+}
 
 table.schedule {
   width: 80%;
@@ -60,6 +107,7 @@ table.schedule thead tr th {
   border: 0;
   padding: 1em;
   width: calc(100% / 7);
+  user-select: none;
 }
 table.schedule tbody tr td {
   border: 1px solid #ccc;
@@ -67,14 +115,18 @@ table.schedule tbody tr td {
   width: calc(100% / 7);
   position: relative;
 }
-table.schedule tbody tr td div {
+table.schedule tbody tr td div.date_txt {
   position: absolute;
   top: 5px;
   right: 5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
-table.schedule tbody tr td:nth-of-type(1) {
-  border-radius: 20px 0 0 20px;
-}
-table.schedule tbody tr td:nth-last-of-type(1) {
-  border-radius: 0 20px 20px 0;
+table.schedule tbody tr td.today > div.date_txt {
+  background-color: orange;
 }
