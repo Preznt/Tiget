@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  width: 100vw;
+  height: 100vh;
+}
+body,
+section.schedule.container {
+  width: 100%;
+  height: 100%;
+}
+section.schedule.container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+div.schedule.top_box {
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+div.schedule.number_box {
+  display: flex;
+  flex-direction: column;
+}
+h2.year,
+h1.month {
+  text-align: center;
+  width: 5em;
+}
+
+button.today {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+/* 
+cf)
+한 요소에 margin-left: auto 를 주게 되면 
+그 요소는 가장 오른쪽에 위치,
+나머지 요소들은 전부 왼쪽으로 붙는다.
+부모 요소에 적용한 자식 요소들의 가운데 정렬은 무시된다.
+*/
+
+table.schedule {
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+table.schedule thead tr th {
+  border: 0;
+  padding: 1em;
+  width: calc(100% / 7);
+}
+table.schedule tbody tr td {
+  border: 1px solid #ccc;
+  margin: 5px;
+  width: calc(100% / 7);
+  position: relative;
+}
+table.schedule tbody tr td div {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+table.schedule tbody tr td:nth-of-type(1) {
+  border-radius: 20px 0 0 20px;
+}
+table.schedule tbody tr td:nth-last-of-type(1) {
+  border-radius: 0 20px 20px 0;
+}
