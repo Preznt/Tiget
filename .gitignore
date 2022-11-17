@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# nodejs 파일 업로드 제외하기
+package-lock.json
