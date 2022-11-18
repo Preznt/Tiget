@@ -23,11 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     date: time.getDate(),
     day: time.getDay(),
   };
-  const todayArr = [
-    `year_${today.year}`,
-    `month_${today.month}`,
-    `date_${today.date}`,
-  ];
+  const todayArr = [`y_${today.year}`, `m_${today.month}`, `d_${today.date}`];
 
   const showNum = () => {
     monthNum.textContent = `${valDay.month}월`;
@@ -36,9 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const matchToday = (arr1, arr2) => arr1.every((ele) => arr2.includes(ele));
 
+  // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = () => {
     // 이번 달 마지막 날짜 = 총 날짜 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
+    const prevLastDate = new Date(valDay.year, valDay.month - 1, 0).getDate();
     // 이번 달 첫 요일은 이번 달 첫 주에서 저번 달 마지막 요일(prevMonthDate)을 뺀 것
     // 저번 달 마지막 요일 index. 0(일요일)부터 시작하므로 요일 개수를 구하기 위해 + 1
     const prevMonthDate =
@@ -55,7 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // dateIndex : 1 ~ lastDate 까지 증가
     let dateIndex = 1;
-    for (let j = 0; j < 5; j++) {
+
+    let prevDateIndex = prevLastDate - (prevMonthDate - 1);
+
+    let nextDateIndex = 1;
+    for (let j = 0; j < 6; j++) {
       let tds = trs[j].querySelectorAll("td");
       for (let k = 0; k < 7; k++) {
         let td = tds[k];
@@ -64,22 +66,38 @@ document.addEventListener("DOMContentLoaded", () => {
         td.appendChild(dateTxt);
         // 마지막 달이 토요일(6 + 1 = 7)이면 이번 달은 일요일이므로 첫 주 공백이 없음
         if (j === 0 && prevMonthDate != 7 && k < prevMonthDate) {
-          dateTxt.textContent = "";
+          dateTxt.textContent = prevDateIndex;
+          td.setAttribute(
+            "class",
+            `prevMonth y_${valDay.year} m_${
+              valDay.month - 1
+            } d_${prevDateIndex}`
+          );
+          prevDateIndex++;
         } else if (dateIndex <= lastDate) {
           dateTxt.textContent = dateIndex;
           dateTxt.setAttribute("class", "date_txt");
           td.setAttribute(
             "class",
-            `year_${valDay.year} month_${valDay.month} date_${dateIndex}`
+            `y_${valDay.year} m_${valDay.month} d_${dateIndex}`
           );
           const tdClassArr = Array.from(td.classList);
           if (matchToday(tdClassArr, todayArr)) {
             td.setAttribute(
               "class",
-              `today year_${valDay.year} month_${valDay.month} date_${dateIndex}`
+              `today y_${valDay.year} m_${valDay.month} d_${dateIndex}`
             );
           }
           dateIndex++;
+        } else {
+          dateTxt.textContent = nextDateIndex;
+          td.setAttribute(
+            "class",
+            `nextMonth y_${valDay.year} m_${
+              valDay.month + 1
+            } d_${nextDateIndex}`
+          );
+          nextDateIndex++;
         }
       } // 1주 for문 종료
     } // 1달 for문 종료
@@ -116,6 +134,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // 렌더링 완료 후 즉시 실행
   showDate();
 });
+
+// 월별 배경 변경 switch문
+// switch (valDay.month) {
+//   case 1:
+//     break;
+//   case 2:
+//     break;
+//   case 3:
+//     break;
+//   case 4:
+//     break;
+//   case 5:
+//     break;
+//   case 6:
+//     break;
+//   case 7:
+//     break;
+//   case 8:
+//     break;
+//   case 9:
+//     break;
+//   case 10:
+//     break;
+//   case 11:
+//     break;
+//   case 12:
+//     break;
+// }
 
 /**
  * TO DO

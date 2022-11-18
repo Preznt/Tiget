@@ -17,6 +17,7 @@ button {
   cursor: pointer;
   outline: none;
   transition: all 0.2s;
+  user-select: none;
 }
 
 /* schedule */
@@ -42,7 +43,6 @@ div.schedule.top_box {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 1vh 0;
 }
 div.schedule.number_box {
   width: 30%;
@@ -56,30 +56,70 @@ h1.month {
   user-select: none;
 }
 h1.month {
-  font-size: 3em;
+  font-size: 2em;
 }
 button.prev,
 button.next {
+  width: 50px;
+  height: 50px;
+  border: none;
+  position: relative;
+  background-color: transparent;
+}
+
+/*
+before, after는 border로 만든 삼각형
+버튼에 hover 되면 반응
+*/
+button.prev:before,
+button.next:after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 15px);
   width: 0;
   height: 0;
+  cursor: pointer;
   background-color: transparent;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
-button.prev {
+
+button.prev:before {
   border-left: 15px solid transparent;
   border-right: 15px solid black;
+  left: calc(50% - 25px);
 }
-button.next {
+button.next:after {
   border-left: 15px solid black;
   border-right: 15px solid transparent;
+  left: calc(50% - 5px);
 }
-button.prev:hover {
+
+button.prev:hover:before {
   border-right-color: orange;
+  animation: 0.3s infinite alternate linear moveLeft;
 }
-button.next:hover {
+button.next:hover:after {
   border-left-color: orange;
+  animation: 0.3s infinite alternate linear moveRight;
 }
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+@keyframes moveRight {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
 button.today {
   position: absolute;
   top: calc(50% - 15px);
@@ -97,9 +137,10 @@ button.today:hover {
   box-shadow: 0 0 4px orange;
 }
 
+/* table 영역 */
 table.schedule {
   width: 80%;
-  height: 80%;
+  height: 90%;
   margin: 0 auto;
   border-collapse: collapse;
 }
@@ -120,8 +161,8 @@ table.schedule tbody tr td div.date_txt {
   top: 5px;
   right: 5px;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,4 +170,8 @@ table.schedule tbody tr td div.date_txt {
 }
 table.schedule tbody tr td.today > div.date_txt {
   background-color: orange;
+}
+table.schedule tbody tr td.prevMonth > div.date_txt,
+table.schedule tbody tr td.nextMonth > div.date_txt {
+  color: #ccc;
 }
