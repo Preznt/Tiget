@@ -13,6 +13,9 @@ section {
   width: 100%;
   height: 100%;
 }
+input {
+  outline: none;
+}
 button {
   cursor: pointer;
   outline: none;
@@ -20,12 +23,12 @@ button {
   user-select: none;
 }
 
-/* schedule section */
-section.schedule.container {
+/* calendar section */
+section.calendar.container {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 /* 
@@ -36,28 +39,38 @@ cf)
 부모 요소에 적용한 자식 요소들의 가운데 정렬은 무시된다.
 */
 
-/* 상단 영역 */
-div.schedule.top_box {
-  position: relative;
+/* 상단 top_box 영역 */
+div.calendar.top_box {
   width: 80%;
+  padding: 0.2% 2%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
 }
-div.schedule.number_box {
-  width: 30%;
+/* paging button, h1, h2 영역 */
+div.button_box {
+  flex: 7;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+div.number_box {
+  flex-basis: 150px;
+  flex-shrink: 1;
+  flex-grow: 0;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 h2.year,
 h1.month {
-  text-align: center;
+  white-space: nowrap;
   user-select: none;
 }
 h1.month {
-  font-size: 2em;
+  text-align: right;
 }
 button.prev,
 button.next {
@@ -75,22 +88,22 @@ button.prev:before,
 button.next:after {
   content: "";
   position: absolute;
-  top: calc(50% - 15px);
+  top: calc(50% - 10px);
   width: 0;
   height: 0;
   cursor: pointer;
   background-color: transparent;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
 button.prev:before {
-  border-left: 15px solid transparent;
-  border-right: 15px solid black;
-  left: calc(50% - 25px);
+  border-left: 10px solid transparent;
+  border-right: 10px solid black;
+  left: calc(50% - 15px);
 }
 button.next:after {
-  border-left: 15px solid black;
-  border-right: 15px solid transparent;
+  border-left: 10px solid black;
+  border-right: 10px solid transparent;
   left: calc(50% - 5px);
 }
 button.prev:hover:before {
@@ -106,7 +119,7 @@ button.next:hover:after {
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(-10px);
+    transform: translateX(-5px);
   }
 }
 @keyframes moveRight {
@@ -114,13 +127,10 @@ button.next:hover:after {
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(10px);
+    transform: translateX(5px);
   }
 }
 button.today {
-  position: absolute;
-  top: calc(50% - 15px);
-  right: 0;
   border: 2px solid black;
   border-radius: 10px;
   width: 60px;
@@ -134,40 +144,124 @@ button.today:hover {
   box-shadow: 0 0 4px orange;
 }
 
-/* table 영역 */
-table.schedule {
-  width: 80%;
-  height: 90%;
-  margin: 0 auto;
-  border-collapse: collapse;
+/* search 영역 */
+div.search_box {
+  position: relative;
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
 }
-table.schedule thead tr,
-table.schedule tbody tr:nth-last-of-type(1) {
+div.search_box > * {
+  padding: 2%;
+}
+input.input_search {
+  border: 0;
+  width: 60%;
+  border: 1px solid black;
+}
+button.btn_search {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 110px);
+  width: 30px;
+  height: 100%;
+  border: 0;
+  background-color: transparent;
+}
+button.btn_search:before,
+button.btn_search:after {
+  position: absolute;
+  content: "";
+  background-color: transparent;
+}
+button.btn_search:before {
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+button.btn_search:after {
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-top: 2px solid black;
+  transform: rotate(45deg);
+}
+button.btn_search_detail {
+  border: 1px solid black;
+  width: 80px;
+  padding: 0 1em;
+  background-color: transparent;
+  text-align: left;
+  position: relative;
+}
+div.btn_search_detail_arrow {
+  position: absolute;
+  top: calc(50% - 2.5px);
+  right: 15%;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  border-top: 5px solid black;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+div.btn_search_detail_arrow.active {
+  top: calc(50% - 7.5px);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+/* 하단 bottom_box 영역 */
+div.calendar.bottom_box {
+  width: 100%;
+  height: 90%;
+  padding: 0 2%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* calendar table 영역 */
+table.calendar {
+  flex: 8;
+  height: 100%;
+  border-collapse: collapse;
+  margin-right: 1%;
+}
+table.calendar thead tr,
+table.calendar tbody tr:nth-last-of-type(1) {
   border-bottom: 2px solid black;
 }
-table.schedule thead tr th {
+table.calendar thead tr th {
   border: 0;
-  padding: 1em;
+  padding: 0.5em;
   width: calc(100% / 7);
   user-select: none;
+  font-size: 12pt;
+  font-weight: 700;
 }
-table.schedule tbody tr td {
+table.calendar tbody tr td {
   border: 1px solid #ccc;
   margin: 5px;
   width: calc(100% / 7);
   height: calc(100% / 6);
   position: relative;
 }
-table.schedule tbody tr td:nth-of-type(1) {
+table.calendar tbody tr td:nth-of-type(1) {
   border-left: 0;
 }
-table.schedule tbody tr td:nth-last-of-type(1) {
+table.calendar tbody tr td:nth-last-of-type(1) {
   border-right: 0;
 }
-table.schedule tbody tr td div.date_txt {
+table.calendar tbody tr td div.date_txt {
   position: absolute;
   top: 5px;
-  right: 5px;
+  left: 5px;
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -176,10 +270,68 @@ table.schedule tbody tr td div.date_txt {
   justify-content: center;
   user-select: none;
 }
-table.schedule tbody tr td.today > div.date_txt {
+table.calendar tbody tr td.today {
+  background-color: antiquewhite;
+}
+table.calendar tbody tr td.today > div.date_txt {
   background-color: orange;
 }
-table.schedule tbody tr td.prevMonth > div.date_txt,
-table.schedule tbody tr td.nextMonth > div.date_txt {
+table.calendar tbody tr td.prevMonth > div.date_txt,
+table.calendar tbody tr td.nextMonth > div.date_txt {
   color: #ccc;
+}
+
+/* schedule aside 영역*/
+aside.schedule {
+  flex: 2;
+  margin-left: 1%;
+  border: 1px solid black;
+}
+div.ticket_shape {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+div.ticket_shape.header {
+  width: 100%;
+  flex: 1.5;
+  background-color: red;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20pt;
+  user-select: none;
+}
+div.ticket_shape.circle {
+  width: 100%;
+  height: 1%;
+  position: absolute;
+  top: calc(100% - 2.5%);
+  left: 0;
+  border-top: 5px dotted white;
+}
+div.ticket_shape.circle:before,
+div.ticket_shape.circle:after {
+  content: "";
+  position: absolute;
+  top: -16px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+}
+div.ticket_shape.circle:before {
+  left: -12px;
+}
+div.ticket_shape.circle:after {
+  right: -12px;
+}
+div.ticket_shape.body {
+  width: 100%;
+  flex: 8.5;
+  background-color: white;
 }

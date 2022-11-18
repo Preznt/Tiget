@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const yearNum = document.querySelector("h2.year");
   const monthNum = document.querySelector("h1.month");
-  const trs = document.querySelectorAll("table.schedule tbody tr");
+  const trs = document.querySelectorAll("table.calendar tbody tr");
   const btnPrev = document.querySelector("button.prev");
   const btnNext = document.querySelector("button.next");
   const btnToday = document.querySelector("button.today");
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const matchToday = (arr1, arr2) => arr1.every((ele) => arr2.includes(ele));
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
+
   const showDate = () => {
     // 이번 달 마지막 날짜 = 총 날짜 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
@@ -53,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // dateIndex : 1 ~ lastDate 까지 증가
     let dateIndex = 1;
-
+    // prevDateIndex : 이번 달에서 저번 달 날짜를 표시하기 위한 시작 날짜
+    // (prevLastDate - 이전 요일 Index). prevMonthDate에서 + 1 했으므로 - 1
     let prevDateIndex = prevLastDate - (prevMonthDate - 1);
-
     let nextDateIndex = 1;
     for (let j = 0; j < 6; j++) {
       let tds = trs[j].querySelectorAll("td");
@@ -131,6 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
     showDate();
   });
 
+  // search detail button 클릭하면 dropdown 표시, arrow 토글
+  const btnSearchDetail = document.querySelector("button.btn_search_detail");
+  btnSearchDetail?.addEventListener("click", () => {
+    const detailArrow = document.querySelector("div.btn_search_detail_arrow");
+    detailArrow.classList.toggle("active");
+  });
+
   // 렌더링 완료 후 즉시 실행
   showDate();
 });
@@ -166,10 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
 /**
  * TO DO
  * 0. button.today 클릭하면 오늘 날짜 표시(화면, 일정도 변경)
- * 1. h2.year, h1.month 클릭 시 input 또는 list 표시
- * (좌우 버튼을 여러 번 클릭하지 않아도 달력을 넘길 수 있게)
+ * 1. 네이버 캘린더처럼 상세 버튼을 클릭하면
+ *    일정 색, 공연 장소, 일정, 공연명 등 검색 상세 dropdown 표시
  * 2. 월별로 배경화면 변경
  * 3. 공휴일 표시(open API 사용)
  * 4. 일정 표시(open API 사용)
  * 5. 일정을 클릭하면 넷플릭스 상세정보처럼 modal 창을 크게 표시
+ * 6. 공연정보 modal 안에 별표, 북마크 등 중요도 체크하는 항목 표시
  */
