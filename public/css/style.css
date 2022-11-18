@@ -20,7 +20,7 @@ button {
   user-select: none;
 }
 
-/* schedule */
+/* schedule section */
 section.schedule.container {
   overflow: hidden;
   display: flex;
@@ -36,6 +36,7 @@ cf)
 부모 요소에 적용한 자식 요소들의 가운데 정렬은 무시된다.
 */
 
+/* 상단 영역 */
 div.schedule.top_box {
   position: relative;
   width: 80%;
@@ -66,7 +67,6 @@ button.next {
   position: relative;
   background-color: transparent;
 }
-
 /*
 before, after는 border로 만든 삼각형
 버튼에 hover 되면 반응
@@ -83,7 +83,6 @@ button.next:after {
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
-
 button.prev:before {
   border-left: 15px solid transparent;
   border-right: 15px solid black;
@@ -94,7 +93,6 @@ button.next:after {
   border-right: 15px solid transparent;
   left: calc(50% - 5px);
 }
-
 button.prev:hover:before {
   border-right-color: orange;
   animation: 0.3s infinite alternate linear moveLeft;
@@ -119,7 +117,6 @@ button.next:hover:after {
     transform: translateX(10px);
   }
 }
-
 button.today {
   position: absolute;
   top: calc(50% - 15px);
@@ -144,6 +141,10 @@ table.schedule {
   margin: 0 auto;
   border-collapse: collapse;
 }
+table.schedule thead tr,
+table.schedule tbody tr:nth-last-of-type(1) {
+  border-bottom: 2px solid black;
+}
 table.schedule thead tr th {
   border: 0;
   padding: 1em;
@@ -154,7 +155,14 @@ table.schedule tbody tr td {
   border: 1px solid #ccc;
   margin: 5px;
   width: calc(100% / 7);
+  height: calc(100% / 6);
   position: relative;
+}
+table.schedule tbody tr td:nth-of-type(1) {
+  border-left: 0;
+}
+table.schedule tbody tr td:nth-last-of-type(1) {
+  border-right: 0;
 }
 table.schedule tbody tr td div.date_txt {
   position: absolute;

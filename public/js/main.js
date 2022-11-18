@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
  * 1. h2.year, h1.month 클릭 시 input 또는 list 표시
  * (좌우 버튼을 여러 번 클릭하지 않아도 달력을 넘길 수 있게)
  * 2. 월별로 배경화면 변경
- * 3. 일정 표시
- * 4. 일정을 클릭하면 넷플릭스 상세정보처럼 modal 창을 크게 표시
+ * 3. 공휴일 표시(open API 사용)
+ * 4. 일정 표시(open API 사용)
+ * 5. 일정을 클릭하면 넷플릭스 상세정보처럼 modal 창을 크게 표시
  */
