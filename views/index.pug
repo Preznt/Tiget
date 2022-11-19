@@ -1,7 +1,9 @@
 extends layout
 
 block content
+  link(rel='stylesheet', href='/css/style.css')
   script(src="/js/main.js")
+  script(src="/js/search.js")
   section.calendar.container
     div.calendar.top_box
       div.button_box
@@ -12,10 +14,18 @@ block content
         button.next
         button.today today
       div.search_box
-        input(type="text").input_search
+        input(type="text", placeholder="공연 일정 검색").input_search
         button(type="button").btn_search
         button(type="button").btn_search_detail 상세 
           div.btn_search_detail_arrow
+    div.search_detail_dropdown_box
+      div.search_detail_dropdown
+        label()
+        input()
+        label(for="input_search_title") 제목
+        input(type="text", placeholder="제목")#input_search_title
+        label(for="input_search_place") 장소
+        input(type="text", placeholder="장소")#input_search_place
     div.calendar.bottom_box
       table.calendar
         thead
@@ -78,6 +88,19 @@ block content
             td 
       aside.schedule
         div.ticket_shape
-          div.ticket_shape.header 나의 일정 
-            div.ticket_shape.circle
+          div.ticket_shape.header 나의 일정
+            div.ticket_shape.barcode
+            div.ticket_shape.cut
           div.ticket_shape.body
+            div.ticket_shape.content
+              ul 
+                li 가
+                li 나
+                li 다
+                li 라
+                li 마
+                li 바
+                li 사
+                li 아
+                li 자
+                li 차

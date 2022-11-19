@@ -29,7 +29,7 @@ section.calendar.container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
 }
 /* 
 cf)
@@ -42,7 +42,7 @@ cf)
 /* 상단 top_box 영역 */
 div.calendar.top_box {
   width: 80%;
-  padding: 0.2% 2%;
+  padding: 2% 2% 0% 2%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -131,17 +131,16 @@ button.next:hover:after {
   }
 }
 button.today {
-  border: 2px solid black;
+  border: 1px solid #aaa;
   border-radius: 10px;
   width: 60px;
   height: 30px;
   background-color: transparent;
-  font-weight: 700;
 }
 button.today:hover {
   border-color: orange;
   color: orange;
-  box-shadow: 0 0 4px orange;
+  box-shadow: 0 0 3px orange;
 }
 
 /* search 영역 */
@@ -152,12 +151,13 @@ div.search_box {
   justify-content: flex-end;
 }
 div.search_box > * {
-  padding: 2%;
+  padding: 5px;
 }
 input.input_search {
   border: 0;
   width: 60%;
-  border: 1px solid black;
+  border: 1px solid #aaa;
+  padding: 10px;
 }
 button.btn_search {
   position: absolute;
@@ -175,24 +175,27 @@ button.btn_search:after {
   background-color: transparent;
 }
 button.btn_search:before {
-  top: 0;
-  left: 0;
+  top: 24%;
+  left: calc(50% - 10px);
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2px solid black;
+  border: 2px solid #aaa;
 }
 button.btn_search:after {
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
+  top: calc(50% + 3px);
+  left: calc(50% - 2px);
+  width: 8px;
+  height: 8px;
   border: 0;
-  border-top: 2px solid black;
+  border-top: 2px solid #aaa;
   transform: rotate(45deg);
 }
 button.btn_search_detail {
-  border: 1px solid black;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  border-left: 0;
+  border-right: 1px solid #aaa;
   width: 80px;
   padding: 0 1em;
   background-color: transparent;
@@ -217,15 +220,32 @@ div.btn_search_detail_arrow.active {
   border-bottom: 5px solid black;
 }
 
+/* search detail dropdown 영역 */
+div.search_detail_dropdown_box {
+  width: 80%;
+  height: 0;
+  padding: 0.5% 2%;
+  display: flex;
+  transition: height 0.2s;
+}
+div.search_detail_dropdown_box > * {
+  display: none;
+}
+div.search_detail_dropdown_box.visible {
+  height: 20%;
+}
+div.search_detail_dropdown_box.visible > * {
+  display: block;
+}
+
 /* 하단 bottom_box 영역 */
 div.calendar.bottom_box {
   width: 100%;
-  height: 90%;
-  padding: 0 2%;
+  height: 100%;
+  padding: 0 2% 2% 2%;
   display: flex;
   flex-wrap: wrap;
 }
-
 /* calendar table 영역 */
 table.calendar {
   flex: 8;
@@ -285,53 +305,106 @@ table.calendar tbody tr td.nextMonth > div.date_txt {
 aside.schedule {
   flex: 2;
   margin-left: 1%;
-  border: 1px solid black;
 }
 div.ticket_shape {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* clip-path: inset(0% 0% 0% 0% round 20px); */
 }
 div.ticket_shape.header {
   width: 100%;
   flex: 1.5;
-  background-color: red;
+  background-color: #c5a773;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
   font-size: 20pt;
   user-select: none;
+  border-radius: 5px 5px 20px 20px;
 }
-div.ticket_shape.circle {
-  width: 100%;
+div.ticket_shape.barcode {
+  width: 60%;
+  height: 15%;
+  position: absolute;
+  top: 10px;
+  left: 20%;
+  background: linear-gradient(
+    to right,
+    #333 2%,
+    rgba(0, 0, 0, 0) 2% 5%,
+    #333 5% 8%,
+    rgba(0, 0, 0, 0) 8% 10%,
+    #333 10% 12%,
+    rgba(0, 0, 0, 0) 12% 15%,
+    #333 15% 20%,
+    rgba(0, 0, 0, 0) 20% 25%,
+    #333 25% 28%,
+    rgba(0, 0, 0, 0) 28% 30%,
+    #333 30% 35%,
+    rgba(0, 0, 0, 0) 35% 40%,
+    #333 40% 42%,
+    rgba(0, 0, 0, 0) 42% 43%,
+    #333 43% 45%,
+    rgba(0, 0, 0, 0) 45% 48%,
+    #333 48% 50%,
+    rgba(0, 0, 0, 0) 50% 52%,
+    #333 52% 56%,
+    rgba(0, 0, 0, 0) 56% 60%,
+    #333 60% 62%,
+    rgba(0, 0, 0, 0) 62% 64%,
+    #333 64% 68%,
+    rgba(0, 0, 0, 0) 68% 70%,
+    #333 70% 75%,
+    rgba(0, 0, 0, 0) 75% 78%,
+    #333 78% 80%,
+    rgba(0, 0, 0, 0) 80% 85%,
+    #333 85% 88%,
+    rgba(0, 0, 0, 0) 88% 90%,
+    #333 90% 92%,
+    rgba(0, 0, 0, 0) 92% 96%,
+    #333 96% 100%
+  );
+}
+div.ticket_shape.cut {
+  width: 80%;
   height: 1%;
   position: absolute;
-  top: calc(100% - 2.5%);
-  left: 0;
-  border-top: 5px dotted white;
-}
-div.ticket_shape.circle:before,
-div.ticket_shape.circle:after {
-  content: "";
-  position: absolute;
-  top: -16px;
-  border-radius: 50%;
-  border: 1px solid black;
-  background-color: transparent;
-  width: 24px;
-  height: 24px;
-}
-div.ticket_shape.circle:before {
-  left: -12px;
-}
-div.ticket_shape.circle:after {
-  right: -12px;
+  top: calc(100% - 2%);
+  left: 10%;
+  border-top: 5px dotted rgb(248, 244, 241);
 }
 div.ticket_shape.body {
   width: 100%;
   flex: 8.5;
   background-color: white;
+  border-radius: 20px 20px 5px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #181818;
+}
+div.ticket_shape.content {
+  width: 90%;
+  height: 95%;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #c5a773;
+}
+div.ticket_shape.content ul {
+  list-style: none;
+}
+div.ticket_shape.content ul li {
+  padding: 5px 0;
+  color: white;
+}
+div.ticket_shape.content ul li:before {
+  content: "\2022";
+  color: #c5a773;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
