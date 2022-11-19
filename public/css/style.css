@@ -19,7 +19,7 @@ input {
 button {
   cursor: pointer;
   outline: none;
-  transition: all 0.2s;
+  transition: all ease-in 0.2s;
   user-select: none;
 }
 
@@ -27,9 +27,9 @@ button {
 section.calendar.container {
   overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 2%;
 }
 /* 
 cf)
@@ -39,10 +39,18 @@ cf)
 부모 요소에 적용한 자식 요소들의 가운데 정렬은 무시된다.
 */
 
-/* 상단 top_box 영역 */
-div.calendar.top_box {
-  width: 80%;
-  padding: 2% 2% 0% 2%;
+/* 왼쪽 main 영역 */
+div.calendar.main {
+  flex: 8;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 좌상단 tools 영역 */
+div.calendar_tools {
+  width: 100%;
+  padding: 0 0 0.5% 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -95,14 +103,15 @@ button.next:after {
   background-color: transparent;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
+  transition: all ease-in 0.2s;
 }
 button.prev:before {
   border-left: 10px solid transparent;
-  border-right: 10px solid black;
+  border-right: 10px solid #181818;
   left: calc(50% - 15px);
 }
 button.next:after {
-  border-left: 10px solid black;
+  border-left: 10px solid #181818;
   border-right: 10px solid transparent;
   left: calc(50% - 5px);
 }
@@ -132,15 +141,13 @@ button.next:hover:after {
 }
 button.today {
   border: 1px solid #aaa;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 60px;
   height: 30px;
   background-color: transparent;
 }
 button.today:hover {
-  border-color: orange;
-  color: orange;
-  box-shadow: 0 0 3px orange;
+  background-color: #ccc;
 }
 
 /* search 영역 */
@@ -157,6 +164,7 @@ input.input_search {
   border: 0;
   width: 60%;
   border: 1px solid #aaa;
+  border-radius: 5px 0 0 5px;
   padding: 10px;
 }
 button.btn_search {
@@ -173,6 +181,7 @@ button.btn_search:after {
   position: absolute;
   content: "";
   background-color: transparent;
+  transition: all ease-in 0.2s;
 }
 button.btn_search:before {
   top: 24%;
@@ -196,11 +205,16 @@ button.btn_search_detail {
   border-bottom: 1px solid #aaa;
   border-left: 0;
   border-right: 1px solid #aaa;
+  border-radius: 0 5px 5px 0;
   width: 80px;
   padding: 0 1em;
   background-color: transparent;
   text-align: left;
   position: relative;
+  white-space: nowrap;
+}
+button.btn_search_detail:hover {
+  background-color: #ccc;
 }
 div.btn_search_detail_arrow {
   position: absolute;
@@ -209,7 +223,7 @@ div.btn_search_detail_arrow {
   width: 0;
   height: 0;
   background-color: transparent;
-  border-top: 5px solid black;
+  border-top: 5px solid #181818;
   border-bottom: 5px solid transparent;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
@@ -217,45 +231,95 @@ div.btn_search_detail_arrow {
 div.btn_search_detail_arrow.active {
   top: calc(50% - 7.5px);
   border-top: 5px solid transparent;
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #181818;
 }
 
-/* search detail dropdown 영역 */
+/* search detail 버튼을 클릭할 때 나타나는 dropdown 영역 */
 div.search_detail_dropdown_box {
-  width: 80%;
+  width: 100%;
   height: 0;
-  padding: 0.5% 2%;
   display: flex;
-  transition: height 0.2s;
+  transition: height ease-in 0.2s;
 }
-div.search_detail_dropdown_box > * {
+form.search_detail_dropdown {
+  width: 100%;
+  height: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  opacity: 0;
+  transition: all ease-in-out 0.2s;
+}
+div.search_detail_dropdown_box > form.search_detail_dropdown > * {
   display: none;
 }
 div.search_detail_dropdown_box.visible {
-  height: 20%;
+  height: 10%;
 }
-div.search_detail_dropdown_box.visible > * {
-  display: block;
+div.search_detail_dropdown_box.visible > form.search_detail_dropdown {
+  opacity: 1;
+  height: 100%;
+}
+div.search_detail_dropdown_box.visible > form.search_detail_dropdown > * {
+  display: flex;
+}
+.search_detail_input_box {
+  width: calc(100% / 5);
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 5px;
+}
+.search_detail_input_box:nth-child(1) {
+  flex: 1;
+}
+.search_detail_input_box > label {
+  font-weight: 700;
+  white-space: nowrap;
+  margin-right: 10px;
+}
+.search_detail_input_box > input {
+  width: 80%;
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+input::placeholder {
+  color: #aaa;
+}
+input[type="date"]::-webkit-datetime-edit-text {
+  color: #aaa;
+}
+.search_detail_input_box > span {
+  display: inline-block;
+  margin: 0 5px;
+}
+form.search_detail_dropdown > button {
+  width: 80px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin-left: 1%;
+  border: 1px solid #aaa;
+  background-color: transparent;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+form.search_detail_dropdown > button:hover {
+  background-color: #ccc;
 }
 
-/* 하단 bottom_box 영역 */
-div.calendar.bottom_box {
-  width: 100%;
-  height: 100%;
-  padding: 0 2% 2% 2%;
-  display: flex;
-  flex-wrap: wrap;
-}
 /* calendar table 영역 */
 table.calendar {
   flex: 8;
   height: 100%;
   border-collapse: collapse;
-  margin-right: 1%;
 }
 table.calendar thead tr,
 table.calendar tbody tr:nth-last-of-type(1) {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #181818;
 }
 table.calendar thead tr th {
   border: 0;
@@ -271,6 +335,7 @@ table.calendar tbody tr td {
   width: calc(100% / 7);
   height: calc(100% / 6);
   position: relative;
+  transition: background-color ease-out 0.1s;
 }
 table.calendar tbody tr td:nth-of-type(1) {
   border-left: 0;
@@ -278,6 +343,11 @@ table.calendar tbody tr td:nth-of-type(1) {
 table.calendar tbody tr td:nth-last-of-type(1) {
   border-right: 0;
 }
+table.calendar tbody tr td:hover {
+  background-color: #eee;
+}
+
+/* table.calendar td 안 date_text 영역 */
 table.calendar tbody tr td div.date_txt {
   position: absolute;
   top: 5px;
@@ -301,10 +371,24 @@ table.calendar tbody tr td.nextMonth > div.date_txt {
   color: #ccc;
 }
 
-/* schedule aside 영역*/
-aside.schedule {
+/* table.calendar td 안 schedule 영역 */
+table.calendar tbody tr td div.schedule {
+  width: 100%;
+  padding: 5px;
+  background-color: #181818;
+  color: white;
+  user-select: none;
+}
+table.calendar tbody tr td div.schedule:hover {
+  cursor: pointer;
+  background-color: orange;
+}
+
+/* my_schedule aside 영역*/
+aside.calendar.my_schedule {
   flex: 2;
   margin-left: 1%;
+  height: 100%;
 }
 div.ticket_shape {
   width: 100%;
@@ -333,39 +417,39 @@ div.ticket_shape.barcode {
   left: 20%;
   background: linear-gradient(
     to right,
-    #333 2%,
+    #181818 2%,
     rgba(0, 0, 0, 0) 2% 5%,
-    #333 5% 8%,
+    #181818 5% 8%,
     rgba(0, 0, 0, 0) 8% 10%,
-    #333 10% 12%,
+    #181818 10% 12%,
     rgba(0, 0, 0, 0) 12% 15%,
-    #333 15% 20%,
+    #181818 15% 20%,
     rgba(0, 0, 0, 0) 20% 25%,
-    #333 25% 28%,
+    #181818 25% 28%,
     rgba(0, 0, 0, 0) 28% 30%,
-    #333 30% 35%,
+    #181818 30% 35%,
     rgba(0, 0, 0, 0) 35% 40%,
-    #333 40% 42%,
+    #181818 40% 42%,
     rgba(0, 0, 0, 0) 42% 43%,
-    #333 43% 45%,
+    #181818 43% 45%,
     rgba(0, 0, 0, 0) 45% 48%,
-    #333 48% 50%,
+    #181818 48% 50%,
     rgba(0, 0, 0, 0) 50% 52%,
-    #333 52% 56%,
+    #181818 52% 56%,
     rgba(0, 0, 0, 0) 56% 60%,
-    #333 60% 62%,
+    #181818 60% 62%,
     rgba(0, 0, 0, 0) 62% 64%,
-    #333 64% 68%,
+    #181818 64% 68%,
     rgba(0, 0, 0, 0) 68% 70%,
-    #333 70% 75%,
+    #181818 70% 75%,
     rgba(0, 0, 0, 0) 75% 78%,
-    #333 78% 80%,
+    #181818 78% 80%,
     rgba(0, 0, 0, 0) 80% 85%,
-    #333 85% 88%,
+    #181818 85% 88%,
     rgba(0, 0, 0, 0) 88% 90%,
-    #333 90% 92%,
+    #181818 90% 92%,
     rgba(0, 0, 0, 0) 92% 96%,
-    #333 96% 100%
+    #181818 96% 100%
   );
 }
 div.ticket_shape.cut {
@@ -399,6 +483,7 @@ div.ticket_shape.content ul {
 div.ticket_shape.content ul li {
   padding: 5px 0;
   color: white;
+  user-select: none;
 }
 div.ticket_shape.content ul li:before {
   content: "\2022";
@@ -407,4 +492,8 @@ div.ticket_shape.content ul li:before {
   display: inline-block;
   width: 1em;
   margin-left: -1em;
+}
+div.ticket_shape.content ul li:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
