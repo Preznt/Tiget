@@ -25,6 +25,7 @@ button {
 
 /* calendar section */
 section.calendar.container {
+  position: relative;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -151,13 +152,13 @@ button.today:hover {
 }
 
 /* search 영역 */
-div.search_box {
+form.search_box {
   position: relative;
   flex: 3;
   display: flex;
   justify-content: flex-end;
 }
-div.search_box > * {
+form.search_box > * {
   padding: 5px;
 }
 input.input_search {
@@ -384,6 +385,118 @@ table.calendar tbody tr td div.schedule:hover {
   background-color: orange;
 }
 
+/* calendar modal 영역 */
+.calendar.modal {
+  position: absolute;
+  top: calc(50% - 30%);
+  left: calc(50% - 30%);
+  opacity: 0.8;
+  transform: scale(0.8);
+  transform-origin: center;
+  width: 60%;
+  height: 60%;
+  border-radius: 5px;
+  z-index: -1;
+  transition: all ease-out 0.3s;
+}
+.calendar.modal.visible {
+  z-index: 999;
+  background-color: #181818;
+  transform: scale(1);
+  opacity: 1;
+}
+.calendar.modal > .calendar.modal_content {
+  display: none;
+}
+.calendar.modal.visible > .calendar.modal_content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 20px 30px;
+}
+.calendar.modal_content > * {
+  margin: 5px 0;
+}
+button.modal.btn_close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(151, 151, 151, 0.5);
+  transition: background-color ease-out 0.1s;
+}
+button.modal.btn_close:hover {
+  background-color: rgba(151, 151, 151, 1);
+}
+div.modal.main {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+div.modal.main > .modal.image {
+  width: 100%;
+  height: 80%;
+  background-color: white;
+  border-radius: 5px;
+}
+div.modal.main > .modal.button_box {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+div.modal.main > .modal.button_box > button {
+  width: 40%;
+  border: 1px solid #ccc;
+  padding: 5%;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 12pt;
+}
+.modal.desc {
+  width: 68%;
+  height: 100%;
+  margin-left: 2%;
+}
+.modal.desc > .modal.title {
+  width: 100%;
+  height: 18%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 20pt;
+  font-weight: 700;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+.modal.desc > .modal.body {
+  width: 100%;
+  height: 80%;
+  color: #ccc;
+}
+
+/* modal 이 visible 할 때 다른 영역 클릭 방지 */
+.bg_blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  transition: all ease-out 0.3s;
+}
+.bg_blur.active {
+  /* backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px); */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
 /* my_schedule aside 영역*/
 aside.calendar.my_schedule {
   flex: 2;
@@ -410,13 +523,13 @@ div.ticket_shape.header {
   border-radius: 5px 5px 20px 20px;
 }
 div.ticket_shape.barcode {
-  width: 60%;
-  height: 15%;
+  width: 10%;
+  height: 80%;
   position: absolute;
   top: 10px;
-  left: 20%;
+  right: 5%;
   background: linear-gradient(
-    to right,
+    to bottom,
     #181818 2%,
     rgba(0, 0, 0, 0) 2% 5%,
     #181818 5% 8%,

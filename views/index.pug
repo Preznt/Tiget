@@ -14,13 +14,13 @@ block content
             h1.month
           button.next
           button.today today
-        div.search_box
+        form(method="POST").search_box
           input(type="text", placeholder="공연 일정 검색").input_search
           button(type="button").btn_search
           button(type="button").btn_search_detail 상세 
             div.btn_search_detail_arrow
       div.search_detail_dropdown_box
-        form.search_detail_dropdown
+        form(method="POST").search_detail_dropdown
           div.search_detail_input_box
             label(for="input_search_date") 기간
             input(type="date", name="search_start")#input_search_start
@@ -97,6 +97,19 @@ block content
             td 
             td 
             td 
+    div.calendar.modal
+      div.calendar.modal_content
+        button(type="button").modal.btn_close X
+        div.modal.main
+          div.modal.image 이미지
+          div.modal.button_box
+            button(type="button") 상세정보
+            button(type="button") 예매하기
+        div.modal.desc
+          div.modal.title 제목입니다
+          div.modal.body
+            p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ut. Corporis laudantium deleniti voluptate obcaecati, atque distinctio itaque quidem autem porro dicta alias et nostrum fugit minima id perspiciatis sint!
+    div.bg_blur
     aside.calendar.my_schedule
       div.ticket_shape
         div.ticket_shape.header 나의 일정

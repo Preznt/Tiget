@@ -139,6 +139,28 @@ document.addEventListener("DOMContentLoaded", () => {
     detailArrow.classList.toggle("active");
   });
 
+  const calendar = document.querySelector("table.calendar");
+  const modal = document.querySelector("div.calendar.modal");
+  const bgBlur = document.querySelector("div.bg_blur");
+  calendar?.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.className === "schedule") {
+      modal.classList.add("visible");
+      bgBlur.classList.add("active");
+    }
+  });
+
+  bgBlur?.addEventListener("click", () => {
+    modal.classList.remove("visible");
+    bgBlur.classList.remove("active");
+  });
+
+  const btnModalClose = document.querySelector("button.modal.btn_close");
+  btnModalClose?.addEventListener("click", () => {
+    modal.classList.remove("visible");
+    bgBlur.classList.remove("active");
+  });
+
   // 렌더링 완료 후 즉시 실행
   showDate();
 });
