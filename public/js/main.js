@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const yearNum = document.querySelector("h2.year");
-  const monthNum = document.querySelector("h1.month");
-  const trs = document.querySelectorAll("table.calendar tbody tr");
+  const calendar = document.querySelector("table.calendar");
   const btnPrev = document.querySelector("button.prev");
   const btnNext = document.querySelector("button.next");
   const btnToday = document.querySelector("button.today");
+  const btnSearchDetail = document.querySelector("button.btn_search_detail");
+  const bgBlur = document.querySelector("div.bg_blur");
+  const btnModalClose = document.querySelector("button.modal.btn_close");
 
   const time = new Date();
-
   // 달력 넘기기 용도
   const valDay = {
     year: time.getFullYear(),
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     date: time.getDate(),
     day: time.getDay(),
   };
-
   // 오늘 날짜 표시 용도
   const today = {
     year: time.getFullYear(),
@@ -23,82 +22,116 @@ document.addEventListener("DOMContentLoaded", () => {
     date: time.getDate(),
     day: time.getDay(),
   };
-  const todayArr = [`y_${today.year}`, `m_${today.month}`, `d_${today.date}`];
+
+  const modal = {
+    modal: document.querySelector("div.calendar.modal"),
+    open() {
+      this.modal.classList.add("visible");
+      bgBlur.classList.add("active");
+    },
+    close() {
+      this.modal.classList.remove("visible");
+      bgBlur.classList.remove("active");
+    },
+  };
 
   const showNum = () => {
-    monthNum.textContent = `${valDay.month}월`;
+    const yearNum = document.querySelector("h2.year");
+    const monthNum = document.querySelector("h1.month");
     yearNum.textContent = `${valDay.year}년`;
+    monthNum.textContent = `${valDay.month}월`;
   };
 
   const matchToday = (arr1, arr2) => arr1.every((ele) => arr2.includes(ele));
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
-
   const showDate = () => {
-    // 이번 달 마지막 날짜 = 총 날짜 개수
+    const todayArr = [`y_${today.year}`, `m_${today.month}`, `d_${today.date}`];
+    // lastDate: 이번 달 마지막 날짜 = 이번 달 날짜의 총 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
+    // prevLastDate: 저번 달 마지막 날짜
     const prevLastDate = new Date(valDay.year, valDay.month - 1, 0).getDate();
-    // 이번 달 첫 요일은 이번 달 첫 주에서 저번 달 마지막 요일(prevMonthDate)을 뺀 것
-    // 저번 달 마지막 요일 index. 0(일요일)부터 시작하므로 요일 개수를 구하기 위해 + 1
-    const prevMonthDate =
+    // prevMonthDays: 저번 달 마지막 날짜 요일 index + 1. 0(일요일)부터 시작하므로 요일 개수를 구하기 위해 + 1
+    // 이번 달 첫 날짜 요일이 언제인지를 구하기 위함
+    const prevMonthDays =
       new Date(valDay.year, valDay.month - 1, 0).getDay() + 1;
+    /**
+     * dIndex.current : 1 ~ lastDate 까지 증가
+     * dIndex.prev : 이번 달 첫 주에서 표시할 저번 달의 시작 날짜(prevLastDate - 이전 요일 Index)
+     *               prevMonthDays에서 + 1 했으므로 - 1
+     */
+    const dIndex = {
+      current: 1,
+      prev: prevLastDate - (prevMonthDays - 1),
+      next: 1,
+    };
 
-    // 모든 td 안의 날짜 div(tdTxt) 제거
+    // 모든 td 안의 날짜 div(dateTxt) 제거
     const tdAll = document.querySelectorAll("td");
     for (let td of tdAll) {
-      const tdTxt = document.querySelector(".date_txt");
-      if (Array.from(td.children).includes(tdTxt)) {
-        td.removeChild(tdTxt);
+      let dateTxt = document.querySelector(".date_txt");
+      if (Array.from(td.children).includes(dateTxt)) {
+        td.removeChild(dateTxt);
       }
     }
 
-    // dateIndex : 1 ~ lastDate 까지 증가
-    let dateIndex = 1;
-    // prevDateIndex : 이번 달에서 저번 달 날짜를 표시하기 위한 시작 날짜
-    // (prevLastDate - 이전 요일 Index). prevMonthDate에서 + 1 했으므로 - 1
-    let prevDateIndex = prevLastDate - (prevMonthDate - 1);
-    let nextDateIndex = 1;
+    const trs = document.querySelectorAll("table.calendar tbody tr");
     for (let j = 0; j < 6; j++) {
       let tds = trs[j].querySelectorAll("td");
+
       for (let k = 0; k < 7; k++) {
         let td = tds[k];
         let dateTxt = document.createElement("div");
         dateTxt.setAttribute("class", "date_txt");
         td.appendChild(dateTxt);
-        // 마지막 달이 토요일(6 + 1 = 7)이면 이번 달은 일요일이므로 첫 주 공백이 없음
-        if (j === 0 && prevMonthDate != 7 && k < prevMonthDate) {
-          dateTxt.textContent = prevDateIndex;
+
+        // 저번 달 날짜 표시
+        // prevMonthDays != 7: 저번 달 마지막 요일이 토요일(6 + 1 = 7)이면 이번 달은 일요일이므로 첫 주 공백이 없음
+        if (j === 0 && prevMonthDays != 7 && k < prevMonthDays) {
+          dateTxt.textContent = dIndex.prev;
+          if (valDay.month === 1) {
+            td.setAttribute(
+              "class",
+              `y_${valDay.year - 1} m_12 d_${dIndex.prev}`
+            );
+          } else {
+            td.setAttribute(
+              "class",
+              `y_${valDay.year} m_${valDay.month - 1} d_${dIndex.prev}`
+            );
+          }
+          td.classList.add("prevMonth");
+          dIndex.prev++;
+
+          // 이번 달 날짜 표시
+        } else if (dIndex.current <= lastDate) {
+          dateTxt.textContent = dIndex.current;
           td.setAttribute(
             "class",
-            `prevMonth y_${valDay.year} m_${
-              valDay.month - 1
-            } d_${prevDateIndex}`
-          );
-          prevDateIndex++;
-        } else if (dateIndex <= lastDate) {
-          dateTxt.textContent = dateIndex;
-          dateTxt.setAttribute("class", "date_txt");
-          td.setAttribute(
-            "class",
-            `y_${valDay.year} m_${valDay.month} d_${dateIndex}`
+            `y_${valDay.year} m_${valDay.month} d_${dIndex.current}`
           );
           const tdClassArr = Array.from(td.classList);
           if (matchToday(tdClassArr, todayArr)) {
+            td.classList.add("today");
+          }
+          dIndex.current++;
+
+          // 다음 달 날짜 표시
+        } else {
+          dateTxt.textContent = dIndex.next;
+          if (valDay.month === 12) {
             td.setAttribute(
               "class",
-              `today y_${valDay.year} m_${valDay.month} d_${dateIndex}`
+              `y_${valDay.year + 1} m_1 d_${dIndex.next}`
+            );
+          } else {
+            td.setAttribute(
+              "class",
+              `y_${valDay.year} m_${valDay.month + 1} d_${dIndex.next}`
             );
           }
-          dateIndex++;
-        } else {
-          dateTxt.textContent = nextDateIndex;
-          td.setAttribute(
-            "class",
-            `nextMonth y_${valDay.year} m_${
-              valDay.month + 1
-            } d_${nextDateIndex}`
-          );
-          nextDateIndex++;
+          td.classList.add("nextMonth");
+          dIndex.next++;
         }
       } // 1주 for문 종료
     } // 1달 for문 종료
@@ -124,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showNum();
     showDate();
   });
-
   btnToday?.addEventListener("click", () => {
     valDay.year = today.year;
     valDay.month = today.month;
@@ -133,32 +165,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // search detail button 클릭하면 dropdown 표시, arrow 토글
-  const btnSearchDetail = document.querySelector("button.btn_search_detail");
   btnSearchDetail?.addEventListener("click", () => {
-    const detailArrow = document.querySelector("div.btn_search_detail_arrow");
-    detailArrow.classList.toggle("active");
+    document
+      .querySelector("div.btn_search_detail_arrow")
+      .classList.toggle("active");
   });
 
-  const calendar = document.querySelector("table.calendar");
-  const modal = document.querySelector("div.calendar.modal");
-  const bgBlur = document.querySelector("div.bg_blur");
+  // 이벤트 버블링 이용, schedule 클릭 시 modal 창과 bgBlur 띄우기
   calendar?.addEventListener("click", (e) => {
     const target = e.target;
     if (target.className === "schedule") {
-      modal.classList.add("visible");
-      bgBlur.classList.add("active");
+      modal.open();
     }
   });
 
+  // bgBlur나 modal 창의 close 버튼 클릭 시 modal 창과 bgBlur 닫기
   bgBlur?.addEventListener("click", () => {
-    modal.classList.remove("visible");
-    bgBlur.classList.remove("active");
+    modal.close();
   });
-
-  const btnModalClose = document.querySelector("button.modal.btn_close");
   btnModalClose?.addEventListener("click", () => {
-    modal.classList.remove("visible");
-    bgBlur.classList.remove("active");
+    modal.close();
   });
 
   // 렌더링 완료 후 즉시 실행

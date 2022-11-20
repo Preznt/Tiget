@@ -252,7 +252,7 @@ form.search_detail_dropdown {
   border-radius: 5px;
   padding: 15px;
   opacity: 0;
-  transition: all ease-in-out 0.2s;
+  transition: all cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s;
 }
 div.search_detail_dropdown_box > form.search_detail_dropdown > * {
   display: none;
@@ -526,7 +526,7 @@ div.ticket_shape.barcode {
   width: 10%;
   height: 80%;
   position: absolute;
-  top: 10px;
+  top: 10%;
   right: 5%;
   background: linear-gradient(
     to bottom,
