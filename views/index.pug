@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  link(rel='stylesheet', href='/css/style.css')
-  script(src="/js/main.js")
+  link(rel='stylesheet', href='/css/calendar.css')
+  script(src="/js/calendar.js")
   script(src="/js/search.js")
   section.calendar.container
     div.calendar.main
@@ -47,56 +47,6 @@ block content
             th Fri
             th Sat
         tbody
-          tr
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-          tr
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-          tr
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-          tr
-            td 
-              div.schedule test1 
-              div.schedule test2
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-          tr
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-          tr
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
-            td 
     div.calendar.modal
       div.calendar.modal_content
         button(type="button").modal.btn_close X
@@ -109,7 +59,6 @@ block content
           div.modal.title 제목입니다
           div.modal.body
             p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ut. Corporis laudantium deleniti voluptate obcaecati, atque distinctio itaque quidem autem porro dicta alias et nostrum fugit minima id perspiciatis sint!
-    div.bg_blur
     aside.calendar.my_schedule
       div.ticket_shape
         div.ticket_shape.header 나의 일정
@@ -128,3 +77,5 @@ block content
               li 아
               li 자
               li 차
+          div.bg_image
+    div.bg_blur
