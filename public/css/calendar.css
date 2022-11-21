@@ -30,7 +30,7 @@ section.calendar.container {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 2%;
+  padding: 1%;
 }
 /* 
 cf)
@@ -268,7 +268,7 @@ form.search_detail_dropdown {
   display: flex;
 }
 .search_detail_input_box {
-  width: calc(100% / 5);
+  /* width: calc(100% / 5); */
   justify-content: flex-start;
   align-items: center;
   margin: 0 5px;
@@ -279,7 +279,7 @@ form.search_detail_dropdown {
 .search_detail_input_box > label {
   font-weight: 700;
   white-space: nowrap;
-  margin-right: 10px;
+  margin: 5px;
 }
 .search_detail_input_box > input {
   width: 80%;
@@ -310,6 +310,43 @@ form.search_detail_dropdown > button {
 }
 form.search_detail_dropdown > button:hover {
   background-color: #ccc;
+}
+
+label[for="input_search_loc"],
+label[for="input_search_genre"] {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  position: relative;
+}
+.search_loc_dropdown_box,
+.search_genre_dropdown_box {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  display: none;
+  width: 60px;
+  height: 600px;
+  z-index: 1;
+}
+.search_loc_dropdown_box > label,
+.search_genre_dropdown_box > label {
+  padding: 5px;
+  user-select: none;
+}
+label[for="input_search_loc"]:hover .search_loc_dropdown_box,
+label[for="input_search_genre"]:hover .search_genre_dropdown_box {
+  display: block;
+  background-color: #ccc;
+  display: flex;
+  flex-direction: column;
+}
+.search_loc_dropdown_box input:checked + label,
+.search_genre_dropdown_box input:checked + label {
+  color: red;
+}
+.search_loc_dropdown_box input,
+.search_genre_dropdown_box input {
+  display: none;
 }
 
 /* calendar table 영역 */

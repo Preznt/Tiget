@@ -79,8 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let k = 0; k < 7; k++) {
         let td = document.createElement("TD");
         let dateTxt = document.createElement("div");
-        dateTxt.setAttribute("class", "date_txt");
+        dateTxt.classList.add("date_txt");
         td.appendChild(dateTxt);
+        let holiTxt = document.createElement("div");
+        holiTxt.classList.add("holi_txt");
+        td.appendChild(holiTxt);
 
         // 저번 달 날짜 표시
         // prevMonthDays != 7: 저번 달 마지막 요일이 토요일(6 + 1 = 7)이면 이번 달은 일요일이므로 첫 주 공백이 없음
@@ -134,6 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showNum();
   };
+
+  console.log(holidays);
 
   btnPrev?.addEventListener("click", () => {
     valDay.month--;
