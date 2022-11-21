@@ -46,7 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = () => {
-    const todayArr = [`y_${today.year}`, `m_${today.month}`, `d_${today.date}`];
+    const todayArr = [
+      `${today.year}${String(today.month).padStart(2, 0)}${String(
+        today.date
+      ).padStart(2, 0)}`,
+    ];
     // lastDate: 이번 달 마지막 날짜 = 이번 달 날짜의 총 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
     // prevLastDate: 저번 달 마지막 날짜
@@ -82,23 +86,22 @@ document.addEventListener("DOMContentLoaded", () => {
         // prevMonthDays != 7: 저번 달 마지막 요일이 토요일(6 + 1 = 7)이면 이번 달은 일요일이므로 첫 주 공백이 없음
         if (j === 0 && prevMonthDays != 7 && k < prevMonthDays) {
           dateTxt.textContent = dIndex.prev;
+          let dd = String(dIndex.prev).padStart(2, 0);
           if (valDay.month === 1) {
-            td.classList.add(`y_${valDay.year - 1}`);
-            td.classList.add(`m_12`);
+            td.classList.add(`${valDay.year - 1}12${dd}`);
           } else {
-            td.classList.add(`y_${valDay.year}`);
-            td.classList.add(`m_${valDay.month - 1}`);
+            let mm = String(valDay.month - 1).padStart(2, 0);
+            td.classList.add(`${valDay.year}${mm}${dd}`);
           }
-          td.classList.add(`d_${dIndex.prev}`);
           td.classList.add("prevMonth");
           dIndex.prev++;
 
           // 이번 달 날짜 표시
         } else if (dIndex.current <= lastDate) {
           dateTxt.textContent = dIndex.current;
-          td.classList.add(`y_${valDay.year}`);
-          td.classList.add(`m_${valDay.month}`);
-          td.classList.add(`d_${dIndex.current}`);
+          let mm = String(valDay.month).padStart(2, 0);
+          let dd = String(dIndex.current).padStart(2, 0);
+          td.classList.add(`${valDay.year}${mm}${dd}`);
           const tdClassArr = Array.from(td.classList);
           if (matchToday(tdClassArr, todayArr)) {
             td.classList.add("today");
@@ -114,14 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
           // 다음 달 날짜 표시
         } else {
           dateTxt.textContent = dIndex.next;
+          let dd = String(dIndex.next).padStart(2, 0);
           if (valDay.month === 12) {
-            td.classList.add(`y_${valDay.year + 1}`);
-            td.classList.add(`m_1`);
+            td.classList.add(`${valDay.year + 1}01${dd}`);
           } else {
-            td.classList.add(`y_${valDay.year}`);
-            td.classList.add(`m_${valDay.month + 1}`);
+            let mm = String(valDay.month + 1).padStart(2, 0);
+            td.classList.add(`${valDay.year}${mm}${dd}`);
           }
-          td.classList.add(`d_${dIndex.next}`);
           td.classList.add("nextMonth");
           dIndex.next++;
         }
@@ -172,6 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   btnModalClose?.addEventListener("click", () => {
     modal.close();
+  });
+
+  const btnInfo = document.querySelector("button#btn_info");
+  btnInfo?.addEventListener("click", () => {
+    document.location.href = `/detail/${111}`;
   });
 
   const bgImage = document.querySelector(".bg_image");

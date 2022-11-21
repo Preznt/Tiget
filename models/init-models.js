@@ -1,9 +1,9 @@
-import _tbl_sample from "./sample_model.js";
+import _tbl_holiday from "./holiday_model.js";
 const initModels = (sequelize) => {
-  const tbl_sample = _tbl_sample(sequelize);
+  const tbl_holiday = _tbl_holiday(sequelize);
 
   return {
-    tbl_sample,
+    tbl_holiday,
   };
 };
 
