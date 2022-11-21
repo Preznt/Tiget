@@ -1,0 +1,64 @@
+div.ranking {
+  width: 70%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+div.title button {
+  border: none;
+  font-size: 30px;
+  background-color: transparent;
+  margin: 15px;
+}
+
+div.title span {
+  color: #ccc;
+  font-size: 26px;
+}
+
+button.genre {
+  color: #ccc;
+}
+
+button.genre:hover {
+  color: #aaa;
+}
+
+button.genre:focus {
+  color: black;
+}
+
+div.sub-title button {
+  padding: 7px 15px;
+  font-size: 17px;
+  margin: 10px;
+  border-radius: 1.5em;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+div.sub-title button:hover {
+  border: 1px solid black;
+}
+
+div.detail img {
+  width: 200px;
+  height: 247px;
+}
+
+div.detail a {
+  display: inline-block;
+  width: 200px;
+  margin: 12px;
+}
+
+div.detail div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+div.detail div.title {
+  font-weight: 900;
+}
