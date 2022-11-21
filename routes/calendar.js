@@ -7,8 +7,12 @@ const router = express.Router();
 /* GET home page. */
 router.get("/calendar", async (req, res, next) => {
   const holidays = await Holiday.findAll();
-  console.log(holidays["tbl_holiday"]);
-  res.render("calendar", { holidays });
+  const holiArr = [];
+  for (let i of holidays) {
+    holiArr.push(i.dataValues);
+  }
+  console.log(holiArr);
+  res.render("calendar", { holiArr });
 });
 
 export default router;

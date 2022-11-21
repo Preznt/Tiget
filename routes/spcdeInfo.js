@@ -17,7 +17,7 @@ const servicekey =
   "9sO%2BZVBC9mjTRJen1l4kyCib4qEKBjsmKRIWkI2U%2FCdv16CRM60dzGlagqOTQIwK0W1kpY4tG4Silvvhlf7H%2Fg%3D%3D";
 
 // 내년 국경일(공휴일 + 제헌절) 정보 업데이트
-let currentYear = new Date().getFullYear() + 1;
+let currentYear = new Date().getFullYear();
 
 let queryParams = "?" + encodeURIComponent("serviceKey") + "=" + servicekey;
 queryParams +=
@@ -46,13 +46,12 @@ const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
     // console.log("Reponse received", body);
     let dataArr = {};
     try {
-      let data = JSON.parse(body);
-      for (let i in data["response"]["body"]["items"]["item"]) {
-        let dateName = data["response"]["body"]["items"]["item"][i]["dateName"];
-        let isHoliday =
-          data["response"]["body"]["items"]["item"][i]["isHoliday"];
-        let locdate = data["response"]["body"]["items"]["item"][i]["locdate"];
-        let seq = data["response"]["body"]["items"]["item"][i]["seq"];
+      let data = JSON.parse(body)["response"]["body"]["items"]["item"];
+      for (let i in data) {
+        let dateName = data[i]["dateName"];
+        let isHoliday = data[i]["isHoliday"];
+        let locdate = data[i]["locdate"];
+        let seq = data[i]["seq"];
         dataArr = {
           h_dateName: dateName,
           h_isHoliday: isHoliday,

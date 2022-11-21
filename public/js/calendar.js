@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     monthNum.textContent = `${valDay.month}월`;
   };
 
-  const matchToday = (arr1, arr2) => arr1.every((ele) => arr2.includes(ele));
+  const matchDay = (arr1, arr2) => arr1.every((ele) => arr2.includes(ele));
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = () => {
@@ -81,9 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let dateTxt = document.createElement("div");
         dateTxt.classList.add("date_txt");
         td.appendChild(dateTxt);
-        let holiTxt = document.createElement("div");
-        holiTxt.classList.add("holi_txt");
-        td.appendChild(holiTxt);
 
         // 저번 달 날짜 표시
         // prevMonthDays != 7: 저번 달 마지막 요일이 토요일(6 + 1 = 7)이면 이번 달은 일요일이므로 첫 주 공백이 없음
@@ -106,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let dd = String(dIndex.current).padStart(2, 0);
           td.classList.add(`${valDay.year}${mm}${dd}`);
           const tdClassArr = Array.from(td.classList);
-          if (matchToday(tdClassArr, todayArr)) {
+          if (matchDay(tdClassArr, todayArr)) {
             td.classList.add("today");
 
             // schedule 임시 추가용
@@ -137,8 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showNum();
   };
-
-  console.log(holidays);
 
   btnPrev?.addEventListener("click", () => {
     valDay.month--;
@@ -187,13 +182,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const bgImage = document.querySelector(".bg_image");
-
   if (today.month === 11 || today.month <= 2) {
     bgImage.style.backgroundImage = "url('../images/winter bg.png')";
   }
 
   // 렌더링 완료 후 즉시 실행
   showDate();
+
+  // for (let td of document.querySelectorAll("td")) {
+  //   const tdClassArr = Array.from(td.classList);
+  //   let holiTxt = document.createElement("div");
+  //   holiTxt.classList.add("holi_txt");
+  //   td.appendChild(holiTxt);
+  // for (let i of holidays) {
+  // if (matchDay(tdClassArr, i.h_locdate)) {
+  //   holiTxt.textContent = i.h_dateName;
+  // }
+  // if (i.h_isHoliday === "Y") {
+  //   holiTxt.style.color === "red";
+  // }
+  //   }
+  // }
 });
 
 /**
@@ -201,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
  * 0. button.today 클릭하면 오늘 날짜 표시(화면, 일정도 변경)
  * 1. 네이버 캘린더처럼 상세 버튼을 클릭하면
  *    일정 색, 공연 장소, 일정, 공연명 등 검색 상세 dropdown 표시
+ *    상세 검색 하면 달력 대신 리스트 표시
  * 2. 월별로 배경화면 변경
  * 3. 공휴일 표시(open API 사용)
  * 4. 일정 표시(open API 사용)

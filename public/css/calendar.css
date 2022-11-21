@@ -317,31 +317,58 @@ label[for="input_search_genre"] {
   border: 1px solid #aaa;
   border-radius: 5px;
   position: relative;
+  padding: 3px 10px;
+  cursor: pointer;
 }
 .search_loc_dropdown_box,
 .search_genre_dropdown_box {
   position: absolute;
-  top: 20px;
+  top: 28px;
   left: 0;
   display: none;
-  width: 60px;
-  height: 600px;
+  height: 200px;
+  overflow: hidden scroll;
   z-index: 1;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+.search_loc_dropdown_box::-webkit-scrollbar,
+.search_genre_dropdown_box::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
+}
+.search_loc_dropdown_box::-webkit-scrollbar-thumb,
+.search_genre_dropdown_box::-webkit-scrollbar-thumb {
+  background: #181818;
 }
 .search_loc_dropdown_box > label,
 .search_genre_dropdown_box > label {
-  padding: 5px;
+  padding: 5px 15px;
   user-select: none;
+  font-weight: normal;
+}
+.search_loc_dropdown_box > label:hover,
+.search_genre_dropdown_box > label:hover {
+  cursor: pointer;
+  background-color: #ccc;
 }
 label[for="input_search_loc"]:hover .search_loc_dropdown_box,
 label[for="input_search_genre"]:hover .search_genre_dropdown_box {
   display: block;
-  background-color: #ccc;
+  background-color: white;
   display: flex;
   flex-direction: column;
 }
-.search_loc_dropdown_box input:checked + label,
-.search_genre_dropdown_box input:checked + label {
+.search_loc_dropdown_box > label:before,
+.search_genre_dropdown_box > label:before {
+  content: "\2022";
+  color: #aaa;
+  margin-right: 5px;
+  font-size: 18pt;
+}
+.search_loc_dropdown_box input:checked + label:before,
+.search_genre_dropdown_box input:checked + label:before {
   color: red;
 }
 .search_loc_dropdown_box input,
