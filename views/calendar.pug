@@ -2,11 +2,13 @@ extends layout
 
 block content
   link(rel='stylesheet', href='/css/calendar/calendar.css')
-  
+  //- cf)
+  //- JSON.stringify 를 사용하면 
+  //- router 의 데이터를 view template 로 가져올 때 생성되는 
+  //- 불필요한 데이터가 포함되지 않는다.
+  //- !: escaping 되지 않고 코드 그대로 출력
   script.
-    //- console.log(#{holiArr})
-    // const holiD = `#{holidays}`
-    // console.log(Promise.all(holiD))
+    const holiD = !{JSON.stringify(holidays)}
 
   script(src="/js/calendar/calendar.js")
   script(src="/js/calendar/search.js")
