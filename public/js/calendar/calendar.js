@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const bgBlur = document.querySelector("div.bg_blur");
   const btnModalClose = document.querySelector("button.modal.btn_close");
 
+  console.log(holiD);
+
   const time = new Date();
   // 달력 넘기기 용도
   const valDay = {
@@ -183,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const bgImage = document.querySelector(".bg_image");
   if (today.month === 11 || today.month <= 2) {
-    bgImage.style.backgroundImage = "url('../images/winter bg.png')";
+    bgImage.style.backgroundImage = "url('../images/calendar/winter bg.png')";
   }
 
   // 렌더링 완료 후 즉시 실행
