@@ -19,7 +19,7 @@ import logger from "morgan";
 import DB from "../models/index.js";
 
 // sample router modules
-import indexRouter from "../routes/index.js";
+import mainRouter from "../routes/main.js";
 import calendarRouter from "../routes/calendar.js";
 import detailRouter from "../routes/detail.js";
 import usersRouter from "../routes/users.js";
@@ -47,7 +47,7 @@ app.use(cookieParser());
 app.use(express.static(path.join("public")));
 
 // router link enable
-app.use("/", indexRouter);
+app.use("/", mainRouter);
 app.use("/calendar", calendarRouter);
 app.use("/detail", detailRouter);
 app.use("/data", spcdeInfo);

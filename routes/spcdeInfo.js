@@ -17,7 +17,10 @@ const servicekey =
   "9sO%2BZVBC9mjTRJen1l4kyCib4qEKBjsmKRIWkI2U%2FCdv16CRM60dzGlagqOTQIwK0W1kpY4tG4Silvvhlf7H%2Fg%3D%3D";
 
 // 내년 국경일(공휴일 + 제헌절) 정보 업데이트
-let currentYear = new Date().getFullYear();
+let currentYear = new Date().getFullYear() + 1;
+
+// 2021
+// new Date().getFullYear();
 
 let queryParams = "?" + encodeURIComponent("serviceKey") + "=" + servicekey;
 queryParams +=
@@ -39,6 +42,7 @@ const option = {
 
 // cron 표현식, 초 분 시 일 월 년
 // 매일 자정마다 scheduler 실행, 기본키 중복된 경우 update
+// "*/5 * * * * *"
 const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
   request(option, async (error, response, body) => {
     // console.log("Status", response.statusCode);
