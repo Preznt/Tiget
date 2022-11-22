@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // const slide = document.querySelector(".curl");
+  const slide = document.querySelector(".curl");
   const gradient = document.querySelector(".mosaic.gradient");
   const entrance = document.querySelector("a.entrance");
   // slide?.addEventListener("mouseover", () => {

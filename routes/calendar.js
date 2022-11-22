@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
   // console.log(holidays);
   // res.json(holidays);
   //
-  res.render("calendar", { holidays: Promise.all(holidays) });
+  res.render("main", { holidays: holidays });
 });
 
 export default router;
