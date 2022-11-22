@@ -1,6 +1,44 @@
 doctype html
 html
   head
-    title Tiget
+    title= title
+    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet' href='/css/title.css')
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet")
+    link(rel='stylesheet' href='/css/main_community.css')
+    link(href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet")
+    script(src="/js/main.js")
+    script(src="/js/title.js")
+
+
   body
-    block content
+    header
+      div.left
+        h1 
+          a(href="") Tiget
+      div.right
+        div.menu
+          ul
+            li 
+              a(href="") 콘서트
+            li
+              a(href="") 페스티벌
+            li 
+              a(href="") 커뮤니티
+            button#btn-modal 로그인
+        div.search
+          input(placeholder= "공연정보를 입력해주세요")
+          a(href="") 
+            img(src="images/search.png")
+        div.switch
+          label.switch
+            input(type="checkbox")
+            span.slider.round
+        div.user
+          a(href="")
+            img(src="images/user.png")
+    section.scroll
+      block content
+

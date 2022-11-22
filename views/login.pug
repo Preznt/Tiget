@@ -1,18 +1,9 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/css/nav.css')
-    script(src="/js/main.js")
-  body
-  header 
-  nav.main
-    ul
-      li Home
-      li 커뮤니티
-      <button id="btn-modal">로그인</button>
+extends layout
+
+block content
+link(rel="stylesheet", href="/css/login.css")
+script(src="/js/users/main.js")
   <body>
-    </div>
     <div id="modal" class="modal-overlay">
       <div class="modal-window">
         <div class="title">
@@ -32,4 +23,4 @@ html
       </div>
     </div>
   section.main
-    block content
+

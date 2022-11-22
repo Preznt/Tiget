@@ -14,13 +14,12 @@ section.scroll {
   scroll-snap-type: y mandatory;
 }
 
+section.calendar.container,
 section.main3,
-section.main2 {
+div.main {
   height: 100%;
   width: 100%;
   scroll-snap-align: start;
-  border: 1px solid black;
-  border-radius: 5%;
 }
 /* div.flag {
   height: 100%;
