@@ -19,7 +19,11 @@ import logger from "morgan";
 import DB from "../models/index.js";
 
 // sample router modules
+<<<<<<< HEAD
 import EntranceRouter from "../routes/entrance.js";
+=======
+import mainRouter from "../routes/main.js";
+>>>>>>> efa62ca4e8bf03385c461a70c27a6e1afe630e58
 import calendarRouter from "../routes/calendar.js";
 import detailRouter from "../routes/detail.js";
 import usersRouter from "../routes/users.js";
@@ -47,8 +51,13 @@ app.use(cookieParser());
 app.use(express.static(path.join("public")));
 
 // router link enable
+<<<<<<< HEAD
 app.use("/", EntranceRouter);
 app.use("/main", calendarRouter);
+=======
+app.use("/", mainRouter);
+app.use("/calendar", calendarRouter);
+>>>>>>> efa62ca4e8bf03385c461a70c27a6e1afe630e58
 app.use("/detail", detailRouter);
 app.use("/data", spcdeInfo);
 app.use("/users", usersRouter);
