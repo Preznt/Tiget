@@ -1,0 +1,28 @@
+extends ../layout1
+
+block content
+    link(rel="stylesheet", href="/css/users/write.css")
+    script(src="/ckeditor/ckeditor.js") 
+    script(src="/js/users/write.js")
+    div.write.main
+        div.write.insert
+            h1.mina 글쓰기
+            span.button_box
+                button(type="submit").write.insert 등록
+        div.margin
+        form(method="POST",enctype="multipart/form-data").category
+            div.form.title
+                input(type="text", name="title").main.title 
+                select(name="category")
+                    option(value="none") 게시판을 선택해주세요
+                    option(value="Notice") 공지사항
+                    option(value="concert_review") 공연 후기
+                    option(value="concert_hall_review") 공연장 후기
+                    option(value="freeboard") 자유게시판
+            div.main.text
+                textarea(id="content", cols="30", rows="30", name="main_text") 
+            div.img
+                label(for="c_image_file")
+                input(type="file",name="c_image_file", accept="image/*")#c_image_file
+    script.
+        CKEDITOR.replace('content');
