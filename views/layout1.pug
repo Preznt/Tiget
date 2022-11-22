@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/nav.css')
+    script(src="/js/main.js")
+  body
+  header 
+  nav.main
+    ul
+      li Home
+      li 커뮤니티
+      <button id="btn-modal">로그인</button>
+  <body>
+    </div>
+    <div id="modal" class="modal-overlay">
+      <div class="modal-window">
+        <div class="title">
+        </div>
+        <div class="close-area">X</div>
+        <div class="content">
+          <input class="user_id" name="user_id", type="text", placeholder="USERNAME"/>
+          <input class="user_pw" name="user_pw", type="password", placeholder="PASSWORD" />
+          <button type="button", name="login">로그인</button>
+        div.login.url
+          a(href="/users/join").join 회원가입
+          div.login &nbsp;|&nbsp;
+          a(href="/users/loss/username").username 아이디
+          div.login &nbsp;|&nbsp;
+          a(href="/users/loss/password").password 비밀번호 찾기
+        </div>
+      </div>
+    </div>
+  section.main
+    block content
