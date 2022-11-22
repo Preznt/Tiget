@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/main.css')
+    script(src="/js/main.js")
+  body
+    header
+      div.left
+        h1 
+          a(href="") Tiget
+      div.right
+        div.menu
+          ul
+            li 
+              a(href="") 콘서트
+            li
+              a(href="") 페스티벌
+            li 
+              a(href="") 커뮤니티
+
+        div.search
+          input(placeholder= "공연정보를 입력해주세요")
+          a(href="") 
+            img(src="images/search.png")
+        div.switch
+          label.switch
+            input(type="checkbox")
+            span.slider.round
+        div.user
+          a(href="")
+            img(src="images/user.png")
+    block content
