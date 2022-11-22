@@ -24,6 +24,7 @@ header {
   position: absolute;
   z-index: 40;
   width: 100%;
+  position: fixed;
 }
 
 header a {
