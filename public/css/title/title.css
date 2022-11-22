@@ -1,26 +1,17 @@
 html {
   box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
 }
 body {
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   position: relative;
   font-family: "Nanum Myeongjo", serif;
 }
-section.scroll {
-  height: 100vh;
-  width: 100vw;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-}
 
-section.calendar.container,
-section.main3,
-div.main {
-  height: 100%;
-  width: 100%;
-  scroll-snap-align: start;
-}
 /* div.flag {
   height: 100%;
   width: 100%;
@@ -48,7 +39,7 @@ div.main {
   height: 100vh;
 }
 span.tiget {
-  z-index: 2;
+  z-index: 1;
   font-family: "Rubik Distressed", cursive;
   position: absolute;
   top: 10%;
@@ -65,7 +56,7 @@ span.tiget {
   height: 100vh;
   top: 0;
   left: 0;
-  background-image: url("../images/first_1920.jpg");
+  background-image: url("/images/first_1920.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -75,7 +66,7 @@ span.tiget {
   height: 100vh;
   top: 0;
   left: 0;
-  background-image: url("../images/second_1920.jpg");
+  background-image: url("/images/second_1920.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -85,7 +76,7 @@ span.tiget {
   height: 100vh;
   top: 0;
   left: 0;
-  background-image: url("../images/third_1920.jpg");
+  background-image: url("/images/third_1920.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -135,6 +126,11 @@ span.tiget {
 
 .curl:hover {
   width: 150px;
+  height: 100%;
+}
+.curl a {
+  display: inline-block;
+  width: 100%;
   height: 100%;
 }
 .mosaic.gradient {

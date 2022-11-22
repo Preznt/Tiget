@@ -7,8 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bgBlur = document.querySelector("div.bg_blur");
   const btnModalClose = document.querySelector("button.modal.btn_close");
 
-  console.log(holiD);
-
   const time = new Date();
   // 달력 넘기기 용도
   const valDay = {
