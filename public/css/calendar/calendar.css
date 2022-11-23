@@ -1,17 +1,7 @@
 /* global */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 html {
   width: 100vw;
   height: 100vh;
-}
-
-section {
-  width: 100%;
-  height: 100%;
 }
 input {
   outline: none;
@@ -30,7 +20,7 @@ section.calendar.container {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 1%;
+  padding: 120px 1% 1% 1%;
 }
 /* 
 cf)
@@ -77,6 +67,7 @@ h2.year,
 h1.month {
   white-space: nowrap;
   user-select: none;
+  font-size: 18pt;
 }
 h1.month {
   text-align: right;
@@ -445,6 +436,13 @@ table.calendar tbody tr td:nth-last-of-type(1).today > .date_txt {
   background-color: blue;
   color: white;
 }
+table.calendar tbody tr td > .holi_txt {
+  position: absolute;
+  top: 6%;
+  left: 20%;
+  font-size: 10pt;
+}
+
 table.calendar tbody tr td.prevMonth,
 table.calendar tbody tr td.nextMonth {
   opacity: 0.4;
