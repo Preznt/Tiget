@@ -1,0 +1,67 @@
+extends layout
+
+block content
+    link(rel="stylesheet", href="https://unpkg.com/swiper/swiper-bundle.min.css")
+    link(rel="stylesheet", href="/css/changeSW.css")
+    script.
+        const holiData = !{JSON.stringify(holiData)}
+    script(src="/js/header.js")
+    script(src="https://unpkg.com/swiper/swiper-bundle.min.js")
+    div.main
+        div.swiper-container
+            div.swiper-wrapper
+                div.swiper-slide
+                    a(href="")
+                        img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221114/wel_mv_44090.jpg/dims/quality/70/" alt="")
+                div.swiper-slide
+                    a(href="")
+                        img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/01.-CONAN-GRAY_%EB%A9%94%EC%9D%B8-%EB%B9%85%EB%B0%B0%EB%84%88(PC)_1920X700px.jpg/dims/quality/70/" alt="")
+
+            //- div.swiper-pagination
+
+            div.swiper-button-prev
+            div.swiper-button-next
+
+            div.swiper-scrollbar
+                a(href="") 
+                    img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221114/wel_mv_44090_s.jpg/dims/quality/70/", alt="")
+                a(href="") 
+                    img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg/dims/quality/70/", alt="")
+                a(href="") 
+                    img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/wel_mv_44104_s.jpg/dims/quality/70/", alt="")
+                //- a(href="") 
+                //-     img(src="", alt="")
+                //- a(href="") 
+                //-     img(src="", alt="")
+    include includes/ranking.pug
+    include includes/calendar.pug
+    include includes/community.pug       
+            
+
+
+    script.
+        var mySwiper = new Swiper(".swiper-container", {
+        // 슬라이드를 버튼으로 움직일 수 있습니다.
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+
+        // 현재 페이지를 나타내는 점이 생깁니다. 클릭하면 이동합니다.
+        pagination: {
+            el: ".swiper-pagination",
+            type: "bullets",
+        },
+
+        // 현재 페이지를 나타내는 스크롤이 생깁니다. 클릭하면 이동합니다.
+        //- scrollbar: {
+        //-   el: ".swiper-scrollbar",
+        //-   draggable: true,
+        //- },
+
+        // 3초마다 자동으로 슬라이드가 넘어갑니다. 1초 = 1000
+        //- autoplay: {
+        //-   delay: 3000,
+        //- },
+        });
+        
