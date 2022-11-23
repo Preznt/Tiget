@@ -18,22 +18,19 @@ const servicekey =
 
 // 내년 국경일(공휴일 + 제헌절) 정보 업데이트
 let currentYear = new Date().getFullYear() + 1;
-
 // 2021
 // new Date().getFullYear();
 
-let queryParams = "?" + encodeURIComponent("serviceKey") + "=" + servicekey;
-queryParams +=
-  "&" +
-  encodeURIComponent("solYear") +
-  "=" +
-  encodeURIComponent(`${currentYear}`);
+let queryParams = `?${encodeURIComponent("serviceKey")}=${servicekey}`;
+queryParams += `&${encodeURIComponent("solYear")}=${encodeURIComponent(
+  currentYear
+)}`;
 //queryParams +=
-//  "&" + encodeURIComponent("solMonth") + "=" + encodeURIComponent("12");
-queryParams +=
-  "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("100");
-queryParams +=
-  "&" + encodeURIComponent("_type") + "=" + encodeURIComponent("json");
+//  `&${encodeURIComponent("solMonth")}=${encodeURIComponent("12")}`;
+queryParams += `&${encodeURIComponent("numOfRows")}=${encodeURIComponent(
+  "100"
+)}`;
+queryParams += `&${encodeURIComponent("_type")}=${encodeURIComponent("json")}`;
 
 const option = {
   url: url + queryParams,
@@ -48,27 +45,29 @@ const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
     // console.log("Status", response.statusCode);
     // console.log("Headers", JSON.stringify(response.headers));
     // console.log("Reponse received", body);
-    let dataArr = {};
-    try {
-      let data = JSON.parse(body)["response"]["body"]["items"]["item"];
-      for (let i in data) {
-        let dateName = data[i]["dateName"];
-        let isHoliday = data[i]["isHoliday"];
-        let locdate = data[i]["locdate"];
-        let seq = data[i]["seq"];
-        dataArr = {
-          h_dateName: dateName,
-          h_isHoliday: isHoliday,
-          h_locdate: locdate,
-          h_seq: seq,
-        };
-        console.log(dataArr);
-        await Holiday.create(dataArr);
+    let holiData = {};
+
+    let data = await JSON.parse(body)["response"]["body"]["items"]["item"];
+    // 여러 객체 리터럴이 배열 안에 묶여있는 형식
+    for (let i of data) {
+      // cf) 선생님 comment
+      // 구조분해 하면서 변수 이름 변경
+      // 왼쪽(실제변수) : 오른쪽(바꿀이름)
+      let {
+        dateName: h_dateName,
+        isHoliday: h_isHoliday,
+        locdate: h_locdate,
+        seq: h_seq,
+      } = i;
+      if (h_dateName === "1월1일") h_dateName = "신정";
+      if (h_dateName === "기독탄신일") h_dateName = "성탄절";
+      holiData = { h_dateName, h_isHoliday, h_locdate, h_seq };
+      console.log(holiData);
+      try {
+        await Holiday.create(holiData);
+      } catch (error) {
+        Holiday.update(holiData, { where: { h_locdate: holiData.h_locdate } });
       }
-      console.log("DB insert");
-    } catch (error) {
-      Holiday.update(dataArr, { where: { h_locdate: dataArr.h_locdate } });
-      console.log("DB update");
     }
   });
 });
