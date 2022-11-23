@@ -4,8 +4,6 @@ div.terms.allbox {
   width: 80%;
   height: 100%;
   margin: auto;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
   display: grid;
   grid-template-columns: 1fr;
 }
