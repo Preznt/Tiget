@@ -1,11 +1,10 @@
 import express from "express";
-import DB from "../models/index.js";
-const Holiday = DB.models.tbl_holiday;
+import Holiday from "../models/tbl_holiday.js";
 
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
-  const holiData = await Holiday.findAll();
+  const holiData = await Holiday.find();
   const locData = [
     { eng: "seoul", kor: "서울" },
     { eng: "busan", kor: "부산" },
