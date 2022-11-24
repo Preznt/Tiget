@@ -14,9 +14,8 @@ import path from "path";
 // 3rd party lib modules
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-
-// MySQL Sequelize
-import DB from "../models/index.js";
+import mongoose from "mongoose";
+import { atlasURL } from "../config/mongoDB.js";
 
 // sample router modules
 import EntranceRouter from "../routes/entrance.js";
@@ -28,9 +27,18 @@ import spcdeInfo from "../routes/spcdeInfo.js";
 // create express framework
 const app = express();
 
-DB.sequelize.sync({ force: false }).then((dbConn) => {
-  console.log(dbConn.options.host, dbConn.config.database, "DB Connection OK");
+const dbConn = mongoose.connection;
+// mongoose 를 통해 mongoDB 정상 접속 시 최초 한번 실행
+dbConn.once("open", () => {
+  console.log("MongoDB Connected");
 });
+// db 연결 후 문제 발생 시 호출
+dbConn.on("error", (err) => {
+  if (err) {
+    console.err(err);
+  }
+});
+await mongoose.connect(atlasURL);
 
 // Disable the fingerprinting of this web technology.
 app.disable("x-powered-by");
