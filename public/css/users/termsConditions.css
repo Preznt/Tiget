@@ -1,0 +1,63 @@
+/* 약관화면 */
+
+div.terms.allbox {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+div.margins {
+  padding: 30px;
+}
+span.input.check {
+  width: 80%;
+  margin: 30px auto 15px auto;
+}
+span.input.check label {
+  padding-top: 10px;
+  user-select: none;
+}
+div.termsConditions.join {
+  width: 80%;
+  margin: auto auto 10px auto;
+  overflow-y: scroll;
+  height: 150px;
+  border: 1px solid #8f8f8f;
+}
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+  cursor: pointer;
+  padding-left: 25px;
+  background-repeat: no-repeat;
+  background: url("/images/check-mark-off.png") no-repeat 0 0px / contain;
+  background-size: 20px 20px;
+}
+input[type="checkbox"]:checked + label {
+  background: url("/images/check-mark.svg") no-repeat 0 0px / contain;
+  background-size: 20px 20px;
+}
+div.consent {
+  margin-top: 10px;
+}
+.btnbox.join {
+  margin: auto;
+  padding: 20px;
+}
+a.btn_type.btn_default,
+button.btn_type.btn_primary {
+  padding: 10px 40px;
+  margin: 7px;
+  border: 1px solid blue;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+}
+button.btn_type.btn_primary {
+  background-color: black;
+}
+a.btn_type.btn_default {
+  color: black;
+}

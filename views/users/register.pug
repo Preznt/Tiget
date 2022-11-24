@@ -1,0 +1,87 @@
+extends ../layout
+
+block content
+    link(rel="stylesheet", href="/css/users/register.css")
+    script(src="/js/users/pwchk.js") 
+    div.register.box
+        form(method="POST").privacy.input 
+            div.register.email
+                label 이메일
+                div.input_box.select.email
+                    input(name="email_first", placeholder="이메일을 입력해주세요")
+                    span.email @
+                    select(name="email_back")
+                        option(value="none") 뒷자리를 선택해주세요
+                        option(value="gmail.com") gmail.com
+                        option(value="naver.com") naver.com
+                        option(value="hanmail.net") hanmail.net
+            div.register.password
+                label 비밀번호
+                div.input_box.input
+                    input(name="password", type="password") 
+            div.register.password_check
+                label 비밀번호확인
+                div.input_box.input
+                    input(class="password_check", type="password")
+            div.pass.div_box
+                div.pass.ii 비밀번호가 일치하지 않습니다
+                div.pass.i 비밀번호가 일치합니다
+            div.register.nick_name
+                label 닉네임
+                div.input_box.input
+                    input(name="nick_name", type="password")
+            div.register.name
+                label 이름
+                div.input_box.input
+                    input(name="name", type="text")
+            div.register.birthday
+                label 생년월일
+                div.input_box.select.birthday
+                    input(name="birthday", type="text") 
+                    select(name="mm")
+                        option(value="none") 월
+                        option(value="1") 01
+                        option(value="2") 02
+                        option(value="3") 03
+                        option(value="4") 04
+                        option(value="5") 05
+                        option(value="6") 06
+                        option(value="7") 07
+                        option(value="8") 08
+                        option(value="9") 09
+                        option(value="10") 10
+                        option(value="11") 11
+                        option(value="12") 12
+                    input(type="text")
+            div.register.gender
+                label 성별
+                div.input_box.select.gender
+                    select(name="gender") 
+                        option(value="none") 성별
+                        option(value="M") 남성
+                        option(value="F") 여성
+            div.register.tel
+                label 전화번호
+                div.input_box.input
+                    input(name="tel", type="text")
+            div.margin
+            div.register.preference
+                label.main 음악 선호도 (2개 이상)
+                div.typeMusic.select
+                    input(type="checkbox")
+                    label Pop<br>
+                    input(type="checkbox")
+                    label Rock<br>
+                    input(type="checkbox")
+                    label Electronic<br>
+                    input(type="checkbox")
+                    label Hip-Hop<br>
+                    input(type="checkbox")
+                    label R&B<br>
+                    input(type="checkbox")
+                    label Jazz<br>
+                    input(type="checkbox")
+                    label Classic<br>
+            div.button.box.submit
+                button(type="button").btn.join.submit 가입하기
+                

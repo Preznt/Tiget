@@ -1,0 +1,135 @@
+/* 회원가입 */
+div.register.box {
+  width: 100%;
+  margin: 10px auto;
+  overflow-y: hidden;
+}
+
+div.register.email,
+div.register.password,
+div.register.password_check,
+div.register.nick_name,
+div.register.name,
+div.register.birthday,
+div.register.gender,
+div.register.tel,
+div.register.preference {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+div.register.email label,
+div.register.password label,
+div.register.password_check label,
+div.register.nick_name label,
+div.register.name label,
+div.register.birthday label,
+div.register.gender label,
+div.register.tel label {
+  width: 40%;
+  margin: auto;
+  margin-left: 80px;
+  flex-basis: 33%;
+  text-align: right;
+  flex-shrink: 0;
+  padding: 12px 16px;
+}
+div.pass.div_box {
+  width: 25%;
+  margin: auto;
+}
+div.margin {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+div.register.preference {
+  padding-top: 2%;
+  width: 35%;
+  margin: auto;
+  display: block;
+}
+div.register.preference label.main {
+  font-size: 18px;
+  font-weight: 600;
+}
+div.typeMusic.select {
+  margin-left: 5%;
+  margin-top: 20px;
+}
+div.typeMusic.select input,
+div.typeMusic.select label {
+  padding: 12px;
+  font-size: 16px;
+}
+div.register.email div.input_box,
+div.register.password div.input_box,
+div.register.password_check div.input_box,
+div.register.nick_name div.input_box,
+div.register.name div.input_box,
+div.register.birthday div.input_box,
+div.register.gender div.input_box,
+div.register.tel div.input_box {
+  flex-basis: 66%;
+  flex-shrink: 1;
+  display: flex;
+}
+div.input_box.input input {
+  flex-basis: 467px;
+}
+div.input_box.email input {
+  flex-basis: 200px;
+}
+div.input_box.gender select {
+  margin-left: 2.5px;
+}
+div.input_box.email select,
+div.input_box.gender select {
+  flex-basis: 250px;
+}
+div.input_box.birthday input {
+  flex-basis: 211px;
+}
+div.input_box.birthday select {
+}
+input,
+label {
+  padding: 8px;
+  margin: 3px;
+}
+div.button.box.submit {
+  width: 40%;
+  padding-top: 30px;
+  margin: auto;
+  text-align: center;
+}
+button.btn.join.submit {
+  padding: 12px 30px;
+  background-color: black;
+  color: white;
+  font-size: 19px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.btn.join.submit:active {
+  background-color: gray;
+}
+span.email {
+  margin-top: 20px;
+}
+div.pass.div_box {
+  display: none;
+}
+div.pass.ii {
+  display: none;
+  flex-basis: 100%;
+  font-weight: 600;
+  color: red;
+}
+div.pass.i {
+  display: none;
+  flex-basis: 100%;
+  font-weight: 600;
+  color: rgb(18, 194, 18);
+}
