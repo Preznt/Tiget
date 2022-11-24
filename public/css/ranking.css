@@ -53,6 +53,9 @@ div.detail a {
   margin: 12px;
 }
 
+div.ranking {
+  scroll-snap-align: start;
+}
 div.detail div {
   overflow: hidden;
   white-space: nowrap;
