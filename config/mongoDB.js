@@ -1,4 +1,4 @@
 const atlasURL =
-  "mongodb+srv://teem:940603@cluster0.d1aqdwj.mongodb.net/tigetdb?retryWrites=true&w=majority";
+  "mongodb+srv://ashisland:paranoid@cluster0.u7cnyfy.mongodb.net/tiget?retryWrites=true&w=majority";
 
 export { atlasURL };
