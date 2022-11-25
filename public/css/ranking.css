@@ -95,5 +95,5 @@ div.recommend div.detail .big-poster img {
 
 div.recommend div.detail .sub-poster {
   flex: 2;
-  align-items: flex-end;
+  /* align-items: flex-end; */
 }
