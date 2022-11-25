@@ -52,6 +52,11 @@ div.sub-title button {
   border: 1px solid #ddd;
 }
 
+div.ranking button.active {
+  background-color: black;
+  color: white;
+}
+
 div.sub-title button:hover {
   border: 1px solid black;
 }
@@ -95,5 +100,5 @@ div.recommend div.detail .big-poster img {
 
 div.recommend div.detail .sub-poster {
   flex: 2;
-  /* align-items: flex-end; */
+  align-items: flex-end;
 }
