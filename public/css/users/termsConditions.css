@@ -1,5 +1,7 @@
 /* 약관화면 */
-
+.main3 {
+  scroll-snap-align: start;
+}
 div.terms.allbox {
   width: 80%;
   height: 100%;
