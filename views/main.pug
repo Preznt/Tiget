@@ -2,7 +2,6 @@ extends layout
 
 block content
     link(rel="stylesheet", href="https://unpkg.com/swiper/swiper-bundle.min.css")
-    link(rel="stylesheet", href="/css/changeSW.css")
     script.
         const holiData = !{JSON.stringify(holiData)}
     script(src="/js/header.js")
@@ -21,21 +20,27 @@ block content
 
             div.swiper-button-prev
             div.swiper-button-next
-
+            
             div.swiper-scrollbar
-                a(href="") 
-                    img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221114/wel_mv_44090_s.jpg/dims/quality/70/", alt="")
-                a(href="") 
-                    img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg/dims/quality/70/", alt="")
-                a(href="") 
-                    img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/wel_mv_44104_s.jpg/dims/quality/70/", alt="")
+                    div.pager-bg
+                        a(href="")
+                            img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221114/wel_mv_44090_s.jpg/dims/quality/70/", alt="")
+                        a(href="") 
+                            img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg/dims/quality/70/", alt="")
+                        a(href="") 
+                            img(src="http://tkfile.yes24.com/Upload2/Display/202211/20221118/wel_mv_44104_s.jpg/dims/quality/70/", alt="")
+        div.test 
+            .main.button.box    
+                button.ranking 랭킹
+                button.calendar 달력
+                button.forum 포럼
                 //- a(href="") 
                 //-     img(src="", alt="")
                 //- a(href="") 
                 //-     img(src="", alt="")
     include includes/ranking.pug
     include includes/calendar.pug
-    include includes/community.pug       
+    include includes/community.pug
             
 
 

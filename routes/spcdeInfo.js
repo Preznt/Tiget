@@ -1,13 +1,11 @@
 /*  open api 에서 가져온 데이터를 tbl_holiday 테이블로 업데이트 */
 
+import express from "express";
 import request from "request";
 /* npm install --save request */
 import scheduler from "node-schedule";
 /* npm install --save node-schedule */
-import DB from "../models/index.js";
-const Holiday = DB.models.tbl_holiday;
-
-import express from "express";
+import Holiday from "../models/tbl_holiday.js";
 
 const router = express.Router();
 
@@ -45,9 +43,10 @@ const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
     // console.log("Status", response.statusCode);
     // console.log("Headers", JSON.stringify(response.headers));
     // console.log("Reponse received", body);
-    let holiData = {};
 
+    let holiData = {};
     let data = await JSON.parse(body)["response"]["body"]["items"]["item"];
+
     // 여러 객체 리터럴이 배열 안에 묶여있는 형식
     for (let i of data) {
       // cf) 선생님 comment
@@ -63,11 +62,12 @@ const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
       if (h_dateName === "기독탄신일") h_dateName = "성탄절";
       holiData = { h_dateName, h_isHoliday, h_locdate, h_seq };
       console.log(holiData);
-      try {
-        await Holiday.create(holiData);
-      } catch (error) {
-        Holiday.update(holiData, { where: { h_locdate: holiData.h_locdate } });
-      }
+
+      await Holiday.updateOne(
+        { h_locdate: h_locdate },
+        { $set: holiData },
+        { upsert: true } // update + insert: update 할 대상이 없으면 insert
+      );
     }
   });
 });

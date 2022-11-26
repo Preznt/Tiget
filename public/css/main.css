@@ -11,9 +11,9 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  position: relative;
 }
-
 section.scroll {
   height: 100vh;
   width: 100vw;
@@ -21,37 +21,14 @@ section.scroll {
   top: 0;
   left: 0;
   overflow-y: scroll;
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-section.scroll::-webkit-scrollbar,
-section.scroll::-webkit-scrollbar-thumb {
-  display: none;
-}
-footer,
-div.ranking,
-section.calendar.container,
-section.main3,
-div.main {
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
-  scroll-snap-align: start;
-}
-footer,
-div.ranking,
-section.calendar.container,
-section.main3 {
-  padding-top: 120px;
-}
-
-/* absolute로 바꾸니까 전체 width가 줄어든 이유?*/
 header {
   flex-direction: row;
   padding: 0 30px;
-  /* position: absolute; */
-  z-index: 40;
+  z-index: 2;
   width: 100%;
   height: 100px;
   display: flex;
@@ -62,6 +39,53 @@ header {
   background-color: rgba(0, 0, 0, 0);
   transition: all ease-in 0.2s;
 }
+div.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+div.test {
+  background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  top: 80%;
+  width: 100%;
+  height: 20%;
+  z-index: 50;
+}
+div.test .main.button.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+div.test .main.button.box button {
+  width: 20%;
+  height: 30%;
+  font-size: 2em;
+  margin: auto;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+}
+div.test .main.button.box button.ranking {
+}
+
+div.ranking,
+div.recommend,
+.main3,
+footer {
+  padding-top: 120px;
+}
+section.scroll::-webkit-scrollbar,
+section.scroll::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+/* absolute로 바꾸니까 전체 width가 줄어든 이유?*/
+
 header .search {
   display: flex;
   justify-content: space-between;
@@ -84,10 +108,7 @@ header .user {
 a {
   text-decoration: none;
 }
-div.main {
-  width: 100%;
-  height: 100%;
-}
+
 div.left {
   flex: 1;
 }
@@ -197,6 +218,13 @@ swiper-container에 딱 맞게끔 하기 위해서 */
   height: 80%;
 }
 
+.swiper-horizontal > .swiper-scrollbar {
+  position: absolute;
+  bottom: 0;
+  transition: 0.5s;
+  z-index: 3;
+}
+
 .swiper-wrapper img {
   width: 100%;
   height: 100%;
@@ -205,20 +233,23 @@ swiper-container에 딱 맞게끔 하기 위해서 */
 .swiper-scrollbar img {
   width: 86px;
   height: 120px;
-  display: none;
+  /* display: none; */
+  opacity: 0;
   transition: 0.5s;
 }
 
-.swiper-horizontal > .swiper-scrollbar {
-  transition: 0.5s;
+.swiper-scrollbar a {
+  display: inline-block;
+  margin: 3px;
 }
 
 .swiper-horizontal > .swiper-scrollbar:hover {
-  height: 120px;
+  height: 125px;
 }
 
 .swiper-horizontal > .swiper-scrollbar:hover img {
   display: inline;
+  opacity: 1;
 }
 
 button {
