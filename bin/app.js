@@ -23,6 +23,10 @@ import calendarRouter from "../routes/calendar.js";
 import detailRouter from "../routes/detail.js";
 import usersRouter from "../routes/users.js";
 import spcdeInfo from "../routes/spcdeInfo.js";
+// import perdisPeriod from "../routes/perdisPeriod.js";
+// import perdisArea from "../routes/perdisArea.js";
+// import perdisRealm from "../routes/perdisRealm.js";
+// import perdisSeq from "../routes/perdisSeq.js";
 
 // create express framework
 const app = express();
@@ -58,8 +62,12 @@ app.use(express.static(path.join("public")));
 app.use("/", EntranceRouter);
 app.use("/main", calendarRouter);
 app.use("/detail", detailRouter);
-app.use("/data", spcdeInfo);
 app.use("/users", usersRouter);
+app.use("/holiday", spcdeInfo);
+// app.use("/period", perdisPeriod);
+// app.use("/area", perdisArea);
+// app.use("/realm", perdisRealm);
+// app.use("/seq", perdisSeq);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,4 +1,5 @@
-/*  open api 에서 가져온 데이터를 tbl_holiday 테이블로 업데이트 */
+/* 공공데이터 한국천문연구원_특일 정보 */
+/* tbl_holidays 테이블로 업데이트 */
 
 import express from "express";
 import request from "request";
