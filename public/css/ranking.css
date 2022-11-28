@@ -43,11 +43,11 @@ button.genre {
   color: #ccc;
 }
 
-div.ranking button.genre:hover {
+div.ranking div.title button:hover {
   color: #aaa;
 }
 
-div.ranking button.genre:focus {
+div.ranking div.title button:focus {
   color: black;
 }
 

@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnGenre = document.querySelector(".ranking div.title button.genre");
-  const btnPerform = document.querySelector(
-    ".ranking div.title button.perform"
-  );
+  const btnGenre = document.querySelector("div.title button.genre");
+  const btnPerform = document.querySelector("div.title button.perform");
   const titleBox = document.querySelector("div.ranking div.title");
 
   const subtitleBox = document.querySelector("div.ranking div.sub-title");
@@ -11,8 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const rankingImgs = document.querySelectorAll("div.ranking div.detail img");
 
-  btnGenre?.addEventListener("click", () => {
-    btnPerform.classList.add("non-active");
+  const genreSubtitle = {};
+
+  titleBox?.addEventListener("click", (e) => {
+    const event = e.target;
+    if (event.tagName === "BUTTON") {
+      const titleName = event.textContent;
+      if (titleName === "장르별 랭킹") {
+        btnPerform.classList.add("non-active");
+        // subtitleBox.textContent = "";
+      }
+    }
   });
 
   subtitleBox?.addEventListener("click", (e) => {
