@@ -3,4 +3,6 @@
  * 파일이름을 mongoDB.js 로 변경한 후 프로젝트를 시작하시오
  */
 
-const atliasURL = "YOUR MONGO ATLAS URL";
+const atlasURL = "YOUR MONGO ATLAS URL";
+
+// export { atlasURL };
