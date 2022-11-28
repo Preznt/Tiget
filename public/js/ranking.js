@@ -1,19 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnGenre = document.querySelector(".ranking div.title button.genre");
-  const btnPerform = document.querySelector(
-    ".ranking div.title button.perform"
-  );
-  const titleBox = document.querySelector("div.ranking div.title");
-
+  const btnGenre = document.querySelector("div.ranking div.button.genre");
   const subtitleBox = document.querySelector("div.ranking div.sub-title");
   const subtitleBtns = document.querySelector(
     "div.ranking div.sub-title button"
   );
   const rankingImgs = document.querySelectorAll("div.ranking div.detail img");
 
-  btnGenre?.addEventListener("click", () => {
-    btnPerform.classList.add("non-active");
-  });
+  const mainHeader = document.querySelector("header.main");
 
   subtitleBox?.addEventListener("click", (e) => {
     const event = e.target;
@@ -21,7 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const subtitleName = event.textContent;
       if (subtitleName === "국내") {
         event.classList.add("active");
-
+        subtitleBtns[1].classList.remove("active");
+        subtitleBtns[2].classList.remove("active");
         let imgs = [
           "http://image.toast.com/aaaaab/ticketlink/TKL_1/jan_daegu_221020.jpg",
           "http://image.toast.com/aaaaab/ticketlink/TKL_5/ep_pst1109.jpg",
@@ -33,7 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         return false;
       } else if (subtitleName === "내한") {
-        event.classList.add("active");
+        if (subtitleBtns[0].classList)
+          subtitleBtns[0].classList.remove("active");
+
         let imgs = [
           "http://tkfile.yes24.com/upload2/perfblog/202211/20221115/20221115-44119.jpg/dims/quality/70/",
           "http://tkfile.yes24.com/upload2/perfblog/202211/20221111/20221111-44100.jpg/dims/quality/70/",
