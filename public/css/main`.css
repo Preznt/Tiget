@@ -15,6 +15,7 @@ body {
   position: relative;
 }
 section.scroll {
+  scroll-behavior: smooth !important;
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -69,8 +70,6 @@ div.test .main.button.box button {
   border: none;
   background-color: inherit;
   color: inherit;
-}
-div.test .main.button.box button.ranking {
 }
 
 div.ranking,
