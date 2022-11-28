@@ -1,6 +1,5 @@
 /* 공공데이터 한국문화정보원_공연전시정보조회서비스 */
 /* 1 기간별공연/전시목록조회 */
-/* tbl_perdisPeriods 테이블에 저장 가능? */
 
 import express from "express";
 import request from "request";
