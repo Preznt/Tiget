@@ -70,8 +70,16 @@ div.test .main.button.box button {
   background-color: inherit;
   color: inherit;
 }
+<<<<<<< HEAD
 
 div.ranking,
+=======
+div.test .main.button.box button.ranking {
+}
+
+div.ranking,
+div.recommend,
+>>>>>>> main
 .main3,
 footer {
   padding-top: 120px;
@@ -253,6 +261,7 @@ button {
   cursor: pointer;
   font-weight: 900;
 }
+<<<<<<< HEAD
 .btn.calendar,
 .btn.ranking,
 .btn.forum {
@@ -301,3 +310,5 @@ button {
   -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
   transform: translateX(-9%) translateY(-25%) rotate(45deg);
 }
+=======
+>>>>>>> main

@@ -105,3 +105,9 @@ dist
 
 # TernJS port file
 .tern-port
+<<<<<<< HEAD
+=======
+
+# Security Config ignore
+mongoDB.*
+>>>>>>> main

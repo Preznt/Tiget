@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*  open api 에서 가져온 데이터를 tbl_holiday 테이블로 업데이트 */
 
 import express from "express";
@@ -5,12 +6,23 @@ import request from "request";
 /* npm install --save request */
 import scheduler from "node-schedule";
 /* npm install --save node-schedule */
+=======
+/* 공공데이터 한국천문연구원_특일 정보 */
+/* tbl_holidays 테이블로 업데이트 */
+
+import express from "express";
+/* npm install --save request */
+import request from "request";
+/* npm install --save node-schedule */
+import scheduler from "node-schedule";
+>>>>>>> main
 import Holiday from "../models/tbl_holiday.js";
 
 const router = express.Router();
 
 const url =
   "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo";
+<<<<<<< HEAD
 const servicekey =
   "9sO%2BZVBC9mjTRJen1l4kyCib4qEKBjsmKRIWkI2U%2FCdv16CRM60dzGlagqOTQIwK0W1kpY4tG4Silvvhlf7H%2Fg%3D%3D";
 
@@ -20,6 +32,14 @@ let currentYear = new Date().getFullYear() + 1;
 // new Date().getFullYear();
 
 let queryParams = `?${encodeURIComponent("serviceKey")}=${servicekey}`;
+=======
+const serviceKey = "서비스키";
+
+// 내년 국경일(공휴일 + 제헌절) 정보 업데이트
+let currentYear = new Date().getFullYear() + 1;
+
+let queryParams = `?${encodeURIComponent("serviceKey")}=${serviceKey}`;
+>>>>>>> main
 queryParams += `&${encodeURIComponent("solYear")}=${encodeURIComponent(
   currentYear
 )}`;
@@ -37,7 +57,10 @@ const option = {
 
 // cron 표현식, 초 분 시 일 월 년
 // 매일 자정마다 scheduler 실행, 기본키 중복된 경우 update
+<<<<<<< HEAD
 // "*/5 * * * * *"
+=======
+>>>>>>> main
 const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
   request(option, async (error, response, body) => {
     // console.log("Status", response.statusCode);

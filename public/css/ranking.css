@@ -1,11 +1,35 @@
+<<<<<<< HEAD
 div.ranking {
   width: 70%;
   margin: 20px auto;
+=======
+section.performance.info {
+  width: 75%;
+  margin: 10px auto;
+  display: flex;
+}
+
+div.ranking {
+  width: 20%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+div.recommend {
+  flex: 1.5;
+>>>>>>> main
   display: flex;
   flex-direction: column;
 }
 
+<<<<<<< HEAD
 div.title button {
+=======
+div.title button,
+div.recommend div.recommend-title {
+>>>>>>> main
   border: none;
   font-size: 30px;
   background-color: transparent;
@@ -38,6 +62,14 @@ div.sub-title button {
   border: 1px solid #ddd;
 }
 
+<<<<<<< HEAD
+=======
+div.ranking button.active {
+  background-color: black;
+  color: white;
+}
+
+>>>>>>> main
 div.sub-title button:hover {
   border: 1px solid black;
 }
@@ -62,6 +94,30 @@ div.detail div {
   text-overflow: ellipsis;
 }
 
+<<<<<<< HEAD
 div.detail div.title {
   font-weight: 900;
 }
+=======
+section.performance.info div.title,
+div.recommend div.recommend-title {
+  font-weight: 900;
+}
+
+div.recommend div.detail {
+  display: flex;
+}
+
+div.recommend div.detail .big-poster {
+  flex: 1;
+}
+div.recommend div.detail .big-poster img {
+  width: 378px;
+  height: 558px;
+}
+
+div.recommend div.detail .sub-poster {
+  flex: 2;
+  align-items: flex-end;
+}
+>>>>>>> main
