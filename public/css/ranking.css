@@ -31,23 +31,15 @@ div.title span {
   font-size: 26px;
 }
 
-div.title button.active {
-  color: black;
-}
-
-div.title button.non-active {
-  color: #ccc;
-}
-
 button.genre {
   color: #ccc;
 }
 
-div.ranking div.title button:hover {
+button.genre:hover {
   color: #aaa;
 }
 
-div.ranking div.title button:focus {
+button.genre:focus {
   color: black;
 }
 
@@ -60,7 +52,7 @@ div.sub-title button {
   border: 1px solid #ddd;
 }
 
-div.sub-title button.active {
+div.ranking button.active {
   background-color: black;
   color: white;
 }
