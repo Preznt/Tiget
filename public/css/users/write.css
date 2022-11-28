@@ -1,9 +1,6 @@
 /* 글쓰기화면 */
 div.write.main {
-<<<<<<< HEAD
-=======
   scroll-snap-align: start;
->>>>>>> main
   width: 80%;
   height: 100%;
   margin: auto;

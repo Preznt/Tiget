@@ -1,23 +1,5 @@
 /* 회원가입 */
 div.register.box {
-<<<<<<< HEAD
-  width: 100%;
-  height: 100%;
-  margin: 10px auto;
-  overflow-y: hidden;
-  scroll-snap-align: start;
-}
-form.privacy.input {
-  margin: 120px auto;
-  display: flex;
-}
-.row.box:nth-of-type(1) {
-  flex: 3;
-}
-.row.box:nth-of-type(2) {
-  flex: 2;
-}
-=======
   scroll-snap-align: start;
   width: 100%;
   margin: 10px auto;
@@ -25,7 +7,6 @@ form.privacy.input {
   padding-top: 50px;
 }
 
->>>>>>> main
 div.register.email,
 div.register.password,
 div.register.password_check,
@@ -62,19 +43,11 @@ div.pass.div_box {
 }
 div.margin {
   width: 100%;
-<<<<<<< HEAD
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-div.register.preference {
-  padding-top: 2%;
-=======
   padding: 5px;
   border-bottom: 1px solid #ddd;
 }
 div.register.preference {
   padding-top: 1%;
->>>>>>> main
   width: 35%;
   margin: auto;
   display: block;

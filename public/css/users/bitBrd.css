@@ -1,17 +1,5 @@
 /* 커뮤니티 화면 */
 article.bitBrd {
-<<<<<<< HEAD
-  display: flex;
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-}
-article.bitBrd aside.bitBrd.aside,
-article.bitBrd div.bitBrd.table {
-  margin-top: 120px;
-}
-article.bitBrd aside.bitBrd.aside {
-=======
   scroll-snap-align: start;
   display: flex;
   width: 100%;
@@ -23,17 +11,11 @@ div.main {
 }
 article.bitBrd aside.bitBrd.aside {
   margin: 5% auto 0 auto;
->>>>>>> main
   flex: 1;
   border: 1px solid #aaa;
 }
 article.bitBrd div.bitBrd.table {
   flex: 4;
-<<<<<<< HEAD
-  display: flex;
-  flex-direction: column;
-=======
->>>>>>> main
 }
 thead tr.title,
 tbody tr.item {
@@ -46,42 +28,23 @@ table.bitBrd.table,
 div.button.box,
 div.bitBrd.category {
   width: 80%;
-<<<<<<< HEAD
-  margin: 12px auto;
-}
-div.bitBrd.category {
-  text-align: left;
-=======
   margin: 10px auto;
 }
 div.bitBrd.category {
   margin: 4% auto 0 auto;
->>>>>>> main
   font-size: 16px;
   font-weight: 600;
 }
 div.category {
-<<<<<<< HEAD
-  display: flex;
-  width: 80%;
-  margin: 20px auto 20px 10%;
-=======
   padding-top: 2%;
->>>>>>> main
 }
 div.category a {
   padding: 12px 16px;
   border: 2px solid #bbb;
   color: gray;
   border-radius: 30px;
-<<<<<<< HEAD
-  margin: 12px auto;
-}
-
-=======
   margin: 10px;
 }
->>>>>>> main
 a.write {
   color: white;
 }
@@ -93,11 +56,6 @@ div.button.box button {
   background-color: gray;
   border-radius: 5px;
 }
-<<<<<<< HEAD
-td,
-th {
-  margin: 12px auto;
-=======
 div.categorysearch {
   text-align: right;
   transition: 0.5s;
@@ -109,5 +67,4 @@ div.categorysearch button {
   padding: 8px;
   border-radius: 5px;
   border: none;
->>>>>>> main
 }

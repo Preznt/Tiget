@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-div.ranking {
-  width: 70%;
-  margin: 20px auto;
-=======
 section.performance.info {
   width: 75%;
   margin: 10px auto;
@@ -19,17 +14,12 @@ div.ranking {
 
 div.recommend {
   flex: 1.5;
->>>>>>> main
   display: flex;
   flex-direction: column;
 }
 
-<<<<<<< HEAD
-div.title button {
-=======
 div.title button,
 div.recommend div.recommend-title {
->>>>>>> main
   border: none;
   font-size: 30px;
   background-color: transparent;
@@ -62,14 +52,11 @@ div.sub-title button {
   border: 1px solid #ddd;
 }
 
-<<<<<<< HEAD
-=======
 div.ranking button.active {
   background-color: black;
   color: white;
 }
 
->>>>>>> main
 div.sub-title button:hover {
   border: 1px solid black;
 }
@@ -94,11 +81,6 @@ div.detail div {
   text-overflow: ellipsis;
 }
 
-<<<<<<< HEAD
-div.detail div.title {
-  font-weight: 900;
-}
-=======
 section.performance.info div.title,
 div.recommend div.recommend-title {
   font-weight: 900;
@@ -120,4 +102,3 @@ div.recommend div.detail .sub-poster {
   flex: 2;
   align-items: flex-end;
 }
->>>>>>> main

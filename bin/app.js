@@ -16,19 +16,13 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import mongoose from "mongoose";
 import { atlasURL } from "../config/mongoDB.js";
-<<<<<<< HEAD
-=======
 import expressSession from "express-session";
->>>>>>> main
 
 // sample router modules
 import EntranceRouter from "../routes/entrance.js";
 import calendarRouter from "../routes/calendar.js";
 import detailRouter from "../routes/detail.js";
 import usersRouter from "../routes/users.js";
-<<<<<<< HEAD
-import spcdeInfo from "../routes/spcdeInfo.js";
-=======
 // import spcdeInfo from "../routes/spcdeInfo.js";
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
@@ -36,7 +30,6 @@ import spcdeInfo from "../routes/spcdeInfo.js";
 // import perdisSeq from "../routes/perdisSeq.js";
 // import prfrList from "../routes/prfrList.js";
 // import prfrDetail from "../routes/prfrDetail.js";
->>>>>>> main
 
 // create express framework
 const app = express();
@@ -54,8 +47,6 @@ dbConn.on("error", (err) => {
 });
 await mongoose.connect(atlasURL);
 
-<<<<<<< HEAD
-=======
 const sessionOption = {
   key: "tiget", // session ID(key)
   secret: "12345", // session 암호화 할때 사용할 비번
@@ -66,7 +57,6 @@ const sessionOption = {
 };
 app.use(expressSession(sessionOption));
 
->>>>>>> main
 // Disable the fingerprinting of this web technology.
 app.disable("x-powered-by");
 
@@ -81,8 +71,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("public")));
 
-<<<<<<< HEAD
-=======
 app.use("/", (req, res, next) => {
   // app.locals : ejs, pug 등 view Template 에서 서버의
   // global 데이터에 접근하는 통로
@@ -102,15 +90,10 @@ app.use("/", (req, res, next) => {
   next();
 });
 
->>>>>>> main
 // router link enable
 app.use("/", EntranceRouter);
 app.use("/main", calendarRouter);
 app.use("/detail", detailRouter);
-<<<<<<< HEAD
-app.use("/data", spcdeInfo);
-app.use("/users", usersRouter);
-=======
 app.use("/users", usersRouter);
 // app.use("/holiday", spcdeInfo);
 // app.use("/period", perdisPeriod);
@@ -119,7 +102,6 @@ app.use("/users", usersRouter);
 // app.use("/seq", perdisSeq);
 // app.use("/prfrlist", prfrList);
 // app.use("/prfrdetail", prfrDetail);
->>>>>>> main
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,14 +1,7 @@
 /* 약관화면 */
-<<<<<<< HEAD
-.main3 {
-  scroll-snap-align: start;
-}
-div.terms.allbox {
-=======
 
 div.terms.allbox {
   scroll-snap-align: start;
->>>>>>> main
   width: 80%;
   height: 100%;
   margin: auto;
@@ -22,12 +15,9 @@ span.input.check {
   width: 80%;
   margin: 30px auto 15px auto;
 }
-<<<<<<< HEAD
-=======
 span.input.check:nth-of-type(1) {
   margin-top: 90px;
 }
->>>>>>> main
 span.input.check label {
   padding-top: 10px;
   user-select: none;
