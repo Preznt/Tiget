@@ -13,6 +13,7 @@ html
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css' integrity='sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==' crossorigin='anonymous' referrerpolicy='no-referrer')
     link(rel="stylesheet", href=`/css/login.css`)
     script(src=`/js/users/main.js`)
+    script(src="/js/login.js") 
   body
     header
       div.left
@@ -36,16 +37,20 @@ html
             input(type="checkbox")
             span.slider.round
         div.user
-          a#btn-modal
-            i(class="fa fa-user-circle", aria-hidden="true")
+          if !user
+            a#btn-modal
+              i(class="fa fa-user-circle", aria-hidden="true")
+          else 
+            li #{user.nick_name} 님 Page
       div(id="modal", class="modal-overlay")
         div(class="modal-window")
           div(class="title")
           div(class="close-area") X
           div(class="content")
-            input(class="user_id" name="user_id", type="text", placeholder="USERNAME")
-            input(class="user_pw" name="user_pw", type="password", placeholder="PASSWORD")
-            button(type="button", name="login") 로그인
+            form(method="post", action="http://localhost:3002/users/login").login 
+              input(class="user_id" name="user_id", type="text", placeholder="USERNAME")
+              input(class="user_pw" name="user_pw", type="password", placeholder="PASSWORD")
+              button(type="button", name="login", class="login") 로그인
           div.login.url
             a(href="/users/join").join 회원가입
             div.login &nbsp;|&nbsp;
