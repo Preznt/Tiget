@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   subtitleBox?.addEventListener("click", (e) => {
     const event = e.target;
     if (event.tagName === "BUTTON") {
-      event.classList.add("active");
       const subtitleName = event.textContent;
       if (subtitleName === "국내") {
+        event.classList.add("active");
         subtitleBtns[1].classList.remove("active");
         subtitleBtns[2].classList.remove("active");
         let imgs = [
