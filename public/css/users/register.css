@@ -1,8 +1,10 @@
 /* 회원가입 */
 div.register.box {
+  scroll-snap-align: start;
   width: 100%;
   margin: 10px auto;
   overflow-y: hidden;
+  padding-top: 50px;
 }
 
 div.register.email,
@@ -41,11 +43,11 @@ div.pass.div_box {
 }
 div.margin {
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   border-bottom: 1px solid #ddd;
 }
 div.register.preference {
-  padding-top: 2%;
+  padding-top: 1%;
   width: 35%;
   margin: auto;
   display: block;
