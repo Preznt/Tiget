@@ -16,6 +16,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import mongoose from "mongoose";
 import { atlasURL } from "../config/mongoDB.js";
+import expressSession from "express-session";
 
 // sample router modules
 import EntranceRouter from "../routes/entrance.js";
@@ -46,6 +47,16 @@ dbConn.on("error", (err) => {
 });
 await mongoose.connect(atlasURL);
 
+const sessionOption = {
+  key: "tiget", // session ID(key)
+  secret: "12345", // session 암호화 할때 사용할 비번
+  resave: false, // 매번 session 새로 작성할 것인가, 성능상 문제로 false 권장
+  saveUninitialized: false, // 모든 session 을 저장할 것인가, 성능상 문제로 false 권장
+  httpOnly: false,
+  originalMaxAge: 1000 * 600, // 1000밀리초 * 60 = 1분
+};
+app.use(expressSession(sessionOption));
+
 // Disable the fingerprinting of this web technology.
 app.disable("x-powered-by");
 
@@ -59,6 +70,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("public")));
+
+app.use("/", (req, res, next) => {
+  // app.locals : ejs, pug 등 view Template 에서 서버의
+  // global 데이터에 접근하는 통로
+  if (req.session.user) {
+    // 로그인이 되면 global 변수에
+    // session 에 담긴 user 정보를 추가
+    app.locals.user = req.session?.user;
+  } else {
+    // 로그아웃이 되었거나, 어떤이유로 session 에 로그인 정보가 없으면
+    // globa; 데이터에서 user 데이터 제거
+    delete app.locals.user;
+  }
+
+  console.log("유저정보", req.session.user);
+  // control을 다음(여기는 router)으로 전달
+  // next() 를 생략하면 다음의 router 작동되지 않는다
+  next();
+});
 
 // router link enable
 app.use("/", EntranceRouter);
