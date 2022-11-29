@@ -35,7 +35,7 @@ let queryParams = `?${encodeURIComponent("serviceKey")}=${serviceKey}`;
 // queryParams += `&${encodeURIComponent("ComMsgHeader")}=${encodeURIComponent("")}`;
 // queryParams += `&${encodeURIComponent("MsgBody")}=${encodeURIComponent("")}`;
 queryParams += `&${encodeURIComponent("realmCode")}=${encodeURIComponent(
-  realmCode.음악
+  realmCode.기타
 )}`;
 queryParams += `&${encodeURIComponent("cPage")}=${encodeURIComponent("1")}`;
 queryParams += `&${encodeURIComponent("rows")}=${encodeURIComponent("100")}`;
@@ -43,7 +43,7 @@ queryParams += `&${encodeURIComponent("from")}=${encodeURIComponent(
   "20220101"
 )}`;
 queryParams += `&${encodeURIComponent("to")}=${encodeURIComponent("20221231")}`;
-queryParams += `&${encodeURIComponent("sido")}=${encodeURIComponent("광주")}`;
+queryParams += `&${encodeURIComponent("sido")}=${encodeURIComponent("서울")}`;
 // queryParams += `&${encodeURIComponent("gugun")}=${encodeURIComponent("동구")}`;
 // queryParams += `&${encodeURIComponent("place")}=${encodeURIComponent("국립아시아문화전당")}`;
 // queryParams += `&${encodeURIComponent("gpsxfrom")}=${encodeURIComponent("129.1013129")}`;
