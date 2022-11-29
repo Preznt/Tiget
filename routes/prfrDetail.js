@@ -11,9 +11,11 @@ const router = express.Router();
 
 const url = "http://www.kopis.or.kr/openApi/restful/pblprfr";
 const serviceKey = "서비스키";
+const titleId = "PF198304";
 
-let queryParams = `/${encodeURIComponent("PF132236")}`;
+let queryParams = `/${encodeURIComponent(titleId)}`;
 queryParams += `?${encodeURIComponent("service")}=${serviceKey}`;
+
 const option = {
   url: url + queryParams,
   method: "GET",
@@ -39,7 +41,31 @@ request(option, async (error, response, body) => {
   //console.log("Reponse received", body);
   let data = await parser.parse(body);
   data = await data.dbs.db;
-  console.log(data);
+
+  const result = {
+    titleId: data.mt20id || "",
+    placeId: data.mt10id || "",
+    title: data.prfnm || "",
+    from: data.prfpdfrom || "",
+    to: data.prfpdto || "",
+    place: data.fcltynm || "",
+    cast: data.prfcast || "",
+    crew: data.prfcrew || "",
+    runtime: data.prfruntime || "",
+    age: data.prfage || "",
+    producer: data.entrpsnm || "",
+    price: data.pcseguidance || "",
+    poster: data.poster || "",
+    story: data.sty || "",
+    genre: data.genrenm || "",
+    status: data.prfstate || "",
+    openrun: data.openrun || "",
+    // 여러 styurl 속성이 객체 리터럴로 묶여있음
+    styurls: data.styurls || "",
+    time: data.dtguidance || "",
+  };
+
+  console.log(result);
 });
 
 export default router;

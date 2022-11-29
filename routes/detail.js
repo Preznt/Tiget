@@ -1,7 +1,7 @@
 import express from "express";
 
 const router = express.Router();
-router.get("/:id", (req, res) => {
+router.get("/", (req, res) => {
   const id = 111;
   // const id = req.params.id
   res.render("detail");
