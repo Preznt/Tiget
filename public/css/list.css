@@ -1,0 +1,53 @@
+section.scroll {
+  scroll-snap-type: none;
+  position: relative;
+  margin: 0 auto;
+}
+section.concert.list {
+  margin-top: 100px;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1%;
+}
+.concert.msg {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 14pt;
+  font-weight: 700;
+}
+.concert.list_box {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.concert.list_box .poster {
+  border-radius: 5px;
+  width: 200px;
+  height: 250px;
+  background-color: #181818;
+  margin-right: 20px;
+}
+.concert.list_box .desc {
+  width: 60%;
+}
+.concert.list_box .desc > * {
+  margin: 10px 0;
+}
+
+.concert.list_box .title {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.concert.list_box button.ticketing {
+  width: 100px;
+  height: 50px;
+}

@@ -1,0 +1,24 @@
+extends layout 
+block content
+    link(rel="stylesheet", href="/css/list.css")
+    - let count= 0;
+    section.concert.list 
+        div.concert.msg 총 #{count}개의 검색결과가 있습니다.
+        div.concert.list_box
+            mixin box
+                div.poster
+                div.desc
+                    div.title 제목입니다
+                    div.date
+                        span.date.start 2022.11.29 화
+                        span.date.dash &nbsp;~&nbsp;
+                        span.date.end 2022.11.30 수
+                    div.place 문화예술회관 
+                button(type="button").ticketing 예매하기
+            +box
+            +box
+            +box
+            +box
+            +box
+            +box
+                
