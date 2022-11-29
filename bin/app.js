@@ -14,13 +14,13 @@ import path from "path";
 // 3rd party lib modules
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import mongoose from "mongoose";
-import { atlasURL } from "../config/mongoDB.js";
 import expressSession from "express-session";
+// MySQL Sequelize
+import DB from "../models/index.js";
 
 // sample router modules
 import EntranceRouter from "../routes/entrance.js";
-import calendarRouter from "../routes/calendar.js";
+import mainRouter from "../routes/main.js";
 import detailRouter from "../routes/detail.js";
 import usersRouter from "../routes/users.js";
 // import spcdeInfo from "../routes/spcdeInfo.js";
@@ -34,18 +34,9 @@ import usersRouter from "../routes/users.js";
 // create express framework
 const app = express();
 
-const dbConn = mongoose.connection;
-// mongoose 를 통해 mongoDB 정상 접속 시 최초 한번 실행
-dbConn.once("open", () => {
-  console.log("MongoDB Connected");
+DB.sequelize.sync({ force: false }).then((dbConn) => {
+  console.log(dbConn.options.host, dbConn.config.database, "DB Connection OK");
 });
-// db 연결 후 문제 발생 시 호출
-dbConn.on("error", (err) => {
-  if (err) {
-    console.err(err);
-  }
-});
-await mongoose.connect(atlasURL);
 
 const sessionOption = {
   key: "tiget", // session ID(key)
@@ -92,7 +83,7 @@ app.use("/", (req, res, next) => {
 
 // router link enable
 app.use("/", EntranceRouter);
-app.use("/main", calendarRouter);
+app.use("/main", mainRouter);
 app.use("/detail", detailRouter);
 app.use("/users", usersRouter);
 // app.use("/holiday", spcdeInfo);
