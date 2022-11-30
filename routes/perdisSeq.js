@@ -11,7 +11,7 @@ const router = express.Router();
 
 const url = `http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/`;
 const serviceKey = "서비스키";
-const seq = "225851";
+const seq = "217219";
 
 let queryParams = `?${encodeURIComponent("serviceKey")}=${serviceKey}`;
 // queryParams += `&${encodeURIComponent("ComMsgHeader")}=${encodeURIComponent("")}`;

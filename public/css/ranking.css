@@ -35,13 +35,21 @@ button.genre {
   color: #ccc;
 }
 
-button.genre:hover {
+div.title button.non-active {
+  color: #ccc;
+}
+
+div.title button:hover {
   color: #aaa;
 }
 
-button.genre:focus {
+div.title button:focus {
   color: black;
 }
+
+/* div.title button:focus {
+  color: black;
+} */
 
 div.sub-title button {
   padding: 7px 15px;
@@ -51,8 +59,7 @@ div.sub-title button {
   background-color: white;
   border: 1px solid #ddd;
 }
-
-div.ranking button.active {
+section.performance.info button.active {
   background-color: black;
   color: white;
 }
