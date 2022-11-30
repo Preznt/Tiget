@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rankBox = document.querySelector("div.ranking");
   const mainHeader = document.querySelector("header.main");
   const navButtons = document.querySelector("div.main.button.box");
+  const boardSort = document.querySelectorAll(".categorylist div");
 
   navButtons?.addEventListener("click", (e) => {
     const button = e.target;
@@ -12,6 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
       document.location.href = "#main2";
     } else if (btnClass == "포럼") {
       document.location.href = "#main1";
+    }
+  });
+  boardSort?.addEventListener("click", async (e) => {
+    const sort = e.target;
+    if (sort.tagName === "BUTTON") {
+      let location = sort.textContent;
+      const option = {
+        Method: "get",
+        body: location,
+      };
+      fetch(`/forum/${location}`, option).then((res) => res.json());
     }
   });
 
