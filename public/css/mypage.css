@@ -1,0 +1,42 @@
+.mypage {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.menu.section {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 20%;
+
+  scroll-snap-type: none;
+  height: 60%;
+  border: 1px solid black;
+}
+nav.menu {
+  height: 100%;
+}
+section.scroll {
+  scroll-snap-type: none;
+}
+ul.menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.menu.section li {
+  margin: 12px auto 8px 20px;
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+
+div.info.section {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 55%;
+  border: 1px solid black;
+  height: 60%;
+}
