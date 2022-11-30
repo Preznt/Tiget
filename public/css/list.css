@@ -5,49 +5,91 @@ section.scroll {
 }
 section.concert.list {
   margin-top: 100px;
+  margin: 120px auto 0;
   width: 80vw;
   display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: 5px;
-  padding: 1%;
+  padding: 2%;
 }
 .concert.msg {
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 10px 0 100px;
   font-size: 14pt;
   font-weight: 700;
 }
-.concert.list_box {
+/*
+cf)
+* grid container 속성
+    (item들의 너비/높이의 합이 container의 너비/높이보다 작을 경우)
+    justify-content: grid contents의 x축 정렬
+    align-content: grid contents의 y축 정렬
+
+    justify-items:	grid item들의 x축 정렬
+    align-items:	grid item들의 y축 정렬
+
+    gap: 각 item 간 간격(row-gap, column-gap)
+
+    cf) auto-fill 과 auto-fit
+    column의 개수를 정하지 않고 설정된 너비의 cell을 최대한 채운다.
+    cell의 개수가 모자랄 경우,
+    auto-fill은 공간을 남기는 반면 auto-fit은 남는 공간만큼 cell 크기를 stretch
+
+* grid item 속성
+    grid-row: grid item의 행 시작 위치 / 끝 위치 지정
+    grid-column: grid item의 열 시작 위치 / 끝 위치 지정
+*/
+.concert.list_container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  justify-content: center;
+  gap: 15px;
+}
+.list_box {
   width: 100%;
   padding: 10px;
-  border-bottom: 1px solid #aaa;
+  border: 1px solid #aaa;
+  border-radius: 5px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
-.concert.list_box .poster {
+.list_box .poster {
   border-radius: 5px;
   width: 200px;
   height: 250px;
-  background-color: #181818;
-  margin-right: 20px;
+  overflow: hidden;
 }
-.concert.list_box .desc {
-  width: 60%;
+.list_box .poster img {
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  transition: ease-out 0.3s;
+  transform-origin: center;
 }
-.concert.list_box .desc > * {
-  margin: 10px 0;
+.list_box:hover .poster img {
+  transform: scale(1.1);
+  -webkit-filter: brightness(0.6);
+  filter: brightness(0.6);
 }
-
-.concert.list_box .title {
-  font-size: 1.5em;
-  font-weight: 700;
-  margin-bottom: 10px;
+.list_box .desc {
+  width: 100%;
+  text-align: center;
 }
-
-.concert.list_box button.ticketing {
-  width: 100px;
-  height: 50px;
+.list_box .desc > * {
+  margin: 2px 0;
+}
+.list_box .title {
+  font-size: 1.2em;
+  margin: 20px 0 10px;
+}
+.list_box .desc div:not(.title) {
+  font-size: 0.9em;
+  color: #888;
 }
