@@ -12,6 +12,25 @@ const router = express.Router();
 const url = "http://www.kopis.or.kr/openApi/restful/pblprfr";
 const serviceKey = "서비스키";
 
+const signgucode = {
+  서울: "11",
+  부산: "26",
+  대구: "27",
+  인천: "28",
+  광주: "29",
+  대전: "30",
+  울산: "31",
+  세종: "36",
+  경기: "41",
+  강원: "42",
+  충북: "43",
+  충남: "44",
+  전북: "45",
+  전남: "46",
+  경북: "47",
+  경남: "48",
+  제주: "50",
+};
 let queryParams = `?${encodeURIComponent("service")}=${serviceKey}`;
 queryParams += `&${encodeURIComponent("stdate")}=${encodeURIComponent(
   "20220101"
@@ -21,13 +40,12 @@ queryParams += `&${encodeURIComponent("eddate")}=${encodeURIComponent(
 )}`;
 queryParams += `&${encodeURIComponent("cpage")}=${encodeURIComponent("1")}`;
 queryParams += `&${encodeURIComponent("rows")}=${encodeURIComponent("100")}`;
-
 // queryParams += `&${encodeURIComponent("shprfnm")}=${encodeURIComponent("100")}`;
 // queryParams += `&${encodeURIComponent("shprfnmfct")}=${encodeURIComponent("100")}`;
 // queryParams += `&${encodeURIComponent("shcate")}=${encodeURIComponent("100")}`;
 // queryParams += `&${encodeURIComponent("prfplccd")}=${encodeURIComponent("100")}`;
 queryParams += `&${encodeURIComponent("signgucode")}=${encodeURIComponent(
-  "11"
+  signgucode.서울
 )}`;
 // queryParams += `&${encodeURIComponent("signgucodesub")}=${encodeURIComponent("100")}`;
 // queryParams += `&${encodeURIComponent("kidstate")}=${encodeURIComponent("100")}`;
