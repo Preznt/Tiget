@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const calendar = document.querySelector("table.calendar");
-  const tbody = document.querySelector("table.calendar tbody");
+  const calendar = document.querySelector("div.calendar");
+  const tbody = document.querySelector("div.calendar .tbody");
   const btnPrev = document.querySelector("button.prev");
   const btnNext = document.querySelector("button.next");
   const btnToday = document.querySelector("button.today");
@@ -74,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
     tbody.textContent = "";
 
     for (let j = 0; j < 6; j++) {
-      let tr = document.createElement("TR");
+      let tr = document.createElement("div");
+      tr.className = "dates";
 
       for (let k = 0; k < 7; k++) {
-        let td = document.createElement("TD");
+        let td = document.createElement("div");
         let dateTxt = document.createElement("div");
         dateTxt.classList.add("date_txt");
         td.appendChild(dateTxt);

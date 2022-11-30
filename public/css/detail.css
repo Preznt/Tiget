@@ -10,38 +10,54 @@ section.detail {
   flex-direction: column;
   background-color: white;
   border-radius: 5px;
+  padding: 3%;
 }
 .detail.top {
-  width: 100%;
-  height: 500px;
-  display: grid;
-  grid-template-rows: 1fr 4fr;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 20px;
-  padding: 20px;
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
 }
 .detail.top .top.img {
-  background-color: #181818;
-  grid-row: 1 / 3;
   width: 100%;
-  height: 100%;
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   border-radius: 5px;
+  flex: 3;
+  overflow: hidden;
+}
+.detail.top .top.img img {
+  width: 100%;
+}
+.detail.top .top.content {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 .detail.top .top.title {
   width: 100%;
-  height: 100%;
-  padding: 0 2%;
+  flex: 2;
   border-bottom: 2px solid #181818;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 2%;
 }
 .detail.top .top.title h2 {
   display: inline-block;
-  width: 100%;
   text-overflow: ellipsis;
   font-size: 20pt;
   font-weight: 700;
+}
+.detail.top .top.title .genre {
+  display: inline-block;
+  color: rgb(116, 116, 116);
+  font-size: 10pt;
+  white-space: nowrap;
+  flex: 1;
+  margin-left: 15px;
 }
 .detail.top .top.title button {
   padding: 1.2em;
@@ -52,33 +68,36 @@ section.detail {
   background-color: #ff2e2e;
   cursor: pointer;
   outline: none;
+  white-space: nowrap;
 }
 .detail.top .top.desc {
   width: 100%;
+  flex: 8;
   display: grid;
-  grid-template-rows: 1fr 1fr 5fr;
+  grid-template-rows: 0.5fr 0.5fr 2fr;
   grid-template-columns: 1fr 2fr 1fr 2fr;
 }
 .top.desc > * {
   display: flex;
   align-items: center;
+  padding: 3%;
 }
 .top.desc > .label {
   font-weight: 500;
   justify-content: center;
   color: #aaa;
-  font-size: 14pt;
+  white-space: nowrap;
+}
+.top.desc > div:not(.label) {
+  word-break: keep-all;
 }
 .top.desc > div:nth-of-type(n + 9) {
   align-items: flex-start;
   padding-top: 25px;
   border-top: 1px solid #ccc;
 }
-.top.desc > div:nth-of-type(10) {
-  background-color: gray;
-}
 .detail.bottom {
-  padding: 30px;
+  padding: 5% 0;
 }
 .detail.bottom h2 {
   display: inline-block;

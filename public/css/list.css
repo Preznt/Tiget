@@ -11,7 +11,7 @@ section.concert.list {
   flex-direction: column;
   background-color: white;
   border-radius: 5px;
-  padding: 2%;
+  padding: 2% 0 5%;
 }
 .concert.msg {
   width: 100%;
@@ -50,7 +50,7 @@ cf)
 }
 .list_box {
   width: 100%;
-  padding: 10px;
+  padding: 15px 10px;
   border: 1px solid #aaa;
   border-radius: 5px;
   display: flex;
