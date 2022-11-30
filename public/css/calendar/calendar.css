@@ -1,8 +1,4 @@
 /* global */
-html {
-  width: 100vw;
-  height: 100vh;
-}
 input {
   outline: none;
 }
@@ -15,6 +11,7 @@ button {
 
 /* calendar section */
 section.calendar.container {
+  scroll-behavior: smooth !important;
   width: 100%;
   height: 100%;
   position: relative;

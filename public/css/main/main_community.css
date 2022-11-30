@@ -1,4 +1,5 @@
 .main3 {
+  scroll-behavior: smooth !important;
   scroll-snap-align: start;
   width: 100%;
   height: 100%;
@@ -99,9 +100,9 @@ table.boardcontainer td:hover {
 .buttonbox button {
   padding: 1em;
   border-radius: 5%;
-  background: rgba(0, 0, 0,0.3);
+  background: rgb(0, 0, 0);
   color: white;
-  opacity: 1;
+  opacity: 0.5;
   transition: 0.3s;
   border: none;
 }
@@ -109,10 +110,10 @@ table.boardcontainer td:hover {
 .category:hover {
   opacity: 1;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 1);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 button.more:hover {
   opacity: 1;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 1);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
