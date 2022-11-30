@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let location = sort.textContent;
       const option = {
         Method: "get",
-        bodydata: location,
+        body: location,
       };
       fetch(`/forum/${location}`, option).then((res) => res.json());
     }
