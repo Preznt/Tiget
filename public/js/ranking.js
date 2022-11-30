@@ -67,6 +67,5 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
       }
     }
-    // 수정했다
   });
 });
