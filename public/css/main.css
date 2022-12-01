@@ -22,7 +22,7 @@ section.scroll {
   top: 0;
   left: 0;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
