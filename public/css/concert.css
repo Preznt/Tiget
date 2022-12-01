@@ -5,18 +5,38 @@ section.concert.content {
   grid-template-rows: 1fr 3fr 3fr;
 }
 
+section.concert.content h1,
+h2 {
+  font-size: 35px;
+  margin: 30px 8px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
 article.concert.banner {
   display: grid;
   grid-template-columns: 4fr 1fr;
 }
 
-section.concert.content h1,
-article.concert.ranking h2 {
-  font-size: 35px;
-  margin: 30px 8px;
-  padding: 8px;
-  border-bottom: 1px solid #ccc;
+article.concert.ranking {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+div.full.ranking {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+div.concert.poster a {
+  display: inline-block;
+  border: 1px solid #ccc;
 }
 
 article.concert.ranking button {
+  padding: 7px 15px;
+  font-size: 15px;
+  margin-top: 60px;
+  background: transparent;
+  border-bottom: 1px solid #ccc;
 }
