@@ -1,0 +1,49 @@
+div.main {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding-top: 100px;
+}
+div.main div.container.box {
+  width: 90%;
+  margin: 0 auto 0 auto;
+}
+div.notice.board {
+  width: 100%;
+  border: 1px solid #ddd;
+  display: grid;
+  grid-template-columns: 0.6fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "category title . . . . . . . . ."
+    "userImg user . . . . . . . . ."
+    "content content content content content content content content content content content ";
+}
+div.commentbox {
+  display: grid;
+  grid-template-columns: 0.6fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "comments . . . . . . . . . ."
+    ". comment comment comment comment comment comment . . . .";
+}
+div.container.box div.category {
+  grid-area: category;
+}
+div.container.box div.title {
+  grid-area: title;
+}
+div.container.box div.userImg {
+  grid-area: userImg;
+}
+div.container.box div.user {
+  grid-area: user;
+}
+div.container.box div.content {
+  margin: 15px;
+  grid-area: content;
+}
+div.container.box div.comments {
+  grid-area: comments;
+}
+div.container.box div.comment {
+  grid-area: comment;
+}

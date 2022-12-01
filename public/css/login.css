@@ -65,7 +65,7 @@ div.login.url {
   grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
   text-align: center;
 }
-div.content {
+form.login {
   display: grid;
   grid-template-columns: 1fr;
 }
