@@ -5,7 +5,7 @@ export default (sequelize) => {
     {
       seq: {
         type: Sequelize.DataTypes.BIGINT,
-        primarykey,
+        primaryKey: true,
         auto_increment,
       },
       b_nickname: {
