@@ -23,6 +23,12 @@ article.concert.ranking {
   grid-template-columns: 3fr 1fr;
 }
 
+article.concert.ranking img {
+  width: 180px;
+  height: 250px;
+  border-radius: 1em;
+}
+
 div.full.ranking {
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -31,6 +37,7 @@ div.full.ranking {
 div.concert.poster a {
   display: inline-block;
   border: 1px solid #ccc;
+  margin: 0 10px 0 10px;
 }
 
 article.concert.ranking button {
