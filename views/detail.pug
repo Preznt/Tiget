@@ -1,31 +1,32 @@
 extends layout 
 block content
     link(rel="stylesheet", href="/css/detail.css")
+    //- let id= !{JSON.stringify(concert)};
     section.scroll.detail
         div.detail.top
             div.top.img
-                img(src="http://tkfile.yes24.com/upload2/PerfBlog/202211/20221124/20221124-43610.jpg")
+                img(src=`${concert.url}`)
             div.top.content
                 div.top.title 
-                    h2 제목입니다
-                    span.genre 락/메탈
+                    h2= concert.title
+                    span.genre= concert.genre
                     button(type="button")#ticketing 예매하기 
                 div.top.desc
                     div.place.label 장소
-                    div.place 장소입니다
+                    div.place= concert.place
                     div.time.label 관람시간
-                    div.time 120분
+                    div.time= concert.time
                     div.date.label 기간
                     div.date 
-                        span.date.from 2022.01.01
+                        span.date.from= concert.start
                         span.date.dash &nbsp;-&nbsp;
-                        span.date.to 2022.12.31
+                        span.date.to= concert.end
                     div.rate.label 관람등급
-                    div.rate 청소년 관람불가
+                    div.rate= concert.rate
                     div.price.label 가격
-                    div.price A석 0원
+                    div.price= concert.price
                     div.discount.label 할인정보
-                    div.discount 없음
+                    div.discount= concert.discount
         div.detail.bottom
             h2 상세정보
             div.bottom.desc

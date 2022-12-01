@@ -1,6 +1,6 @@
 import express from "express";
 import DB from "../models/index.js";
-const Holiday = DB.models.tbl_holiday;
+const Holiday = DB.models.holiday;
 
 const router = express.Router();
 

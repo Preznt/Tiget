@@ -2,22 +2,22 @@ extends layout
 block content
     link(rel="stylesheet", href="/css/list.css")
     - let count= 0;
-    - let id= !{JSON.stringify(concert)};
+    //- let id= !{JSON.stringify(concert)};
     section.concert.list 
         div.concert.msg 총 #{count}개의 검색결과가 있습니다.
         div.concert.list_container
             mixin box
-                a(href=`/detail/id=${concert.id}`)
+                a(href=`/detail/${concert.id}`)
                 div.list_box
                     div.poster
-                        img(src="http://tkfile.yes24.com/upload2/PerfBlog/202211/20221124/20221124-43610.jpg")
+                        img(src=`${concert.url}`)
                     div.desc
-                        div.title 제목입니다
+                        div.title= concert.title
                         div.date
-                            span.date.start 2022.11.29
+                            span.date.start= concert.start
                             span.date.dash &nbsp;~&nbsp;
-                            span.date.end 2022.11.30
-                        div.place 문화예술회관 
+                            span.date.end= concert.end
+                        div.place= concert.place
             +box
             +box
             +box
