@@ -6,7 +6,6 @@ export default {
     host: "127.0.0.1",
     dialect: "mysql",
     logging: true,
-    port: "3306",
   },
   test: {
     username: "root",

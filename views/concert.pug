@@ -2,7 +2,7 @@ extends layout
 
 block content
     script(src="https://unpkg.com/swiper/swiper-bundle.min.js")
-    script(src="/js/concert.js")
+    script(src="/user/main.js")
     link(rel="stylesheet", href="https://unpkg.com/swiper/swiper-bundle.min.css")
     link(rel="stylesheet", href="/css/concert.css")
     section.concert.content 
@@ -14,11 +14,33 @@ block content
             div.image-list
         
         article.concert.ranking
-            div.concert.title
-                h2 랭킹
-            div.concert.sub-title
-                button 국내
-                button 내한
-            div.
+            div.full.ranking
+                div.concert.title
+                    h2 랭킹
+                div.concert.sub-title
+                    button 국내
+                    button 내한
+                div.concert.poster
+                    a(href="")
+                        img(src="", alt="")
+                        div
+                            div.title 제목입니다
+                            div.region 장소정보
+                            div.date 공연날짜
+                        
+                        
+                    
+                    
+            div.weekly.ranking
+                h2 WEEKLY RANK
+
+        article.concert.recommend
+            div.recommend.title
+                h2 추천공연
+            
+        article.concert.region
+            div.region.title
+                h2 지역별
+
 
                        

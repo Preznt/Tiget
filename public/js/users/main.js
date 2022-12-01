@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
           url = "/concert";
           break;
         case "페스티벌":
-          url = "/concert";
+          url = "/concert/festival";
           break;
       }
       document.location.href = url;
