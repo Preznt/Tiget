@@ -6,6 +6,7 @@ export default (sequelize) => {
       artist_code: {
         type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
+        primaryKey: true,
       },
       artist_name: {
         type: Sequelize.DataTypes.STRING(125),
