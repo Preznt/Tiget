@@ -4,26 +4,22 @@ block content
     link(rel="stylesheet" href="/css/mypage.css")
     link(rel="stylesheet" href="/css/mypage/profile.css")
     link(rel="stylesheet" href="/css/mypage/change_password.css")
+    link(rel="stylesheet" href="/css/mypage/favorite_genre.css")
+    link(rel="stylesheet" href="/css/mypage/withdrawal.css")
     div.mypage
         div.menu.section
+            
             nav.menu
                 ul.menu
                     li 사용자 정보
                     li 비밀번호 변경
                     li 선호장르 설정
                     li 찜목록
-                    li 회원탈퇴
+                    li 회원탈퇴   
         div.info.section
-            .change_password
-                .notice
-                    h2 비밀번호 변경
-                    li 다른 아이디/사이트에서 사용한 적 없는 비밀번호
-                    li 이전에 사용한 적 없는 비밀번호가 안전합니다.                
-                form.password
-                    input.passwordinput(placeholder="현재 비밀번호") 
-                    input.passwordinput.new(placeholder="새 비밀번호") 
-                    input.passwordinput.new_check(placeholder="새 비밀번호 확인") 
-                    button.changebutton 확인
-                    button.cancelbutton 취소
-
+            h2 회원탈퇴
+            form.withdrawal
+                input(type="password" placeholder="비밀번호 입력")
+                input(type="password" placeholder="비밀번호 확인")
+                button 회원탈퇴
             
