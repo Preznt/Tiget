@@ -16,6 +16,9 @@ router.get("/join/register", (req, res) => {
 router.get("/bltBrd", (req, res) => {
   res.render("users/bltBrd");
 });
+router.get("/bltBrd/detail", (req, res) => {
+  res.render("users/detail");
+});
 router.get("/bltBrd/write", (req, res) => {
   res.render("users/write");
 });

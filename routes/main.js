@@ -35,7 +35,7 @@ router.get("/", async (req, res, next) => {
     { id: "classic", name: "Classic" },
   ];
 
-  res.render("main", { holiData, locData, genreData });
+  res.render("main", { body: "ranking", holiData, locData, genreData });
 });
 
 export default router;
