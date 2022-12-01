@@ -20,6 +20,7 @@
     "node-schedule": "^2.1.0",
     "pug": "~3.0.2",
     "request": "^2.88.2",
-    "sequelize": "~6.25.5"
+    "sequelize": "~6.25.5",
+    "spotify-web-api-node": "^5.0.2"
   }
 }
