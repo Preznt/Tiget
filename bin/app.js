@@ -24,6 +24,7 @@ import mainRouter from "../routes/main.js";
 import detailRouter from "../routes/detail.js";
 import usersRouter from "../routes/users.js";
 import mypageRouter from "../routes/mypage.js";
+import concertRouter from "../routes/concert.js";
 // import spcdeInfo from "../routes/spcdeInfo.js";
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
@@ -88,6 +89,7 @@ app.use("/main", mainRouter);
 app.use("/detail", detailRouter);
 app.use("/users", usersRouter);
 app.use("/mypage", mypageRouter);
+app.use("/concert", concertRouter);
 // app.use("/holiday", spcdeInfo);
 // app.use("/period", perdisPeriod);
 // app.use("/area", perdisArea);
@@ -95,6 +97,7 @@ app.use("/mypage", mypageRouter);
 // app.use("/seq", perdisSeq);
 // app.use("/prfrlist", prfrList);
 // app.use("/prfrdetail", prfrDetail);
+// app.use("/spotify", spotifyRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
