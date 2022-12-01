@@ -5,7 +5,7 @@ export default (sequelize) => {
     {
       board_code: {
         type: Sequelize.DataTypes.BIGINT,
-        primarykey,
+        primaryKey: true,
       },
       r_nickname: {
         type: Sequelize.DataTypes.STRING(256),

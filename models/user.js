@@ -6,7 +6,7 @@ export default (sequelize) => {
       username: {
         type: Sequelize.DataTypes.STRING(256),
         allowNull: false,
-        primaryKey,
+        primaryKey: true,
       },
       profile_image: {
         type: Sequelize.DataTypes.STRING(256),

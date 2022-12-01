@@ -4,11 +4,11 @@ export default (sequelize) => {
     "concert_artist",
     {
       concert_code: {
-        type: Sequelize.DataTypes.VARCHAR(20),
+        type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
       },
       artist_code: {
-        type: Sequelize.DataTypes.VARCHAR(20),
+        type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
       },
     },
