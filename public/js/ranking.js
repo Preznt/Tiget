@@ -17,15 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (titleName === "장르별 랭킹") {
         btnPerform.classList.add("non-active");
         btnGenre.style.color = "black";
-        subtitleBtns[0].textContent = "KPOP";
-        subtitleBtns[1].textContent = "발라드";
-        subtitleBtns[2].textContent = "인디";
+        const genre = ["KPOP", "발라드", "인디"];
+        for (let i = 0; i < subtitleBtns.length; i++) {
+          subtitleBox[i].textContent = genre[i];
+        }
       } else {
         btnPerform.classList.remove("non-active");
         btnGenre.style.color = "#ccc";
-        subtitleBtns[0].textContent = "국내";
-        subtitleBtns[1].textContent = "내한";
-        subtitleBtns[2].textContent = "페스티벌";
+        const concert = ["국내", "내한", "페스티벌"];
+        for (let i = 0; i < subtitleBtns.length; i++) {
+          subtitleBox[i].textContent = concert[i];
+        }
       }
     }
   });
