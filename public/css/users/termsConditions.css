@@ -8,15 +8,10 @@ div.terms.allbox {
   display: grid;
   grid-template-columns: 1fr;
 }
-div.margins {
-  padding: 30px;
-}
+
 span.input.check {
   width: 80%;
   margin: 30px auto 15px auto;
-}
-span.input.check:nth-of-type(1) {
-  margin-top: 90px;
 }
 span.input.check label {
   padding-top: 10px;
