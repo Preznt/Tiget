@@ -1,29 +1,27 @@
 import Sequelize from "sequelize";
 export default (sequelize) => {
   return sequelize.define(
-    "genre",
+    "genre_concert",
     {
+      concert_code: {
+        type: Sequelize.DataTypes.STRING(20),
+        allowNull: false,
+      },
       genre_code: {
         type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
-        primaryKey: true,
-      },
-      genre_name: {
-        type: Sequelize.DataTypes.STRING(20),
-        allowNull: false,
-        primaryKey: true,
       },
     },
     {
       sequelize,
-      tableName: "genre",
+      tableName: "genre_concert",
       timestamps: false,
       indexes: [
         {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "genre_code", name: "genre_name" }],
+          fields: [{ name: "concert_code", name: "genre_code" }],
         },
       ],
     }

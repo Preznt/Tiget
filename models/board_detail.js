@@ -6,7 +6,7 @@ export default (sequelize) => {
       seq: {
         type: Sequelize.DataTypes.BIGINT,
         primaryKey: true,
-        auto_increment,
+        autoIncrement: true,
       },
       b_nickname: {
         type: Sequelize.DataTypes.STRING(256),
