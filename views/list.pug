@@ -1,0 +1,27 @@
+extends layout 
+block content
+    link(rel="stylesheet", href="/css/list.css")
+    - let count= 0;
+    //- let id= !{JSON.stringify(concert)};
+    section.concert.list 
+        div.concert.msg 총 #{count}개의 검색결과가 있습니다.
+        div.concert.list_container
+            mixin box
+                a(href=`/detail/${concert.id}`)
+                div.list_box
+                    div.poster
+                        img(src=`${concert.url}`)
+                    div.desc
+                        div.title= concert.title
+                        div.date
+                            span.date.start= concert.start
+                            span.date.dash &nbsp;~&nbsp;
+                            span.date.end= concert.end
+                        div.place= concert.place
+            +box
+            +box
+            +box
+            +box
+            +box
+            +box
+                

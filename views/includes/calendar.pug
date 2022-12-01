@@ -51,17 +51,17 @@ section.calendar.container#main2
                 input(type="checkbox", name=`${genre.id}`, value=`${genre.id}`, id=`${genre.id}`)
                 label(for=`${genre.id}`)= genre.name
         button(type="button").btn_detail_search 검색
-    table.calendar
-      thead
-        tr
-          th Sun
-          th Mon
-          th Tue
-          th Wed
-          th Thu
-          th Fri
-          th Sat
-      tbody
+    div.calendar
+      div.thead
+        div.days
+          div Sun
+          div Mon
+          div Tue
+          div Wed
+          div Thu
+          div Fri
+          div Sat
+      div.tbody
   div.calendar.modal
     div.calendar.modal_content
       button(type="button").modal.btn_close X

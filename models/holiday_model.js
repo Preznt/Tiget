@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 export default (sequelize) => {
   return sequelize.define(
-    "tbl_holiday",
+    "holiday",
     {
       h_dateName: {
         type: Sequelize.DataTypes.STRING(50),
@@ -23,7 +23,7 @@ export default (sequelize) => {
     },
     {
       sequelize,
-      tableName: "tbl_holiday",
+      tableName: "holiday",
       timestamps: false,
       indexes: [
         {
