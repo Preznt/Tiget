@@ -1,0 +1,22 @@
+section.concert.content {
+  width: 70%;
+  margin: 110px auto;
+  display: grid;
+  grid-template-rows: 1fr 3fr 3fr;
+}
+
+article.concert.banner {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+section.concert.content h1,
+article.concert.ranking h2 {
+  font-size: 35px;
+  margin: 30px 8px;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+article.concert.ranking button {
+}
