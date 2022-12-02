@@ -8,7 +8,7 @@ export default (sequelize) => {
         primaryKey: true,
       },
       r_nickname: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       r_content: {
@@ -16,19 +16,19 @@ export default (sequelize) => {
         allowNull: false,
       },
       b_img: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       r_update_date: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       r_modified_date: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       r_remove_date: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
     },
