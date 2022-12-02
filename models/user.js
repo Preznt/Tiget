@@ -4,12 +4,12 @@ export default (sequelize) => {
     "user",
     {
       username: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
         primaryKey: true,
       },
       profile_image: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       nickname: {
@@ -17,7 +17,7 @@ export default (sequelize) => {
         allowNull: false,
       },
       birthdate: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
       },
       Level: {

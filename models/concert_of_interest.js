@@ -4,7 +4,7 @@ export default (sequelize) => {
     "concert_of_interest",
     {
       username: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
         primaryKey: true,
       },

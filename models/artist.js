@@ -17,7 +17,7 @@ export default (sequelize) => {
         allowNull: true,
       },
       artist_img: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       artist_debut: {

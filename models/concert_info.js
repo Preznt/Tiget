@@ -16,7 +16,7 @@ export default (sequelize) => {
         allowNull: false,
       },
       concert_poster: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       start_date: {
