@@ -1,4 +1,5 @@
 import _holiday from "./holiday_model.js";
+import _artist_genre from "./artist_genre.js";
 import _artist_of_interest from "./artist_of_interest.js";
 import _artist from "./artist.js";
 import _board_detail from "./board_detail.js";
@@ -13,6 +14,7 @@ import _user from "./user.js";
 
 const initModels = (sequelize) => {
   const holiday = _holiday(sequelize);
+  const artist_genre = _artist_genre(sequelize);
   const artist_of_interest = _artist_of_interest(sequelize);
   const artist = _artist(sequelize);
   const board_detail = _board_detail(sequelize);
@@ -27,6 +29,7 @@ const initModels = (sequelize) => {
 
   return {
     holiday,
+    artist_genre,
     artist_of_interest,
     artist,
     board_detail,

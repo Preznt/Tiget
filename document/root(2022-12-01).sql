@@ -3,38 +3,44 @@ USE tigetDB;
 
 -- 사용자정보
 create table if not exists user(
- username varchar(256) primary key ,
- profile_image varchar(256) ,
+ username varchar(255) primary key ,
+ profile_image varchar(255) ,
  nickname varchar(20) unique not null,
- birthdate varchar(256) not null,
+ birthdate varchar(255) not null,
  level int not null
 );
 
 -- 관심장르
 create table if not exists genre_of_interest(
-username	varchar(256)	NOT NULL,	
+username	varchar(255)	NOT NULL,	
 genre_code	varchar(20)	NOT NULL,	
 			PRIMARY KEY(username,genre_code)
 );
 
 -- 관심공연
 create table if not exists concert_of_interest(
-username	varchar(256)	NOT NULL,		
+username	varchar(255)	NOT NULL,		
 concert_code	varchar(20)	NOT NULL,	
 			PRIMARY KEY(username,concert_code)	
 );
 
 -- 관심아티스트
 create table if not exists artist_of_interest(
-username	varchar(256)	NOT NULL,	
+username	varchar(255)	NOT NULL,	
 artist_code	varchar(20)	NOT NULL,	
 			PRIMARY KEY(username,artist_code)
 );
 
--- 장르
-create table if not exists genre(
-genre_code	varchar(20)	NOT NULL	PRIMARY KEY,
-genre_name	varchar(20)	NOT NULL
+-- 공연정보
+create table if not exists concert_info(
+concert_code int auto_increment primary key,
+concert_name varchar(125) not null,
+concert_artist varchar(125) not null,
+concert_poster varchar(255) ,
+start_date varchar(125) not null,
+end_date varchar(125) not null,
+concert_place varchar(125) not null,
+price varchar(125) not null
 );
 
 -- 공연-장르
@@ -56,49 +62,50 @@ create table if not exists artist(
 artist_code	varchar(20)	NOT NULL,
 artist_name	varchar(125)	NOT NULL,
 artist_type	varchar(20),
-artist_img varchar(256),	
-year_debut	varchar(12),	
-genre_name	varchar(20)	
+artist_img varchar(255),	
+artist_debut	varchar(12),	
+artist_genre	varchar(20)	
 );
 
--- 공연정보
-create table if not exists concert_info(
-concert_code int auto_increment primary key,
-concert_name varchar(125) not null,
-concert_artist varchar(125) not null,
-concert_poster varchar(256) ,
-start_date varchar(125) not null,
-end_date varchar(125) not null,
-concert_place varchar(125) not null,
-price varchar(125) not null
+-- 아티스트-장르
+create table if not exists artist_genre(
+artist_code	varchar(20)	NOT NULL,	
+genre_code	varchar(20)	NOT NULL,	
+PRIMARY KEY(artist_code,genre_code)
+);
+
+-- 장르
+create table if not exists genre(
+genre_code	varchar(20)	NOT NULL	PRIMARY KEY,
+genre_name	varchar(20)	NOT NULL
 );
 
 -- 이미지
 create table if not exists image(
 i_seq	BIGINT	AUTO_INCREMENT PRIMARY KEY,
-i_url	VARCHAR(256)						
+i_url	VARCHAR(255)						
 );
 
 -- 게시판
 create table if not exists board_detail (
 seq bigint auto_increment primary key,
-b_nickname varchar(256),
-title varchar(256),
+b_nickname varchar(255),
+title varchar(255),
 b_content text,
-b_img varchar(256),
-sort_board varchar(256),
-b_update_date varchar(256) ,
-b_modified_date varchar(256),
-b_remove_date varchar(256)
+b_img varchar(255),
+sort_board varchar(255),
+b_update_date varchar(255) ,
+b_modified_date varchar(255),
+b_remove_date varchar(255)
 );
 
 -- 댓글
 create table if not exists reply (
-r_nickname varchar(256),
-r_content varchar(256),
-r_update_date varchar(256),
-r_modified_date varchar(256),
-r_remove_date varchar(256),
+r_nickname varchar(255),
+r_content varchar(255),
+r_update_date varchar(255),
+r_modified_date varchar(255),
+r_remove_date varchar(255),
 board_code bigint,
 primary key (r_update_date, r_nickname)
 );

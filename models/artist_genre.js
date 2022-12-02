@@ -1,14 +1,14 @@
 import Sequelize from "sequelize";
 export default (sequelize) => {
   return sequelize.define(
-    "artist_of_interest",
+    "artist_genre",
     {
-      username: {
-        type: Sequelize.DataTypes.STRING(255),
+      artist_code: {
+        type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
         primaryKey: true,
       },
-      artist_code: {
+      genre_code: {
         type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
         primaryKey: true,
@@ -16,14 +16,14 @@ export default (sequelize) => {
     },
     {
       sequelize,
-      tableName: "artist_of_interest",
+      tableName: "artist_genre",
       timestamps: false,
       indexes: [
         {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "username", name: "artist_code" }],
+          fields: [{ name: "artist_code", name: "genre_code" }],
         },
       ],
     }
