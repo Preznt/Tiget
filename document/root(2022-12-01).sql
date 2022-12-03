@@ -16,51 +16,52 @@ create table if not exists user(
 create table if not exists genre_of_interest(
 username	varchar(255)	NOT NULL,	
 genre_code	varchar(20)	NOT NULL,	
-			PRIMARY KEY(username,genre_code)
+PRIMARY KEY(username,genre_code)
 );
 
 -- 관심공연
 create table if not exists concert_of_interest(
 username	varchar(255)	NOT NULL,		
 concert_code	varchar(20)	NOT NULL,	
-			PRIMARY KEY(username,concert_code)	
+PRIMARY KEY(username,concert_code)	
 );
 
 -- 관심아티스트
 create table if not exists artist_of_interest(
 username	varchar(255)	NOT NULL,	
 artist_code	varchar(20)	NOT NULL,	
-			PRIMARY KEY(username,artist_code)
+PRIMARY KEY(username,artist_code)
 );
 
 -- 공연정보
 create table if not exists concert_info(
-concert_code int auto_increment primary key,
+concert_code varchar(20) primary key,
 concert_name varchar(225) not null,
-concert_poster varchar(255) ,
+concert_poster varchar(255),
 start_date varchar(125) not null,
 end_date varchar(125) not null,
 concert_place varchar(225) not null,
-concert_artist varchar(225) not null
+concert_loc varchar(20) not null,
+concert_artist varchar(225)
 );
 
 -- 공연-장르
 create table if not exists genre_concert(
 concert_code	varchar(20)	NOT NULL,	
 genre_code	varchar(20)	NOT NULL,	
-			PRIMARY KEY(concert_code,genre_code)
+PRIMARY KEY(concert_code,genre_code)
 );
 
 -- 공연-아티스트
 create table if not exists concert_artist(
 concert_code	varchar(20)	NOT NULL,	
 artist_code	varchar(20)	NOT NULL,	
-			PRIMARY KEY(concert_code,artist_code)
+PRIMARY KEY(concert_code,artist_code)
 );
 
 -- 아티스트
 create table if not exists artist(
-artist_code	varchar(20)	NOT NULL,
+artist_code	varchar(20)	PRIMARY KEY,
 artist_name	varchar(125)	NOT NULL,
 artist_type	varchar(20),
 artist_img varchar(255),	
@@ -115,6 +116,6 @@ primary key (r_update_date, r_nickname)
 CREATE TABLE holiday(
 h_dateName	VARCHAR(50)	NOT NULL,	
 h_isHoliday	VARCHAR(50)	NOT NULL,	
-h_locdate	INT	NOT NULL	PRIMARY KEY,
+h_locdate	INT	PRIMARY KEY,
 h_seq	INT		
 );
