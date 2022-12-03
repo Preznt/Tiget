@@ -22,9 +22,8 @@ router.get(`/:loadFor`, async (req, res) => {
 
   try {
     const boardResult = await Board.findAll({where:{sort_board:list}})
-    // console.log(boardResult)
-    return res.render("./includes/community", {boards:boardResult})
     
+    return res.json(boardResult)   
    } catch(err) {
     console.error(err)
     return res.send("좀 더 수련해")
