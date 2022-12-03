@@ -1,0 +1,9 @@
+// window.onscroll = scrollF();
+
+  // function scrollF() {
+  //   if (document.body.scrollTop > 50) {
+  //     mainHeader.classList.add("active");
+  //   } else {
+  //     mainHeader.classList.remove("active");
+  //   }
+  // }
