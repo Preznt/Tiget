@@ -8,6 +8,10 @@ export default (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
+      password: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: false,
+      },
       profile_image: {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
@@ -18,11 +22,15 @@ export default (sequelize) => {
       },
       birthdate: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
-      Level: {
+      level: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+      },
+      delete_date: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: true,
       },
     },
     {
