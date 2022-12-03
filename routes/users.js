@@ -9,7 +9,6 @@ const router = express.Router();
 router.get("/join", (req, res) => {
   res.render("users/join");
 });
-
 router.get("/join/register", (req, res) => {
   res.render("users/register");
 });

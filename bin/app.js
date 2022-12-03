@@ -89,6 +89,7 @@ app.use("/", EntranceRouter);
 app.use("/main", mainRouter);
 app.use("/detail", detailRouter);
 app.use("/users", usersRouter);
+app.use("/mypage", mypageRouter);
 app.use("/holiday", spcdeInfo);
 app.use("/concert", concertRouter);
 app.use("/list", listRouter);
