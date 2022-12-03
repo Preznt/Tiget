@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rankBox = document.querySelector("div.ranking");
   const mainHeader = document.querySelector("header.main");
   const navButtons = document.querySelector("div.main.button.box");
-  const boardSort = document.querySelectorAll(".categorylist div");
+  const boardSort = document.querySelector(".categorylist");
 
   navButtons?.addEventListener("click", (e) => {
     const button = e.target;
@@ -15,25 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
       document.location.href = "#main1";
     }
   });
-  boardSort?.addEventListener("click", async (e) => {
-    const sort = e.target;
-    if (sort.tagName === "BUTTON") {
-      let location = sort.textContent;
-      const option = {
-        Method: "get",
-        body: location,
-      };
-      fetch(`/forum/${location}`, option).then((res) => res.json());
+  boardSort?.addEventListener("click",(b)=>{
+    const target = b.target
+    if( target.tagName === "DIV") {
+      let loadFor = target.textContent
+      // console.log(loadFor)
+      
+      fetch(`/forum/:${loadFor}`)      
     }
-  });
+  })
 
-  // window.onscroll = scrollF();
-
-  // function scrollF() {
-  //   if (document.body.scrollTop > 50) {
-  //     mainHeader.classList.add("active");
-  //   } else {
-  //     mainHeader.classList.remove("active");
-  //   }
-  // }
+  
 });

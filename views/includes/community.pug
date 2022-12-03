@@ -3,11 +3,11 @@ section#main1.main3
     h3.title Sample title
     .container 
         .categorylist 
-            div.category sample 1
-            div.category sample 2
-            div.category sample 3
-            div.category sample 4
-            div.category sample 5
+            div(value="sample1").category sample1
+            div(value="sample2").category sample2
+            div(value="sample3").category sample3
+            div(value="sample4").category sample4
+            div(value="sample5").category sample5
         .boardlist 
             table.boardcontainer 
                 thead 
@@ -16,9 +16,10 @@ section#main1.main3
                         th 제목
                         th 날짜
                 tbody 
+                each board in boards              
                     tr 
-                        td 1
-                        td Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione fugiat, iure harum architecto, saepe alias quod nam sit quibusdam expedita doloribus ducimus natus impedit soluta consequuntur rerum nostrum debitis? Dolorem.
-                        td 2022-11-21                        
+                        td= board.seq
+                        td= board.b_title
+                        td= board.b_update_date
     .buttonbox 
-        button(type="button").more 더 보기
+        a(href="/users/bltBrd").button 더보기
