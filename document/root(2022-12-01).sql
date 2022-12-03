@@ -36,12 +36,12 @@ artist_code	varchar(20)	NOT NULL,
 -- 공연정보
 create table if not exists concert_info(
 concert_code int auto_increment primary key,
-concert_name varchar(125) not null,
-concert_artist varchar(125) not null,
+concert_name varchar(225) not null,
 concert_poster varchar(255) ,
 start_date varchar(125) not null,
 end_date varchar(125) not null,
-concert_place varchar(125) not null
+concert_place varchar(225) not null,
+concert_artist varchar(225) not null
 );
 
 -- 공연-장르
