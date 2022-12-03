@@ -3,11 +3,13 @@ USE tigetDB;
 
 -- 사용자정보
 create table if not exists user(
- username varchar(255) primary key ,
- profile_image varchar(255) ,
+ username varchar(255) primary key,
+ password varchar(255) not null,
+ profile_image varchar(255),
  nickname varchar(20) unique not null,
  birthdate varchar(255) not null,
- level int not null
+ level int not null,
+ delete_date varchar(255)
 );
 
 -- 관심장르
@@ -39,8 +41,7 @@ concert_artist varchar(125) not null,
 concert_poster varchar(255) ,
 start_date varchar(125) not null,
 end_date varchar(125) not null,
-concert_place varchar(125) not null,
-price varchar(125) not null
+concert_place varchar(125) not null
 );
 
 -- 공연-장르
@@ -94,7 +95,7 @@ title varchar(255),
 b_content text,
 b_img varchar(255),
 sort_board varchar(255),
-b_update_date varchar(255) ,
+b_update_date varchar(255),
 b_modified_date varchar(255),
 b_remove_date varchar(255)
 );
