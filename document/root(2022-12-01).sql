@@ -7,8 +7,8 @@ create table if not exists user(
  password varchar(255) not null,
  profile_image varchar(255),
  nickname varchar(20) unique not null,
- birthdate varchar(255) not null,
- level int not null,
+ birthdate varchar(255),
+ level int,
  delete_date varchar(255)
 );
 

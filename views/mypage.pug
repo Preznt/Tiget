@@ -6,6 +6,9 @@ block content
     link(rel="stylesheet" href="/css/mypage/change_password.css")
     link(rel="stylesheet" href="/css/mypage/favorite_genre.css")
     link(rel="stylesheet" href="/css/mypage/withdrawal.css")
+    script(src="/js/mypage.js")
+    //- test 용 username 변수
+    - const username = "buddy96@gmail.com";
     div.mypage
         div.menu.section            
             nav.menu
@@ -17,8 +20,8 @@ block content
                     li 회원탈퇴   
         div.info.section
             h2 회원탈퇴
-            form.withdrawal
-                input(type="password" placeholder="비밀번호 입력")
-                input(type="password" placeholder="비밀번호 확인")
-                button 회원탈퇴
+            form(method="POST", action=`/mypage/check/${username}`).withdrawal
+                input(type="password", name="val_password", placeholder="비밀번호 입력")
+                input(type="password", name="chk_password", placeholder="비밀번호 확인")
+                button(type="button")#deleteAcc 회원탈퇴
             
