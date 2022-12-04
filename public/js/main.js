@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainHeader = document.querySelector("header.main");
   const navButtons = document.querySelector("div.main.button.box");
   const boardSort = document.querySelector(".categorylist");
-  const tbodyList = document.querySelector(".boardcontainer tbody")
+  const tbodyList = document.querySelector("tbody.boardcontainer.tbody")
 
   
   
@@ -20,46 +20,36 @@ document.addEventListener("DOMContentLoaded", () => {
   // tbody.append(...boardList)
   
   const showBoard = (datas) => {
-    tbodyList.textContent=""
-    const tr = document.createElement("TR")
+    console.log(datas)
+    tbodyList.textContent= ""  
+    let tr = document.createElement("TR")
     tr.className = "board tr"
-    const tbody1 = document.createElement("TBODY")
-    // console.log(datas)
-    const boardList = datas.map((data, index, i )=>{
-    
+    tr.textContent = ""
     let td = document.createElement("td")
     td.classList = "board seq"
-    td.textContent =  index+1
+    td.textContent =""
+    
+    const boardList = datas.map((data,index)=>{
+    td.textContent =  index+(1)
     tr.appendChild(td)
-    tbody1.appendChild(tr)
-
+    tbodyList.appendChild(tr)
     td = document.createElement("TD")
     td.classList = "board title"
     td.textContent = data.b_title
-    console.log(td.textContent)
     tr.appendChild(td)
-    tbody1.appendChild(tr)
-
+    tbodyList.appendChild(tr)
     td = document.createElement("TD")
     td.classList = "board nickname"
     td.textContent = data.b_nickname
-    // console.log(td.textContent)
     tr.appendChild(td)
-    tbody1.appendChild(tr)
-    
-
+    tbodyList.appendChild(tr)
     td = document.createElement("td")
     td.classList = "board date"
     td.textContent = data.b_update_date
-    tr.appendChild(td)
-    tbody1.appendChild(tr)
-    // tbody1.appendChild(tr)
-    // return tbodylist
-    })
-    // tbodyList.appendchild(tbody1)
-    
+    tr.appendChild(td)    
+    tbodyList.appendChild(tr)
+    })    
     tbodyList.append(...boardList)
-    
   }
    navButtons?.addEventListener("click", (e) => {
     const button = e.target;
@@ -79,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // console.log(loadFor)
       await fetch(`/forum/:${loadFor}`)
       .then((res)=> res.json())
-      .then((datas)=> {console.log(datas); showBoard(datas)}
+      .then((datas)=> {showBoard(datas)}
       )
     }
   });

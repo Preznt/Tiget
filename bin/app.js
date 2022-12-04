@@ -28,6 +28,7 @@ import concertRouter from "../routes/concert.js";
 import listRouter from "../routes/list.js";
 import spcdeInfo from "../routes/spcdeInfo.js";
 import forum from "../routes/forum.js"
+import profile from "../routes/profile.js"
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
 // import perdisRealm from "../routes/perdisRealm.js";
@@ -95,7 +96,7 @@ app.use("/holiday", spcdeInfo);
 app.use("/concert", concertRouter);
 app.use("/list", listRouter);
 app.use("/forum", forum)
-
+app.use("/profile", profile)
 // app.use("/period", perdisPeriod);
 // app.use("/area", perdisArea);
 // app.use("/realm", perdisRealm);
