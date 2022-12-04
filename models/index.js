@@ -17,6 +17,7 @@ if (config.use_env_variable) {
     config
   );
 }
+
 const db = { sequelize };
 db.models = initModel(sequelize);
 export default db;
