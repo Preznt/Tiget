@@ -50,70 +50,30 @@ table.boardcontainer {
   width: 100%;
   overflow: none;
 }
+.boardcontainer thead,tbody {
+  display: flex;
+  width: 100%;
+}
 table.boardcontainer tr {
+  width: 100%;
   display: flex;
   border-collapse: collapse;
+  border-bottom: 1px solid black;  
 }
-table.boardcontainer tbody tr td {
-  flex: 1;
+tr.board.tr{
+  width: 100%;
 }
-table.boardcontainer tbody tr td:nth-of-type(2) {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 70px;
-  overflow: hidden;
+table.boardcontainer th:nth-of-type(2), tbody th:nth-of-type(2),
+table.boardcontainer td:nth-of-type(2), tbody td:nth-of-type(2){
+  flex:5;
 }
-table.boardcontainer th {
-  flex: 1;
-  border-bottom: 1px solid black;
-}
-table.boardcontainer th:nth-of-type(1) {
-  margin-left: 16px;
-  text-align: left;
-}
-table.boardcontainer th:nth-of-type(3) {
-  margin-right: 16px;
-  text-align: right;
-}
-table.boardcontainer tbody td:nth-of-type(1) {
-  margin-left: 16px;
-  text-align: left;
-}
-table.boardcontainer tbody td:nth-of-type(3) {
-  margin-right: 16px;
-  text-align: right;
-}
-table.boardcontainer td {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin: 12px 16px 8px 16px;
-  cursor: pointer;
-}
-table.boardcontainer td:hover {
-  text-decoration: underline;
-}
-.buttonbox {
+.boardcontainer th, td{
+  flex:1;
   margin: 12px auto;
-  width: 80%;
-  text-align: right;
-}
-.buttonbox button {
-  padding: 1em;
-  border-radius: 5%;
-  background: rgb(0, 0, 0);
-  color: white;
-  opacity: 0.5;
-  transition: 0.3s;
-  border: none;
+  text-align: left;
+  white-space: nowrap;  
 }
 
-.category:hover {
-  opacity: 1;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-}
-button.more:hover {
-  opacity: 1;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+.board.title {
+  width: 20px;
 }
