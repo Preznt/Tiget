@@ -94,6 +94,7 @@ app.use("/detail", detailRouter);
 app.use("/users", usersRouter);
 app.use("/mypage", mypageRouter);
 app.use("/holiday", spcdeInfo);
+app.use("/mypage", mypageRouter);
 app.use("/concert", concertRouter);
 app.use("/list", listRouter);
 app.use("/forum", forum);

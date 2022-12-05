@@ -5,12 +5,10 @@ export default (sequelize) => {
     {
       username: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: false,
         primaryKey: true,
       },
       genre_code: {
         type: Sequelize.DataTypes.STRING(20),
-        allowNull: false,
         primaryKey: true,
       },
     },
