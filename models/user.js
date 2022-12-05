@@ -4,12 +4,16 @@ export default (sequelize) => {
     "user",
     {
       username: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
         primaryKey: true,
       },
+      password: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: false,
+      },
       profile_image: {
-        type: Sequelize.DataTypes.STRING(256),
+        type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
       nickname: {
@@ -17,12 +21,16 @@ export default (sequelize) => {
         allowNull: false,
       },
       birthdate: {
-        type: Sequelize.DataTypes.STRING(256),
-        allowNull: false,
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: true,
       },
-      Level: {
+      level: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+      },
+      delete_date: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: true,
       },
     },
     {

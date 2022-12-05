@@ -1,0 +1,33 @@
+h2 회원탈퇴
+    form.withdrawal
+        input(type="password" placeholder="비밀번호 입력").password
+        input(type="password" placeholder="비밀번호 확인").passwordCheck
+        button(type="button") 회원탈퇴
+    script.
+        const button = document.querySelector("button")
+        const passwordInput = document.querySelector("input.password")
+        const passwordInputCheck = document.querySelector("input.passwordCheck")
+
+        button?.addEventListner("click", ()=> {
+            if (passwordInput.value !== passwordInputCheck.value) {
+                alert("비밀번호를 확인해주세요"); 
+                return 
+            } else if(confirm("탈퇴하시겠습니까?")) {
+                const option {
+                    method:"post",
+                    body : `${passwordInput.value}`
+                    header: {
+                        "Content-Type" : "application/json"
+                    }
+                }
+                fetch(`/user/:${check}`)
+                const option1 {
+                    method:"post",
+                    body : `${username}`
+                    header: {
+                        "Content-Type" : "application/json"
+                    }
+                }
+                fetch(`/user/:${id}`);
+            }  document.location.href = "/" 
+        })

@@ -2,9 +2,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const rankBox = document.querySelector("div.ranking");
   const mainHeader = document.querySelector("header.main");
   const navButtons = document.querySelector("div.main.button.box");
-  const boardSort = document.querySelectorAll(".categorylist div");
+  const boardSort = document.querySelector(".categorylist");
+  const tbodyList = document.querySelector("tbody.boardcontainer.tbody")
 
-  navButtons?.addEventListener("click", (e) => {
+  
+  
+
+  //   td = document.createElement("td")
+  //   td.textContent = data.b_title
+  //   tr.appendChild(td)
+
+  //   td = document.createElement("td")
+  //   td.textContent = data.b_update_date
+  //   tr.appendChild(td)
+
+  //   return boardList
+  // tbody.append(...boardList)
+  
+  const showBoard = (datas) => {
+    console.log(datas)
+    tbodyList.textContent= ""  
+    let tr = document.createElement("TR")
+    tr.className = "board tr"
+    tr.textContent = ""
+    let td = document.createElement("td")
+    td.classList = "board seq"
+    td.textContent =""
+    
+    const boardList = datas.map((data,index)=>{
+    td.textContent =  index+(1)
+    tr.appendChild(td)
+    tbodyList.appendChild(tr)
+    td = document.createElement("TD")
+    td.classList = "board title"
+    td.textContent = data.b_title
+    tr.appendChild(td)
+    tbodyList.appendChild(tr)
+    td = document.createElement("TD")
+    td.classList = "board nickname"
+    td.textContent = data.b_nickname
+    tr.appendChild(td)
+    tbodyList.appendChild(tr)
+    td = document.createElement("td")
+    td.classList = "board date"
+    td.textContent = data.b_update_date
+    tr.appendChild(td)    
+    tbodyList.appendChild(tr)
+    })    
+    tbodyList.append(...boardList)
+  }
+   navButtons?.addEventListener("click", (e) => {
     const button = e.target;
     const btnClass = button.textContent;
     if (btnClass == "랭킹") {
@@ -13,27 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
       document.location.href = "#main2";
     } else if (btnClass == "포럼") {
       document.location.href = "#main1";
-    }
+    } 
   });
-  boardSort?.addEventListener("click", async (e) => {
-    const sort = e.target;
-    if (sort.tagName === "BUTTON") {
-      let location = sort.textContent;
-      const option = {
-        Method: "get",
-        body: location,
-      };
-      fetch(`/forum/${location}`, option).then((res) => res.json());
+  boardSort?.addEventListener("click", async (b)=>{
+    const target = b.target
+    if( target.tagName === "DIV") {
+      let loadFor = target.textContent
+      // console.log(loadFor)
+      await fetch(`/forum/:${loadFor}`)
+      .then((res)=> res.json())
+      .then((datas)=> {showBoard(datas)}
+      )
     }
   });
 
-  // window.onscroll = scrollF();
-
-  // function scrollF() {
-  //   if (document.body.scrollTop > 50) {
-  //     mainHeader.classList.add("active");
-  //   } else {
-  //     mainHeader.classList.remove("active");
-  //   }
-  // }
+  
 });

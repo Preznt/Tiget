@@ -27,6 +27,8 @@ import mypageRouter from "../routes/mypage.js";
 import concertRouter from "../routes/concert.js";
 import listRouter from "../routes/list.js";
 import spcdeInfo from "../routes/spcdeInfo.js";
+import forum from "../routes/forum.js";
+import profile from "../routes/profile.js";
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
 // import perdisRealm from "../routes/perdisRealm.js";
@@ -78,7 +80,7 @@ app.use("/", (req, res, next) => {
     delete app.locals.user;
   }
 
-  console.log("유저정보", req.session.user);
+  // console.log("유저정보", req.session.user);
   // control을 다음(여기는 router)으로 전달
   // next() 를 생략하면 다음의 router 작동되지 않는다
   next();
@@ -89,9 +91,13 @@ app.use("/", EntranceRouter);
 app.use("/main", mainRouter);
 app.use("/detail", detailRouter);
 app.use("/users", usersRouter);
+app.use("/mypage", mypageRouter);
 app.use("/holiday", spcdeInfo);
 app.use("/mypage", mypageRouter);
 app.use("/concert", concertRouter);
+app.use("/list", listRouter);
+app.use("/forum", forum);
+app.use("/profile", profile);
 // app.use("/period", perdisPeriod);
 // app.use("/area", perdisArea);
 // app.use("/realm", perdisRealm);

@@ -108,3 +108,8 @@ dist
 
 # Security Config ignore
 mongoDB.*
+
+# 사진 파일
+*.jpg
+*.png
+*.gif
