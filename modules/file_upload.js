@@ -22,7 +22,7 @@ const storageOption = {
   destination: (req, file, fileup) => {
     // upload_dir 폴더가 없으면 만들어라
     if (!fs.existsSync(upload_dir)) {
-      fs.mkdirSync(upload_dir);
+      fs.mkdirSync(upload_dir, {recursive:true});
     }
     // 실질적으로 파일 업로드를 담당하는 multer 내부의
     // 함수 호출
