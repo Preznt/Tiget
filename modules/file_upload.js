@@ -3,7 +3,8 @@ import multer from "multer";
 // nodejs 기본 기능
 import fs from "fs";
 import path from "path";
-// import { V4 } from "uuid";
+import { v4 } from "uuid";
+
 const upload_dir = path.join("public/uploads");
 
 const storageOption = {

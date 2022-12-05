@@ -22,11 +22,11 @@ const chkSession = (req, res, next) => {
 };
 
 router.get("/", chkSession, (req, res) => {
-  res.render("mypage");
+  res.render("mypage", { body: "users", users: {} });
 });
 
 router.get("/delete", (req, res) => {
-  res.render("/includes/mypage_withdrawal");
+  res.render("mypage", { body: "withdrawal" });
 });
 
 router.post("/delete/check", async (req, res) => {

@@ -2,10 +2,9 @@ extends layout
 
 block content 
     link(rel="stylesheet" href="/css/mypage.css")
-    link(rel="stylesheet" href="/css/mypage/profile.css")
     link(rel="stylesheet" href="/css/mypage/change_password.css")
     link(rel="stylesheet" href="/css/mypage/favorite_genre.css")
-    - let users = true
+    script(src="/js/mypage.js")
     div.mypage
         div.menu.section            
             nav.menu
@@ -15,8 +14,7 @@ block content
                     li 선호장르 설정
                     li 찜목록
                     li 회원탈퇴   
-        div.info.section
-        if users
+        if body === "users"
             include includes/mypage_profile.pug
-        if withdrawal 
-            include includes/mypage_widthdrawal.pug
+        if body === "withdrawal" 
+            include includes/mypage_withdrawal.pug
