@@ -22,20 +22,23 @@ const chkSession = (req, res, next) => {
 };
 
 router.get("/", chkSession, (req, res) => {
-  res.render("mypage", { body: "users", users: {} });
+  const user = req.session.user;
+  return res.render("mypage", { body: "users", user });
 });
 
-router.get("/delete", (req, res) => {
-  res.render("mypage", { body: "withdrawal" });
+router.get("/delete", chkSession, (req, res) => {
+  const user = req.session.user.username;
+  return res.render("mypage", { body: "withdrawal", user });
 });
 
-router.post("/delete/check", async (req, res) => {
-  const username = req?.body.username;
+router.post("/delete/check", chkSession, async (req, res) => {
+  const user = req.session.user.username;
+  console.log(user);
   const val = req?.body.val_password;
   try {
     let data = await Users.findAll({
       attributes: ["password"],
-      where: { username: username },
+      where: { username: user },
     });
     data = JSON.parse(JSON.stringify(data))[0].password;
     if (data === "") {
@@ -52,7 +55,7 @@ router.post("/delete/check", async (req, res) => {
   }
 });
 
-router.get("/delete/:username", async (req, res) => {
+router.get("/delete/:username", chkSession, async (req, res) => {
   const username = req.params.username;
   const date = moment().format(dateFormat);
   try {
@@ -72,7 +75,8 @@ router.get("/delete/:username", async (req, res) => {
     console.log(delUser);
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write("<script>alert('성공적으로 탈퇴되었습니다.')</script>");
-    return res.write("<script>location.href='/users/logout'</script>");
+    res.write("<script>location.href='/users/logout'</script>");
+    return res.end();
   } catch (err) {
     console.error(err);
     return res.send("예기치 않은 문제가 생겼습니다. 다시 시도해주세요.");
