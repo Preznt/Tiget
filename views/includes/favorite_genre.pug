@@ -1,38 +1,43 @@
-button(type="button").genre_button 선호장르 저장
-    .genre_select
-        .pop
-            label(for="pop") 팝  
-            input(type="checkbox" id="pop")                    
-        .rock
-            label(for="rock") 락    
-            input(type="checkbox" id="rock")                    
-        .electronic
-            label(for="electronic") 일렉트로닉
-            input(type="checkbox" id="electronic")                    
-        .hiphop
-            label(for="hiphop") 힙합
-            input(type="checkbox" id="hiphop")                    
-        .rnb
-            label(for="rnb") 알앤비
-            input(type="checkbox" id="rnb")                    
-        .jazz
-            label(for="jazz") 재즈
-            input(type="checkbox" id="jazz")                                
-        .classic
-            label(for="classic") 클래식
-            input(type="checkbox" id="classic")                    
-        .ballad
-            label(for="ballad") 발라드
-            input(type="checkbox" id="ballad")                    
-        .dance
-            label(for="dance") 댄스
-            input(type="checkbox" id="dance")                    
-        .trot
-            label(for="trot") 트로트
-            input(type="checkbox" id="trot")                    
-        .inde
-            label(for="independent") 인디뮤직
-            input(type="checkbox" id="independent")                    
-        .traditional
-            label(for="국악") 국악
-            input(type="checkbox" id="국악")
+form(method ="POST").genre_select
+    input(name= "username" placeholder="username을 입력해주세요" id="username")
+    .pop
+        label(for="pop") 팝 
+        input(name= "genre" type="checkbox" id="pop" value="G0001" )
+    .rock
+        label(for="rock") 락    
+        input(name= "genre" type="checkbox" id="rock", value="G0002")
+    .trot
+        label(for="trot") 트로트
+        input(name= "genre" type="checkbox" id="trot", value="G0003")
+    .ballad
+        label(for="ballad") 발라드
+        input(name= "genre" type="checkbox" id="ballad", value="G0004")
+    .hiphop
+        label(for="hiphop") 힙합
+        input(name= "genre" type="checkbox" id="hiphop", value="G0005")
+    .rnb
+        label(for="rnb") 알앤비
+        input(name= "genre" type="checkbox" id="rnb", value="G0006")
+    .folk_blues
+        label(for="folk_blues") 포크/블루스
+        input(name= "genre" type="checkbox" id="folk_blues", value="G0007")                        
+    .electronic
+        label(for="electronic") 일렉트로닉
+        input(name= "genre" type="checkbox" id="electronic", value="G0008")
+    .classic
+        label(for="classic") 클래식
+        input(name= "genre" type="checkbox" id="classic", value="G0009")                                     
+    .jazz
+        label(for="jazz") 재즈
+        input(name= "genre" type="checkbox" id="jazz", value="G0010")                                
+    .musical
+        label(for="musical") 뮤지컬
+        input(name= "genre" type="checkbox" id="musical", value="G0011")                                     
+    .CCM
+        label(for="CCM") CCM
+        input(name= "genre" type="checkbox" id="CCM", value="G0012")
+    .inde
+        label(for="independent") 인디뮤직
+        input(name= "genre" type="checkbox", id="independent", value="G0013")   
+    .buttonBox
+        button(type="button").genre_button 선호장르 저장
