@@ -14,7 +14,7 @@ block content
                     li 선호장르 설정
                     li 찜목록
                     li 회원탈퇴   
-        if body === "users"
-            include includes/mypage_profile.pug
-        if body === "withdrawal" 
+        if body == "withdrawal" 
             include includes/mypage_withdrawal.pug
+        if body == "users"
+            include includes/mypage_profile.pug
