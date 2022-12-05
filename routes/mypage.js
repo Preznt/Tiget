@@ -1,6 +1,8 @@
 import express from "express";
 import DB from "../models/index.js";
 import moment from "moment";
+import session from "express-session";
+
 const Users = DB.models.user;
 const IntCon = DB.models.concert_of_interest;
 const IntArt = DB.models.artist_of_interest;
@@ -8,7 +10,18 @@ const IntGen = DB.models.genre_of_interest;
 const dateFormat = "YYYY.MM.DD";
 
 const router = express.Router();
-router.get("/", (req, res) => {
+
+const chkSession = (req, res, next) => {
+  if (!req.session.user) {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write("<script>alert('로그인이 필요한 페이지입니다.')</script>");
+    return res.write("<script>location.href='/main'</script>");
+  } else {
+    next();
+  }
+};
+
+router.get("/", chkSession, (req, res) => {
   res.render("mypage");
 });
 
