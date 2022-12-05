@@ -1,10 +1,11 @@
 script(src="/js/profile.js")
 //- test 용 username 변수
 - const username = "buddy96@gmail.com";
+- const nickname = "박명수"
 form.setinline(method="post" enctype="multipart/form-data")
     .profile.img= users.profile_image
-    span.emailid= 12333
-    span.nickname= 34444
+    span.emailid= username
+    span.nickname= nickname
     div.profilebutton        
-        input(type="file", name="b_upfile", multiple, accept="image/*")#b_upfile
-    button.profilebutton(type="flie" value="image") 프로필이미지 변경
+        input(type="file", name="b_upfile", accept="image/*")#b_upfile
+    button.profilebutton(type="submit" value="image") 프로필이미지 변경
