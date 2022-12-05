@@ -28,7 +28,11 @@ import concertRouter from "../routes/concert.js";
 import listRouter from "../routes/list.js";
 import spcdeInfo from "../routes/spcdeInfo.js";
 import forum from "../routes/forum.js";
+<<<<<<< HEAD
 import profile from "../routes/profile.js";
+=======
+import favorite_genre_router from "../routes/favorite_genre.js";
+>>>>>>> 65dd436c8ff343f0e4e0968673f2e74336c220fb
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
 // import perdisRealm from "../routes/perdisRealm.js";
@@ -97,7 +101,12 @@ app.use("/mypage", mypageRouter);
 app.use("/concert", concertRouter);
 app.use("/list", listRouter);
 app.use("/forum", forum);
+<<<<<<< HEAD
 app.use("/profile", profile);
+=======
+app.use("/favoriteGenre", favorite_genre_router);
+
+>>>>>>> 65dd436c8ff343f0e4e0968673f2e74336c220fb
 // app.use("/period", perdisPeriod);
 // app.use("/area", perdisArea);
 // app.use("/realm", perdisRealm);

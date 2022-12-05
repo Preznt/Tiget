@@ -1,4 +1,4 @@
-.genre_select {
+form.genre_select {
   position: absolute;
   width: 50%;
   top: 50%;
@@ -17,7 +17,7 @@
   padding: 1em;
   border: none;
 }
-.genre_select div {
+form.genre_select div {
   max-width: 120px;
   text-align: right;
 }
