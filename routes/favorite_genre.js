@@ -1,29 +1,38 @@
 import express from "express";
 import DB from "../models/index.js";
+import user from "../models/user.js";
 
 const Users = DB.models.user;
 const genre = DB.models.genre;
 const IntGen = DB.models.genre_of_interest;
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  // const userResult = Users.findAll({
-  //   include: [
-  //     {
-  //       model: IntGen,
-  //       attributes: ["username", "genre_code"],
-  //     },
-  //   ],
-  //   // where: { username: "bjw1403@gmail.com" },
+router.get("/", async (req, res) => {
+  // const uservalue = "bjw1403@gmail.com";
+  // const favorite_genre = await IntGen.findAll({
+  //   where: { username: uservalue },
   // });
 
-  // res.send(userResult);
   res.render("mypage");
 });
 
-router.post("/", (req, res) => {
-  const InfoGenre = req.body.pop;
-  IntGen.create(InfoGenre);
-  res.json(InfoGenre);
+router.post("/", async (req, res) => {
+  const uservalue = req.body.username;
+  const genres = req.body.genre;
+
+  // IntGen.create(InfoGenre);
+  // console.log(uservalue, genres);
+
+  const upLoadGenre = genres.map((genre) => {
+    let uploadvalue = {
+      username: uservalue,
+      genre_code: genre,
+    };
+    return uploadvalue;
+  });
+
+  console.log(upLoadGenre);
+  const del = await IntGen.destroy({ where: { username: uservalue } });
+  const result = await IntGen.bulkCreate(upLoadGenre);
 });
 export default router;
