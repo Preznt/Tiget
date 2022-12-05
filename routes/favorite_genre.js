@@ -1,9 +1,6 @@
 import express from "express";
 import DB from "../models/index.js";
-import user from "../models/user.js";
 
-const Users = DB.models.user;
-const genre = DB.models.genre;
 const IntGen = DB.models.genre_of_interest;
 const router = express.Router();
 
@@ -13,7 +10,7 @@ router.get("/", async (req, res) => {
   //   where: { username: uservalue },
   // });
 
-  res.render("mypage");
+  res.render("mypage", { body: "favoriteGenre" });
 });
 
 router.post("/", async (req, res) => {
