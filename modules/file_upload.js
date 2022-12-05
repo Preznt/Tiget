@@ -12,7 +12,8 @@ const storageOption = {
   filename: (req, file, callback) => {
     const originalname = file.originalname;
     const fileprefix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const uploadFileName = `${fileprefix}-${originalname}`;
+    const newFileName = `${fileprefix}-${originalname}`;
+    const uploadFileName = newFileName.substring(newFileName.length - 255);
 
     callback(null, uploadFileName);
   },
