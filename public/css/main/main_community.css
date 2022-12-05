@@ -50,28 +50,35 @@ table.boardcontainer {
   width: 100%;
   overflow: none;
 }
-.boardcontainer thead,tbody {
+.boardcontainer thead,
+tbody {
   display: flex;
   width: 100%;
+}
+.boardcontainer tbody {
+  flex-direction: column;
 }
 table.boardcontainer tr {
   width: 100%;
   display: flex;
   border-collapse: collapse;
-  border-bottom: 1px solid black;  
+  border-bottom: 1px solid black;
 }
-tr.board.tr{
+tr.board.tr {
   width: 100%;
 }
-table.boardcontainer th:nth-of-type(2), tbody th:nth-of-type(2),
-table.boardcontainer td:nth-of-type(2), tbody td:nth-of-type(2){
-  flex:5;
+table.boardcontainer th:nth-of-type(2),
+tbody th:nth-of-type(2),
+table.boardcontainer td:nth-of-type(2),
+tbody td:nth-of-type(2) {
+  flex: 5;
 }
-.boardcontainer th, td{
-  flex:1;
+.boardcontainer th,
+td {
+  flex: 1;
   margin: 12px auto;
   text-align: left;
-  white-space: nowrap;  
+  white-space: nowrap;
 }
 
 .board.title {

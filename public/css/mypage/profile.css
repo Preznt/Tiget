@@ -1,47 +1,47 @@
-
-.setinline {    
-    position: relative;
-    width: 100%;
-
+.setinline {
+  position: relative;
+  top: 20%;
+  left: 40%;
+  width: 60%;
 }
 .profile.img {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border : 1px solid black ;    
-    border-radius: 50%;
-    top:30%;
-    left:40%;
-    margin : 16px auto 16px 20px;
-    background: url("/images/profile.png") ;    
-    background-size: cover;
-    display: inline-block;    
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 50%;
+  top: 0%;
+  left: 10%;
+  margin: 16px auto 16px 20px;
+  background: url("/images/profile.png");
+  background-size: cover;
+  display: inline-block;
 }
 .emailid {
-    position:absolute;
-    top: 30%;
-    left: 60%;
+  position: absolute;
+  top: 5%;
+  left: 35%;
 }
 .nickname {
-    position:absolute;
-    top: 45%;
-    left: 60%;
+  position: absolute;
+  top: 15%;
+  left: 35%;
 }
 div.profilebutton {
-    position : absolute;
-    top: 50%;
-    left: 41%;
+  position: absolute;
+  top: 25%;
+  left: 15%;
 }
-button.profilebutton{
-    position : absolute;
-    top: 55%;
-    left: 41.8%;
-    padding: 0.5em;
-    background-color: white;
-    border-radius: 10px;
-    transition:0.6s
+button.profilebutton {
+  position: absolute;
+  top: 32%;
+  left: 13%;
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 10px;
+  transition: 0.6s;
 }
 button.profilebutton:hover {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }

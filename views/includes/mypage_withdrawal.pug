@@ -1,0 +1,12 @@
+link(rel="stylesheet" href="/css/mypage/withdrawal.css")
+script(src="/js/withdrawal.js")
+script.
+    let result= `#{result}` || "";
+div.info.section
+    h2 회원탈퇴
+    form(method="POST").withdrawal
+        div.err_msg
+        input(type="hidden", name="username", value=`${username}`)
+        input(type="password", name="val_password", placeholder="비밀번호 입력")
+        input(type="password", name="chk_password", placeholder="비밀번호 확인")
+        button(type="button")#deleteAcc 회원탈퇴

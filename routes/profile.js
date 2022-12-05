@@ -1,19 +1,26 @@
-import express from "express"
-import modelDB from "../models/index.js"
-const router = express.Router()
-const userDB = modelDB.models.user
+import express from "express";
+import modelDB from "../models/index.js";
+import upload from "../modules/file_upload.js";
+const router = express.Router();
+const userDB = modelDB.models.user;
 
-router.get("/", (req, res)=> {
-    res.render("mypage", {users:""} )
-})
-router.post("/:id", async (req, res)=> {
-    const id = req.body
+router.get("/", (req, res) => {
+  res.render("mypage", { body: "users", users: {} });
+});
+router.post("/", upload.single("b_upfile"), async (req, res) => {
+  const profile = req.file.filename;
+  console.log(profile);
+  const emailID = req.body.username;
+  // console.log(emailID);
+  try {
+    const profileIMG = await userDB.update(
+      { profile_image: profile },
+      { where: { username: emailID } }
+    );
+    res.redirect("/", { profileIMG });
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-    try {
-        const withdrawalResult = await userDB.destroy({where:{username:id}})
-        res.redirect("/")
-    } catch(err) {console.error(err); return res.send("회원정보가 없습니다.")}
-}) 
-
-
-export default router
+export default router;

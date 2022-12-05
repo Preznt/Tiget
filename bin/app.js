@@ -28,7 +28,7 @@ import concertRouter from "../routes/concert.js";
 import listRouter from "../routes/list.js";
 import spcdeInfo from "../routes/spcdeInfo.js";
 import forum from "../routes/forum.js";
-import favorite_genre_router from "../routes/favorite_genre.js";
+import profile from "../routes/profile.js";
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
 // import perdisRealm from "../routes/perdisRealm.js";
@@ -76,8 +76,9 @@ app.use("/", (req, res, next) => {
     app.locals.user = req.session?.user;
   } else {
     // 로그아웃이 되었거나, 어떤이유로 session 에 로그인 정보가 없으면
-    // globa; 데이터에서 user 데이터 제거
+    // global 데이터에서 user 데이터 제거
     delete app.locals.user;
+    // ** 로그아웃 후 뒤로가기 방지하는 방법?
   }
 
   // console.log("유저정보", req.session.user);
@@ -97,7 +98,7 @@ app.use("/mypage", mypageRouter);
 app.use("/concert", concertRouter);
 app.use("/list", listRouter);
 app.use("/forum", forum);
-app.use("/favoriteGenre", favorite_genre_router);
+app.use("/profile", profile);
 
 // app.use("/period", perdisPeriod);
 // app.use("/area", perdisArea);
