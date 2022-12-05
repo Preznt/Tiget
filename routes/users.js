@@ -56,4 +56,21 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/logout", (req, res) => {
+  var session = req.session;
+  try {
+    if (session.user) {
+      req.session.destroy((err) => {
+        if (err) console.error(err);
+        else {
+          res.redirect("/main");
+        }
+      });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  res.redirect("/main");
+});
+
 export default router;
