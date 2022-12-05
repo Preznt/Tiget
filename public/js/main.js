@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       td = document.createElement("TD");
       td.classList = "board title";
       td.textContent = data.b_title;
+      console.log(td.textContent);
       tr.appendChild(td);
 
       td = document.createElement("TD");
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.appendChild(td);
       return tr;
     });
+    console.log(boardList);
     tbodyList.append(...boardList);
   };
   navButtons?.addEventListener("click", (e) => {

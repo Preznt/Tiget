@@ -14,9 +14,15 @@ router.get("/", (req, res) => {
 
 router.get("/:loadFor", async (req, res) => {
   let loadFor = req.params.loadFor;
-  try {
-    const boardResult = await Board.findAll({ where: { sort_board: loadFor } });
+  // console.log(loadFor);
+  let list = loadFor.substring(1, loadFor.length);
+  // console.log(list);
 
+  try {
+    const boardResult = await Board.findAll({
+      where: { sort_board: list },
+      limit: 14,
+    });
     return res.json(boardResult);
   } catch (err) {
     console.error(err);
