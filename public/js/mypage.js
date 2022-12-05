@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       };
-      let result = await fetch(`/mypage/check`, fetchOption);
+      let result = await fetch(`/mypage/delete/check`, fetchOption);
       result = await result.json();
       if (result.msg === "false") {
         errMsg.textContent = "비밀번호가 틀렸습니다.\n다시 입력해주세요.";

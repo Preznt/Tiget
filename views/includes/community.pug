@@ -14,12 +14,8 @@ section#main1.main3
                     tr 
                         th 순서
                         th 제목
+                        th 작성자
                         th 날짜
-                tbody 
-                each board in boards              
-                    tr 
-                        td= board.seq
-                        td= board.b_title
-                        td= board.b_update_date
+                tbody.boardcontainer.tbody
     .buttonbox 
         a(href="/users/bltBrd").button 더보기

@@ -25,7 +25,11 @@ router.get("/", chkSession, (req, res) => {
   res.render("mypage");
 });
 
-router.post("/check", async (req, res) => {
+router.get("/delete", (req, res) => {
+  res.render("/includes/mypage_withdrawal");
+});
+
+router.post("/delete/check", async (req, res) => {
   const username = req?.body.username;
   const val = req?.body.val_password;
   try {
