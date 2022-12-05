@@ -62,15 +62,12 @@ router.get("/logout", (req, res) => {
     if (session.user) {
       req.session.destroy((err) => {
         if (err) console.error(err);
-        else {
-          res.redirect("/main");
-        }
       });
     }
   } catch (err) {
-    console.error(err);
+    return console.error(err);
   }
-  res.redirect("/main");
+  return res.redirect("/main");
 });
 
 export default router;

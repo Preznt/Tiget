@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const formWithdrawal = document.querySelector("form.withdrawal");
   let errMsg = document.querySelector("div.err_msg");
-  const username = document.querySelector("input[name='username']").value;
   const inputVal = document.querySelector("input[name='val_password']");
   const inputChk = document.querySelector("input[name='chk_password']");
   const btnDel = document.querySelector("button#deleteAcc");
@@ -32,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnDel?.addEventListener("click", async () => {
     if (chkVal()) {
-      const data = { username: username, val_password: inputVal.value };
+      const data = { val_password: inputVal.value };
       const fetchOption = {
         method: "POST",
         body: JSON.stringify(data),
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let result = await fetch(`/mypage/delete/check`, fetchOption);
       result = await result.json();
       if (result.msg === "false") {
-        errMsg.textContent = "비밀번호가 틀렸습니다.\n다시 입력해주세요.";
+        errMsg.textContent = "비밀번호가 틀렸습니다. 다시 입력해주세요.";
         resetInput();
         inputVal.focus();
         return false;
