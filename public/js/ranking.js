@@ -9,65 +9,111 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const rankingImgs = document.querySelectorAll("div.ranking div.detail img");
 
+  const genre = ["POP", "발라드", "인디", "재즈", "락/메탈"];
+  const concert = ["국내", "내한", "페스티벌"];
+
   // 공연, 장르별 클릭시 카테고리 변경
   titleBox?.addEventListener("click", (e) => {
     const event = e.target;
     if (event.tagName === "BUTTON") {
       const titleName = event.textContent;
+
       if (titleName === "장르별 랭킹") {
         btnPerform.classList.add("non-active");
         btnGenre.style.color = "black";
-        const genre = ["KPOP", "발라드", "인디"];
-        for (let i = 0; i < subtitleBtns.length; i++) {
-          subtitleBox[i].textContent = genre[i];
+        subtitleBox.textContent = "";
+
+        for (let i = 0; i < genre.length; i++) {
+          const btn = document.createElement("BUTTON");
+          btn.textContent = genre[i];
+          btn.dataset.index = i + 1;
+          subtitleBox.appendChild(btn);
         }
       } else {
         btnPerform.classList.remove("non-active");
         btnGenre.style.color = "#ccc";
-        const concert = ["국내", "내한", "페스티벌"];
-        for (let i = 0; i < subtitleBtns.length; i++) {
-          subtitleBox[i].textContent = concert[i];
+        subtitleBox.textContent = "";
+
+        for (let i = 0; i < concert.length; i++) {
+          const btn = document.createElement("BUTTON");
+          btn.textContent = concert[i];
+          btn.dataset.index = i + 1;
+          subtitleBox.appendChild(btn);
         }
       }
     }
   });
 
-  // 공연별 카테고리에 대한 데이터 보여주기
-  subtitleBox?.addEventListener("click", (e) => {
-    const event = e.target;
-    if (event.tagName === "BUTTON") {
-      const subtitleName = event.textContent;
-      if (subtitleName === "국내") {
-        event.classList.add("active");
-        subtitleBtns[1].classList.remove("active");
-        subtitleBtns[2].classList.remove("active");
-        // subtitleBtns[2].classList.toggle("active");
+  // 예시 데이터
+  let imgs = [];
 
-        let imgs = [
-          "http://image.toast.com/aaaaab/ticketlink/TKL_1/jan_daegu_221020.jpg",
-          "http://image.toast.com/aaaaab/ticketlink/TKL_5/ep_pst1109.jpg",
-          "http://image.toast.com/aaaaab/ticketlink/TKL_4/cats_pst1107.jpg",
-          "http://image.toast.com/aaaaab/ticketlink/TKL_8/poster(220915)b.jpg",
-        ];
-        imgs.forEach((img, index) => {
-          rankingImgs[index].src = img;
-        });
-        return false;
-      } else if (subtitleName === "내한") {
-        event.classList.add("active");
-        subtitleBtns[0].classList.remove("active");
-        subtitleBtns[2].classList.remove("active");
-        let imgs = [
-          "http://tkfile.yes24.com/upload2/perfblog/202211/20221115/20221115-44119.jpg/dims/quality/70/",
-          "http://tkfile.yes24.com/upload2/perfblog/202211/20221111/20221111-44100.jpg/dims/quality/70/",
-          "http://tkfile.yes24.com/upload2/perfblog/202211/20221116/20221116-44165.jpg/dims/quality/70/",
-          "http://tkfile.yes24.com/upload2/perfblog/202209/20220915/20220915-43512.jpg/dims/quality/70/",
-        ];
+  const internalImgs = [
+    "http://image.toast.com/aaaaab/ticketlink/TKL_1/jan_daegu_221020.jpg",
+    "http://image.toast.com/aaaaab/ticketlink/TKL_5/ep_pst1109.jpg",
+    "http://image.toast.com/aaaaab/ticketlink/TKL_4/cats_pst1107.jpg",
+    "http://image.toast.com/aaaaab/ticketlink/TKL_8/poster(220915)b.jpg",
+  ];
+  const externalImgs = [
+    "http://tkfile.yes24.com/upload2/perfblog/202211/20221115/20221115-44119.jpg/dims/quality/70/",
+    "http://tkfile.yes24.com/upload2/perfblog/202211/20221111/20221111-44100.jpg/dims/quality/70/",
+    "http://tkfile.yes24.com/upload2/perfblog/202211/20221116/20221116-44165.jpg/dims/quality/70/",
+    "http://tkfile.yes24.com/upload2/perfblog/202209/20220915/20220915-43512.jpg/dims/quality/70/",
+  ];
+
+  const festivalImgs = [
+    "http://tkfile.yes24.com/upload2/perfblog/202209/20220915/20220915-43512.jpg/dims/quality/70/",
+    "http://tkfile.yes24.com/upload2/perfblog/202209/20220915/20220915-43512.jpg/dims/quality/70/",
+    "http://tkfile.yes24.com/upload2/perfblog/202209/20220915/20220915-43512.jpg/dims/quality/70/",
+    "http://tkfile.yes24.com/upload2/perfblog/202209/20220915/20220915-43512.jpg/dims/quality/70/",
+  ];
+
+  // 공연별 카테고리 버튼 클릭했을 때 css 변경
+  const btnActive = (event) => {
+    const btnIndex = event.dataset.index;
+    for (let btn of subtitleBtns) {
+      btn.classList.remove("active");
+    }
+    subtitleBtns[btnIndex - 1].classList.add("active");
+  };
+
+  // 공연별 카테고리에 대한 데이터 보여주기
+  const dataActive = (event) => {
+    const subtitleName = event.textContent;
+    for (let i = 0; i < subtitleBtns.length; i++) {
+      if (subtitleName == concert[i]) {
+        btnActive(event);
+        // switch (i) {
+        //   case "0":
+        //     imgs = imgs;
+        //     break;
+        //   case "1":
+        //     imgs = internalImgs;
+        //     break;
+        //   case "2":
+        //     imgs = festivalImgs;
+        //     break;
+        // }
+        if (i == "0") {
+          imgs = internalImgs;
+        } else if (i == "1") {
+          imgs = externalImgs;
+        } else {
+          imgs = festivalImgs;
+        }
+
+        // console.log(imgs);
         imgs.forEach((img, index) => {
           rankingImgs[index].src = img;
         });
         return false;
       }
+    }
+  };
+
+  subtitleBox?.addEventListener("click", (e) => {
+    const event = e.target;
+    if (event.tagName === "BUTTON") {
+      dataActive(event);
     }
   });
 });

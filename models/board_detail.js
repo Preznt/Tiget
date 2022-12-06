@@ -10,7 +10,7 @@ export default (sequelize) => {
       },
       b_nickname: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: true,
+        allowNull: false,
       },
       b_title: {
         type: Sequelize.DataTypes.STRING(255),
@@ -34,11 +34,11 @@ export default (sequelize) => {
       },
       b_modified_date: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       b_remove_date: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

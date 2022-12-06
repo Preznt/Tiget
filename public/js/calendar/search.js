@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchDropdownBox = document.querySelector(
     ".search_detail_dropdown_box"
   );
+  const btnSearchSchedule = document.querySelector("#btn_search_schedule");
 
   // search detail button 클릭하면 dropdown 표시, arrow 토글
   btnSearchDetail?.addEventListener("click", () => {

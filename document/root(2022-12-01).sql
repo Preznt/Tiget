@@ -35,7 +35,7 @@ PRIMARY KEY(username,artist_code)
 
 -- 공연정보
 create table if not exists concert_info(
-concert_code varchar(20) primary key,
+concert_code bigint auto_increment primary key,
 concert_name varchar(225) not null,
 concert_poster varchar(255),
 start_date varchar(125) not null,
@@ -61,7 +61,7 @@ PRIMARY KEY(concert_code,artist_code)
 
 -- 아티스트
 create table if not exists artist(
-artist_code	varchar(20)	PRIMARY KEY,
+artist_code bigint auto_increment primary key,
 artist_name	varchar(125)	NOT NULL,
 artist_type	varchar(20),
 artist_img varchar(255),	

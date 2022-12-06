@@ -4,6 +4,8 @@ link(rel='stylesheet', href='/css/calendar/calendar.css')
 //- router 의 데이터를 view template 로 가져올 때 생성되는 
 //- 불필요한 데이터가 포함되지 않는다.
 //- !{}: 괄호 안의 내용을 escaping 하지 않고 코드 그대로 출력
+script.
+  const conData = !{JSON.stringify(conData)}
 script(src="/js/calendar/calendar.js")
 script(src="/js/calendar/search.js")
 section.calendar.container#main2
@@ -22,7 +24,7 @@ section.calendar.container#main2
         button(type="button").btn_search_detail 상세 
           div.btn_search_detail_arrow.active
     div.search_detail_dropdown_box.visible
-      form(method="POST").search_detail_dropdown
+      form(method="POST", action="/detail").search_detail_dropdown
         div.search_detail_input_box
           label(for="input_search_date") 기간
           input(type="date", name="search_start")#input_search_start
@@ -42,15 +44,17 @@ section.calendar.container#main2
           label(for="input_search_loc") 지역
             div.search_loc_dropdown_box
               for loc in locData
-                input(type="checkbox", name=`${loc.eng}`, value=`${loc.eng}`, id=`${loc.eng}`)
+                input(type="checkbox", name="search_loc", value=`${loc.eng}`, id=`${loc.eng}`)
                 label(for=`${loc.eng}`)= loc.kor
         div.search_detail_input_box
           label(for="input_search_genre") 장르
             div.search_genre_dropdown_box
               for genre in genreData
-                input(type="checkbox", name=`${genre.id}`, value=`${genre.id}`, id=`${genre.id}`)
+                input(type="checkbox", name="search_genre", value=`${genre.id}`, id=`${genre.id}`)
                 label(for=`${genre.id}`)= genre.name
-        button(type="button").btn_detail_search 검색
+        button(type="submit")#btn_search_schedule 검색
+    if body === "detail"
+      include ../detail.pug
     div.calendar
       div.thead
         div.days

@@ -15,6 +15,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import expressSession from "express-session";
+// import MySQLStore from "express-mysql-session";
 // MySQL Sequelize
 import DB from "../models/index.js";
 
@@ -29,6 +30,7 @@ import listRouter from "../routes/list.js";
 import spcdeInfo from "../routes/spcdeInfo.js";
 import forum from "../routes/forum.js";
 import profile from "../routes/profile.js";
+import favgGenreRouter from "../routes/favorite_genre.js";
 // import perdisPeriod from "../routes/perdisPeriod.js";
 // import perdisArea from "../routes/perdisArea.js";
 // import perdisRealm from "../routes/perdisRealm.js";
@@ -99,6 +101,7 @@ app.use("/concert", concertRouter);
 app.use("/list", listRouter);
 app.use("/forum", forum);
 app.use("/profile", profile);
+app.use("/favoriteGenre", favgGenreRouter);
 
 // app.use("/period", perdisPeriod);
 // app.use("/area", perdisArea);

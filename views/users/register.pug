@@ -8,13 +8,13 @@ block content
             div.register.email
                 label 이메일
                 div.input_box.select.email
-                    input(name="email_first", placeholder="이메일을 입력해주세요")
-                    span.email @
-                    select(name="email_back")
-                        option(value="none") 뒷자리를 선택해주세요
-                        option(value="gmail.com") gmail.com
-                        option(value="naver.com") naver.com
-                        option(value="hanmail.net") hanmail.net
+                    input(name="username", placeholder="이메일을 입력해주세요",id="username")
+                    //- span.email @
+                    //- select(name="email_back")
+                    //-     option(value="none") 뒷자리를 선택해주세요
+                    //-     option(value="gmail.com") gmail.com
+                    //-     option(value="naver.com") naver.com
+                    //-     option(value="hanmail.net") hanmail.net
             div.register.password
                 label 비밀번호
                 div.input_box.input
@@ -29,15 +29,15 @@ block content
             div.register.nick_name
                 label 닉네임
                 div.input_box.input
-                    input(name="nick_name", type="password")
+                    input(name="nickname", type="text")
             div.register.name
                 label 이름
                 div.input_box.input
-                    input(name="name", type="text")
+                    input(name="realname", type="text")
             div.register.birthday
                 label 생년월일
                 div.input_box.select.birthday
-                    input(name="birthday", type="text") 
+                    input(name="birthdate", type="text") 
                     select(name="mm")
                         option(value="none") 월
                         option(value="1") 01
@@ -52,14 +52,14 @@ block content
                         option(value="10") 10
                         option(value="11") 11
                         option(value="12") 12
-                    input(type="text")
-            div.register.gender
-                label 성별
-                div.input_box.select.gender
-                    select(name="gender") 
-                        option(value="none") 성별
-                        option(value="M") 남성
-                        option(value="F") 여성
+                    input(name="dd" type="text")
+            //- div.register.gender
+            //-     label 성별
+            //-     div.input_box.select.gender
+            //-         select(name="gender") 
+            //-             option(value="none") 성별
+            //-             option(value="M") 남성
+            //-             option(value="F") 여성
             div.register.tel
                 label 전화번호
                 div.input_box.input
@@ -68,19 +68,19 @@ block content
             div.register.preference
                 label.main 음악 선호도 (2개 이상)
                 div.typeMusic.select
-                    input(type="checkbox" value="Pop")
+                    input(name="genre" type="checkbox" value="G0001")
                     label Pop<br>
-                    input(type="checkbox" value="Rock")
+                    input(name="genre" type="checkbox" value="G0002")
                     label Rock<br>
-                    input(type="checkbox" value="Electronic")
+                    input(name="genre" type="checkbox" value="G0008")
                     label Electronic<br>
-                    input(type="checkbox" value="Hip-Hop")
+                    input(name="genre" type="checkbox" value="G0005")
                     label Hip-Hop<br>
-                    input(type="checkbox" value="RandB")
+                    input(name="genre" type="checkbox" value="G0006")
                     label R&B<br>
-                    input(type="checkbox" value="Jazz")
+                    input(name="genre" type="checkbox" value="G0010")
                     label Jazz<br>
-                    input(type="checkbox" value="Classic")
+                    input(name="genre" type="checkbox" value="G0009")
                     label Classic<br>
             div.button.box.submit
                 button(type="button").btn.join.submit 가입하기

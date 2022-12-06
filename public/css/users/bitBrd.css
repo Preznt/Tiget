@@ -20,7 +20,7 @@ article.bitBrd div.bitBrd.table {
 thead tr.title,
 tbody tr.item {
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 5fr 0.5fr 0.5fr;
+  grid-template-columns: 0.5fr 0.5fr 5fr 1fr 0.5fr;
   border: 1px solid #aaa;
 }
 
@@ -35,21 +35,31 @@ div.bitBrd.category {
   font-size: 16px;
   font-weight: 600;
 }
-div.category {
+nav.main {
   padding-top: 2%;
+  display: flex;
 }
-div.category a {
+nav.main ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+nav.main li {
   padding: 12px 16px;
   border: 2px solid #bbb;
   color: gray;
   border-radius: 30px;
   margin: 10px;
+  text-align: center;
+  color: black;
+  cursor: pointer;
 }
-a.write {
-  color: white;
-}
+
 div.button.box {
   text-align: right;
+}
+div.button.box a {
+  color: white;
 }
 div.button.box button {
   padding: 12px 16px;
