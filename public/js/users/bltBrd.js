@@ -8,28 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const aFreeboard = document.querySelector("li.freeboard");
   const mainNav = document.querySelector("nav.main");
 
+  const baseURL = "/users/bltBrd";
+  const data = [
+    { name: "전체보기", url: `${baseURL}` },
+    { name: "공지사항", url: `${baseURL}/Notice` },
+    { name: "공연후기", url: `${baseURL}/category/공연후기` },
+    { name: "공연장후기", url: `${baseURL}/category/공연장후기` },
+    { name: "자유게시판", url: `${baseURL}/category/자유게시판` },
+  ];
+
   mainNav?.addEventListener("click", (tag) => {
     const navItem = tag.target;
     if (navItem?.tagName === "LI") {
-      let data = [
-        "전체보기",
-        "공지사항",
-        "공연후기",
-        "공연장후기",
-        "자유게시판",
-      ];
-      let href = [
-        "/users/bltBrd",
-        "/users/bltBrd/Notice",
-        "/users/bltBrd/category/공연후기",
-        "/users/bltBrd/category/공연장후기",
-        "/users/bltBrd/category/자유게시판",
-      ];
-      data.forEach((data, index) => {
-        switch (navItem.textContent) {
-          case data:
-            document.location.href = href[index];
-            break;
+      data.forEach((data) => {
+        if (data.name === navItem.textContent) {
+          document.location.href = data.url;
         }
       });
     }
