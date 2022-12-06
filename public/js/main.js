@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navButtons = document.querySelector("div.main.button.box");
   const boardSort = document.querySelector(".categorylist");
   const tbodyList = document.querySelector("tbody.boardcontainer.tbody");
-  
+
   //   td = document.createElement("td")
   //   td.textContent = data.b_title
   //   tr.appendChild(td)
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let tr = document.createElement("TR");
       tr.className = "board tr";
       tr.textContent = "";
-      tr.dataset.id = data.seq
+      tr.dataset.id = data.seq;
       let td = document.createElement("td");
       td.classList = "board seq";
       td.textContent = "";
@@ -71,16 +71,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((res) => res.json())
         .then((datas) => {
           showBoard(datas);
-        });   
-    }    
+        });
+    } else return false;
   });
   tbodyList?.addEventListener("click", (e) => {
-    const target = e.target
-    console.log(target)
+    const target = e.target;
+    console.log(target);
 
-    if(target.tagName === "TD"){
-    const boardSeq = target.closest("TR").dataset.id
-    document.location.href = `/forum/board/:${boardSeq}`
-  }
-  })
+    if (target.tagName === "TD") {
+      const boardSeq = target.closest("TR").dataset.id;
+      document.location.href = `/forum/board/:${boardSeq}`;
+    }
+  });
 });

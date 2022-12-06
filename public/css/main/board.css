@@ -1,22 +1,86 @@
+.overflow {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
 .boardContainer {
-    margin: 5% auto;
-    width: 80%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  margin: 5% auto;
+  width: 80%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
 }
-.firstcontainer, 
+.firstcontainer,
 .secondcontainer,
-.textcontainer{
-    display: flex;    
-    width: 100%;    
+.textcontainer,
+form.replycontainer {
+  display: flex;
+  width: 100%;
 }
-
-.firstcontainer span, div {
-    margin : 12px 16px
+.secondcontainer span {
+  line-height: 45px;
+}
+.firstcontainer span,
+div {
+  margin: 12px 16px;
+}
+.firstcontainer div:nth-of-type(3) {
+  margin-left: auto;
 }
 
 .textcontainer {
-    border : 1px solid black;
-    height : 80%
+  border: 1px solid black;
+  min-height: 60%;
+}
+form.replycontainer {
+  flex-direction: column;
+}
+div.replywrite {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width: 100%;
+}
+div.replywrite input {
+  width: 20%;
+  border: 1px solid #aaa;
+  transition: all 0.7s;
+}
+div.replywrite input:focus {
+  padding: 1em;
+  border-radius: 20px;
+  width: 50%;
+}
+
+div.replywrite button {
+  margin: 0px 16px auto 12px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  padding: 1em;
+}
+.reply {
+  display: flex;
+}
+.imgexample {
+  margin-right: 0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: url(../../images/profile.png) no-repeat;
+  background-size: 100%;
+}
+.replyinfo {
+  display: flex;
+}
+
+.replyinfo span {
+  line-height: 45px;
+}
+.example {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 1% 10%);
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
 }
