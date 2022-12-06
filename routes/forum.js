@@ -1,6 +1,7 @@
 import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
+import { Sequelize } from "sequelize";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -18,15 +19,15 @@ router.get("/", (req, res) => {
 
 router.get("/board/:id", async (req, res) => {
   const id = req.params.id;
-  const seqNum = id.substring(1);
+
   let replies;
   try {
-    replies = await Reply.findAll({ where: { board_code: seqNum } });
+    replies = await Reply.findAll({ where: { board_code: id } });
   } catch (err) {
     res.send(err);
   }
   try {
-    const result = await Board.findOne({ where: { seq: seqNum } });
+    const result = await Board.findOne({ where: { seq: id } });
     console.log(result);
     res.render("board", { result, replies });
   } catch (err) {
@@ -76,6 +77,21 @@ router.get("/:loadFor", async (req, res) => {
       where: { sort_board: list },
       limit: 14,
     });
+    let seq = boardResult.map((row) => row.seq);
+    console.log(seq);
+    const replyResult = await Reply.findAll({
+      attributes: [
+        "board_code",
+        [
+          Sequelize.fn("COUNT", Sequelize.col("board_code")),
+          "count_board_code",
+        ],
+      ],
+      where: { board_code: seq },
+      group: ["board_code"],
+    });
+    console.log(replyResult);
+
     return res.json(boardResult);
   } catch (err) {
     console.error(err);

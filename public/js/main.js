@@ -80,7 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (target.tagName === "TD") {
       const boardSeq = target.closest("TR").dataset.id;
-      document.location.href = `/forum/board/:${boardSeq}`;
+
+      document.location.href = `/forum/board/${boardSeq}`;
     }
   });
 });
