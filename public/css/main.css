@@ -83,8 +83,6 @@ section.scroll::-webkit-scrollbar-thumb {
   display: none;
 }
 
-/* absolute로 바꾸니까 전체 width가 줄어든 이유?*/
-
 header .search {
   display: flex;
   justify-content: space-between;
@@ -117,6 +115,7 @@ div.right {
   flex: 5;
   justify-content: right;
   align-items: center;
+  white-space: nowrap;
 }
 
 div.right div {

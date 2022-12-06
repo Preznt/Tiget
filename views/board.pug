@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    script(src="/js/board/reply.js") 
+    link(rel="stylesheet" href="/css/main/board.css")
+    .overflow
+        .boardContainer
+            .firstcontainer
+                span 작성자:
+                div= result.b_nickname            
+                span 작성일자:
+                div= result.b_update_date
+                div= result.sort_board
+            .secondcontainer
+                span 제목
+                div= result.b_title
+            .textcontainer
+                div= result.b_content
+            form.replycontainer(data-seq=result.seq)                
+                div.replyplace
+                each reply in replies
+                    .reply
+                        .imgexample
+                        .example 
+                            div.replyinfo
+                                span 작성시각:
+                                div= reply.r_update_date
+                                span 작성자:
+                                div= reply.r_nickname
+                            .replies= reply.r_content
+                div.replywrite                    
+                    input(name="content" placeholder="          댓글을 입력하세요.")#input
+                    button(type="button").replyAdd 댓글추가

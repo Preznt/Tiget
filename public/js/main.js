@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let tr = document.createElement("TR");
       tr.className = "board tr";
       tr.textContent = "";
+      tr.dataset.id = data.seq;
       let td = document.createElement("td");
       td.classList = "board seq";
       td.textContent = "";
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       td = document.createElement("TD");
       td.classList = "board title";
       td.textContent = data.b_title;
-      console.log(td.textContent);
+      // console.log(td.textContent);
       tr.appendChild(td);
 
       td = document.createElement("TD");
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.appendChild(td);
       return tr;
     });
-    console.log(boardList);
+    // console.log(boardList);
     tbodyList.append(...boardList);
   };
   navButtons?.addEventListener("click", (e) => {
@@ -71,6 +72,15 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((datas) => {
           showBoard(datas);
         });
+    } else return false;
+  });
+  tbodyList?.addEventListener("click", (e) => {
+    const target = e.target;
+    console.log(target);
+
+    if (target.tagName === "TD") {
+      const boardSeq = target.closest("TR").dataset.id;
+      document.location.href = `/forum/board/:${boardSeq}`;
     }
   });
 });
