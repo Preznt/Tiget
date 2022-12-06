@@ -1,6 +1,12 @@
 import express from "express";
+import { stringify } from "uuid";
+import DB from "../models/index.js";
 
 const router = express.Router();
+const Concert = DB.models.concert_info;
+const Artist = DB.models.artist;
+const ConArt = DB.models.concert_artist_model;
+
 router.post("/", (req, res) => {
   const data = req.body;
   console.log(data);

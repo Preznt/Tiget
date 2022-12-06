@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addSchedule = (concert) => {
     const schedule = document.createElement("div");
     schedule.textContent = concert.conName;
+    schedule.dataset.code = concert.conCode;
     schedule.classList.add("schedule");
     return schedule;
   };

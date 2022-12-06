@@ -49,7 +49,6 @@ router.get("/", async (req, res, next) => {
   // LEFT JOIN concert_info
   // ON concert_info.concert_code = concert_artist.concert_code;`;
   const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
-
   return res.render("main", {
     body: "ranking",
     holiData,
@@ -57,7 +56,17 @@ router.get("/", async (req, res, next) => {
     genreData,
     boards: "",
     conData,
+    calendar: "schedule",
   });
+});
+
+// calendar modal 에 공연 정보 표시
+router.get("/find/:conCode", async (req, res) => {
+  const code = req.params.conCode;
+  let conInfo = await Concert.findAll({ where: { concert_code: code } });
+  conInfo = JSON.stringify(conInfo);
+  console.log(conInfo);
+  return res.render("includes/schedule", { conInfo });
 });
 
 export default router;
