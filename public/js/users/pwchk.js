@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formJoin = document.querySelector("form.privacy.input");
 
   const joinInputs = document.querySelectorAll("form.privacy.input input");
+  const genreInputs = document.querySelectorAll("div.typeMusic.select input");
 
   passchk.addEventListener("input", () => {
     let passNow = pass.value;
@@ -24,9 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // 회원가입 유효성 검사
   btnJoin.addEventListener("click", () => {
     const email = joinInputs[0];
-    let exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    const exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    const checkedInput = document.querySelectorAll(
+      "input[type='checkbox']:checked"
+    );
     console.log(joinInputs);
     if (email.value) {
       if (exptext.test(email.value) == false) {
@@ -34,16 +39,24 @@ document.addEventListener("DOMContentLoaded", () => {
         email.select();
         return false;
       }
-    } else {
-      for (let i = 1; i < joinInputs.length; i++) {
-        if (!joinInputs[i]) {
+      for (let i = 1; i <= joinInputs.length - genreInputs.length; i++) {
+        if (!joinInputs[i].value) {
           alert("값을 입력해주세요");
+          joinInputs[i].focus();
           return false;
         }
       }
-    }
 
-    alert("회원가입이 완료되었습니다.");
-    formJoin?.submit();
+      if (checkedInput.length < 2) {
+        alert("선호 장르를 2개이상 선택해주세요");
+        return false;
+      }
+
+      alert("회원가입이 완료되었습니다.");
+      formJoin?.submit();
+    } else {
+      alert("값을 입력해주세요");
+      email.select();
+    }
   });
 });

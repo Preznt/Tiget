@@ -73,6 +73,7 @@ router.post(
     }
   }
 );
+
 // 로그인 구현
 router.post("/login", async (req, res) => {
   const { user_id, user_pw } = req.body;
@@ -81,7 +82,7 @@ router.post("/login", async (req, res) => {
     user_pw,
   });
   const userInfo = await User.findByPk(user_id);
-  console.log(userInfo);
+  // console.log(userInfo);
   if (userInfo) {
     const pw = userInfo.password;
     if (pw !== user_pw) {
@@ -100,13 +101,12 @@ router.post("/login", async (req, res) => {
   });
 });
 
+// 로그아웃 구현
 router.get("/logout", (req, res) => {
   var session = req.session;
   try {
     if (session.user) {
-      req.session.destroy((err) => {
-        if (err) console.error(err);
-      });
+      req.session.destroy();
     }
   } catch (err) {
     return console.error(err);
@@ -114,6 +114,7 @@ router.get("/logout", (req, res) => {
   return res.redirect("/main");
 });
 
+// 회원가입 구현
 router.post("/join/register", async (req, res) => {
   const joinInfo = req.body;
   joinInfo.level = 3;
