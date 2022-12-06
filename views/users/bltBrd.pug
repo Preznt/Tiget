@@ -3,21 +3,18 @@ extends ../layout
 block content
     link(rel="stylesheet", href="/css/users/bitBrd.css")
     script.
-        let category = "all"
-        //- if(c.category){
-        //-     category = c.category
-        //- }
-        console.log(category)
+        let category = `#{body}`
     script(src="/js/users/bltBrd.js") 
     article.bitBrd
         div.bitBrd.table
             div.bitBrd.category | 커뮤니티
-                div.category
-                    a(href="bltBrd/all" role="button").all 전체보기
-                    a(href="bltBrd/Notice" role="button").Notice 공지사항
-                    a(href="bltBrd/concert_review" role="button").concert_review 공연 후기
-                    a(href="bltBrd/concert_hall_review" role="button").concert_hall_review 공연장 후기
-                    a(href="bltBrd/freeboard" role="button").freeboard 자유게시판
+                nav.main
+                    ul
+                        li.all 전체보기
+                        li.Notice 공지사항
+                        li.concert_review 공연후기
+                        li.concert_hall_review 공연장후기
+                        li.freeboard 자유게시판
             div.button.box
                 button
                     a(href="bltBrd/write").write 글쓰기
@@ -29,13 +26,15 @@ block content
                         th 제목
                         th 등록일
                         th 조회수
-                tbody 
-                    tr.item
-                        td 공지사항
-                        td 홍길동
-                        td 쏜애플 콘서트 ‘불구경’ 티켓오픈안내 
-                        td 2022-11-18
-                        td 12
+                if body == "all"
+                    include category/categoryall.pug
+                if body == "Notice"
+                    include category/categoryNotice.pug
+                if body == "공연후기"
+                    include category/categoryconcert_review.pug
+                if body == "공연장후기"
+                    include category/categoryconcert_hall_review.pug
+                if body == "자유게시판"
+                    include category/categoryfreeboard.pug
         aside.bitBrd.aside Side Content
             div 뭔가 홍보할만한 이미지같은거 작게 넣기 위한칸
-            
