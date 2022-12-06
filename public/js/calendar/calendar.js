@@ -44,6 +44,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const matchDay = (arr, val) => arr.includes(val);
 
+  const addSchedule = (concert) => {
+    const schedule = document.createElement("div");
+    schedule.textContent = concert.conName;
+    schedule.classList.add("schedule");
+    return schedule;
+  };
+
+  const calcDate = (start, end) => {
+    let diffDate = new Date(end).getTime() - new Date(start).getTime();
+    diffDate = diffDate / (1000 * 3600 * 24);
+    return diffDate;
+  };
+
+  // pug 파일에서 가져온 concertData
+  const showSchedule = () => {
+    let schedule;
+    let dates = document.querySelectorAll(".date");
+    for (let date of dates) {
+      const classArr = date.className;
+      for (let data of conData) {
+        const concert = {
+          conCode: data.concert_code,
+          conName: data.concert_name,
+          artName: data.artist_name,
+          start: data.start_date,
+          end: data.end_date,
+        };
+        if (matchDay(classArr, concert.start)) {
+          schedule = addSchedule(concert);
+          schedule.textContent = concert.conName;
+          date.appendChild(schedule);
+          let i = 0;
+          let d = date;
+          const diffDate = calcDate(concert.start, concert.end);
+          while (i < diffDate) {
+            if (!d.nextSibling) {
+              d = d.parentNode.nextSibling.firstChild;
+            } else {
+              d = d.nextSibling;
+            }
+            const nextSchedule = addSchedule(concert);
+            d.appendChild(nextSchedule);
+            i++;
+          }
+        } else {
+          continue;
+        }
+      }
+    }
+  };
+
   // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = () => {
     const todayVal = `${today.year}.${String(today.month).padStart(
@@ -146,61 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
+
+    showSchedule();
   };
 
   showDate();
-
-  const addSchedule = (concert) => {
-    const schedule = document.createElement("div");
-    schedule.classList.add("schedule");
-    schedule.textContent = concert.conName;
-    return schedule;
-  };
-
-  const calcDate = (start, end) => {
-    let diffDate = new Date(end).getTime() - new Date(start).getTime();
-    diffDate = diffDate / (1000 * 3600 * 24);
-    return diffDate;
-  };
-
-  // pug 파일에서 가져온 concertData
-  const showSchedule = () => {
-    let schedule;
-    let dates = document.querySelectorAll(".date");
-    for (let date of dates) {
-      const classArr = date.className;
-      for (let data of conData) {
-        const concert = {
-          conCode: data.concert_code,
-          conName: data.concert_name,
-          artName: data.artist_name,
-          start: data.start_date,
-          end: data.end_date,
-        };
-        if (matchDay(classArr, concert.start)) {
-          schedule = addSchedule(concert);
-          date.appendChild(schedule);
-          let i = 0;
-          let d = date;
-          const diffDate = calcDate(concert.start, concert.end);
-          while (i < diffDate) {
-            if (!d.nextSibling) {
-              d = d.parentNode.nextSibling.firstChild;
-            } else {
-              d = d.nextSibling;
-            }
-            const nextSchedule = addSchedule(concert);
-            d.appendChild(nextSchedule);
-            i++;
-          }
-        } else {
-          continue;
-        }
-      }
-    }
-  };
-
-  showSchedule();
 
   btnPrev?.addEventListener("click", () => {
     valDay.month--;
