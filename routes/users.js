@@ -1,8 +1,10 @@
 import express from "express";
 import upload from "../modules/file_upload.js";
+import DB from "../models/index.js";
 import moment from "moment";
 const dateFormat = "YYYY-MM-DD";
 const timeFormat = "HH:mm:ss";
+const Board = DB.models.board_detail;
 
 const router = express.Router();
 
@@ -21,16 +23,28 @@ router.get("/bltBrd/detail", (req, res) => {
 router.get("/bltBrd/write", (req, res) => {
   res.render("users/write");
 });
-router.post("/bltBrd/write", upload.single("c_image_file"), (req, res) => {
-  console.log(req.body);
-  const fileName = req?.file?.filename;
-  const body = req.body;
-  res.json({
-    fileName,
-    body,
-    username: req.session.user.username,
-  });
-});
+router.post(
+  "/bltBrd/write",
+  upload.single("c_image_file"),
+  async (req, res) => {
+    const { b_title, sort_board, b_content } = req.body;
+    const item = {
+      b_title,
+      sort_board,
+      b_content,
+      b_img: req?.file?.filename,
+      b_nickname: "익명",
+      b_update_date: moment().format(dateFormat),
+    };
+    try {
+      await Board.create(item);
+      res.redirect("/users/bltBrd");
+    } catch (err) {
+      console.error(err);
+      res.send("SQL 오류");
+    }
+  }
+);
 
 router.post("/login", async (req, res) => {
   const { user_id, user_pw } = req.body;
