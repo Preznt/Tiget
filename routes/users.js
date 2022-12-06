@@ -16,8 +16,30 @@ router.get("/join", (req, res) => {
 router.get("/join/register", (req, res) => {
   res.render("users/register");
 });
-router.get("/bltBrd", (req, res) => {
-  res.render("users/bltBrd");
+router.get("/bltBrd", async (req, res) => {
+  const lists = await Board.findAll({
+    where: { sort_board: "공지사항" },
+    limit: 3,
+  });
+  const boards = await Board.findAll();
+  const boardsList = boards.filter((category) => {
+    return category.sort_board != "공지사항";
+  });
+  res.render("users/bltBrd", { lists, boardsList, body: "all" });
+});
+router.get("/bltBrd/Notice", async (req, res) => {
+  const lists = await Board.findAll({ where: { sort_board: "공지사항" } });
+  res.render("users/bltBrd", { lists, body: "Notice" });
+});
+router.get("/bltBrd/category/:category", async (req, res) => {
+  const category = req.params.category;
+  console.log(category);
+  const lists = await Board.findAll({
+    where: { sort_board: "공지사항" },
+    limit: 3,
+  });
+  const boards = await Board.findAll({ where: { sort_board: category } });
+  res.render("users/bltBrd", { lists, boards, body: category });
 });
 router.get("/bltBrd/detail", (req, res) => {
   res.render("users/detail");
@@ -30,13 +52,16 @@ router.post(
   upload.single("c_image_file"),
   async (req, res) => {
     const { b_title, sort_board, b_content } = req.body;
+    const date = moment().format(dateFormat);
+    const time = moment().format(timeFormat);
+    const b_update_date = date + " " + time;
     const item = {
       b_title,
       sort_board,
       b_content,
       b_img: req?.file?.filename,
       b_nickname: "익명",
-      b_update_date: moment().format(dateFormat),
+      b_update_date,
     };
     try {
       await Board.create(item);
