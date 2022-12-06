@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const divpass2 = document.querySelector("div.pass.i");
   const divCon = document.querySelector("div.pass.div_box");
 
+  const btnJoin = document.querySelector("button.btn.join.submit");
+  const formJoin = document.querySelector("form.privacy.input");
+
   passchk.addEventListener("input", () => {
     let passNow = pass.value;
     let passChkNow = passchk.value;
@@ -17,5 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
       divpass1.style.display = "none";
       divpass2.style.display = "block";
     }
+  });
+
+  btnJoin.addEventListener("click", () => {
+    formJoin?.submit();
   });
 });

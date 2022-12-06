@@ -70,4 +70,8 @@ router.get("/logout", (req, res) => {
   return res.redirect("/main");
 });
 
+router.post("/join/register", (req, res) => {
+  const joinInfo = req.body;
+  console.log(joinInfo);
+});
 export default router;
