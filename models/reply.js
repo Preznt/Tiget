@@ -3,13 +3,18 @@ export default (sequelize) => {
   return sequelize.define(
     "reply",
     {
-      board_code: {
+      r_seq: {
         type: Sequelize.DataTypes.BIGINT,
         primaryKey: true,
+        autoIncrement: true,
+      },
+      board_code: {
+        type: Sequelize.DataTypes.BIGINT,
+        primaryKey: false,
       },
       r_nickname: {
         type: Sequelize.DataTypes.STRING(255),
-        allowNull: true,
+        allowNull: false,
       },
       r_content: {
         type: Sequelize.DataTypes.TEXT,
