@@ -26,7 +26,7 @@ router.post("/", (req, res) => {
   LEFT JOIN concert_info
   ON concert_info.concert_code = concert_artist.concert_code;`;
 
-  res.render("detail", { body: "detail" });
+  res.render("detail", { body: "detail", concert: data });
 });
 
 export default router;

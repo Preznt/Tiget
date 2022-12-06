@@ -40,15 +40,14 @@ router.get("/", async (req, res, next) => {
     { id: "classic", name: "Classic" },
   ];
 
-  const query = `SELECT concert_code, concert_name, start_date, end_date FROM concert_info`;
-
-  // const query = `SELECT artist.artist_name, concert_artist.concert_code, concert_info.concert_name, concert_info.start_date, concert_info.end_date
-  // FROM concert_artist
-  // LEFT JOIN artist
-  // ON concert_artist.artist_code = artist.artist_code
-  // LEFT JOIN concert_info
-  // ON concert_info.concert_code = concert_artist.concert_code;`;
+  const query = `SELECT concert_artist.concert_code, concert_info.concert_name, concert_info.concert_poster, concert_info.start_date, concert_info.end_date, artist.artist_name 
+  FROM concert_artist
+  LEFT JOIN artist
+  ON concert_artist.artist_code = artist.artist_code
+  LEFT JOIN concert_info
+  ON concert_info.concert_code = concert_artist.concert_code;`;
   const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
+
   return res.render("main", {
     body: "ranking",
     holiData,
@@ -58,15 +57,6 @@ router.get("/", async (req, res, next) => {
     conData,
     calendar: "schedule",
   });
-});
-
-// calendar modal 에 공연 정보 표시
-router.get("/find/:conCode", async (req, res) => {
-  const code = req.params.conCode;
-  let conInfo = await Concert.findAll({ where: { concert_code: code } });
-  conInfo = JSON.stringify(conInfo);
-  console.log(conInfo);
-  return res.render("includes/schedule", { conInfo });
 });
 
 export default router;
