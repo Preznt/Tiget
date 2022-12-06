@@ -4,7 +4,7 @@ export default (sequelize) => {
     "concert_info",
     {
       concert_code: {
-        type: Sequelize.DataTypes.STRING(20),
+        type: Sequelize.DataTypes.INTEGER,
         primaryKey: true,
       },
       concert_name: {
