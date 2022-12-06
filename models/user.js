@@ -28,7 +28,7 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
-      telephone: {
+      tel: {
         type: Sequelize.DataTypes.STRING(20),
         allowNull: true,
       },

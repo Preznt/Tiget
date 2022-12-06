@@ -15,6 +15,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import expressSession from "express-session";
+import MySQLStore from "express-mysql-session";
 // MySQL Sequelize
 import DB from "../models/index.js";
 

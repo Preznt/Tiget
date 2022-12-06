@@ -5,6 +5,8 @@ import moment from "moment";
 const dateFormat = "YYYY-MM-DD";
 const timeFormat = "HH:mm:ss";
 const Board = DB.models.board_detail;
+const User = DB.models.user;
+const IntGen = DB.models.genre_of_interest;
 
 const router = express.Router();
 
@@ -52,12 +54,15 @@ router.post("/login", async (req, res) => {
     user_id,
     user_pw,
   });
-  if (user_id === "tiget" && user_pw === "12345") {
+  const userInfo = await User.findAll({ where: { username: user_id } });
+  const pw = userInfo.password;
+  console.log(userInfo);
+  if (user_pw === pw) {
     req.session.user = {
       username: user_id,
-      real_name: "tiget",
-      nick_name: "tiget",
-      user_role: 1,
+      real_name: userInfo.realname,
+      nick_name: userInfo.nickname,
+      user_role: userInfo.level,
     };
     req.session.save(() => {
       res.redirect("/");
@@ -84,8 +89,26 @@ router.get("/logout", (req, res) => {
   return res.redirect("/main");
 });
 
-router.post("/join/register", (req, res) => {
+router.post("/join/register", async (req, res) => {
   const joinInfo = req.body;
-  console.log(joinInfo);
+  joinInfo.level = 3;
+  const userGenre = req.body.genre;
+
+  // 유저-장르 테이블에 넣을 데이터
+  const genreArray = userGenre.map((genre) => {
+    const genreModel = {
+      username: req.body.username,
+      genre_code: genre,
+    };
+    return genreModel;
+  });
+  // console.log(joinInfo);
+  try {
+    const userUpload = await User.create(joinInfo);
+    const genreUpload = await IntGen.bulkCreate(genreArray);
+  } catch (err) {
+    return console.error(err);
+  }
+  return res.redirect("/main");
 });
 export default router;
