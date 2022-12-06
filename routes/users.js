@@ -94,7 +94,7 @@ router.post("/join/register", async (req, res) => {
   joinInfo.level = 3;
   const userGenre = req.body.genre;
 
-  // 유저-장르 테이블에 넣을 데이터
+  // 유저-장르 테이블에 넣을 데이터이다
   const genreArray = userGenre.map((genre) => {
     const genreModel = {
       username: req.body.username,
