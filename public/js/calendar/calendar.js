@@ -42,15 +42,65 @@ document.addEventListener("DOMContentLoaded", () => {
     monthNum.textContent = `${valDay.month}월`;
   };
 
-  const matchDay = (arr1, arr2) => arr1.every((ele) => arr2.includes(ele));
+  const matchDay = (arr, val) => arr.includes(val);
+
+  const addSchedule = (concert) => {
+    const schedule = document.createElement("div");
+    schedule.textContent = concert.conName;
+    schedule.classList.add("schedule");
+    return schedule;
+  };
+
+  const calcDate = (start, end) => {
+    let diffDate = new Date(end).getTime() - new Date(start).getTime();
+    diffDate = diffDate / (1000 * 3600 * 24);
+    return diffDate;
+  };
+
+  // pug 파일에서 가져온 concertData
+  const showSchedule = () => {
+    let schedule;
+    let dates = document.querySelectorAll(".date");
+    for (let date of dates) {
+      const classArr = date.className;
+      for (let data of conData) {
+        const concert = {
+          conCode: data.concert_code,
+          conName: data.concert_name,
+          artName: data.artist_name,
+          start: data.start_date,
+          end: data.end_date,
+        };
+        if (matchDay(classArr, concert.start)) {
+          schedule = addSchedule(concert);
+          schedule.textContent = concert.conName;
+          date.appendChild(schedule);
+          let i = 0;
+          let d = date;
+          const diffDate = calcDate(concert.start, concert.end);
+          while (i < diffDate) {
+            if (!d.nextSibling) {
+              d = d.parentNode.nextSibling.firstChild;
+            } else {
+              d = d.nextSibling;
+            }
+            const nextSchedule = addSchedule(concert);
+            d.appendChild(nextSchedule);
+            i++;
+          }
+        } else {
+          continue;
+        }
+      }
+    }
+  };
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = () => {
-    const todayArr = [
-      `${today.year}${String(today.month).padStart(2, 0)}${String(
-        today.date
-      ).padStart(2, 0)}`,
-    ];
+    const todayVal = `${today.year}.${String(today.month).padStart(
+      2,
+      0
+    )}.${String(today.date).padStart(2, 0)}`;
     // lastDate: 이번 달 마지막 날짜 = 이번 달 날짜의 총 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
     // prevLastDate: 저번 달 마지막 날짜
@@ -75,10 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let j = 0; j < 6; j++) {
       let tr = document.createElement("div");
-      tr.className = "dates";
+      tr.className = "week";
 
       for (let k = 0; k < 7; k++) {
         let td = document.createElement("div");
+        td.className = "date";
         let dateTxt = document.createElement("div");
         dateTxt.classList.add("date_txt");
         td.appendChild(dateTxt);
@@ -89,10 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
           dateTxt.textContent = dIndex.prev;
           let dd = String(dIndex.prev).padStart(2, 0);
           if (valDay.month === 1) {
-            td.classList.add(`${valDay.year - 1}12${dd}`);
+            td.classList.add(`${valDay.year - 1}.12.${dd}`);
           } else {
             let mm = String(valDay.month - 1).padStart(2, 0);
-            td.classList.add(`${valDay.year}${mm}${dd}`);
+            td.classList.add(`${valDay.year}.${mm}.${dd}`);
           }
           td.classList.add("prevMonth");
           dIndex.prev++;
@@ -102,16 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
           dateTxt.textContent = dIndex.current;
           let mm = String(valDay.month).padStart(2, 0);
           let dd = String(dIndex.current).padStart(2, 0);
-          td.classList.add(`${valDay.year}${mm}${dd}`);
+          td.classList.add(`${valDay.year}.${mm}.${dd}`);
           const tdClassArr = Array.from(td.classList);
-          if (matchDay(tdClassArr, todayArr)) {
+          if (matchDay(tdClassArr, todayVal)) {
             td.classList.add("today");
-
-            // schedule 임시 추가용
-            const schedule = document.createElement("div");
-            schedule.textContent = "schedule";
-            schedule.classList.add("schedule");
-            td.appendChild(schedule);
           }
           dIndex.current++;
 
@@ -120,10 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
           dateTxt.textContent = dIndex.next;
           let dd = String(dIndex.next).padStart(2, 0);
           if (valDay.month === 12) {
-            td.classList.add(`${valDay.year + 1}01${dd}`);
+            td.classList.add(`${valDay.year + 1}.01.${dd}`);
           } else {
             let mm = String(valDay.month + 1).padStart(2, 0);
-            td.classList.add(`${valDay.year}${mm}${dd}`);
+            td.classList.add(`${valDay.year}.${mm}.${dd}`);
           }
           td.classList.add("nextMonth");
           dIndex.next++;
@@ -152,7 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
+
+    showSchedule();
   };
+
+  showDate();
 
   btnPrev?.addEventListener("click", () => {
     valDay.month--;
@@ -204,24 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (today.month === 11 || today.month <= 2) {
     bgImage.style.backgroundImage = "url('../images/calendar/winter bg.png')";
   }
-
-  // 렌더링 완료 후 즉시 실행
-  showDate();
-
-  // for (let td of document.querySelectorAll("td")) {
-  //   const tdClassArr = Array.from(td.classList);
-  //   let holiTxt = document.createElement("div");
-  //   holiTxt.classList.add("holi_txt");
-  //   td.appendChild(holiTxt);
-  // for (let i of holidays) {
-  // if (matchDay(tdClassArr, i.h_locdate)) {
-  //   holiTxt.textContent = i.h_dateName;
-  // }
-  // if (i.h_isHoliday === "Y") {
-  //   holiTxt.style.color === "red";
-  // }
-  //   }
-  // }
 });
 
 /**
