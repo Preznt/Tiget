@@ -3,7 +3,7 @@ script(src="/js/profile.js")
 - const nickname = "박명수"
 - const username = "Great_park@naver.com"
 form.setinline(method="post" enctype="multipart/form-data")
-    .profile.img= users.profile_image
+    .profile.img= profile_image || ""
     form(method="POST", enctype="multipart/form-data" )
         input.emailid(name="username" value=`${username}` readonly)
         input.nickname(value=`${nickname}` readonly)
