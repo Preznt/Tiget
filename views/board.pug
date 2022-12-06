@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    link(rel="stylesheet" href="/css/main/board.css")
+    .boardContainer
+        .firstcontainer
+            span 작성자:
+            div= result.b_nickname            
+            span 작성일자:
+            div= result.b_update_date
+        .secondcontainer
+            span 제목
+            div= result.b_title
+        .textcontainer
+            div= result.b_content
