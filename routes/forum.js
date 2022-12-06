@@ -2,6 +2,7 @@ import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
 import { Sequelize } from "sequelize";
+import reply from "../models/reply.js";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -71,27 +72,51 @@ router.get("/:loadFor", async (req, res) => {
   // console.log(loadFor);
   let list = loadFor.substring(1, loadFor.length);
   // console.log(list);
-
+  
   try {
     const boardResult = await Board.findAll({
       where: { sort_board: list },
+      row:true,
       limit: 14,
     });
-    let seq = boardResult.map((row) => row.seq);
-    console.log(seq);
-    const replyResult = await Reply.findAll({
-      attributes: [
-        "board_code",
-        [
-          Sequelize.fn("COUNT", Sequelize.col("board_code")),
-          "count_board_code",
-        ],
-      ],
-      where: { board_code: seq },
-      group: ["board_code"],
-    });
-    console.log(replyResult);
-
+    const seqs = boardResult.map((row) => row.seq);
+    // console.log(seqs);
+    
+    const replyCount = await Reply.count({distinct:true, where:{board_code:seqs},group:['board_code']})
+    // console.log(replyCount)
+    
+    // const st = replyCount[0]
+    // st.board_code = st.seq
+    // const nd = replyCount[1]
+    // nd.board_code = nd.seq
+    // const rd = replyCount[2]
+    // rd.board_code = rd.seq
+    // const fth = replyCount[3]
+    // fth.board_code = fth.seq
+    // const fith = replyCount[4]
+    // fith.board_code = fith.seq
+    // const sth = replyCount[5]
+    // sth.board_code = sth.seq
+    // const seth = replyCount[6]
+    // seth.board_code = seth.seq
+    // const eth = replyCount[7]
+    // eth.board_code = eth.seq
+    // const nth = replyCount[8]
+    // nth.board_code = nth.seq
+    // const t = replyCount[9]
+    // t.board_code = t.seq
+    // const ele = replyCount[10]
+    // ele.board_code = ele.seq
+    // const twe = replyCount[11]
+    // twe.board_code = twe.seq
+    // const tth = replyCount[12]
+    // tth.board_code = tth.seq
+    // boardResult.push(st,nd,rd,fth,fith,sth,seth,eth,nth,t,ele,twe,tth)
+    boardResult.push(replyCount)
+    console.log(boardResult)
+    
+    // Object.assign(boardResult[12], boardResult[0])
+   
     return res.json(boardResult);
   } catch (err) {
     console.error(err);

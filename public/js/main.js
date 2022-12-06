@@ -36,6 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
       td.textContent = data.b_title;
       // console.log(td.textContent);
       tr.appendChild(td);
+      span = document.createElement("span")
+      span.textContent = data.count
+      tr.appendChild(span)
 
       td = document.createElement("TD");
       td.classList = "board nickname";
@@ -69,8 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(loadFor);
       await fetch(`/forum/:${loadFor}`)
         .then((res) => res.json())
-        .then((datas) => {
-          showBoard(datas);
+        .then((datas) => {showBoard(datas);
         });
     } else return false;
   });
