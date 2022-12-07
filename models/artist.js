@@ -5,6 +5,7 @@ export default (sequelize) => {
     {
       artist_code: {
         type: Sequelize.DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },

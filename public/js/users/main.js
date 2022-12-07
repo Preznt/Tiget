@@ -2,6 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const mainNav = document.querySelector("nav.main");
+  const btnLogout = document.querySelector("button.logout");
 
   mainNav?.addEventListener("click", (tag) => {
     const navItem = tag.target;
@@ -32,5 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const divbtn = document.querySelector("div.close-area");
   divbtn?.addEventListener("click", () => {
     modal.style.display = "none";
+  });
+
+  btnLogout?.addEventListener("click", () => {
+    if (confirm("로그아웃 하시곘습니까?")) {
+      document.location.href = "/users/logout";
+    } else {
+      return false;
+    }
   });
 });

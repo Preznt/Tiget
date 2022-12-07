@@ -5,6 +5,7 @@ export default (sequelize) => {
     {
       concert_code: {
         type: Sequelize.DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       concert_name: {
@@ -33,6 +34,14 @@ export default (sequelize) => {
       },
       concert_artist: {
         type: Sequelize.DataTypes.STRING(125),
+        allowNull: true,
+      },
+      concert_type: {
+        type: Sequelize.DataTypes.STRING(20),
+        allowNull: true,
+      },
+      concert_views: {
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: true,
       },
     },
