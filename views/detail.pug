@@ -5,31 +5,31 @@ block content
     section.scroll.detail
         div.detail.top
             div.top.img
-                img(src=`${concert.url}`)
+                img(src=`${conInfo.concert_poster}`)
             div.top.content
                 div.top.title 
-                    h2= concert.title
-                    span.genre= concert.genre
+                    h2= conInfo.concert_name
+                    span.genre= conInfo.genre_name
                     button(type="button")#ticketing 예매하기 
                 div.top.desc
                     div.place.label 장소
-                    div.place= concert.place
+                    div.place= conInfo.concert_place
                     div.time.label 관람시간
-                    div.time= concert.time
+                    div.time
                     div.date.label 기간
                     div.date 
-                        span.date.from= concert.start
+                        span.date.from= conInfo.start_date
                         span.date.dash &nbsp;-&nbsp;
-                        span.date.to= concert.end
+                        span.date.to= conInfo.end_date
                     div.rate.label 관람등급
-                    div.rate= concert.rate
+                    div.rate
                     div.price.label 가격
-                    div.price= concert.price
+                    div.price
                     div.discount.label 할인정보
-                    div.discount= concert.discount
+                    div.discount
         div.detail.bottom
             h2 상세정보
-            div.bottom.desc
+            div.bottom.desc= conInfo.artist_name
 
 
 

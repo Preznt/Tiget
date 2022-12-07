@@ -46,7 +46,26 @@ router.get("/", async (req, res, next) => {
   ON concert_artist.artist_code = artist.artist_code
   LEFT JOIN concert_info
   ON concert_info.concert_code = concert_artist.concert_code;`;
+
+  // const conData = await ConArt.findAll({
+  //   attributes: ["concert_code"],
+  //   include: [
+  //     { model: Artist, attributes: ["artist_name"] },
+  //     {
+  //       model: Concert,
+  //       attributes: [
+  //         "concert_name",
+  //         "concert_poster",
+  //         "start_date",
+  //         "end_date",
+  //       ],
+  //     },
+  //   ],
+  // });
+
   const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
+
+  console.log(conData);
 
   return res.render("main", {
     body: "ranking",
