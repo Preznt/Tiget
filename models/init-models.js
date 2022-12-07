@@ -27,6 +27,9 @@ const initModels = (sequelize) => {
   const reply = _reply(sequelize);
   const user = _user(sequelize);
 
+  reply.belongsTo(board_detail, { as: "f_board", foreignKey: "board_code" });
+  board_detail.hasMany(reply, { as: "f_reply", foreignKey: "board_code" });
+
   return {
     holiday,
     artist_genre,
