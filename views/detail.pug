@@ -1,16 +1,18 @@
 extends layout 
 block content
     link(rel="stylesheet", href="/css/detail.css")
-    //- let id= !{JSON.stringify(concert)};
     section.scroll.detail
+        div.detail.etc 
+            span.type= conInfo.concert_type            
+            span.views 조회수
         div.detail.top
             div.top.img
                 img(src=`${conInfo.concert_poster}`)
             div.top.content
                 div.top.title 
                     h2= conInfo.concert_name
-                    span.genre= conInfo.genre_name
-                    button(type="button")#ticketing 예매하기 
+                    span.type= conInfo.concert_loc
+                    a(href=`${conInfo.concert_ticketing}`, target="_blank")#ticketing 예매하기 
                 div.top.desc
                     div.place.label 장소
                     div.place= conInfo.concert_place
@@ -23,13 +25,20 @@ block content
                         span.date.to= conInfo.end_date
                     div.rate.label 관람등급
                     div.rate
-                    div.price.label 가격
-                    div.price
+                    div.genre.label 장르
+                    div.genre
                     div.discount.label 할인정보
                     div.discount
         div.detail.bottom
-            h2 상세정보
-            div.bottom.desc= conInfo.artist_name
+            h2 가수정보
+            div.bottom.desc
+                each artist of artInfo
+                    div.artist.img
+                        img(src=`${artist.artist_img}`)
+                    span.artist.name= artist.artist_name
+                    span.artist.type= artist.artist_type 
+                    span.artist.debut= artist.artist_debut
+                    span.artist.genre= artist.genre_name
 
 
 

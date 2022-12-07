@@ -534,7 +534,7 @@ button.modal.btn_close:hover {
 }
 .modal.image {
   width: 60%;
-  height: 65%;
+  height: auto;
   background-color: white;
   border-radius: 5px;
   background-repeat: no-repeat;

@@ -51,7 +51,7 @@ section.detail {
   font-size: 20pt;
   font-weight: 700;
 }
-.detail.top .top.title .genre {
+.detail.top .top.title .type {
   display: inline-block;
   color: rgb(116, 116, 116);
   font-size: 10pt;
@@ -59,7 +59,8 @@ section.detail {
   flex: 1;
   margin-left: 15px;
 }
-.detail.top .top.title button {
+.detail.top .top.title a {
+  display: inline-block;
   padding: 1.2em;
   width: 120px;
   font-size: 12pt;
@@ -69,6 +70,7 @@ section.detail {
   cursor: pointer;
   outline: none;
   white-space: nowrap;
+  text-align: center;
 }
 .detail.top .top.desc {
   width: 100%;

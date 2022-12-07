@@ -40,7 +40,7 @@ router.get("/", async (req, res, next) => {
     { id: "classic", name: "Classic" },
   ];
 
-  const query = `SELECT concert_artist.concert_code, concert_info.concert_name, concert_info.concert_poster, concert_info.start_date, concert_info.end_date, artist.artist_name 
+  const query = `SELECT concert_artist.concert_code, concert_info.concert_name, concert_info.concert_poster, concert_info.start_date, concert_info.end_date, concert_info.concert_ticketing, artist.artist_name 
   FROM concert_artist
   LEFT JOIN artist
   ON concert_artist.artist_code = artist.artist_code
@@ -64,8 +64,6 @@ router.get("/", async (req, res, next) => {
   // });
 
   const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
-
-  console.log(conData);
 
   return res.render("main", {
     body: "ranking",
