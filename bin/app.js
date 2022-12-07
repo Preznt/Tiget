@@ -26,15 +26,10 @@ import usersRouter from "../routes/users.js";
 import mypageRouter from "../routes/mypage.js";
 import concertRouter from "../routes/concert.js";
 import listRouter from "../routes/list.js";
-import spcdeInfo from "../routes/spcdeInfo.js";
 import forum from "../routes/forum.js";
 import profile from "../routes/profile.js";
 import favgGenreRouter from "../routes/favorite_genre.js";
-// import perdisPeriod from "../routes/perdisPeriod.js";
-// import perdisArea from "../routes/perdisArea.js";
-// import perdisRealm from "../routes/perdisRealm.js";
-// import perdisSeq from "../routes/perdisSeq.js";
-// import prfrList from "../routes/prfrList.js";
+import spcdeInfo from "../routes/spcdeInfo.js";
 // import prfrDetail from "../routes/prfrDetail.js";
 
 // create express framework
@@ -79,7 +74,6 @@ app.use("/", (req, res, next) => {
     // 로그아웃이 되었거나, 어떤이유로 session 에 로그인 정보가 없으면
     // global 데이터에서 user 데이터 제거
     delete app.locals.user;
-    // ** 로그아웃 후 뒤로가기 방지하는 방법?
   }
 
   // console.log("유저정보", req.session.user);
@@ -94,20 +88,13 @@ app.use("/main", mainRouter);
 app.use("/detail", detailRouter);
 app.use("/users", usersRouter);
 app.use("/mypage", mypageRouter);
-app.use("/holiday", spcdeInfo);
 app.use("/mypage", mypageRouter);
 app.use("/concert", concertRouter);
 app.use("/list", listRouter);
 app.use("/forum", forum);
 app.use("/profile", profile);
 app.use("/favoriteGenre", favgGenreRouter);
-
-// app.use("/period", perdisPeriod);
-// app.use("/area", perdisArea);
-// app.use("/realm", perdisRealm);
-// app.use("/seq", perdisSeq);
-// app.use("/prfrlist", prfrList);
-// app.use("/prfrdetail", prfrDetail);
+app.use("/holiday", spcdeInfo);
 // app.use("/spotify", spotifyRouter);
 
 // catch 404 and forward to error handler
