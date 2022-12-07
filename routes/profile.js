@@ -11,11 +11,24 @@ router.get("/", (req, res) => {
 });
 router.post("/", upload.single("b_upfile"), async (req, res) => {
   const profile = req.file.filename;
-
   const emailID = req.body.username;
   // console.log(profile, emailID);
   const upLoadDirect = path.join("public/uploads");
-  // console.log(emailID);
+  let user;
+  try {
+    user = await userDB.findOne({ where: { username: emailID } });
+  } catch (err) {
+    console.error(err);
+  }
+  // console.log(user.profile_image);
+
+  try {
+    const removeImg = path.join(upLoadDirect, user.profile_image);
+    fs.statSync(removeImg);
+    fs.unlinkSync(removeImg);
+  } catch (err) {
+    res.write(`이미지가 없습니다.`);
+  }
 
   try {
     await userDB.update(
@@ -25,22 +38,12 @@ router.post("/", upload.single("b_upfile"), async (req, res) => {
   } catch (err) {
     console.error(err);
   }
-
   try {
-    const user = await userDB.findOne({ where: { username: emailID } });
-
+    user = await userDB.findOne({ where: { username: emailID } });
     return res.render("mypage", { body: "users", user });
   } catch (err) {
     console.error(err);
   }
-
-  // try {
-  // const delImg = path.join(upLoadDirect, profile)
-  // fs.statSync(delImg)
-  // fs.unlinkSync(delImg)
-  // } catch(err){
-  // console.log("에러")
-  // }
 });
 
 export default router;

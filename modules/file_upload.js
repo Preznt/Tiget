@@ -11,7 +11,7 @@ const storageOption = {
   // 파일을 업로드 하기전에 어떤(??) 일을 선행 처리하는 함수
   filename: (req, file, callback) => {
     const originalname = file.originalname;
-    const fileprefix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    const fileprefix = v4();
     const newFileName = `${fileprefix}-${originalname}`;
     const uploadFileName = newFileName.substring(newFileName.length - 255);
 
@@ -22,7 +22,7 @@ const storageOption = {
   destination: (req, file, fileup) => {
     // upload_dir 폴더가 없으면 만들어라
     if (!fs.existsSync(upload_dir)) {
-      fs.mkdirSync(upload_dir, {recursive:true});
+      fs.mkdirSync(upload_dir, { recursive: true });
     }
     // 실질적으로 파일 업로드를 담당하는 multer 내부의
     // 함수 호출
