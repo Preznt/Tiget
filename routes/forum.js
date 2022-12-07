@@ -1,7 +1,6 @@
 import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
-import { Sequelize } from "sequelize";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -68,29 +67,20 @@ router.post("/board/:boardSeq", async (req, res) => {
 
 router.get("/:loadFor", async (req, res) => {
   let loadFor = req.params.loadFor;
-  // console.log(loadFor);
-  let list = loadFor.substring(1, loadFor.length);
-  // console.log(list);
-
   try {
     const boardResult = await Board.findAll({
-      where: { sort_board: list },
+      where: { sort_board: loadFor },
       limit: 14,
+      include: "f_reply",
     });
-    let seq = boardResult.map((row) => row.seq);
-    console.log(seq);
-    const replyResult = await Reply.findAll({
-      attributes: [
-        "board_code",
-        [
-          Sequelize.fn("COUNT", Sequelize.col("board_code")),
-          "count_board_code",
-        ],
-      ],
-      where: { board_code: seq },
-      group: ["board_code"],
-    });
-    console.log(replyResult);
+    let replies = [];
+    for (let i = 0; i < boardResult.length; i++) {
+      replies.push(boardResult[i].f_reply.length);
+    }
+
+    boardResult.concat(replies);
+
+    // console.log(boardResult);
 
     return res.json(boardResult);
   } catch (err) {

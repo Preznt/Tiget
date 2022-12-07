@@ -1,12 +1,11 @@
 link(rel="stylesheet" href="/css/mypage/profile.css")
 script(src="/js/profile.js")
-- const nickname = "박명수"
-- const username = "Great_park@naver.com"
+
 form.setinline(method="post" enctype="multipart/form-data")
-    .profile.img= profile_image || ""
+    img.profile.img(src=(`/uploads/${user.profile_image}`) || "") 
     form(method="POST", enctype="multipart/form-data" )
-        input.emailid(name="username" value=`${username}` readonly)
-        input.nickname(value=`${nickname}` readonly)
+        input.emailid(name="username" value=`${user.username}` readonly)
+        input.nickname(value=`${user.nickname}` readonly)
         div.profilebutton        
             input(type="file", name="b_upfile", accept="image/*")#b_upfile
         button.profilebutton(type="submit" value="image") 프로필이미지 변경
