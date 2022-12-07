@@ -14,7 +14,6 @@ html
     link(rel="stylesheet", href=`/css/login.css`)
     script(src=`/js/users/main.js`)
     script(src="/js/login.js") 
-    script(src="/js/ranking.js") 
   body
     header
       div.left
@@ -42,7 +41,8 @@ html
             a#btn-modal
               i(class="fa fa-user-circle", aria-hidden="true")
           else 
-            li #{user.nick_name} 님 Page
+            li #{user.nickname} 님 Page
+            button.logout 로그아웃
       div(id="modal", class="modal-overlay")
         div(class="modal-window")
           div(class="title")

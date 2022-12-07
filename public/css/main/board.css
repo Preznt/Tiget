@@ -14,7 +14,7 @@
 .firstcontainer,
 .secondcontainer,
 .textcontainer,
-form.replycontainer {
+div.replycontainer {
   display: flex;
   width: 100%;
 }
@@ -33,7 +33,7 @@ div {
   border: 1px solid black;
   min-height: 60%;
 }
-form.replycontainer {
+div.replycontainer {
   flex-direction: column;
 }
 div.replywrite {
@@ -60,8 +60,15 @@ div.replywrite button {
   color: black;
   padding: 1em;
 }
+.example {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .reply {
   display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 .imgexample {
   margin-right: 0;
@@ -71,8 +78,9 @@ div.replywrite button {
   background: url(../../images/profile.png) no-repeat;
   background-size: 100%;
 }
+
 .replyinfo {
-  display: flex;
+  display: inline-block;
 }
 
 .replyinfo span {

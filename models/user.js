@@ -20,10 +20,6 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
       },
-      realname: {
-        type: Sequelize.DataTypes.STRING(20),
-        allowNull: false,
-      },
       birthdate: {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: true,

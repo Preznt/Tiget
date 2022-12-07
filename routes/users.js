@@ -2,6 +2,7 @@ import express from "express";
 import upload from "../modules/file_upload.js";
 import DB from "../models/index.js";
 import moment from "moment";
+import user from "../models/user.js";
 const dateFormat = "YYYY-MM-DD";
 const timeFormat = "HH:mm:ss";
 const Board = DB.models.board_detail;
@@ -73,40 +74,39 @@ router.post(
   }
 );
 
+// 로그인 구현
 router.post("/login", async (req, res) => {
   const { user_id, user_pw } = req.body;
   console.log({
     user_id,
     user_pw,
   });
-  const userInfo = await User.findAll({ where: { username: user_id } });
-  const pw = userInfo.password;
-  console.log(userInfo);
-  if (user_pw === pw) {
-    req.session.user = {
-      username: user_id,
-      real_name: userInfo.realname,
-      nick_name: userInfo.nickname,
-      user_role: userInfo.level,
-    };
-    req.session.save(() => {
-      res.redirect("/");
-    });
+  const userInfo = await User.findByPk(user_id);
+  // console.log(userInfo);
+  if (userInfo) {
+    const pw = userInfo.password;
+    if (pw !== user_pw) {
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      res.write("<script>alert('비밀번호가 틀렸습니다')</script>");
+      return res.write("<script>location.href='/main'</script>");
+    }
   } else {
-    const loginFail = {
-      status: "USERNAME",
-    };
-    res.redirect("http://localhost:3002/main");
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write("<script>alert('회원정보가 없습니다')</script>");
+    return res.write("<script>location.href='/main'</script>");
   }
+  req.session.user = userInfo;
+  req.session.save(() => {
+    res.redirect("/");
+  });
 });
 
+// 로그아웃 구현
 router.get("/logout", (req, res) => {
   var session = req.session;
   try {
     if (session.user) {
-      req.session.destroy((err) => {
-        if (err) console.error(err);
-      });
+      req.session.destroy();
     }
   } catch (err) {
     return console.error(err);
@@ -114,6 +114,7 @@ router.get("/logout", (req, res) => {
   return res.redirect("/main");
 });
 
+// 회원가입 구현
 router.post("/join/register", async (req, res) => {
   const joinInfo = req.body;
   joinInfo.level = 3;

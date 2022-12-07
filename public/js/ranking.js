@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imgs.forEach((img, index) => {
           rankingImgs[index].src = img;
         });
+
         return false;
       }
     }
