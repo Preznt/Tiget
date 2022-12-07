@@ -79,4 +79,18 @@ section.calendar.container#main2
             li 자
             li 차
         div.bg_image
+  div.calendar.modal
+    div.calendar.modal_content
+        button(type="button").modal.btn_close X
+        div.modal.image
+        div.modal.desc
+            div.modal.title 
+                h1
+                label(for="input_add_list") 찜하기
+                input(type="checkbox").modal#input_add_list
+            div.modal.body
+                p
+        div.modal.button_box
+          button(type="button").modal#btn_info 상세정보
+          button(type="button").modal#btn_ticketing 예매하기
   div.bg_blur

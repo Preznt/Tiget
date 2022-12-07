@@ -44,6 +44,7 @@ start_date varchar(125) not null,
 end_date varchar(125) not null,
 concert_place varchar(225) not null,
 concert_loc varchar(20) not null,
+concert_ticketing varchar(225),
 concert_artist varchar(225)
 );
 
