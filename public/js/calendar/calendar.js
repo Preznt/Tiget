@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const calendar = document.querySelector("div.calendar");
-  const tbody = document.querySelector("div.calendar .tbody");
+  const tbody = document.querySelector(".calendar .tbody");
   const btnPrev = document.querySelector("button.prev");
   const btnNext = document.querySelector("button.next");
   const btnToday = document.querySelector("button.today");
-  const bgBlur = document.querySelector("div.bg_blur");
-  const btnModalClose = document.querySelector("button.modal.btn_close");
 
   const time = new Date();
   // 달력 넘기기 용도
@@ -23,18 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     day: time.getDay(),
   };
 
-  const modal = {
-    modal: document.querySelector("div.calendar.modal"),
-    open() {
-      this.modal.classList.add("visible");
-      bgBlur.classList.add("active");
-    },
-    close() {
-      this.modal.classList.remove("visible");
-      bgBlur.classList.remove("active");
-    },
-  };
-
   const showNum = () => {
     const yearNum = document.querySelector("h2.year");
     const monthNum = document.querySelector("h1.month");
@@ -47,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addSchedule = (concert) => {
     const schedule = document.createElement("div");
     schedule.textContent = concert.conName;
+    schedule.dataset.code = concert.conCode;
     schedule.classList.add("schedule");
     return schedule;
   };
@@ -63,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let dates = document.querySelectorAll(".date");
     for (let date of dates) {
       const classArr = date.className;
+      // artist_name 만 다르고 concert_code 가 같은 데이터는 continue 처리
+      let lastconCode;
       for (let data of conData) {
         const concert = {
           conCode: data.concert_code,
@@ -71,9 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
           start: data.start_date,
           end: data.end_date,
         };
+        if (concert.conCode === lastconCode) {
+          continue;
+        }
         if (matchDay(classArr, concert.start)) {
           schedule = addSchedule(concert);
-          schedule.textContent = concert.conName;
           date.appendChild(schedule);
           let i = 0;
           let d = date;
@@ -91,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           continue;
         }
+        lastconCode = concert.conCode;
       }
     }
   };
@@ -226,27 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
     valDay.month = today.month;
     valDay.date = today.date;
     showDate();
-  });
-
-  // 이벤트 버블링 이용, schedule 클릭 시 modal 창과 bgBlur 띄우기
-  calendar?.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target.className === "schedule") {
-      modal.open();
-    }
-  });
-
-  // bgBlur나 modal 창의 close 버튼 클릭 시 modal 창과 bgBlur 닫기
-  bgBlur?.addEventListener("click", () => {
-    modal.close();
-  });
-  btnModalClose?.addEventListener("click", () => {
-    modal.close();
-  });
-
-  const btnInfo = document.querySelector("button#btn_info");
-  btnInfo?.addEventListener("click", () => {
-    document.location.href = `/detail/${111}`;
   });
 
   const bgImage = document.querySelector(".bg_image");

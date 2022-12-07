@@ -17,10 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // tbody.append(...boardList)
 
   const showBoard = (datas) => {
-    console.log(datas);
+    // console.log(datas);
     tbodyList.textContent = "";
 
     const boardList = datas.map((data, index) => {
+      console.log(data.f_reply.length);
       let tr = document.createElement("TR");
       tr.className = "board tr";
       tr.textContent = "";
@@ -36,9 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
       td.textContent = data.b_title;
       // console.log(td.textContent);
       tr.appendChild(td);
+<<<<<<< HEAD
       span = document.createElement("span")
       span.textContent = data.count
       tr.appendChild(span)
+=======
+      let span = document.createElement("SPAN");
+      if (data.f_reply.length >= 1) {
+        span.textContent = data.f_reply.length;
+      }
+      tr.appendChild(span);
+>>>>>>> main
 
       td = document.createElement("TD");
       td.classList = "board nickname";
@@ -70,9 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (target.tagName === "DIV") {
       let loadFor = target.textContent;
       console.log(loadFor);
-      await fetch(`/forum/:${loadFor}`)
+      await fetch(`/forum/${loadFor}`)
         .then((res) => res.json())
+<<<<<<< HEAD
         .then((datas) => {showBoard(datas);
+=======
+        .then((datas) => {
+          console.log(datas);
+          showBoard(datas);
+>>>>>>> main
         });
     } else return false;
   });

@@ -1,8 +1,11 @@
 import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
+<<<<<<< HEAD
 import { Sequelize } from "sequelize";
 import reply from "../models/reply.js";
+=======
+>>>>>>> main
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -69,6 +72,7 @@ router.post("/board/:boardSeq", async (req, res) => {
 
 router.get("/:loadFor", async (req, res) => {
   let loadFor = req.params.loadFor;
+<<<<<<< HEAD
   // console.log(loadFor);
   let list = loadFor.substring(1, loadFor.length);
   // console.log(list);
@@ -77,8 +81,15 @@ router.get("/:loadFor", async (req, res) => {
     const boardResult = await Board.findAll({
       where: { sort_board: list },
       row:true,
+=======
+  try {
+    const boardResult = await Board.findAll({
+      where: { sort_board: loadFor },
+>>>>>>> main
       limit: 14,
+      include: "f_reply",
     });
+<<<<<<< HEAD
     const seqs = boardResult.map((row) => row.seq);
     // console.log(seqs);
     
@@ -117,6 +128,17 @@ router.get("/:loadFor", async (req, res) => {
     
     // Object.assign(boardResult[12], boardResult[0])
    
+=======
+    let replies = [];
+    for (let i = 0; i < boardResult.length; i++) {
+      replies.push(boardResult[i].f_reply.length);
+    }
+
+    boardResult.concat(replies);
+
+    // console.log(boardResult);
+
+>>>>>>> main
     return res.json(boardResult);
   } catch (err) {
     console.error(err);

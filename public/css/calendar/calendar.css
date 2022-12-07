@@ -253,7 +253,7 @@ form.search_detail_dropdown {
 }
 .search_detail_dropdown_box.visible > form.search_detail_dropdown {
   opacity: 1;
-  height: 100%;
+  height: 50px;
 }
 .search_detail_dropdown_box.visible > form.search_detail_dropdown > * {
   display: flex;
@@ -480,13 +480,13 @@ label[for="input_search_genre"]:hover .search_genre_dropdown_box {
 /* calendar modal 영역 */
 .calendar.modal {
   position: absolute;
-  top: calc(50% - 30%);
-  left: calc(50% - 30%);
+  top: calc(50% - 40%);
+  left: calc(50% - 20%);
   opacity: 0.8;
   transform: scale(0.8);
   transform-origin: center;
-  width: 60%;
-  height: 60%;
+  width: 30%;
+  height: 80%;
   border-radius: 5px;
   z-index: -2;
   transition: all ease-out 0.3s;
@@ -509,7 +509,8 @@ class가 remove 되어도 적용됨
 .calendar.modal.visible > .calendar.modal_content {
   position: relative;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 20px 30px;
@@ -531,24 +532,20 @@ button.modal.btn_close {
 button.modal.btn_close:hover {
   background-color: rgba(151, 151, 151, 1);
 }
-.modal.main {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.modal.main > .modal.image {
-  width: 100%;
-  height: 80%;
+.modal.image {
+  width: 60%;
+  height: 65%;
   background-color: white;
   border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
-.modal.main > .modal.button_box {
+.modal.button_box {
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
-.modal.main > .modal.button_box > button {
+.modal.button_box > button {
   width: 40%;
   border: 1px solid #ccc;
   padding: 5%;
@@ -557,13 +554,11 @@ button.modal.btn_close:hover {
   font-size: 12pt;
 }
 .modal.desc {
-  width: 68%;
-  height: 100%;
-  margin-left: 2%;
+  width: 80%;
+  height: 20%;
 }
-.modal.desc > .modal.title {
+.modal.title {
   width: 100%;
-  height: 18%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: column;
@@ -576,9 +571,8 @@ button.modal.btn_close:hover {
   font-weight: 700;
   color: #ccc;
 }
-.modal.desc > .modal.body {
+.modal.body {
   width: 100%;
-  height: 80%;
   color: #ccc;
 }
 
@@ -595,7 +589,6 @@ button.modal.btn_close:hover {
 .bg_blur.active {
   /* backdrop-filter: blur(0.5px);
   -webkit-backdrop-filter: blur(0.5px); */
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 998;
 }
 
