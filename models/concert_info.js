@@ -32,8 +32,8 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.STRING(20),
         allowNull: false,
       },
-      concert_artist: {
-        type: Sequelize.DataTypes.STRING(125),
+      concert_ticketing: {
+        type: Sequelize.DataTypes.STRING(225),
         allowNull: true,
       },
       concert_type: {
@@ -42,6 +42,10 @@ export default (sequelize) => {
       },
       concert_views: {
         type: Sequelize.DataTypes.INTEGER,
+        allowNull: true,
+      },
+      concert_artist: {
+        type: Sequelize.DataTypes.STRING(125),
         allowNull: true,
       },
     },

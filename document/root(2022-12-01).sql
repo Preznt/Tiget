@@ -7,7 +7,9 @@ create table if not exists user(
  password varchar(255) not null,
  profile_image varchar(255),
  nickname varchar(20) unique not null,
+ realname varchar(20) not null,
  birthdate varchar(255),
+ tel varchar(20),
  level int,
  delete_date varchar(255)
 );
@@ -42,6 +44,9 @@ start_date varchar(125) not null,
 end_date varchar(125) not null,
 concert_place varchar(225) not null,
 concert_loc varchar(20) not null,
+concert_ticketing varchar(225),
+concert_type varchar(20),
+concert_views int,
 concert_artist varchar(225)
 );
 

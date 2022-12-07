@@ -6,8 +6,10 @@ link(rel='stylesheet', href='/css/calendar/calendar.css')
 //- !{}: 괄호 안의 내용을 escaping 하지 않고 코드 그대로 출력
 script.
   const conData = !{JSON.stringify(conData)}
+  //- const conInfo = !{JSON.stringify(conInfo)}
 script(src="/js/calendar/calendar.js")
 script(src="/js/calendar/search.js")
+script(src="/js/calendar/schedule.js")
 section.calendar.container#main2
   div.calendar.main
     div.calendar_tools
@@ -53,34 +55,11 @@ section.calendar.container#main2
                 input(type="checkbox", name="search_genre", value=`${genre.id}`, id=`${genre.id}`)
                 label(for=`${genre.id}`)= genre.name
         button(type="submit")#btn_search_schedule 검색
-    if body === "detail"
+    if calendar === "schedule"
+      include ./schedule.pug
+    if calendar === "detail"
       include ../detail.pug
-    div.calendar
-      div.thead
-        div.days
-          div Sun
-          div Mon
-          div Tue
-          div Wed
-          div Thu
-          div Fri
-          div Sat
-      div.tbody
-  div.calendar.modal
-    div.calendar.modal_content
-      button(type="button").modal.btn_close X
-      div.modal.main
-        div.modal.image 이미지
-        div.modal.button_box
-          button(type="button").modal#btn_info 상세정보
-          button(type="button").modal#btn_ticketing 예매하기
-      div.modal.desc
-        div.modal.title 
-          h1 제목입니다
-          label(for="input_add_list") 찜하기
-          input(type="checkbox").modal#input_add_list
-        div.modal.body
-          p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ut. Corporis laudantium deleniti voluptate obcaecati, atque distinctio itaque quidem autem porro dicta alias et nostrum fugit minima id perspiciatis sint!
+  
   aside.calendar.my_schedule
     div.ticket_shape
       div.ticket_shape.header 나의 일정
@@ -100,4 +79,18 @@ section.calendar.container#main2
             li 자
             li 차
         div.bg_image
+  div.calendar.modal
+    div.calendar.modal_content
+        button(type="button").modal.btn_close X
+        div.modal.image
+        div.modal.desc
+            div.modal.title 
+                h1
+                label(for="input_add_list") 찜하기
+                input(type="checkbox").modal#input_add_list
+            div.modal.body
+                p
+        div.modal.button_box
+          button(type="button").modal#btn_info 상세정보
+          button(type="button").modal#btn_ticketing 예매하기
   div.bg_blur

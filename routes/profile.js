@@ -10,19 +10,26 @@ router.get("/", (req, res) => {
   res.render("mypage", { body: "users", users: {} });
 });
 router.post("/", upload.single("b_upfile"), async (req, res) => {
-  // const profile = req.file.filename;
-  console.log(req.body);
-  // const emailID = req.body.username;
+  const profile = req.file.filename;
 
+  const emailID = req.body.username;
+  // console.log(profile, emailID);
   const upLoadDirect = path.join("public/uploads");
   // console.log(emailID);
 
   try {
-    const profileIMG = await userDB.update(
+    await userDB.update(
       { profile_image: profile },
       { where: { username: emailID } }
     );
-    res.redirect("/", { profileIMG });
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    const user = await userDB.findOne({ where: { username: emailID } });
+
+    return res.render("mypage", { body: "users", user });
   } catch (err) {
     console.error(err);
   }
