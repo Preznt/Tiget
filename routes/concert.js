@@ -9,15 +9,15 @@ router.get("/", (req, res) => {
   res.render("concert");
 });
 
-router.get("/:category", (req, res) => {
+router.get("/:category", async (req, res) => {
   const category = req.params.category;
   console.log(category);
   try {
-    const concert = Concert.findAll({
+    const concert = await Concert.findAll({
       where: { concert_type: category },
     });
-    console.log(concert);
-    // res.json(concert);
+    // console.log(concert);
+    res.json(concert);
   } catch (err) {
     console.log(err);
   }

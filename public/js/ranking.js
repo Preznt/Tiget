@@ -107,8 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const category = event.textContent;
       console.log(category);
 
-      fetch(`/concert/${category}`).then((res) => res.json());
-      // .then((concert) => console.log(concert));
+      fetch(`/concert/${category}`)
+        .then((res) => res.json())
+        .then((concert) => console.log(concert));
     }
   });
   // };
