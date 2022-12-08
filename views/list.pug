@@ -1,10 +1,8 @@
 extends layout 
 block content
     link(rel="stylesheet", href="/css/list.css")
-    - let count= 0;
-    //- let id= !{JSON.stringify(concert)};
     section.concert.list 
-        div.concert.msg 총 #{count}개의 검색결과가 있습니다.
+        div.concert.msg 총 #{listCount}개의 검색결과가 있습니다.
         div.concert.list_container
             each concert in listData
                 a(href=`/detail/${concert.concert_code}`, target="_blank")

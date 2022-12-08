@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     name: document.querySelector(".name"),
     start: document.querySelector(".start_date"),
     end: document.querySelector(".end_date"),
-    artist: document.querySelector(".artist"),
     btnDetail: document.querySelector(".modal#btn_info"),
     btnTicketing: document.querySelector(".modal#btn_ticketing"),
     btnClose: document.querySelector("button.modal.btn_close"),
@@ -26,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
       this.name.textContent = data.concert_name;
       this.start.textContent = data.start_date;
       this.end.textContent = data.end_date;
-      this.artist.textContent = data.artist_name;
 
       this.btnDetail?.addEventListener("click", () => {
         this.btnDetail.href = `/detail/${code}`;

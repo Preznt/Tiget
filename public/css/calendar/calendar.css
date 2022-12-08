@@ -604,12 +604,13 @@ button.modal.btn_close:hover {
   10% {
     transform: scale(0.6);
   }
-  80% {
+  50% {
     transform: scale(1.2);
     text-shadow: 0 0 10px orange;
   }
   100% {
     transform: scale(1);
+    text-shadow: 0;
   }
 }
 

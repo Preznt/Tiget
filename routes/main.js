@@ -1,8 +1,6 @@
 import express from "express";
 import sequelize from "sequelize";
 import { QueryTypes } from "sequelize";
-import genre from "../models/genre.js";
-import genre_of_interest from "../models/genre_of_interest.js";
 import DB from "../models/index.js";
 const Holiday = DB.models.holiday;
 const Genre = DB.models.genre;
@@ -30,15 +28,6 @@ router.get("/", async (req, res, next) => {
     { eng: "gyeongnam", kor: "경남" },
     { eng: "jeju", kor: "제주" },
   ];
-  // const genreData = [
-  //   { id: "pop", name: "Pop" },
-  //   { id: "rock", name: "Rock" },
-  //   { id: "electronic", name: "Electronic" },
-  //   { id: "hiphop", name: "Hip-Hop" },
-  //   { id: "rnb", name: "R&B" },
-  //   { id: "jazz", name: "Jazz" },
-  //   { id: "classic", name: "Classic" },
-  // ];
 
   const query = `SELECT concert_artist.concert_code, concert_info.concert_name, concert_info.concert_poster, concert_info.start_date, concert_info.end_date, concert_info.concert_ticketing, artist.artist_name 
   FROM concert_artist

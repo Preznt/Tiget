@@ -29,19 +29,19 @@ const Chkcond = (data) => {
     query += ` start_date BETWEEN "${data.start_date}" AND "${data.end_date} + 1"
     OR end_date BETWEEN "${data.start_date}" AND "${data.end_date} + 1"`;
 
-  // if (data.concert_name) query += ``;
+  if (data.concert_name) query += ``;
 
   // if (data.concert_place) query += ``;
 
-  // if (data.artist_name) query += ``;
+  if (data.artist_name) query += ``;
 
   // if (data.concert_loc) query += ``;
 
   // if (data.genre_name) query += ``;
 
   // concert_loc과 genre_name은 IN 키워드 사용?
-
-  query += ` GROUP BY concert_info.concert_code`;
+  // bind parameter 사용?
+  // query += ` GROUP BY concert_info.concert_code`;
   return query;
 };
 
@@ -61,7 +61,9 @@ router.post("/", async (req, res) => {
   const query = Chkcond(data);
   console.log(query);
 
-  let listData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
+  const listData = await DB.sequelize.query(query, {
+    type: QueryTypes.SELECT,
+  });
 
   //   const result = await Concert.findAll({where: $or
   //   {
@@ -69,8 +71,8 @@ router.post("/", async (req, res) => {
   //     {end_date:$between {start_date,end_date}}
   //   }
   // })
-
-  res.render("list", { body: "list", listData });
+  const listCount = listData.length;
+  res.render("list", { body: "list", listData, listCount });
 });
 
 export default router;
