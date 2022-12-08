@@ -1,16 +1,16 @@
 extends ../layout
 
 block content
-    link(rel="stylesheet", href="/css/users/bitBrd.css")
+    link(rel="stylesheet", href="/css/users/bltBrd.css")
     script.
         let category = `#{body}`
         let totalPage = `#{totalPage}`
         const pageGroup = `#{pageGroup}`
         const currentPage = `#{pageNum}`
     script(src="/js/users/bltBrd.js") 
-    article.bitBrd
-        div.bitBrd.table
-            div.bitBrd.category | 커뮤니티
+    article.bltBrd
+        div.bltBrd.table
+            div.bltBrd.category | 커뮤니티
                 nav.main
                     ul
                         li.all 전체보기
@@ -20,8 +20,8 @@ block content
                         li.freeboard 자유게시판
             div.button.box
                 button
-                    a(href="bltBrd/write").write 글쓰기
-            table.bitBrd.table
+                    a(href="http://localhost:3002/users/bltBrd/write").write 글쓰기
+            table.bltBrd.table
                 thead 
                     tr.title
                         th 게시판
@@ -45,5 +45,6 @@ block content
                 div.pagecon
                 button.pageNext >
                 button.pageEnd >>
-        aside.bitBrd.aside Side Content
+                
+        aside.bltBrd.aside Side Content
             div 뭔가 홍보할만한 이미지같은거 작게 넣기 위한칸
