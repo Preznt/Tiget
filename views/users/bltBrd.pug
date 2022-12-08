@@ -4,6 +4,9 @@ block content
     link(rel="stylesheet", href="/css/users/bitBrd.css")
     script.
         let category = `#{body}`
+        let totalPage = `#{totalPage}`
+        const pageGroup = `#{pageGroup}`
+        const currentPage = `#{pageNum}`
     script(src="/js/users/bltBrd.js") 
     article.bitBrd
         div.bitBrd.table
@@ -36,5 +39,11 @@ block content
                     include category/categoryconcert_hall_review.pug
                 if body == "자유게시판"
                     include category/categoryfreeboard.pug
+            div.pageContainer
+                button.pagefirst <<
+                button.pagePrev <
+                div.pagecon
+                button.pageNext >
+                button.pageEnd >>
         aside.bitBrd.aside Side Content
             div 뭔가 홍보할만한 이미지같은거 작게 넣기 위한칸
