@@ -13,7 +13,7 @@ router.post("/", upload.single("b_upfile"), async (req, res) => {
   const profile = req.file.filename;
   const emailID = req.body.username;
   // console.log(profile, emailID);
-  const upLoadDirect = path.join("public/uploads");
+  const upLoadDirect = path.join("public/uploads/");
   let user;
   try {
     user = await userDB.findOne({ where: { username: emailID } });
@@ -22,12 +22,12 @@ router.post("/", upload.single("b_upfile"), async (req, res) => {
   }
   // console.log(user.profile_image);
 
+  console.log(upLoadDirect + user.profile_image);
   try {
-    const removeImg = path.join(upLoadDirect, user.profile_image);
-    fs.statSync(removeImg);
-    fs.unlinkSync(removeImg);
+    fs.existsSync(upLoadDirect + user.profile_image);
+    fs.unlinkSync(upLoadDirect + user.profile_image);
   } catch (err) {
-    res.write(`이미지가 없습니다.`);
+    console.log(err);
   }
 
   try {
