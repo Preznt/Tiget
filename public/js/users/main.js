@@ -15,12 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         case "커뮤니티":
           url = "/users/bltBrd";
           break;
-        case "콘서트":
-          url = "/concert";
-          break;
-        case "페스티벌":
-          url = "/concert/festival";
-          break;
       }
       document.location.href = url;
     }
