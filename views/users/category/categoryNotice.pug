@@ -1,6 +1,6 @@
 tbody 
     each list in lists
-        tr.item
+        tr(data-id= `${list.seq}`).item
             td= list.sort_board
             td= list.b_nickname
             td= list.b_title
