@@ -5,17 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const replyPlace = document.querySelector("div.replycontainer");
 
   const ShowReply = (replies) => {
-    // console.log(replies);
+    console.log(replies);
 
     const makeReply = replies.map((reply) => {
       const divReply = document.createElement("DIV");
       divReply.className = "reply";
 
-      const divIMG = document.createElement("DIV");
-      divIMG.className = "imgexample";
-      divIMG.style.backgoundImage =
-        reply.b_img || "url('../../images/profile.png')";
-
+      const IMG = document.createElement("IMG");
+      IMG.style.backgroundImage = "";
+      IMG.className = "imgexample";
+      IMG.style.backgroundImage =
+        `url('/uploads/${reply.b_img}')` || `url('/uploads/null.png')`;
       const divExample = document.createElement("DIV");
       divExample.className = "example";
 
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       replayInfo.appendChild(divContent);
 
       divExample.appendChild(replayInfo);
-      divReply.appendChild(divIMG);
+      divReply.appendChild(IMG);
       divReply.appendChild(divExample);
 
       return divReply;
@@ -58,6 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch(`/forum/board/:${boardSeq}`, option)
       .then((res) => res.json())
-      .then((replies) => ShowReply(replies));
+      .then((replies) => (document.location.href = document.location.href));
   });
 });

@@ -12,6 +12,10 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.BIGINT,
         primaryKey: false,
       },
+      username: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: false,
+      },
       nickname: {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false,

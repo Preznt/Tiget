@@ -16,15 +16,16 @@ block content
                 div= result.b_title
             .textcontainer
                 div= result.b_content
-            .replycontainer(data-seq=result.seq)             
+            .replycontainer(data-seq=result.seq)     
                 each reply in replies
+                    .example 
+                        div.replyinfo
+                            span 작성일시  : #{reply.r_update_date}
+                            span 작성자  : #{reply.nickname}
+                        div.replies= reply.r_content
+                each user in users    
                     div.reply
-                        .imgexample
-                        .example 
-                            div.replyinfo
-                                span 작성일시  : #{reply.r_update_date}
-                                span 작성자  : #{reply.nickname}
-                            div.replies= reply.r_content
+                        img(src=(`/uploads/${user.profile_image}`) || "").imgexample 
             div.replywrite                    
                 input(name="content" placeholder="          댓글을 입력하세요.")#input
                 button(type="button").replyAdd 댓글추가
