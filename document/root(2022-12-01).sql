@@ -46,7 +46,7 @@ concert_place varchar(225) not null,
 concert_loc varchar(20) not null,
 concert_ticketing varchar(225),
 concert_type varchar(20),
-concert_views int,
+concert_views int default 0,
 concert_artist varchar(225)
 );
 

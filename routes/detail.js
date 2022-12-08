@@ -2,9 +2,10 @@ import express from "express";
 import sequelize from "sequelize";
 import { QueryTypes } from "sequelize";
 import DB from "../models/index.js";
+const Concert = DB.models.concert_info;
 
 const router = express.Router();
-// const Concert = DB.models.concert_info;
+
 // const Artist = DB.models.artist;
 // const ConArt = DB.models.concert_artist_model;
 // const Genre = DB.models.genre;
@@ -41,6 +42,12 @@ const filterData = (array, column, group) => {
 router.get("/:conCode", async (req, res) => {
   const code = req.params.conCode;
 
+  // 조회수 증가
+  const updateViews = await Concert.increment(["concert_views"], {
+    by: 1,
+    where: { concert_code: code },
+  });
+
   const query = `SELECT *
   FROM concert_artist ConArt
   INNER JOIN concert_info Con
@@ -65,11 +72,12 @@ router.get("/:conCode", async (req, res) => {
     concert_loc: result[0].concert_loc,
     concert_ticketing: result[0].concert_ticketing,
     concert_type: result[0].concert_type,
-    concert_views: null,
+    concert_views: result[0].concert_views,
   };
+  console.log(conInfo);
   const artInfo = filterData(result, "genre_name", "artist_code");
 
-  res.render("detail", { conInfo, artInfo });
+  return res.render("detail", { conInfo, artInfo });
 });
 
 export default router;

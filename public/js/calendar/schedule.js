@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = {
     modal: document.querySelector(".calendar.modal"),
     image: document.querySelector(".modal.image"),
-    title: document.querySelector(".modal.title h1"),
-    desc: document.querySelector(".modal.body p"),
-    btnDetail: document.querySelector("button.modal#btn_info"),
-    btnTicketing: document.querySelector("button.modal#btn_ticketing"),
+    name: document.querySelector(".name"),
+    start: document.querySelector(".start_date"),
+    end: document.querySelector(".end_date"),
+    artist: document.querySelector(".artist"),
+    btnDetail: document.querySelector(".modal#btn_info"),
+    btnTicketing: document.querySelector(".modal#btn_ticketing"),
     btnClose: document.querySelector("button.modal.btn_close"),
     open() {
       this.modal.classList.add("visible");
@@ -21,15 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     showDetail(code, data) {
       this.image.src = `${data.concert_poster}`;
-      this.title.textContent = data.concert_name;
-      this.desc.textContent = data.artist_name;
+      this.name.textContent = data.concert_name;
+      this.start.textContent = data.start_date;
+      this.end.textContent = data.end_date;
+      this.artist.textContent = data.artist_name;
 
       this.btnDetail?.addEventListener("click", () => {
-        window.location.href = `/detail/${code}`;
+        this.btnDetail.href = `/detail/${code}`;
       });
 
       this.btnTicketing?.addEventListener("click", () => {
-        window.open(`${data.concert_ticketing}`, "_blank");
+        this.btnTicketing.href = `${data.concert_ticketing}`;
+        this.btnTicketing.target = "_blank";
       });
     },
   };

@@ -4,7 +4,7 @@ block content
     section.scroll.detail
         div.detail.etc 
             span.type= conInfo.concert_type            
-            span.views 조회수
+            span.views 조회수 #{conInfo.concert_views}
         div.detail.top
             div.top.img
                 img(src=`${conInfo.concert_poster}`)
@@ -12,7 +12,8 @@ block content
                 div.top.title 
                     h2= conInfo.concert_name
                     span.type= conInfo.concert_loc
-                    a(href=`${conInfo.concert_ticketing}`, target="_blank")#ticketing 예매하기 
+                    a(href=`${conInfo.concert_ticketing}`, target="_blank")#ticketing
+                        i(class="fa-solid fa-ticket") 예매하기 
                 div.top.desc
                     div.place.label 장소
                     div.place= conInfo.concert_place
@@ -30,15 +31,19 @@ block content
                     div.discount.label 할인정보
                     div.discount
         div.detail.bottom
-            h2 가수정보
+            h2.artist.detail 가수정보
             div.bottom.desc
                 each artist of artInfo
-                    div.artist.img
-                        img(src=`${artist.artist_img}`)
-                    span.artist.name= artist.artist_name
-                    span.artist.type= artist.artist_type 
-                    span.artist.debut= artist.artist_debut
-                    span.artist.genre= artist.genre_name
+                    div.artist.info
+                        img(src=`${artist.artist_img}`).artist.img
+                        div.artist.title
+                            span.artist.name= artist.artist_name
+                            span.artist.type= artist.artist_type 
+                        div.artist.desc
+                            span.label 데뷔년도
+                            span.artist.debut= artist.artist_debut
+                            span.label 장르
+                            span.artist.genre= artist.genre_name
 
 
 

@@ -26,34 +26,34 @@ section.calendar.container#main2
         button(type="button").btn_search_detail 상세 
           div.btn_search_detail_arrow.active
     div.search_detail_dropdown_box.visible
-      form(method="POST", action="/detail").search_detail_dropdown
+      form(method="POST", action="/list").search_detail_dropdown
         div.search_detail_input_box
           label(for="input_search_date") 기간
-          input(type="date", name="search_start")#input_search_start
+          input(type="date", name="start_date")#input_search_start
           span -
-          input(type="date", name="search_end")#input_search_end
+          input(type="date", name="end_date")#input_search_end
         div.search_detail_input_box
           label(for="input_search_title") 제목
-          input(type="text", name="search_title", placeholder="제목")#input_search_title
+          input(type="text", name="concert_name", placeholder="제목")#input_search_title
         div.search_detail_input_box
           label(for="input_search_place") 장소
-          input(type="text", name="search_place", placeholder="장소")#input_search_place
+          input(type="text", name="concert_place", placeholder="장소")#input_search_place
         div.search_detail_input_box
-          label(for="input_search_cast") 출연진
-          input(type="text", name="search_cast", placeholder="출연진")#input_search_cast
+          label(for="input_search_artist") 가수
+          input(type="text", name="artist_name", placeholder="출연진")#input_search_cast
         //- cf) 지역, 장르는 DB 에서 데이터를 받아와 for in (객체 내 속성 iterate) 을 사용
         div.search_detail_input_box
           label(for="input_search_loc") 지역
             div.search_loc_dropdown_box
               for loc in locData
-                input(type="checkbox", name="search_loc", value=`${loc.eng}`, id=`${loc.eng}`)
+                input(type="checkbox", name="concert_loc", value=`${loc.kor}`, id=`${loc.eng}`)
                 label(for=`${loc.eng}`)= loc.kor
         div.search_detail_input_box
           label(for="input_search_genre") 장르
             div.search_genre_dropdown_box
               for genre in genreData
-                input(type="checkbox", name="search_genre", value=`${genre.id}`, id=`${genre.id}`)
-                label(for=`${genre.id}`)= genre.name
+                input(type="checkbox", name="genre_name", value=`${genre.genre_code}`, id=`${genre.genre_name}`)
+                label(for=`${genre.genre_name}`)= genre.genre_name
         button(type="submit")#btn_search_schedule 검색
     if calendar === "schedule"
       include ./schedule.pug
@@ -84,13 +84,15 @@ section.calendar.container#main2
         button(type="button").modal.btn_close X
         img.modal.image
         div.modal.desc
+            input(type="checkbox").modal#input_bookmark
+            label(for="input_bookmark").modal.label_bookmark
             div.modal.title 
-                h1
-                label(for="input_add_list") 찜하기
-                input(type="checkbox").modal#input_add_list
-            div.modal.body
-                p
+              div.name
+              div.date
+                span.start_date
+                span.dash &nbsp;-&nbsp; 
+                span.end_date
         div.modal.button_box
-          button(type="button").modal#btn_info 상세정보
-          button(type="button").modal#btn_ticketing 예매하기
+          a(type="button").modal#btn_info 상세정보
+          a(type="button").modal#btn_ticketing 예매하기
   div.bg_blur
