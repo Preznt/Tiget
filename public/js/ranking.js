@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   const genre = ["POP", "발라드", "인디", "재즈", "락"];
+  const genreCode = ["G0001", "G0004", "G0013", "G0010", "G0002"];
   const concert = ["국내", "내한", "페스티벌"];
 
   // 공연, 장르별 클릭시 카테고리 변경
@@ -27,24 +28,39 @@ document.addEventListener("DOMContentLoaded", () => {
         btnGenre.style.color = "black";
         subtitleBox.textContent = "";
 
+        // 장르별 카테고리 생성
         for (let i = 0; i < genre.length; i++) {
           const btn = document.createElement("BUTTON");
           btn.textContent = genre[i];
           btn.dataset.index = i + 1;
           btn.classList.add("genre-rank");
+          btn.id = genreCode[i];
           subtitleBox.appendChild(btn);
         }
+        fetch(`/concert/genre/pop`)
+          .then((res) => res.json())
+          .then((concerts) => {
+            // console.log(concerts);
+            dataActive(concerts);
+          });
       } else {
         btnPerform.classList.remove("non-active");
         btnGenre.style.color = "#ccc";
         subtitleBox.textContent = "";
 
+        // 카테고리 생성
         for (let i = 0; i < concert.length; i++) {
           const btn = document.createElement("BUTTON");
           btn.textContent = concert[i];
           btn.dataset.index = i + 1;
           subtitleBox.appendChild(btn);
         }
+        fetch(`/concert/국내`)
+          .then((res) => res.json())
+          .then((concerts) => {
+            // console.log(concerts);
+            dataActive(concerts);
+          });
       }
     }
 
@@ -97,10 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.tagName === "BUTTON") {
       btnActive(event);
       const category = event.textContent;
-      console.log(category);
+      const gCategory = event.id;
+      // console.log(gCategory);
 
       if (event.className.indexOf("genre-rank") > 0) {
-        fetch(`/concert/genre/${category}`)
+        fetch(`/concert/genre/${gCategory}`)
           .then((res) => res.json())
           .then((genre) => console.log(genre));
       }

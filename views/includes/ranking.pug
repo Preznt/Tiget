@@ -14,46 +14,36 @@ section.performance.info#ranking
             button(data-index="3") 페스티벌
         div.detail
                 div.poster1
-                    a(href="").poster1-1
-                        img(src="http://image.toast.com/aaaaab/ticketlink/TKL_1/jan_daegu_221020.jpg", alt="")
-                        div
-                            div.title 잔나비 전국투어 <판타스틱 올드 패션드>
-                            div.date 2022.12.10 - 2022.12.11
-                    a(href="").poster1-2
-                        img(src="http://image.toast.com/aaaaab/ticketlink/TKL_5/ep_pst1109.jpg", alt="")
-                        div
-                            div.title 2022 최유리 EP 발매 기념 단독 콘서트 '여운'
-                            div.date 2022.12.03 - 2022.12.04
+                    - for(let i = 0; i < 2; i++)
+                        a(href="")
+                            img(src=`${concerts[i].concert_poster}`, alt="")
+                            div
+                                div.title= concerts[i].concert_name
+                                div.date= concerts[i].start_date + "-" + concerts[i].end_date
     
                 div.poster2
-                    a(href="").poster2-1
-                        img(src="http://image.toast.com/aaaaab/ticketlink/TKL_4/cats_pst1107.jpg", alt="")
-                        div
-                            div.title 뮤지컬 ＜캣츠＞오리지널 내한－서울（Musical CATS）
-                            div.date 2023.01.20 - 2023.02.03
-                    a(href="").poster2-2
-                        img(src="http://image.toast.com/aaaaab/ticketlink/TKL_8/poster(220915)b.jpg", alt="")
-                        div
-                            div.title 2022 푸에르자부르타 웨이라 인 서울
-                            div.date 2022.09.29 - 2022.12.26
+                    - for(let i = 2; i < 4; i++)
+                        a(href="")
+                            img(src=`${concerts[i].concert_poster}`, alt="")
+                            div
+                                div.title= concerts[i].concert_name
+                                div.date= concerts[i].start_date + "-" + concerts[i].end_date
     div.recommend
         div.recommend-title 추천 공연
         div.sub-title
-            button(data-index="1") 국내
+            button.active(data-index="1") 국내
             button(data-index="2") 내한
             button(data-index="3") 페스티벌
         div.detail 
             div.big-poster
                 a(href="")
-                    img(src="http://tkfile.yes24.com/upload2/perfblog/202210/20221011/20221011-43774.jpg/dims/quality/70/", alt="")
-                    div.title FKJ LIVE IN SEOUL
-                    div.date 2022.11.28 ~ 2022.11.28
+                    img(src=`${recommends[0].concert_poster}`, alt="")
+                    div.title= recommends[0].concert_name
+                    div.date= recommends[0].start_date + "-" + recommends[0].end_date
             div.sub-posters
-                a(href="")
-                    img(src="http://tkfile.yes24.com/upload2/perfblog/202209/20220928/20220928-43663.jpg/dims/quality/70/", alt="")
-                    div.title FKJ LIVE IN SEOUL
-                    div.date 2022.11.28 ~ 2022.11.28
-                a(href="")
-                    img(src="http://tkfile.yes24.com/upload2/perfblog/202210/20221003/20221003-43708.jpg/dims/quality/70/", alt="")
-                    div.title FKJ LIVE IN SEOUL
-                    div.date 2022.11.28 ~ 2022.11.28
+                - for(let i = 1; i < 3; i++)
+                        a(href="")
+                            img(src=`${recommends[i].concert_poster}`, alt="")
+                            div
+                                div.title= recommends[i].concert_name
+                                div.date= recommends[i].start_date + "-" + recommends[i].end_date

@@ -4,6 +4,7 @@ import DB from "../models/index.js";
 const router = express.Router();
 
 const Concert = DB.models.concert_info;
+const ConcertGenre = DB.models.concert_genre;
 
 router.get("/", (req, res) => {
   res.render("concert");
@@ -25,12 +26,12 @@ router.get("/:category", async (req, res) => {
   }
 });
 
-router.get("/genre/:category", async (req, res) => {
-  const category = req.params.category;
-  console.log(category);
+router.get("/genre/:gcategory", async (req, res) => {
+  const gcategory = req.params.category;
+  console.log(gcategory);
   try {
-    const concert = await Concert.findAll({
-      where: { concert_genre: category },
+    const concert = await ConcertGenre.findAll({
+      where: { genre_code: gcategory },
       order: [["concert_views", "DESC"]],
       limit: 4,
     });
@@ -47,7 +48,7 @@ router.get("/recommend/:category", async (req, res) => {
   try {
     const concert = await Concert.findAll({
       where: { concert_type: category },
-      order: [["concert_views", "DESC"]],
+      order: [["concert_views", "ASC"]],
       limit: 5,
     });
     // console.log(concert);

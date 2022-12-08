@@ -48,6 +48,16 @@ router.get("/", async (req, res, next) => {
   ON concert_info.concert_code = concert_artist.concert_code;`;
   const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
 
+  const concerts = await Concert.findAll({
+    where: { concert_type: "국내" },
+    order: [["concert_views", "DESC"]],
+  });
+
+  const recommends = await Concert.findAll({
+    where: { concert_type: "국내" },
+    order: [["concert_views", "ASC"]],
+  });
+
   return res.render("main", {
     body: "ranking",
     holiData,
@@ -56,6 +66,8 @@ router.get("/", async (req, res, next) => {
     boards: "",
     conData,
     calendar: "schedule",
+    concerts,
+    recommends,
   });
 });
 
