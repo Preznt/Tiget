@@ -25,7 +25,8 @@ router.get("/board/:id", async (req, res) => {
   const id = req.params.id;
   userID = req.session.user;
   let replies;
-  let users;
+
+  let replyContent = [];
   try {
     replies = await Reply.findAll({
       where: { board_code: id },
@@ -34,12 +35,27 @@ router.get("/board/:id", async (req, res) => {
   } catch (err) {
     res.send(err);
   }
-  console.log(replies[0].f_user);
+  // console.log(replies[0].f_user.profile_image);
+
+  for (let i = 0; i < replies.length; i++) {
+    replyContent.push({
+      profile_image: replies[i].f_user.profile_image,
+      r_seq: replies[i].r_seq,
+      board_code: replies[i].board_code,
+      username: replies[i].username,
+      nickname: replies[i].nickname,
+      r_update_date: replies[i].r_update_date,
+      r_modified_date: replies[i].r_modified_date,
+      r_remove_date: replies[i].r_remove_date,
+    });
+  }
+
+  console.log(replyContent);
 
   try {
     const result = await Board.findOne({ where: { seq: id } });
     // console.log(result);
-    res.render("board", { result, replies, users: "" });
+    res.render("board", { result, users: replyContent });
   } catch (err) {
     res.send(err);
   }
