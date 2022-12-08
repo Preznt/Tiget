@@ -12,7 +12,7 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.BIGINT,
         primaryKey: false,
       },
-      r_nickname: {
+      nickname: {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: false,
       },

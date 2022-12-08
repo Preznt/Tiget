@@ -1,11 +1,13 @@
 import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
+import { Sequelize } from "sequelize";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
 const Board = boardList.models.board_detail;
 const Reply = boardList.models.reply;
+const USER = boardList.models.user;
 
 // 데이터 베이스 import
 // import bbsDB from "../models/.."
@@ -27,7 +29,7 @@ router.get("/board/:id", async (req, res) => {
   }
   try {
     const result = await Board.findOne({ where: { seq: id } });
-    console.log(result);
+    // console.log(result);
     res.render("board", { result, replies });
   } catch (err) {
     res.send(err);
@@ -41,28 +43,34 @@ router.post("/board/:boardSeq", async (req, res) => {
 
   const reply = {
     board_code: boardSeq,
-    r_nickname: "",
+    nickname: "",
     r_content: replyContent,
     b_img: "",
     r_update_date: date_format + time_format,
     r_modified_date: "",
     r_remove_date: "",
   };
-  console.log(boardSeq);
+
   try {
     await Reply.create(reply);
-    // console.log(replyresult);
   } catch (err) {
     console.error(err);
   }
-
+  let result;
   try {
-    const result = await Reply.findAll({ where: { board_code: boardSeq } });
-    // console.log(result);
+    result = await Reply.findAll(
+      {
+        include: USER,
+        attribute: [Sequelize.col("profile_img"), "profile_image"],
+      },
+      { where: { board_code: boardSeq } }
+    );
+    console.log(result);
     res.json(result);
   } catch (err) {
     res.send(err);
   }
+  // console.log(result);
 });
 
 router.get("/:loadFor", async (req, res) => {

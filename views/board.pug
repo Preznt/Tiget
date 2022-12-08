@@ -23,7 +23,7 @@ block content
                         .example 
                             div.replyinfo
                                 span 작성일시  : #{reply.r_update_date}
-                                span 작성자  : #{reply.r_nickname}
+                                span 작성자  : #{reply.nickname}
                             div.replies= reply.r_content
             div.replywrite                    
                 input(name="content" placeholder="          댓글을 입력하세요.")#input

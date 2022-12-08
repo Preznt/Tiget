@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const replyPlace = document.querySelector("div.replycontainer");
 
   const ShowReply = (replies) => {
-    console.log(replies);
+    // console.log(replies);
 
     const makeReply = replies.map((reply) => {
       const divReply = document.createElement("DIV");
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       replayInfo.appendChild(span);
 
       span = document.createElement("SPAN");
-      span.textContent = `작성자  : ${reply.r_nickname}`;
+      span.textContent = `작성자  : ${reply.nickname}`;
       replayInfo.appendChild(span);
 
       divContent = document.createElement("DIV");
