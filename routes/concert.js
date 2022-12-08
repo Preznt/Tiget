@@ -32,8 +32,6 @@ router.get("/genre/:gcategory", async (req, res) => {
   try {
     const concert = await ConcertGenre.findAll({
       where: { genre_code: gcategory },
-      order: [["concert_views", "DESC"]],
-      limit: 4,
     });
     // console.log(concert);
     res.json(concert);
