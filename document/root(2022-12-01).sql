@@ -46,8 +46,7 @@ concert_place varchar(225) not null,
 concert_loc varchar(20) not null,
 concert_ticketing varchar(225),
 concert_type varchar(20),
-concert_views int,
-concert_artist varchar(225)
+concert_views int default 0
 );
 
 -- 공연-장르
@@ -70,8 +69,7 @@ artist_code bigint auto_increment primary key,
 artist_name	varchar(125)	NOT NULL,
 artist_type	varchar(20),
 artist_img varchar(255),	
-artist_debut	varchar(12),	
-artist_genre	varchar(20)	
+artist_debut	varchar(12)
 );
 
 -- 아티스트-장르
