@@ -12,8 +12,12 @@ router.get("/", async (req, res) => {
     order: [["concert_views", "DESC"]],
   });
   // console.log(concert);
+  const rConcert = await Concert.findAll({
+    where: { concert_loc: "서울" },
+    order: [["concert_views", "DESC"]],
+  });
 
-  res.render("concert", { concert });
+  res.render("concert", { concert, rConcert });
 });
 
 router.get("/:category", async (req, res) => {
@@ -61,6 +65,10 @@ router.get("/recommend/:category", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.get("/:region", async (req, res) => {
+  const region = req.params.region;
 });
 
 export default router;

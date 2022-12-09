@@ -11,7 +11,6 @@ block content
                 h1 공연
                 button.active(data-index="0") 국내
                 button(data-index="1") 내한
-                button(data-index="2") 페스티벌
         article.concert.banner
             div.image-view
                 img(src="//image.toast.com/aaaaab/ticketlink/TKL_6/TopBanner_개와고양이의시간.jpg")
@@ -48,8 +47,14 @@ block content
             div.region.poster
                 - for(let i = 0; i < 5 ; i++)
                     a(href="")
-                        img(src=`${concert[i].concert_poster}`, alt="")
+                        img(src=`${rConcert[i].concert_poster}`, alt="")
                         div
-                            div.title= concert[i].concert_name
-                            div.region= concert[i].concert_loc
-                            div.date= concert[i].start_date + "-" + concert[i].end_date               
+                            div.title= rConcert[i].concert_name
+                            div.date= rConcert[i].start_date + "-" + rConcert[i].end_date
+            div.region.poster
+                - for(let i = 5; i < 10 ; i++)
+                    a(href="")
+                        img(src=`${rConcert[i].concert_poster}`, alt="")
+                        div
+                            div.title= rConcert[i].concert_name
+                            div.date= rConcert[i].start_date + "-" + rConcert[i].end_date               

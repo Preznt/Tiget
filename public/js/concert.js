@@ -19,11 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
   rheaderBox?.addEventListener("click", (e) => {
     const btn = e.target;
     const btnIndex = btn.dataset.index;
+    const region = btn.textContent;
     if (btn.tagName === "BUTTON") {
       for (let i = 0; i < rheaderBtns.length; i++) {
         rheaderBtns[i].classList.remove("active");
       }
       rheaderBtns[btnIndex].classList.add("active");
     }
+    fetch(`/concert/${region}`)
+      .then((res) => res.json)
+      .then((region) => console.log(region));
   });
 });
