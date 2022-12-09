@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   boardSort?.addEventListener("click", async (b) => {
     const target = b.target;
+    const option = {
+      method: "POST",
+    };
     if (target.tagName === "DIV") {
       let loadFor = target.textContent;
       console.log(loadFor);

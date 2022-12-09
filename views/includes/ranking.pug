@@ -16,18 +16,18 @@ section.performance.info#ranking
                 div.poster1
                     - for(let i = 0; i < 2; i++)
                         a(href="")
-                            img(src=`${concerts[i].concert_poster}`, alt="")
+                            //- img(src=`${concerts[i].concert_poster}`, alt="")
                             div
-                                div.title= concerts[i].concert_name
-                                div.date= concerts[i].start_date + "-" + concerts[i].end_date
+                                //- div.title= concerts[i].concert_name
+                                //- div.date= concerts[i].start_date + "-" + concerts[i].end_date
     
                 div.poster2
                     - for(let i = 2; i < 4; i++)
                         a(href="")
-                            img(src=`${concerts[i].concert_poster}`, alt="")
+                            //- img(src=`${concerts[i].concert_poster}`, alt="")
                             div
-                                div.title= concerts[i].concert_name
-                                div.date= concerts[i].start_date + "-" + concerts[i].end_date
+                                //- div.title= concerts[i].concert_name
+                                //- div.date= concerts[i].start_date + "-" + concerts[i].end_date
     div.recommend
         div.recommend-title 추천 공연
         div.sub-title
@@ -37,13 +37,13 @@ section.performance.info#ranking
         div.detail 
             div.big-poster
                 a(href="")
-                    img(src=`${recommends[0].concert_poster}`, alt="")
-                    div.title= recommends[0].concert_name
-                    div.date= recommends[0].start_date + "-" + recommends[0].end_date
+                    //- img(src=`${recommends[0].concert_poster}`, alt="")
+                    //- div.title= recommends[0].concert_name
+                    //- div.date= recommends[0].start_date + "-" + recommends[0].end_date
             div.sub-posters
                 - for(let i = 1; i < 3; i++)
                         a(href="")
-                            img(src=`${recommends[i].concert_poster}`, alt="")
+                            //- img(src=`${recommends[i].concert_poster}`, alt="")
                             div
-                                div.title= recommends[i].concert_name
-                                div.date= recommends[i].start_date + "-" + recommends[i].end_date
+                                //- div.title= recommends[i].concert_name
+                                //- div.date= recommends[i].start_date + "-" + recommends[i].end_date

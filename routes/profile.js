@@ -40,10 +40,13 @@ router.post("/", upload.single("b_upfile"), async (req, res) => {
   }
   try {
     user = await userDB.findOne({ where: { username: emailID } });
-    return res.render("mypage", { body: "users", user });
+
+    return res.json("mypage", { body: "users", user });
   } catch (err) {
     console.error(err);
   }
 });
+
+router.post("/:userID", async (req, res) => {});
 
 export default router;

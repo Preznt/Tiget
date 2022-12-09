@@ -1,8 +1,6 @@
 import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
-import { Sequelize } from "sequelize";
-import session from "express-session";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -70,22 +68,19 @@ router.get("/board/:id", async (req, res) => {
 router.post("/board/:boardSeq", async (req, res) => {
   const { boardSeq, replyContent } = req.body;
   userID = req.session.user;
-  // console.log(userID);
-  // console.log(req.body);
-  // console.log(boardSeq, replyContent);
-  console.log(userID);
 
-  // console.log(reply);
-
-  if (userID == undefined) {
-    // res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+  if (!userID) {
+    return res.status(200);
+    // res.writeHead(200, { "Content-Type": "text/plain" });
     // res.write("<script>alert('로그인이 필요한 서비스입니다.')</script>");
     // return res.write("<script>location.href='/main'</script>");
-    res.status(401).send("로그인이 필요합니다");
+  } else {
+    console.log(userID);
   }
+
   const reply = {
     board_code: boardSeq,
-    nickname: userID.nickname,
+    nickname: userID.b_nickname,
     r_content: replyContent,
     username: userID.username,
     b_img: "",
@@ -93,9 +88,9 @@ router.post("/board/:boardSeq", async (req, res) => {
     r_modified_date: "",
     r_remove_date: "",
   };
-
+  console.log(reply);
   try {
-    const result = await Reply.create(reply);
+    await Reply.create(reply);
   } catch (err) {
     console.log(err);
   }

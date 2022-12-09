@@ -17,14 +17,21 @@
   display: inline-block;
 }
 .emailid {
+  width: 300px;
   position: absolute;
   top: 5%;
   left: 35%;
+  border: none;
+  outline: none;
+  background-color: inherit;
 }
 .nickname {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 35%;
+  border: none;
+  outline: none;
+  background-color: inherit;
 }
 div.profilebutton {
   position: absolute;
@@ -43,4 +50,24 @@ button.profilebutton {
 button.profilebutton:hover {
   background-color: black;
   color: white;
+}
+.profilebutton {
+  cursor: pointer;
+  padding: 2px;
+  font-weight: 900;
+}
+.profilebutton.myPost {
+  position: absolute;
+  top: 35%;
+  left: 61%;
+}
+.profilebutton.myReply {
+  position: absolute;
+  top: 40%;
+  left: 61%;
+}
+.myGenre {
+  position: absolute;
+  top: 45%;
+  left: 61%;
 }

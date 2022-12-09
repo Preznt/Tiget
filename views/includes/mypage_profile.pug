@@ -1,11 +1,16 @@
 link(rel="stylesheet" href="/css/mypage/profile.css")
-script(src="/js/profile.js")
+
 
 form.setinline(method="post" enctype="multipart/form-data")
-    img.profile.img(src=(`/uploads/${user.profile_image}`) ||  "src=(`/uploads/profile.png`") 
+    img.profile.img(src=(`/uploads/${user.profile_image}`) || "" onerror="javascript:this.src='../../images/profile.png'") 
     form(method="POST", enctype="multipart/form-data" )
-        input.emailid(name="username" value=`${user.username}` readonly)
-        input.nickname(value=`${user.nickname}` readonly)
+        input.emailid(name="username" value=`이메일 ID : ${user.username}` readonly)
+        input.nickname(value=`닉네임 : ${user.nickname}` readonly)
         div.profilebutton        
             input(type="file", name="b_upfile", accept="image/*")#b_upfile
         button.profilebutton(type="submit" value="image") 프로필이미지 변경
+    .myGenre `선호장르`
+    .profilebutton.myPost 내가 쓴 글 보러가기
+    .profilebutton.myReply 내가 쓴 댓글 보러가기
+
+script(src="/js/profile.js")
