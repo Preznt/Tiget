@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const concert = ["국내", "내한", "페스티벌"];
 
   // 공연, 장르별 클릭시 카테고리 변경
-  titleBox?.addEventListener("click", (e) => {
+  titleBox?.addEventListener("click", async (e) => {
     const event = e.target;
     if (event.tagName === "BUTTON") {
       const titleName = event.textContent;
@@ -37,31 +37,32 @@ document.addEventListener("DOMContentLoaded", () => {
           btn.id = genreCode[i];
           subtitleBox.appendChild(btn);
         }
-        fetch(`/concert/genre/pop`)
-          .then((res) => res.json())
-          .then((concerts) => {
-            // console.log(concerts);
-            dataActive(concerts);
-          });
-      } else {
-        btnPerform.classList.remove("non-active");
-        btnGenre.style.color = "#ccc";
-        subtitleBox.textContent = "";
-
-        // 카테고리 생성
-        for (let i = 0; i < concert.length; i++) {
-          const btn = document.createElement("BUTTON");
-          btn.textContent = concert[i];
-          btn.dataset.index = i + 1;
-          subtitleBox.appendChild(btn);
-        }
-        fetch(`/concert/국내`)
-          .then((res) => res.json())
-          .then((concerts) => {
-            // console.log(concerts);
-            dataActive(concerts);
-          });
+        const response = await fetch(`/concert/genre/G0001`);
+        const joinGenre = await response.json();
+        const gConcerts = await joinGenre.map((concert) => {
+          return concert.f_concert;
+        });
+        console.log(gConcerts);
+        dataActive(gConcerts);
       }
+    } else {
+      btnPerform.classList.remove("non-active");
+      btnGenre.style.color = "#ccc";
+      subtitleBox.textContent = "";
+
+      // 카테고리 생성
+      for (let i = 0; i < concert.length; i++) {
+        const btn = document.createElement("BUTTON");
+        btn.textContent = concert[i];
+        btn.dataset.index = i + 1;
+        subtitleBox.appendChild(btn);
+      }
+      fetch(`/concert/국내`)
+        .then((res) => res.json())
+        .then((concerts) => {
+          // console.log(concerts);
+          dataActive(concerts);
+        });
     }
 
     subtitleBtns = document.querySelectorAll(".ranking div.sub-title button");
@@ -80,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //  카테고리별로 데이터 보여주기
   const dataActive = (concerts) => {
+    console.log(concerts);
     const posterLinks = concerts.map((concert) => {
       return concert.concert_poster;
     });
@@ -91,9 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const concertdates = concerts.map((concert) => {
       return `${concert.start_date} - ${concert.end_date}`;
     });
-
-    // console.log(concertdates);
-
+    console.log(posterLinks);
     posterLinks.forEach((poster, index) => {
       rankingImgs[index].src = poster;
     });
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btnActive(event);
       const category = event.textContent;
       const gCategory = event.id;
-      // console.log(gCategory);
+      console.log(gCategory);
 
       if (event.className.indexOf("genre-rank") > 0) {
         fetch(`/concert/genre/${gCategory}`)

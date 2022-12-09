@@ -4,7 +4,7 @@ import DB from "../models/index.js";
 const router = express.Router();
 
 const Concert = DB.models.concert_info;
-const ConcertGenre = DB.models.concert_genre;
+const ConcertGenre = DB.models.genre_concert_model;
 
 router.get("/", (req, res) => {
   res.render("concert");
@@ -28,17 +28,13 @@ router.get("/:category", async (req, res) => {
 
 router.get("/genre/:gcategory", async (req, res) => {
   const gcategory = req.params.gcategory;
+  console.log(gcategory);
   try {
     const concert = await ConcertGenre.findAll({
-      include: {
-        model: Concert,
-        where: {
-          genre_code: gcategory,
-        },
-        required: false,
-      },
+      where: { genre_code: gcategory },
+      include: "f_concert",
+      required: false,
     });
-    // console.log(concert);
     res.json(concert);
   } catch (err) {
     console.log(err);
