@@ -1,11 +1,8 @@
 import express from "express";
-import sequelize from "sequelize";
-import { QueryTypes } from "sequelize";
 import DB from "../models/index.js";
-const Holiday = DB.models.holiday;
 const Concert = DB.models.concert_info;
-const Artist = DB.models.artist;
-const ConArt = DB.models.concert_artist_model;
+const Holiday = DB.models.holiday;
+const Genre = DB.models.genre;
 
 const router = express.Router();
 
@@ -30,23 +27,19 @@ router.get("/", async (req, res, next) => {
     { eng: "gyeongnam", kor: "경남" },
     { eng: "jeju", kor: "제주" },
   ];
-  const genreData = [
-    { id: "pop", name: "Pop" },
-    { id: "rock", name: "Rock" },
-    { id: "electronic", name: "Electronic" },
-    { id: "hiphop", name: "Hip-Hop" },
-    { id: "rnb", name: "R&B" },
-    { id: "jazz", name: "Jazz" },
-    { id: "classic", name: "Classic" },
-  ];
 
-  const query = `SELECT concert_artist.concert_code, concert_info.concert_name, concert_info.concert_poster, concert_info.start_date, concert_info.end_date, artist.artist_name 
-  FROM concert_artist
-  LEFT JOIN artist
-  ON concert_artist.artist_code = artist.artist_code
-  LEFT JOIN concert_info
-  ON concert_info.concert_code = concert_artist.concert_code;`;
-  const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
+  const conData = await Concert.findAll({
+    attributes: [
+      "concert_code",
+      "concert_name",
+      "concert_poster",
+      "start_date",
+      "end_date",
+      "concert_place",
+      "concert_ticketing",
+    ],
+  });
+  const genreData = await Genre.findAll();
 
   const concerts = await Concert.findAll({
     where: { concert_type: "국내" },

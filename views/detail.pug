@@ -1,35 +1,49 @@
 extends layout 
 block content
     link(rel="stylesheet", href="/css/detail.css")
-    //- let id= !{JSON.stringify(concert)};
     section.scroll.detail
+        div.detail.etc 
+            span.type= conInfo.concert_type            
+            span.views 조회수 #{conInfo.concert_views}
         div.detail.top
             div.top.img
-                img(src=`${concert.url}`)
+                img(src=`${conInfo.concert_poster}`)
             div.top.content
                 div.top.title 
-                    h2= concert.title
-                    span.genre= concert.genre
-                    button(type="button")#ticketing 예매하기 
+                    h2= conInfo.concert_name
+                    span.type= conInfo.concert_loc
+                    a(href=`${conInfo.concert_ticketing}`, target="_blank")#ticketing
+                        i(class="fa-solid fa-ticket") 예매하기 
                 div.top.desc
                     div.place.label 장소
-                    div.place= concert.place
+                    div.place= conInfo.concert_place
                     div.time.label 관람시간
-                    div.time= concert.time
+                    div.time
                     div.date.label 기간
                     div.date 
-                        span.date.from= concert.start
+                        span.date.from= conInfo.start_date
                         span.date.dash &nbsp;-&nbsp;
-                        span.date.to= concert.end
+                        span.date.to= conInfo.end_date
                     div.rate.label 관람등급
-                    div.rate= concert.rate
-                    div.price.label 가격
-                    div.price= concert.price
+                    div.rate
+                    div.genre.label 장르
+                    div.genre
                     div.discount.label 할인정보
-                    div.discount= concert.discount
+                    div.discount
         div.detail.bottom
-            h2 상세정보
+            h2.artist.detail 가수정보
             div.bottom.desc
+                each artist of artInfo
+                    div.artist.info
+                        img(src=`${artist.artist_img}`).artist.img
+                        div.artist.title
+                            span.artist.name= artist.artist_name
+                            span.artist.type= artist.artist_type 
+                        div.artist.desc
+                            span.label 데뷔년도
+                            span.artist.debut= artist.artist_debut
+                            span.label 장르
+                            span.artist.genre= artist.genre_name
 
 
 

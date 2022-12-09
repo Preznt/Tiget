@@ -44,15 +44,13 @@ cf)
 .concert.list_container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, 300px);
   justify-content: center;
   gap: 15px;
 }
 .list_box {
   width: 100%;
   padding: 15px 10px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,6 +82,7 @@ cf)
 }
 .list_box .desc > * {
   margin: 2px 0;
+  word-break: keep-all;
 }
 .list_box .title {
   font-size: 1.2em;
