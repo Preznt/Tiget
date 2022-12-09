@@ -43,10 +43,6 @@ div.title button:hover {
   color: #aaa;
 }
 
-div.title button:focus {
-  color: black;
-}
-
 /* div.title button:focus {
   color: black;
 } */
@@ -59,7 +55,7 @@ div.sub-title button {
   background-color: white;
   border: 1px solid #ddd;
 }
-section.performance.info button.active {
+div.sub-title button.active {
   background-color: black;
   color: white;
 }

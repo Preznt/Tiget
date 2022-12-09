@@ -1,12 +1,11 @@
 section.concert.content {
-  width: 70%;
+  width: 65%;
   margin: 110px auto;
   display: grid;
-  grid-template-rows: 0.5fr 1.7fr 2fr 3fr 3fr;
+  grid-template-rows: 0.5fr 1.7fr 2fr 2fr;
 }
 
-section.concert.content h1,
-h2 {
+section.concert.content h2 {
   font-size: 35px;
   padding: 10px;
   border-bottom: 1px solid #ccc;
@@ -17,64 +16,74 @@ section.concert.content h4 {
   padding: 10px;
 }
 
+section.concert.content button {
+  padding-top: 20px;
+  margin-left: 20px;
+  font-size: 18px;
+  color: #aaa;
+  background-color: transparent;
+}
+
+section.concert.content button:hover {
+  color: black;
+}
+
+section.concert.content button.active {
+  color: black;
+}
+
+/* header 부분 */
+.header.box,
+.region.box {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.header.box button:nth-of-type(1),
+.region.box button:nth-of-type(1) {
+  margin-left: auto;
+}
+
+.header.box h1,
+.region.box h1 {
+  font-size: 35px;
+  padding: 10px;
+}
+
+/* 배너 부분 */
 article.concert.banner {
   display: grid;
   grid-template-columns: 4fr 1fr;
 }
 
-article.concert.ranking {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-}
+/* 공연 정보 부분 */
 
-article.concert.ranking img {
-  width: 180px;
-  height: 250px;
+.concert.info img,
+.concert.region img {
+  width: 200px;
+  height: 300;
   border-radius: 1em;
-  margin-bottom: 10px;
 }
 
-div.concert.title {
-  display: flex;
-  margin: 0px 8px 37px 8px;
-  border-bottom: 1px solid #ccc;
+div.concert.poster,
+div.region.poster {
+  white-space: nowrap;
 }
 
-div.concert.sub {
-  margin-left: auto;
-}
-
-/* div.full.ranking {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-} */
-
-div.concert.poster a {
+div.concert.poster a,
+div.region.poster a {
   display: inline-block;
-  margin: 0 9px;
-  width: 180px;
+  margin: 35px 30px 10px 2px;
+  width: 200px;
 }
 
-div.concert.poster div.title {
+div.concert.poster div.title,
+div.region.poster div.title {
   font-size: 20px;
   font-weight: 900;
-}
-div.concert.poster div.title {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-article.concert.ranking button {
-  padding: 10px;
-  font-size: 15px;
-  background: transparent;
-  margin: 20px 7px 0 7px;
-}
-
-/* WEEKLY RANK 화면 */
-
-div.weekly.form {
-  /* background-color: white; */
-  border: 1px solid black;
-}
+/* 지역별 부분 */

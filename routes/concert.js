@@ -6,13 +6,19 @@ const router = express.Router();
 const Concert = DB.models.concert_info;
 const ConcertGenre = DB.models.genre_concert_model;
 
-router.get("/", (req, res) => {
-  res.render("concert");
+router.get("/", async (req, res) => {
+  const concert = await Concert.findAll({
+    where: { concert_type: "국내" },
+    order: [["concert_views", "DESC"]],
+  });
+  // console.log(concert);
+
+  res.render("concert", { concert });
 });
 
 router.get("/:category", async (req, res) => {
   const category = req.params.category;
-  console.log(category);
+  // console.log(category);
   try {
     const concert = await Concert.findAll({
       where: { concert_type: category },
@@ -26,12 +32,12 @@ router.get("/:category", async (req, res) => {
   }
 });
 
-router.get("/genre/:gcategory", async (req, res) => {
-  const gcategory = req.params.gcategory;
-  console.log(gcategory);
+router.get("/genre/:gCategory", async (req, res) => {
+  const gCategory = req.params.gCategory;
+  // console.log(gCategory);
   try {
     const concert = await ConcertGenre.findAll({
-      where: { genre_code: gcategory },
+      where: { genre_code: gCategory },
       include: "f_concert",
       required: false,
     });
@@ -43,7 +49,7 @@ router.get("/genre/:gcategory", async (req, res) => {
 
 router.get("/recommend/:category", async (req, res) => {
   const category = req.params.category;
-  console.log(category);
+  // console.log(category);
   try {
     const concert = await Concert.findAll({
       where: { concert_type: category },

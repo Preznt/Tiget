@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const btn = document.createElement("BUTTON");
           btn.textContent = genre[i];
           btn.dataset.index = i + 1;
-          btn.classList.add("genre-rank");
           btn.id = genreCode[i];
           subtitleBox.appendChild(btn);
         }
@@ -44,25 +43,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         console.log(gConcerts);
         dataActive(gConcerts);
-      }
-    } else {
-      btnPerform.classList.remove("non-active");
-      btnGenre.style.color = "#ccc";
-      subtitleBox.textContent = "";
+      } else {
+        btnPerform.classList.remove("non-active");
+        btnGenre.style.color = "#ccc";
+        subtitleBox.textContent = "";
 
-      // 카테고리 생성
-      for (let i = 0; i < concert.length; i++) {
-        const btn = document.createElement("BUTTON");
-        btn.textContent = concert[i];
-        btn.dataset.index = i + 1;
-        subtitleBox.appendChild(btn);
+        // 카테고리 생성
+        for (let i = 0; i < concert.length; i++) {
+          const btn = document.createElement("BUTTON");
+          btn.textContent = concert[i];
+          btn.dataset.index = i + 1;
+          subtitleBox.appendChild(btn);
+        }
+        fetch(`/concert/국내`)
+          .then((res) => res.json())
+          .then((concerts) => {
+            // console.log(concerts);
+            dataActive(concerts);
+          });
       }
-      fetch(`/concert/국내`)
-        .then((res) => res.json())
-        .then((concerts) => {
-          // console.log(concerts);
-          dataActive(concerts);
-        });
     }
 
     subtitleBtns = document.querySelectorAll(".ranking div.sub-title button");
@@ -72,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 공연별 카테고리 버튼 클릭했을 때 css 변경
   const btnActive = (event) => {
     const btnIndex = event.dataset.index;
-    console.log(btnIndex);
+    // console.log(btnIndex);
     for (let btn of subtitleBtns) {
       btn.classList.remove("active");
     }
@@ -82,29 +81,25 @@ document.addEventListener("DOMContentLoaded", () => {
   //  카테고리별로 데이터 보여주기
   const dataActive = (concerts) => {
     console.log(concerts);
-    const posterLinks = concerts.map((concert) => {
-      return concert.concert_poster;
-    });
 
-    const concertTitles = concerts.map((concert) => {
-      return concert.concert_name;
-    });
+    const length = rankingTitles.length;
+    for (let i = 0; i < length; i++) {
+      const concert = concerts[i];
+      rankingTitles[i].textContent = concert.concert_name;
+      rankingImgs[i].src = concert.concert_poster;
+      rankingDates[
+        i
+      ].textContent = `${concert.start_date} - ${concert.end_date}`;
+    }
 
-    const concertdates = concerts.map((concert) => {
-      return `${concert.start_date} - ${concert.end_date}`;
-    });
-    console.log(posterLinks);
-    posterLinks.forEach((poster, index) => {
-      rankingImgs[index].src = poster;
-    });
-
-    concertTitles.forEach((title, index) => {
-      rankingTitles[index].textContent = title;
-    });
-
-    concertdates.forEach((date, index) => {
-      rankingDates[index].textContent = date;
-    });
+    // rankingTitles.map((title, index) => {
+    //   const concert = concerts[index];
+    //   title.textContent = concert;
+    //   rankingImgs[index].src = concert.concert_poster;
+    //   rankingDates[
+    //     index
+    //   ].textContent = `${concert.start_date} - ${concert.end_date}`;
+    // });
   };
 
   // 해당 카테고리에 대한 데이터 가져오기
@@ -116,17 +111,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const gCategory = event.id;
       console.log(gCategory);
 
-      if (event.className.indexOf("genre-rank") > 0) {
+      if (gCategory) {
         fetch(`/concert/genre/${gCategory}`)
           .then((res) => res.json())
-          .then((genre) => console.log(genre));
+          .then((genre) =>
+            genre.map((concert) => {
+              return concert.f_concert;
+            })
+          )
+          .then((concerts) => dataActive(concerts));
+      } else {
+        fetch(`/concert/${category}`)
+          .then((res) => res.json())
+          .then((concerts) => {
+            // console.log(concerts);
+            dataActive(concerts);
+          });
       }
-      fetch(`/concert/${category}`)
-        .then((res) => res.json())
-        .then((concerts) => {
-          // console.log(concerts);
-          dataActive(concerts);
-        });
     }
   });
   // };
