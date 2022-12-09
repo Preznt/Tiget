@@ -20,7 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
       this.modal.classList.remove("visible");
       bgBlur.classList.remove("active");
     },
-    showDetail(code, data) {
+    showDetail(code, list) {
+      // 클릭한 콘서트의 code 와 일치하는 데이터만 배열로 반환
+      let data = list.filter((e) => {
+        return e.concert_code == code;
+      });
+      data = data[0];
+
       this.image.src = `${data.concert_poster}`;
       this.name.textContent = data.concert_name;
       this.start.textContent = data.start_date;
@@ -53,33 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.close();
   });
 
-  const filterData = (array, code, column) => {
-    // 클릭한 콘서트의 코드와 일치하는 데이터 반환
-    let data = array.filter((data) => {
-      if (data.concert_code === code) return data;
-    });
-    // 만약 가수가 많다면(data의 요소가 2개 이상)
-    // 해당 공연의 가수 리스트를 배열에 저장 후
-    // 첫번째 요소의 artist_name 속성에 배열 할당
-    let arr = [];
-    if (data.length > 1) {
-      for (let i of data) {
-        if (!arr.includes(i[column])) {
-          arr = arr.concat(i[column]);
-        }
-      }
-      data[0][column] = arr;
-    }
-    data = data[0];
-    return data;
-  };
-
   tbody?.addEventListener("click", async (e) => {
     const target = e.target;
     if (target.className === "schedule") {
       const thisCode = target.dataset.code;
-      const thisData = filterData(conData, thisCode, "artist_name");
-      modal.showDetail(thisCode, thisData);
+      modal.showDetail(thisCode, conData);
     }
   });
 });

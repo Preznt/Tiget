@@ -1,7 +1,6 @@
 import express from "express";
-import sequelize from "sequelize";
-import { QueryTypes } from "sequelize";
 import DB from "../models/index.js";
+const Concert = DB.models.concert_info;
 const Holiday = DB.models.holiday;
 const Genre = DB.models.genre;
 
@@ -29,30 +28,16 @@ router.get("/", async (req, res, next) => {
     { eng: "jeju", kor: "제주" },
   ];
 
-  const query = `SELECT concert_artist.concert_code, concert_info.concert_name, concert_info.concert_poster, concert_info.start_date, concert_info.end_date, concert_info.concert_ticketing, artist.artist_name 
-  FROM concert_artist
-  INNER JOIN artist 
-  ON concert_artist.artist_code = artist.artist_code
-  INNER JOIN concert_info 
-  ON concert_info.concert_code = concert_artist.concert_code;`;
-
-  // const conData = await ConArt.findAll({
-  //   attributes: ["concert_code"],
-  //   include: [
-  //     { model: Artist, attributes: ["artist_name"] },
-  //     {
-  //       model: Concert,
-  //       attributes: [
-  //         "concert_name",
-  //         "concert_poster",
-  //         "start_date",
-  //         "end_date",
-  //       ],
-  //     },
-  //   ],
-  // });
-
-  const conData = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
+  const conData = await Concert.findAll({
+    attributes: [
+      "concert_code",
+      "concert_name",
+      "concert_poster",
+      "start_date",
+      "end_date",
+      "concert_ticketing",
+    ],
+  });
   const genreData = await Genre.findAll();
 
   return res.render("main", {
