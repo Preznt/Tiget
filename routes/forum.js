@@ -15,8 +15,14 @@ const USER_REPLY = boardList.models.user_reply;
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("포럼입니다");
+router.get("/", async (req, res) => {
+  try {
+    const result = await Board.findAll({ include: "f_reply", limit: 15 });
+    console.log(result);
+    return res.json(result);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 let userID;
@@ -107,10 +113,11 @@ router.post("/board/:boardSeq", async (req, res) => {
 
 router.get("/:loadFor", async (req, res) => {
   let loadFor = req.params.loadFor;
+
   try {
     const boardResult = await Board.findAll({
       where: { sort_board: loadFor },
-      limit: 14,
+      limit: 15,
       include: "f_reply",
     });
     let replies = [];
