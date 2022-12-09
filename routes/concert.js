@@ -4,15 +4,25 @@ import DB from "../models/index.js";
 const router = express.Router();
 
 const Concert = DB.models.concert_info;
-const ConcertGenre = DB.models.concert_genre;
+const ConcertGenre = DB.models.genre_concert_model;
 
-router.get("/", (req, res) => {
-  res.render("concert");
+router.get("/", async (req, res) => {
+  const concert = await Concert.findAll({
+    where: { concert_type: "국내" },
+    order: [["concert_views", "DESC"]],
+  });
+  // console.log(concert);
+  const rConcert = await Concert.findAll({
+    where: { concert_loc: "서울" },
+    order: [["concert_views", "DESC"]],
+  });
+
+  res.render("concert", { concert, rConcert });
 });
 
 router.get("/:category", async (req, res) => {
   const category = req.params.category;
-  console.log(category);
+  // console.log(category);
   try {
     const concert = await Concert.findAll({
       where: { concert_type: category },
@@ -26,16 +36,15 @@ router.get("/:category", async (req, res) => {
   }
 });
 
-router.get("/genre/:gcategory", async (req, res) => {
-  const gcategory = req.params.category;
-  console.log(gcategory);
+router.get("/genre/:gCategory", async (req, res) => {
+  const gCategory = req.params.gCategory;
+  // console.log(gCategory);
   try {
     const concert = await ConcertGenre.findAll({
-      where: { genre_code: gcategory },
-      order: [["concert_views", "DESC"]],
-      limit: 4,
+      where: { genre_code: gCategory },
+      include: "f_concert",
+      required: false,
     });
-    // console.log(concert);
     res.json(concert);
   } catch (err) {
     console.log(err);
@@ -44,7 +53,7 @@ router.get("/genre/:gcategory", async (req, res) => {
 
 router.get("/recommend/:category", async (req, res) => {
   const category = req.params.category;
-  console.log(category);
+  // console.log(category);
   try {
     const concert = await Concert.findAll({
       where: { concert_type: category },
@@ -56,6 +65,10 @@ router.get("/recommend/:category", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.get("/:region", async (req, res) => {
+  const region = req.params.region;
 });
 
 export default router;

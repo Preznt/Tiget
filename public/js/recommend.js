@@ -24,31 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //  카테고리별로 데이터 보여주기
   const dataActive = (recommends) => {
-    const posterLinks = recommends.map((recommend) => {
-      return recommend.concert_poster;
-    });
-
-    const concertTitles = recommends.map((recommend) => {
-      return recommend.concert_name;
-    });
-
-    const concertdates = recommends.map((recommend) => {
-      return `${recommend.start_date} - ${recommend.end_date}`;
-    });
-
-    // console.log(concertdates);
-
-    posterLinks.forEach((poster, index) => {
-      recommendImgs[index].src = poster;
-    });
-
-    concertTitles.forEach((title, index) => {
-      recommendTitles[index].textContent = title;
-    });
-
-    concertdates.forEach((date, index) => {
-      recommendDates[index].textContent = date;
-    });
+    const length = recommendTitles.length;
+    for (let i = 0; i < length; i++) {
+      const recommend = recommends[i];
+      recommendTitles[i].textContent = recommend.concert_name;
+      recommendImgs[i].src = recommend.concert_poster;
+      recommendDates[
+        i
+      ].textContent = `${recommend.start_date} - ${recommend.end_date}`;
+    }
   };
 
   // 해당 카테고리에 대한 데이터 가져오기
