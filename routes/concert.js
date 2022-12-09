@@ -27,11 +27,16 @@ router.get("/:category", async (req, res) => {
 });
 
 router.get("/genre/:gcategory", async (req, res) => {
-  const gcategory = req.params.category;
-  console.log(gcategory);
+  const gcategory = req.params.gcategory;
   try {
     const concert = await ConcertGenre.findAll({
-      where: { genre_code: gcategory },
+      include: {
+        model: Concert,
+        where: {
+          genre_code: gcategory,
+        },
+        required: false,
+      },
     });
     // console.log(concert);
     res.json(concert);

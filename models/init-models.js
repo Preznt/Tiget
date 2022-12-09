@@ -32,6 +32,15 @@ const initModels = (sequelize) => {
 
   reply.belongsTo(user, { as: "f_user", foreignKey: "nickname" });
   user.hasMany(reply, { as: "f_reply", foreignKey: "r_nickname" });
+
+  genre_concert_model.belongsTo(concert_info, {
+    as: "f_genre",
+    foreignKey: "genre_code",
+  });
+  concert_info.hasMany(genre_concert_model, {
+    as: "f_concert",
+    foreignKey: "concert_code",
+  });
   return {
     holiday,
     artist_genre,
