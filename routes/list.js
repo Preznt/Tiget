@@ -7,15 +7,16 @@ const router = express.Router();
 
 const Chkcond = (data) => {
   let query = `SELECT *
-  FROM concert_artist ConArt
-    INNER JOIN concert_info Con
-      ON ConArt.concert_code = Con.concert_code
+  FROM concert_info Con
+    INNER JOIN concert_artist ConArt
+      ON Con.concert_code = ConArt.concert_code
     INNER JOIN artist Art
       ON ConArt.artist_code = Art.artist_code
-    INNER JOIN artist_genre ArtGen
-      ON Art.artist_code = ArtGen.artist_code
+    INNER JOIN genre_concert GenCon
+      ON Con.concert_code = GenCon.concert_code
     INNER JOIN genre Gen
-      ON ArtGen.genre_code = Gen.genre_code WHERE `;
+      ON GenCon.genre_code = Gen.genre_code 
+  WHERE `;
 
   let addQuery = [];
   if (data.start_date && data.end_date) {
@@ -34,8 +35,8 @@ const Chkcond = (data) => {
   if (data.concert_loc) {
     addQuery.push(`concert_loc IN (:loc)`);
   }
-  if (data.genre_name) {
-    addQuery.push(`genre_name IN (:genre)`);
+  if (data.genre_code) {
+    addQuery.push(`GenCon.genre_code IN (:genre)`);
   }
   addQuery = addQuery.join(` AND `);
   query += addQuery;
@@ -53,7 +54,7 @@ router.post("/", async (req, res) => {
     concert_place,
     artist_name,
     concert_loc,
-    genre_name,
+    genre_code,
   } = data;
 
   const query = Chkcond(data);
@@ -64,8 +65,8 @@ router.post("/", async (req, res) => {
       conName: `%${concert_name}%`,
       conPlace: `%${concert_place}%`,
       artName: `%${artist_name}%`,
-      loc: `${concert_loc}`,
-      genre: `${genre_name}`,
+      loc: concert_loc,
+      genre: genre_code,
     },
     type: QueryTypes.SELECT,
   });

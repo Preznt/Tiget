@@ -52,7 +52,7 @@ section.calendar.container#main2
           label(for="input_search_genre") 장르
             div.search_genre_dropdown_box
               for genre in genreData
-                input(type="checkbox", name="genre_name", value=`${genre.genre_code}`, id=`${genre.genre_name}`)
+                input(type="checkbox", name="genre_code", value=`${genre.genre_code}`, id=`${genre.genre_name}`)
                 label(for=`${genre.genre_name}`)= genre.genre_name
         button(type="submit")#btn_search_schedule 검색
     if calendar === "schedule"
