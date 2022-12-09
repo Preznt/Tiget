@@ -6,11 +6,8 @@ const Concert = DB.models.concert_info;
 
 const router = express.Router();
 
-// const Artist = DB.models.artist;
-// const ConArt = DB.models.concert_artist_model;
-// const Genre = DB.models.genre;
-
-const filterData = (array, column, group) => {
+// 콘서트와 아티스트의 장르를 배열로 통합하는 함수
+const makeArray = (array, column, group) => {
   let result = [];
   let lastgroupValue = "";
 
@@ -40,44 +37,62 @@ const filterData = (array, column, group) => {
 };
 
 router.get("/:conCode", async (req, res) => {
-  const code = req.params.conCode;
+  try {
+    const code = req.params.conCode;
+    console.log(code);
 
-  // 조회수 증가
-  const updateViews = await Concert.increment(["concert_views"], {
-    by: 1,
-    where: { concert_code: code },
-  });
+    // 조회수 증가
+    // const updateViews = await Concert.increment(["concert_views"], {
+    //   by: 1,
+    //   where: { concert_code: code },
+    // });
 
-  const query = `SELECT *
-  FROM concert_artist ConArt
-  INNER JOIN concert_info Con
-  ON ConArt.concert_code = Con.concert_code
-  INNER JOIN artist Art
-  ON ConArt.artist_code = Art.artist_code
-  INNER JOIN artist_genre ArtGen
-  ON Art.artist_code = ArtGen.artist_code
-  INNER JOIN genre Gen
-  ON ArtGen.genre_code = Gen.genre_code
-  WHERE Con.concert_code = ${code}
-  `;
+    // const conQuery = `
+    // SELECT Con.concert_type, Con.concert_views, Con.concert_poster,
+    // Con.concert_name, Con.concert_loc, Con.concert_ticketing, Con.concert_place,
+    // Con.start_date, Con.end_date, Gen.genre_name
+    // FROM concert_info Con
+    //   INNER JOIN genre_concert GenCon
+    //     ON Con.concert_code = GenCon.concert_code
+    //   INNER JOIN genre Gen
+    //     ON GenCon.genre_code = Gen.genre_code
+    // WHERE Con.concert_code = ${code}
+    // `;
 
-  let result = await DB.sequelize.query(query, { type: QueryTypes.SELECT });
+    const artQuery = `
+    SELECT Art.artist_code, Art.artist_name, Art.artist_type,
+    Art.artist_img, Art.artist_debut,
+    Gen.genre_name
+    FROM concert_info Con
+      INNER JOIN concert_artist ConArt
+        ON Con.concert_code = ConArt.concert_code
+      INNER JOIN artist Art
+        ON ConArt.artist_code = Art.artist_code
+      INNER JOIN artist_genre ArtGen
+        ON Art.artist_code = ArtGen.artist_code
+      INNER JOIN genre Gen
+        ON ArtGen.genre_code = Gen.genre_code
+    WHERE Con.concert_code = ${code}
+    `;
 
-  const conInfo = {
-    concert_name: result[0].concert_name,
-    concert_poster: result[0].concert_poster,
-    start_date: result[0].start_date,
-    end_date: result[0].end_date,
-    concert_place: result[0].concert_place,
-    concert_loc: result[0].concert_loc,
-    concert_ticketing: result[0].concert_ticketing,
-    concert_type: result[0].concert_type,
-    concert_views: result[0].concert_views,
-  };
-  console.log(conInfo);
-  const artInfo = filterData(result, "genre_name", "artist_code");
+    // let conResult = await DB.sequelize.query(conQuery, {
+    //   type: QueryTypes.SELECT,
+    // });
+    let artResult = await DB.sequelize.query(artQuery, {
+      type: QueryTypes.SELECT,
+    });
 
-  return res.render("detail", { conInfo, artInfo });
+    // 콘서트 장르를 배열로 변환 후 통합
+    // const conInfo = makeArray(conResult, "genre_name", "concert_code");
+
+    // 아티스트 장르를 배열로 변환 후 통합
+    const artInfo = makeArray(artResult, "genre_name", "artist_code");
+    // conInfo,
+    return res.render("detail", { artInfo });
+  } catch (err) {
+    console.error(err);
+    return res.send("서버가 죽엇슴다--;;");
+  }
 });
 
 export default router;
