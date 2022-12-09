@@ -161,18 +161,17 @@ router.post(
 // 로그인 구현
 router.post("/login", async (req, res) => {
   const { user_id, user_pw } = req.body;
-  console.log({
-    user_id,
-    user_pw,
-  });
+  // console.log({
+  //   user_id,
+  //   user_pw,
+  // });
   const userInfo = await User.findByPk(user_id);
   // console.log(userInfo);
   if (userInfo) {
     const pw = userInfo.password;
     if (pw !== user_pw) {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.write("<script>alert('비밀번호가 틀렸습니다')</script>");
-      return res.write("<script>location.href='/main'</script>");
+      res.write("<script>alert('비밀번호가 틀렸습니다')</script>");      
     }
   } else {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
@@ -180,6 +179,7 @@ router.post("/login", async (req, res) => {
     return res.write("<script>location.href='/main'</script>");
   }
   req.session.user = userInfo;
+  console.log(req.session.user);
   req.session.save(() => {
     res.redirect("/");
   });
