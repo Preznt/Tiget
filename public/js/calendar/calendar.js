@@ -88,10 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = () => {
-    const todayVal = `${today.year}.${String(today.month).padStart(
+    const todayVal = `${today.year}-${String(today.month).padStart(
       2,
       0
-    )}.${String(today.date).padStart(2, 0)}`;
+    )}-${String(today.date).padStart(2, 0)}`;
     // lastDate: 이번 달 마지막 날짜 = 이번 달 날짜의 총 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
     // prevLastDate: 저번 달 마지막 날짜
@@ -131,10 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
           dateTxt.textContent = dIndex.prev;
           let dd = String(dIndex.prev).padStart(2, 0);
           if (valDay.month === 1) {
-            td.classList.add(`${valDay.year - 1}.12.${dd}`);
+            td.classList.add(`${valDay.year - 1}-12-${dd}`);
           } else {
             let mm = String(valDay.month - 1).padStart(2, 0);
-            td.classList.add(`${valDay.year}.${mm}.${dd}`);
+            td.classList.add(`${valDay.year}-${mm}-${dd}`);
           }
           td.classList.add("prevMonth");
           dIndex.prev++;
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
           dateTxt.textContent = dIndex.current;
           let mm = String(valDay.month).padStart(2, 0);
           let dd = String(dIndex.current).padStart(2, 0);
-          td.classList.add(`${valDay.year}.${mm}.${dd}`);
+          td.classList.add(`${valDay.year}-${mm}-${dd}`);
           const tdClassArr = Array.from(td.classList);
           if (matchDay(tdClassArr, todayVal)) {
             td.classList.add("today");
@@ -156,10 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
           dateTxt.textContent = dIndex.next;
           let dd = String(dIndex.next).padStart(2, 0);
           if (valDay.month === 12) {
-            td.classList.add(`${valDay.year + 1}.01.${dd}`);
+            td.classList.add(`${valDay.year + 1}-01-${dd}`);
           } else {
             let mm = String(valDay.month + 1).padStart(2, 0);
-            td.classList.add(`${valDay.year}.${mm}.${dd}`);
+            td.classList.add(`${valDay.year}-${mm}-${dd}`);
           }
           td.classList.add("nextMonth");
           dIndex.next++;

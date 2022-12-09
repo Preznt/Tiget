@@ -25,10 +25,6 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.STRING(12),
         allowNull: true,
       },
-      artist_genre: {
-        type: Sequelize.DataTypes.STRING(20),
-        allowNull: true,
-      },
     },
     {
       sequelize,
