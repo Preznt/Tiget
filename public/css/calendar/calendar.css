@@ -491,13 +491,13 @@ label[for="input_search_genre"]:hover .search_genre_dropdown_box {
 /* calendar modal 영역 */
 .calendar.modal {
   position: absolute;
-  top: calc(50% - 40%);
-  left: calc(50% - 20%);
+  top: calc(50% - 250px);
+  left: calc(50% - 325px);
   opacity: 0.8;
   transform: scale(0.8);
   transform-origin: center;
-  width: 30%;
-  height: 80%;
+  width: 500px;
+  height: auto;
   border-radius: 5px;
   z-index: -2;
   transition: all ease-out 0.3s;
@@ -554,7 +554,6 @@ button.modal.btn_close:hover {
 }
 .modal.title {
   width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -566,11 +565,15 @@ button.modal.btn_close:hover {
   font-size: 20pt;
   padding-bottom: 0.5em;
   font-weight: 700;
-  color: white;
   word-break: keep-all;
+  color: white;
 }
 .modal.title .date > * {
   font-size: 12pt;
+  color: #ccc;
+}
+.modal.title .place {
+  color: #ccc;
 }
 .modal#input_bookmark {
   width: 0;

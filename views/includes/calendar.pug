@@ -6,7 +6,6 @@ link(rel='stylesheet', href='/css/calendar/calendar.css')
 //- !{}: 괄호 안의 내용을 escaping 하지 않고 코드 그대로 출력
 script.
   const conData = !{JSON.stringify(conData)}
-  //- const conInfo = !{JSON.stringify(conInfo)}
 script(src="/js/calendar/calendar.js")
 script(src="/js/calendar/search.js")
 script(src="/js/calendar/schedule.js")
@@ -54,7 +53,7 @@ section.calendar.container#main2
               for genre in genreData
                 input(type="checkbox", name="genre_code", value=`${genre.genre_code}`, id=`${genre.genre_name}`)
                 label(for=`${genre.genre_name}`)= genre.genre_name
-        button(type="submit")#btn_search_schedule 검색
+        button(type="button")#btn_search_schedule 검색
     if calendar === "schedule"
       include ./schedule.pug
     if calendar === "detail"
@@ -92,6 +91,7 @@ section.calendar.container#main2
                 span.start_date
                 span.dash &nbsp;-&nbsp; 
                 span.end_date
+              div.place
         div.modal.button_box
           a(type="button").modal#btn_info 상세정보
           a(type="button").modal#btn_ticketing 예매하기

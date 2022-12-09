@@ -35,6 +35,7 @@ router.get("/", async (req, res, next) => {
       "concert_poster",
       "start_date",
       "end_date",
+      "concert_place",
       "concert_ticketing",
     ],
   });
