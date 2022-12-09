@@ -40,12 +40,11 @@ DB.sequelize.sync({ force: false }).then((dbConn) => {
 });
 
 const sessionOption = {
-  key: "tiget", // session ID(key)
   secret: "12345", // session 암호화 할때 사용할 비번
   resave: false, // 매번 session 새로 작성할 것인가, 성능상 문제로 false 권장
   saveUninitialized: false, // 모든 session 을 저장할 것인가, 성능상 문제로 false 권장
-  httpOnly: false,
-  originalMaxAge: 1000 * 600, // 1000밀리초 * 60 = 1분
+  // httpOnly: false,
+  originalMaxAge: 1000 * 600 * 10, // 1000밀리초 * 60 = 1분
 };
 app.use(expressSession(sessionOption));
 

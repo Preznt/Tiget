@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tbodyList.textContent = "";
 
     const boardList = datas.map((data, index) => {
-      console.log(data.f_reply.length);
+      // console.log(data.f_reply.length);
       let tr = document.createElement("TR");
       tr.className = "board tr";
       tr.textContent = "";

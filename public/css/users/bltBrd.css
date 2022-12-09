@@ -1,5 +1,5 @@
 /* 커뮤니티 화면 */
-article.bitBrd {
+article.bltBrd {
   scroll-snap-align: start;
   display: flex;
   width: 100%;
@@ -9,12 +9,12 @@ div.main {
   width: 80%;
   margin: auto;
 }
-article.bitBrd aside.bitBrd.aside {
+article.bltBrd aside.bltBrd.aside {
   margin: 5% auto 0 auto;
   flex: 1;
   border: 1px solid #aaa;
 }
-article.bitBrd div.bitBrd.table {
+article.bltBrd div.bltBrd.table {
   flex: 4;
 }
 thead tr.title,
@@ -24,13 +24,13 @@ tbody tr.item {
   border: 1px solid #aaa;
 }
 
-table.bitBrd.table,
+table.bltBrd.table,
 div.button.box,
-div.bitBrd.category {
+div.bltBrd.category {
   width: 80%;
   margin: 10px auto;
 }
-div.bitBrd.category {
+div.bltBrd.category {
   margin: 4% auto 0 auto;
   font-size: 16px;
   font-weight: 600;
@@ -77,4 +77,24 @@ div.categorysearch button {
   padding: 8px;
   border-radius: 5px;
   border: none;
+}
+div.pageContainer {
+  display: flex;
+  justify-content: center;
+}
+div.margin {
+  height: 100%;
+  padding-bottom: 20px;
+}
+button.pagefirst,
+button.pageEnd {
+  font-size: 18px;
+  background-color: transparent;
+}
+button.pageNext,
+button.pagePrev,
+button.pageNumber {
+  padding: 12px;
+  font-size: 18px;
+  background-color: transparent;
 }

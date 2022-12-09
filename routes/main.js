@@ -40,6 +40,16 @@ router.get("/", async (req, res, next) => {
   });
   const genreData = await Genre.findAll();
 
+  const concerts = await Concert.findAll({
+    where: { concert_type: "국내" },
+    order: [["concert_views", "DESC"]],
+  });
+
+  const recommends = await Concert.findAll({
+    where: { concert_type: "국내" },
+    order: [["concert_views", "ASC"]],
+  });
+
   return res.render("main", {
     body: "ranking",
     holiData,
@@ -48,6 +58,8 @@ router.get("/", async (req, res, next) => {
     boards: "",
     conData,
     calendar: "schedule",
+    concerts,
+    recommends,
   });
 });
 
