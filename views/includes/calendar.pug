@@ -66,26 +66,16 @@ section.calendar.container#main2
         div.ticket_shape.cut
       div.ticket_shape.body
         div.ticket_shape.content
-          ul 
-            li 가
-            li 나
-            li 다
-            li 라
-            li 마
-            li 바
-            li 사
-            li 아
-            li 자
-            li 차
+        
         div.bg_image
   div.calendar.modal
     div.calendar.modal_content
         button(type="button").modal.btn_close X
         img.modal.image
         div.modal.desc
-            input(type="checkbox").modal#input_bookmark
+            input(type="checkbox", name="bookmark", value="true").modal#input_bookmark
             label(for="input_bookmark").modal.label_bookmark
-            div.modal.title 
+            div.modal.title
               div.name
               div.date
                 span.start_date
@@ -93,6 +83,6 @@ section.calendar.container#main2
                 span.end_date
               div.place
         div.modal.button_box
-          a(type="button").modal#btn_info 상세정보
-          a(type="button").modal#btn_ticketing 예매하기
+          a.modal#btn_info 상세정보
+          a.modal#btn_ticketing 예매하기
   div.bg_blur

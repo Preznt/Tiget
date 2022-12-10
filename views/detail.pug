@@ -22,14 +22,12 @@ block content
                     div.date.label 기간
                     div.date 
                         span.date.from= conInfo.start_date
-                        span.date.dash &nbsp;-&nbsp;
+                        span.date.dash &nbsp;~&nbsp;
                         span.date.to= conInfo.end_date
-                    div.rate.label 관람등급
-                    div.rate
                     div.genre.label 장르
-                    div.genre
-                    div.discount.label 할인정보
-                    div.discount
+                    div.genre= conInfo.genre_name
+                    div.price.label 가격
+                    div.price
         div.detail.bottom
             h2.artist.detail 가수정보
             div.bottom.desc
