@@ -37,10 +37,16 @@ const initModels = (sequelize) => {
 
   concert_of_interest.belongsTo(user, { foreignKey: "username" });
   user.hasMany(concert_of_interest, { foreignKey: "username" });
+  concert_of_interest.belongsTo(concert_info, { foreignKey: "concert_code" });
+  concert_info.hasMany(concert_of_interest, { foreignKey: "concert_code" });
   artist_of_interest.belongsTo(user, { foreignKey: "username" });
   user.hasMany(artist_of_interest, { foreignKey: "username" });
+  artist_of_interest.belongsTo(artist, { foreignKey: "artist_code" });
+  artist.hasMany(artist_of_interest, { foreignKey: "artist_code" });
   genre_of_interest.belongsTo(user, { foreignKey: "username" });
   user.hasMany(genre_of_interest, { foreignKey: "username" });
+  genre_of_interest.belongsTo(genre, { foreignKey: "genre_code" });
+  genre.hasMany(genre_of_interest, { foreignKey: "genre_code" });
 
   genre_concert_model.belongsTo(concert_info, {
     foreignKey: "concert_code",

@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnClose = document.querySelector("button.modal.btn_close");
   const bookmark = document.querySelector("#input_bookmark");
 
+  const image = document.querySelector(".modal.image");
+  const name = document.querySelector(".name");
+  const start = document.querySelector(".start_date");
+  const end = document.querySelector(".end_date");
+  const place = document.querySelector(".place");
+
   // 사용자가 선택한 스케줄의 concert_code 전역변수
   let thisCode;
 
@@ -19,9 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalClose = () => {
     modal.classList.remove("visible");
     bgBlur.classList.remove("active");
+
+    image.src = "";
+    name.textContent = "";
+    start.textContent = "";
+    end.textContent = "";
+    place.textContent = "";
   };
 
-  const showInfo = async (code) => {
+  // 클릭한 concert code 와 유저 bookmark 체크 후 modal 표시
+  const chkInfo = async (code) => {
     const fetchOption = {
       method: "POST",
       body: JSON.stringify({ code }),
@@ -29,17 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     await fetch("/main/info", fetchOption)
       .then((res) => res.json())
-      .then((json) => ddd(json));
+      .then((json) => showInfo(json));
   };
 
-  const ddd = (data) => {
+  const showInfo = (data) => {
     let { conInfo, interCon } = data;
     conInfo = conInfo[0];
-    const image = document.querySelector(".modal.image");
-    const name = document.querySelector(".name");
-    const start = document.querySelector(".start_date");
-    const end = document.querySelector(".end_date");
-    const place = document.querySelector(".place");
 
     image.src = `${conInfo.concert_poster}`;
     name.textContent = conInfo.concert_name;
@@ -65,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = e.target;
     if (target.className === "schedule") {
       thisCode = target.dataset.code;
-      const data = showInfo(thisCode);
+      const data = chkInfo(thisCode);
     }
   });
 
@@ -87,19 +95,30 @@ document.addEventListener("DOMContentLoaded", () => {
     btnTicketing.target = "_blank";
   });
 
-  bookmark?.addEventListener("click", async () => {
+  bookmark?.addEventListener("click", async (e) => {
     const value = bookmark.checked;
     const fetchOption = {
       method: "POST",
       body: JSON.stringify({ value, thisCode }),
       headers: { "Content-Type": "application/json" },
     };
-    const result = await fetch("/main/bookmark", fetchOption);
-    if (result === "insert") {
-      bookmark.checked = true;
-    }
-    if (result === "delete") {
-      bookmark.checked = false;
-    }
+    await fetch("/main/bookmark", fetchOption)
+      .then((res) => res.text())
+      .then((text) => {
+        console.log(text);
+        if (text === "insert") {
+          bookmark.checked = true;
+          return false;
+        }
+        if (text === "delete") {
+          bookmark.checked = false;
+          return false;
+        }
+        if (text === "failed") {
+          alert("로그인 후 이용해주세요");
+          bookmark.checked = false;
+          return false;
+        }
+      });
   });
 });
