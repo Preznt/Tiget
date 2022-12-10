@@ -21,24 +21,37 @@ document.addEventListener("DOMContentLoaded", () => {
     bgBlur.classList.remove("active");
   };
 
-  const showDetail = (code, list) => {
+  const showInfo = async (code) => {
+    const fetchOption = {
+      method: "POST",
+      body: JSON.stringify({ code }),
+      headers: { "Content-Type": "application/json" },
+    };
+    await fetch("/main/info", fetchOption)
+      .then((res) => res.json())
+      .then((json) => ddd(json));
+  };
+
+  const ddd = (data) => {
+    let { conInfo, interCon } = data;
+    conInfo = conInfo[0];
     const image = document.querySelector(".modal.image");
     const name = document.querySelector(".name");
     const start = document.querySelector(".start_date");
     const end = document.querySelector(".end_date");
     const place = document.querySelector(".place");
 
-    // 클릭한 콘서트의 code 와 일치하는 데이터만 배열로 반환
-    let data = list.filter((e) => {
-      return e.concert_code == code;
-    });
-    data = data[0];
-
-    image.src = `${data.concert_poster}`;
-    name.textContent = data.concert_name;
-    start.textContent = data.start_date;
-    end.textContent = data.end_date;
-    place.textContent = data.concert_place;
+    image.src = `${conInfo.concert_poster}`;
+    name.textContent = conInfo.concert_name;
+    start.textContent = conInfo.start_date;
+    end.textContent = conInfo.end_date;
+    place.textContent = conInfo.concert_place;
+    if (interCon === true) {
+      bookmark.checked = true;
+    }
+    if (interCon === false || null) {
+      bookmark.checked = false;
+    }
   };
 
   // 이벤트 버블링 이용, schedule 클릭 시 modal 창과 bgBlur 띄우기
@@ -52,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = e.target;
     if (target.className === "schedule") {
       thisCode = target.dataset.code;
-      showDetail(thisCode, conData);
+      const data = showInfo(thisCode);
     }
   });
 

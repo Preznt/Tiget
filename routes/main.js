@@ -71,6 +71,43 @@ router.get("/", async (req, res, next) => {
 
 // const interCon = await Concert.findAll({ where: { username: User }, });
 
+// calendar modal fetch 메서드
+router.post("/info", async (req, res) => {
+  try {
+    const code = req.body.code;
+    const conInfo = await Concert.findAll({
+      where: { concert_code: code },
+      attributes: [
+        "concert_name",
+        "concert_poster",
+        "start_date",
+        "end_date",
+        "concert_place",
+        "concert_ticketing",
+      ],
+    });
+    let interCon;
+
+    try {
+      const user = req?.session?.user?.username;
+      const findInterCon = await InterCon.findAll({
+        where: { [Op.and]: [{ username: user }, { concert_code: code }] },
+      });
+      if (findInterCon == false) {
+        interCon = false;
+      } else {
+        interCon = true;
+      }
+    } catch (err) {
+      interCon = null;
+    }
+    return res.send({ conInfo, interCon });
+  } catch (err) {
+    console.error(err);
+    return res.send("SQL SELECT ERROR");
+  }
+});
+
 // bookmark fetch 메서드
 router.post("/bookmark", async (req, res) => {
   try {
