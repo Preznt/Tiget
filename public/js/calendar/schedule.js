@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnTicketing = document.querySelector("a#btn_ticketing");
   const btnClose = document.querySelector("button.modal.btn_close");
   const bookmark = document.querySelector("#input_bookmark");
+  const favoriteList = document.querySelector("div.ticket_shape.content");
 
   const image = document.querySelector(".modal.image");
   const name = document.querySelector(".name");
@@ -16,6 +17,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 사용자가 선택한 스케줄의 concert_code 전역변수
   let thisCode;
+
+  // calendar 찜 목록 표시
+  const showIntCon = async () => {
+    await fetch("/main/favorites")
+      .then((res) => res.json())
+      .then((json) => {
+        let lists = json.interConList;
+        favoriteList.textContent = "";
+        if (lists !== null) {
+          for (let ele of lists) {
+            let a = document.createElement("a");
+            a.textContent = ele.concert_name;
+            a.href = `/detail/${ele.concert_code}`;
+            favoriteList.appendChild(a);
+          }
+        }
+      });
+  };
+
+  // 렌더링 시 실행
+  showIntCon();
 
   const modalOpen = () => {
     modal.classList.add("visible");
@@ -108,10 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(text);
         if (text === "insert") {
           bookmark.checked = true;
+          showIntCon();
           return false;
         }
         if (text === "delete") {
           bookmark.checked = false;
+          showIntCon();
           return false;
         }
         if (text === "failed") {
