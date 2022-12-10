@@ -66,24 +66,23 @@ section.calendar.container#main2
         div.ticket_shape.cut
       div.ticket_shape.body
         div.ticket_shape.content
-          ul 
-            li 가
-            li 나
-            li 다
-            li 라
-            li 마
-            li 바
-            li 사
-            li 아
-            li 자
-            li 차
+            a 가
+            a 나
+            a 다
+            a 라
+            a 마
+            a 바
+            a 사
+            a 아
+            a 자
+            a 차
         div.bg_image
   div.calendar.modal
     div.calendar.modal_content
         button(type="button").modal.btn_close X
         img.modal.image
         div.modal.desc
-            input(type="checkbox").modal#input_bookmark
+            input(type="checkbox", name="bookmark", value="true").modal#input_bookmark
             label(for="input_bookmark").modal.label_bookmark
             div.modal.title 
               div.name

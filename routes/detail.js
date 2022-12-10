@@ -99,6 +99,7 @@ router.get("/:conCode", async (req, res) => {
         },
       ],
     });
+    console.log(JSON.parse(JSON.stringify(conResult))[0]);
     const conInfo = conRemoveNested(
       conResult,
       "genre_concerts",

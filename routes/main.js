@@ -1,5 +1,9 @@
 import express from "express";
 import DB from "../models/index.js";
+// 비교 연산자 사용
+import { Op } from "sequelize";
+const User = DB.models.user;
+const InterCon = DB.models.concert_of_interest;
 const Concert = DB.models.concert_info;
 const Holiday = DB.models.holiday;
 const Genre = DB.models.genre;
@@ -39,6 +43,7 @@ router.get("/", async (req, res, next) => {
       "concert_ticketing",
     ],
   });
+
   const genreData = await Genre.findAll();
 
   const concerts = await Concert.findAll({
@@ -62,6 +67,35 @@ router.get("/", async (req, res, next) => {
     concerts,
     recommends,
   });
+});
+
+// const interCon = await Concert.findAll({ where: { username: User }, });
+
+// bookmark fetch 메서드
+router.post("/bookmark", async (req, res) => {
+  try {
+    const code = req.body.thisCode;
+    const value = req.body.value;
+    const user = req.session.user.username;
+    console.log(code, value, user);
+
+    if (value === true) {
+      const addInterCon = await InterCon.create({
+        username: user,
+        concert_code: code,
+      });
+      return res.send({ result: "insert" });
+    }
+    if (value === false) {
+      const delInterCon = await InterCon.destroy({
+        where: { [Op.and]: [{ username: user }, { concert_code: code }] },
+      });
+      return res.send({ result: "delete" });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.send("Bookmark Error");
+  }
 });
 
 export default router;

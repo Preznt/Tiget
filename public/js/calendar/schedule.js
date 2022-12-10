@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnDetail = document.querySelector("a#btn_info");
   const btnTicketing = document.querySelector("a#btn_ticketing");
   const btnClose = document.querySelector("button.modal.btn_close");
+  const bookmark = document.querySelector("#input_bookmark");
+
+  // 사용자가 선택한 스케줄의 concert_code 전역변수
   let thisCode;
 
   const modalOpen = () => {
@@ -61,11 +64,29 @@ document.addEventListener("DOMContentLoaded", () => {
     modalClose();
   });
 
+  // modal 화면 내 버튼 클릭 이벤트
   btnDetail?.addEventListener("click", () => {
     location.href = `/detail/${thisCode}`;
   });
+
   btnTicketing?.addEventListener("click", () => {
     btnTicketing.href = `${data.concert_ticketing}`;
     btnTicketing.target = "_blank";
+  });
+
+  bookmark?.addEventListener("click", async () => {
+    const value = bookmark.checked;
+    const fetchOption = {
+      method: "POST",
+      body: JSON.stringify({ value, thisCode }),
+      headers: { "Content-Type": "application/json" },
+    };
+    const result = await fetch("/main/bookmark", fetchOption);
+    if (result === "insert") {
+      bookmark.checked = true;
+    }
+    if (result === "delete") {
+      bookmark.checked = false;
+    }
   });
 });

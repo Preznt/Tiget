@@ -763,15 +763,12 @@ aside.calendar.my_schedule {
   border: 1px solid #c5a773;
   z-index: 1;
 }
-.ticket_shape.content ul {
-  list-style: none;
-}
-.ticket_shape.content ul li {
+.ticket_shape.content ul a {
   padding: 5px 0;
   color: white;
   user-select: none;
 }
-.ticket_shape.content ul li:before {
+.ticket_shape.content a:before {
   content: "\2022";
   color: #c5a773;
   font-weight: bold;
@@ -779,7 +776,7 @@ aside.calendar.my_schedule {
   width: 1em;
   margin-left: -1em;
 }
-.ticket_shape.content ul li:hover {
+.ticket_shape.content a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
