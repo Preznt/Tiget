@@ -39,6 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 렌더링 시 실행
   showIntCon();
 
+  // 다른 페이지에서 찜하고 메인페이지로 되돌아오면 반영되지 않는다
+  // window.addEventListener("pageshow", (e) => {
+  //   if (e.persisted) {
+  //     showIntCon();
+  //   }
+  // });
+
   const modalOpen = () => {
     modal.classList.add("visible");
     bgBlur.classList.add("active");
@@ -127,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
     await fetch("/main/bookmark", fetchOption)
       .then((res) => res.text())
       .then((text) => {
-        console.log(text);
         if (text === "insert") {
           bookmark.checked = true;
           showIntCon();

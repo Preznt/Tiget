@@ -1,32 +1,26 @@
+script(src="/js/bookmark.js")
 div.info.list
     div.neonsign Enjoy Your Life!
     div.bookmark_conlist
-    each list in conList
-        div.bmk_list_box 
-            img(src=`${list.concert_poster}`).poster
-            div.name= list.concert_name
-            div.date 
-                span.start= list.start_date
-                span.dash &nbsp;~&nbsp;
-                span.end= list.end_date
-            div.place= list.concert_place
-            div.dday 디데이 표시
-            input(type="checkbox")#bookmark
-            label(for="bookmark")
-            a(href=`${list.concert_ticketing}`, target="_blank").ticketing 예매하기
     
     h2 장르별 공연 추천 리스트
     div.recommend_conlist
     each list in recommendConList 
-        div.rcmd_list_box
-            img(src=`${list.concert_poster}`).poster
-            div.name= list.concert_name 
-            div.date
-                span.start= list.start_date
-                span.dash &nbsp;~&nbsp;
-                span.end= list.end_date
-            div.place= list.concert_place
-            div.dday 디데이 표시
-            input(type="checkbox")#bookmark
-            label(for="bookmark")
-            div.genre
+        a(href=`/detail/${list.concert_code}`)
+            div.rcmdCon_list_box
+                img(src=`${list.concert_poster}`).poster
+                div.name= list.concert_name 
+                div.date
+                    span.start= list.start_date
+                    span.dash &nbsp;~&nbsp;
+                    span.end= list.end_date
+                div.place= list.concert_place
+                div.genre= list["genre_concerts.genre.genre_name"]
+
+    h2 장르별 아티스트 추천 리스트
+    div.recommend_conlist
+    each list in recommendArtList
+        div.rcmdArt_list_box
+            img(src=`${list.artist_img}`).image
+            div.name= list.artist_name
+            div.genre= list["artist_genres.genre.genre_name"]

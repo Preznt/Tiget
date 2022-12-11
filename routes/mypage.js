@@ -1,5 +1,6 @@
 import express from "express";
 import DB from "../models/index.js";
+import sequelize from "sequelize";
 // 비교 연산자 사용
 import { Op } from "sequelize";
 import moment from "moment";
@@ -15,6 +16,7 @@ const InterCon = DB.models.concert_of_interest;
 const InterArt = DB.models.artist_of_interest;
 const InterGen = DB.models.genre_of_interest;
 const GenCon = DB.models.genre_concert_model;
+const ArtGen = DB.models.artist_genre;
 const Genre = DB.models.genre;
 const dateFormat = "YYYY.MM.DD";
 const findDateFormat = "YYYY-MM-DD";
@@ -131,29 +133,7 @@ router.post("/pwChange/:username", async (req, res) => {
 router.get("/bookmark", chkSession, async (req, res) => {
   try {
     const user = req.session.user.username;
-    let conList;
-
     const today = moment().format(findDateFormat);
-    console.log(today);
-    // 찜한 콘서트 목록
-    try {
-      conList = await Concert.findAll({
-        raw: true,
-        attributes: [
-          "concert_code",
-          "concert_name",
-          "concert_poster",
-          "start_date",
-          "end_date",
-          "concert_place",
-          "concert_ticketing",
-        ],
-        include: { model: InterCon, where: { username: user } },
-      });
-    } catch (err) {
-      conList = null;
-    }
-
     /**
      * cf)
      * table join 시(include) 일치하지 않는 값은 null로 표시됨
@@ -177,40 +157,88 @@ router.get("/bookmark", chkSession, async (req, res) => {
         },
       },
     });
-    console.log(recommendConList[0]["genre_concerts.genre.genre_name"]);
+
+    // 선호 장르에 맞는 아티스트 추천
+    const recommendArtList = await Artist.findAll({
+      raw: true,
+      include: {
+        model: ArtGen,
+        where: { artist_code: { [Op.not]: null } },
+        include: {
+          model: Genre,
+          attributes: ["genre_name"],
+          where: { genre_name: { [Op.not]: null } },
+          include: {
+            model: InterGen,
+            where: { username: user },
+          },
+        },
+      },
+    });
 
     // 선호 장르 > 선호 아티스트(또는 아티스트 찜) > 추천 공연으로 넘어가야 할 것 같다
 
     // // 선호 아티스트 목록
     // const artList = await Artist.findAll({
     //   attributes: ["artist_code", "artist_name"],
-    //   include: [{ model: IntArt, where: { username: user } }],
+    //   include: { model: IntArt, where: { username: user } },
     // });
 
     // // 선호 아티스트에 따른 공연 목록
     // const artConList = await Concert.findAll({
     //   attributes: ["concert_code", "concert_name"],
-    //   include: [
-    //     {
-    //       model: Artist,
-    //       include: [
-    //         {
-    //           model: ArtCon,
-    //           where: { username: user },
-    //         },
-    //       ],
+    //   include: {
+    //     model: Artist,
+    //     include: {
+    //       model: ArtCon,
+    //       where: { username: user },
     //     },
-    //   ],
+    //   },
     // });
 
     return res.render("mypage", {
       body: "bookmark",
-      conList,
       recommendConList,
+      recommendArtList,
     });
   } catch (err) {
     console.error(err);
     return res.send("USER INTEREST DATA SQL SELECT ERROR");
   }
 });
+
+// 북마크 콘서트 목록 fetch
+router.get("/bookmarklist", async (req, res) => {
+  try {
+    let conList;
+
+    try {
+      const user = req.session.user.username;
+      const today = moment().format(findDateFormat);
+      const dday = sequelize.fn("datediff", today, sequelize.col("start_date"));
+      conList = await Concert.findAll({
+        raw: true,
+        attributes: [
+          "concert_code",
+          "concert_name",
+          "concert_poster",
+          "start_date",
+          "end_date",
+          "concert_place",
+          "concert_ticketing",
+          [dday, "dday"],
+        ],
+        include: { model: InterCon, where: { username: user } },
+      });
+    } catch (err) {
+      conList = null;
+    }
+
+    return res.send({ conList });
+  } catch (err) {
+    console.error(err);
+    return res.send("BOOKMARK LIST DATA SELECT ERROR");
+  }
+});
+
 export default router;

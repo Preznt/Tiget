@@ -87,6 +87,7 @@ router.get("/:conCode", async (req, res) => {
     let conResult = await Concert.findAll({
       where: { concert_code: code },
       attributes: [
+        "concert_code",
         "concert_type",
         "concert_views",
         "concert_poster",
