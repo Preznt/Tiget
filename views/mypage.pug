@@ -12,7 +12,7 @@ block content
                     li 비밀번호 변경
                     li 선호장르 설정
                     li 찜목록
-                    li 회원탈퇴   
+                    li 회원탈퇴
         if body == "withdrawal" 
             include includes/mypage_withdrawal.pug
         if body == "users"
@@ -21,3 +21,5 @@ block content
             include includes/favorite_genre.pug
         if body == "change_password"
             include includes/change_password.pug
+        if body == "bookmark"
+            include includes/mypage_bookmark.pug

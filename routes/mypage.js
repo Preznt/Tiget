@@ -117,4 +117,8 @@ router.post("/pwChange/:username", async (req, res) => {
     console.error(err);
   }
 });
+
+router.get("/bookmark", chkSession, (req, res) => {
+  return res.render("mypage", { body: "bookmark" });
+});
 export default router;
