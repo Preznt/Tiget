@@ -1,13 +1,23 @@
 import express from "express";
 import DB from "../models/index.js";
+// 비교 연산자 사용
+import { Op } from "sequelize";
 import moment from "moment";
 import session from "express-session";
+import concert_artist_model from "../models/concert_artist_model.js";
+import artist from "../models/artist.js";
+import genre from "../models/genre.js";
 
 const Users = DB.models.user;
-const IntCon = DB.models.concert_of_interest;
-const IntArt = DB.models.artist_of_interest;
-const IntGen = DB.models.genre_of_interest;
+const Concert = DB.models.concert_info;
+const Artist = DB.models.artist;
+const InterCon = DB.models.concert_of_interest;
+const InterArt = DB.models.artist_of_interest;
+const InterGen = DB.models.genre_of_interest;
+const GenCon = DB.models.genre_concert_model;
+const Genre = DB.models.genre;
 const dateFormat = "YYYY.MM.DD";
+const findDateFormat = "YYYY-MM-DD";
 
 const router = express.Router();
 
@@ -69,9 +79,9 @@ router.get("/delete/:username", chkSession, async (req, res) => {
       },
       { where: { username: username } }
     );
-    const delIntCon = await IntCon.destroy({ where: { username: username } });
-    const delIntArt = await IntArt.destroy({ where: { username: username } });
-    const delIntGen = await IntGen.destroy({ where: { username: username } });
+    const delIntCon = await InterCon.destroy({ where: { username: username } });
+    const delIntArt = await InterArt.destroy({ where: { username: username } });
+    const delIntGen = await InterGen.destroy({ where: { username: username } });
     console.log(delUser);
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write("<script>alert('성공적으로 탈퇴되었습니다.')</script>");
@@ -118,7 +128,89 @@ router.post("/pwChange/:username", async (req, res) => {
   }
 });
 
-router.get("/bookmark", chkSession, (req, res) => {
-  return res.render("mypage", { body: "bookmark" });
+router.get("/bookmark", chkSession, async (req, res) => {
+  try {
+    const user = req.session.user.username;
+    let conList;
+
+    const today = moment().format(findDateFormat);
+    console.log(today);
+    // 찜한 콘서트 목록
+    try {
+      conList = await Concert.findAll({
+        raw: true,
+        attributes: [
+          "concert_code",
+          "concert_name",
+          "concert_poster",
+          "start_date",
+          "end_date",
+          "concert_place",
+          "concert_ticketing",
+        ],
+        include: { model: InterCon, where: { username: user } },
+      });
+    } catch (err) {
+      conList = null;
+    }
+
+    /**
+     * cf)
+     * table join 시(include) 일치하지 않는 값은 null로 표시됨
+     * 따라서 null를 제외하도록 조건으로 직접 지정
+     */
+    // 선호 장르에 맞는 공연 추천
+    const recommendConList = await Concert.findAll({
+      raw: true,
+      where: { end_date: { [Op.gte]: today } },
+      include: {
+        model: GenCon,
+        where: { concert_code: { [Op.not]: null } },
+        include: {
+          model: Genre,
+          attributes: ["genre_name"],
+          where: { genre_name: { [Op.not]: null } },
+          include: {
+            model: InterGen,
+            where: { username: user },
+          },
+        },
+      },
+    });
+    console.log(recommendConList[0]["genre_concerts.genre.genre_name"]);
+
+    // 선호 장르 > 선호 아티스트(또는 아티스트 찜) > 추천 공연으로 넘어가야 할 것 같다
+
+    // // 선호 아티스트 목록
+    // const artList = await Artist.findAll({
+    //   attributes: ["artist_code", "artist_name"],
+    //   include: [{ model: IntArt, where: { username: user } }],
+    // });
+
+    // // 선호 아티스트에 따른 공연 목록
+    // const artConList = await Concert.findAll({
+    //   attributes: ["concert_code", "concert_name"],
+    //   include: [
+    //     {
+    //       model: Artist,
+    //       include: [
+    //         {
+    //           model: ArtCon,
+    //           where: { username: user },
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // });
+
+    return res.render("mypage", {
+      body: "bookmark",
+      conList,
+      recommendConList,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.send("USER INTEREST DATA SQL SELECT ERROR");
+  }
 });
 export default router;

@@ -56,7 +56,6 @@ router.get("/", async (req, res, next) => {
     genreData,
     boards: "",
     conData,
-    calendar: "schedule",
     concerts,
     recommends,
   });
@@ -79,7 +78,7 @@ router.get("/favorites", async (req, res) => {
     return res.send({ interConList });
   } catch (err) {
     console.error(err);
-    return res.send("찜 목록을 가져오는데 실패했습니다.");
+    return res.send("USER INTEREST DATA SQL SELECT ERROR");
   }
 });
 
@@ -116,7 +115,7 @@ router.post("/info", async (req, res) => {
     return res.send({ conInfo, interCon });
   } catch (err) {
     console.error(err);
-    return res.send("SQL SELECT ERROR");
+    return res.send("MODAL DATA SQL SELECT ERROR");
   }
 });
 
@@ -145,7 +144,7 @@ router.post("/bookmark", async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    return res.send("Bookmark Error");
+    return res.send("BOOKMARK DATA SQL SELECT ERROR");
   }
 });
 

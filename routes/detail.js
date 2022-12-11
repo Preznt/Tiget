@@ -15,7 +15,10 @@ const router = express.Router();
  * cf)
  * sequelize.query 를 통해 rawQuery 를 반복 사용할 경우
  * request가 2번 발생하는 현상... parameter 값이 정상데이터 -> undefined
- *
+ */
+
+// 재귀함수 사용해서 함수 통합 가능?
+/**
  * sequelize 고유메서드를 사용할 경우
  * 데이터가 배열, 객체 리터럴 반복적으로 중첩
  * 따라서 객체 안 컬럼명: [요소1, 요소2 ...] 로 변환
@@ -79,6 +82,8 @@ router.get("/:conCode", async (req, res) => {
     });
 
     // 콘서트 데이터
+    // init-models.js 에 as 지정하면 이 코드가 맛이 가는데
+    // as를 여기에서 어떻게 사용하는지 모르겠어요
     let conResult = await Concert.findAll({
       where: { concert_code: code },
       attributes: [
@@ -92,12 +97,10 @@ router.get("/:conCode", async (req, res) => {
         "start_date",
         "end_date",
       ],
-      include: [
-        {
-          model: GenCon,
-          include: [{ model: Genre, attributes: ["genre_name"] }],
-        },
-      ],
+      include: {
+        model: GenCon,
+        include: { model: Genre, attributes: ["genre_name"] },
+      },
     });
     const conInfo = conRemoveNested(
       conResult,
@@ -106,31 +109,24 @@ router.get("/:conCode", async (req, res) => {
       "genre_name"
     );
 
-    // 너무 징그러운데...
     // let artQuery = await Concert.findAll({
     //   where: { concert_code: code },
-    //   include: [
-    //     {
-    //       model: ConArt,
-    //       include: [
-    //         {
-    //           model: Artist,
-    //           attributes: [
-    //             "artist_name",
-    //             "artist_type",
-    //             "artist_img",
-    //             "artist_debut",
-    //           ],
-    //           include: [
-    //             {
-    //               model: ArtGen,
-    //               include: [{ model: Genre, attributes: ["genre_name"] }],
-    //             },
-    //           ],
-    //         },
+    //   include: {
+    //     model: ConArt,
+    //     include: {
+    //       model: Artist,
+    //       attributes: [
+    //         "artist_name",
+    //         "artist_type",
+    //         "artist_img",
+    //         "artist_debut",
     //       ],
+    //       include: {
+    //         model: ArtGen,
+    //         include: { model: Genre, attributes: ["genre_name"] },
+    //       },
     //     },
-    //   ],
+    //   },
     // });
     // [0]["concert_artists"][0]["artist"]["artist_genres"]["genre"]["genre_name"]
 
@@ -150,18 +146,15 @@ router.get("/:conCode", async (req, res) => {
         ON ArtGen.genre_code = Gen.genre_code
     WHERE Con.concert_code = ${code}
     `;
-
     let artResult = await DB.sequelize.query(artQuery, {
       type: QueryTypes.SELECT,
     });
-
-    // 아티스트 장르를 배열로 변환 후 통합
     const artInfo = artRemoveNested(artResult, "genre_name", "artist_code");
 
     return res.render("detail", { conInfo, artInfo });
   } catch (err) {
     console.error(err);
-    return res.send("서버가 죽엇슴다--;;");
+    return res.send("DETAIL DATA SQL SELECT ERROR");
   }
 });
 

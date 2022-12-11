@@ -218,22 +218,4 @@ document.addEventListener("DOMContentLoaded", () => {
     valDay.date = today.date;
     showDate();
   });
-
-  const bgImage = document.querySelector(".bg_image");
-  if (today.month === 11 || today.month <= 2) {
-    bgImage.style.backgroundImage = "url('../images/calendar/winter bg.png')";
-  }
 });
-
-/**
- * TO DO
- * 0. button.today 클릭하면 오늘 날짜 표시(화면, 일정도 변경)
- * 1. 네이버 캘린더처럼 상세 버튼을 클릭하면
- *    일정 색, 공연 장소, 일정, 공연명 등 검색 상세 dropdown 표시
- *    상세 검색 하면 달력 대신 리스트 표시
- * 2. 월별로 배경화면 변경
- * 3. 공휴일 표시(open API 사용)
- * 4. 일정 표시(open API 사용)
- * 5. 일정을 클릭하면 넷플릭스 상세정보처럼 modal 창을 크게 표시
- * 6. 공연정보 modal 안에 별표, 북마크 등 중요도 체크하는 항목 표시
- */
