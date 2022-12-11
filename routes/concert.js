@@ -67,8 +67,15 @@ router.get("/recommend/:category", async (req, res) => {
   }
 });
 
-router.get("/:region", async (req, res) => {
-  const region = req.params.region;
+router.get("/region/:category", async (req, res) => {
+  const category = req.params.category;
+
+  try {
+    const concert = await Concert.findAll({ where: { concert_loc: category } });
+    res.json(concert);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 export default router;

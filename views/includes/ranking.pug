@@ -6,7 +6,7 @@ section.performance.info#ranking
         div.title
             button.perform 공연 랭킹
             span |
-            button.genre 장르별 랭킹
+            button.genre.hover 장르별 랭킹
     
         div.sub-title
             button.active(data-index="1") 국내
@@ -15,7 +15,7 @@ section.performance.info#ranking
         div.detail
                 div.poster1
                     - for(let i = 0; i < 2; i++)
-                        a(href="")
+                        a(href=`http://localhost:3302/detail/${concerts[i].concert_code}`)
                             img(src=`${concerts[i].concert_poster}`, alt="")
                             div
                                 div.title= concerts[i].concert_name

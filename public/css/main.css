@@ -104,6 +104,7 @@ header .user {
 }
 a {
   text-decoration: none;
+  color: black;
 }
 
 div.left {
