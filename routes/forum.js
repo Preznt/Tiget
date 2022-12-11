@@ -48,6 +48,7 @@ router.get("/board/:id", async (req, res) => {
       board_code: replies[i].board_code,
       username: replies[i].username,
       nickname: replies[i].nickname,
+      r_content: replies[i].r_content,
       r_update_date: replies[i].r_update_date,
       r_modified_date: replies[i].r_modified_date,
       r_remove_date: replies[i].r_remove_date,
@@ -68,19 +69,16 @@ router.get("/board/:id", async (req, res) => {
 router.post("/board/:boardSeq", async (req, res) => {
   const { boardSeq, replyContent } = req.body;
   userID = req.session.user;
-
-  if (!userID) {
-    return res.status(200);
-    // res.writeHead(200, { "Content-Type": "text/plain" });
-    // res.write("<script>alert('로그인이 필요한 서비스입니다.')</script>");
-    // return res.write("<script>location.href='/main'</script>");
+  // console.log(userID);
+  if (userID == undefined) {
+    return res.redirect("/");
   } else {
     console.log(userID);
   }
 
   const reply = {
     board_code: boardSeq,
-    nickname: userID.b_nickname,
+    nickname: userID.nickname,
     r_content: replyContent,
     username: userID.username,
     b_img: "",
@@ -88,7 +86,7 @@ router.post("/board/:boardSeq", async (req, res) => {
     r_modified_date: "",
     r_remove_date: "",
   };
-  console.log(reply);
+
   try {
     await Reply.create(reply);
   } catch (err) {
