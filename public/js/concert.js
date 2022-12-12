@@ -48,17 +48,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const event = e.target;
     if (event.tagName === "BUTTON") {
       btnActive(headerBtns, event);
+
+      fetch(`/concert/region/${event.textContent}`)
+        .then((res) => res.json)
+        .then((bigCa) => console.log(bigCa));
     }
   });
 
   rheaderBox?.addEventListener("click", (e) => {
     const event = e.target;
     const category = event.textContent;
-    console.log(category);
+    const activeType = document.querySelector(
+      ".header.box button.active"
+    ).textContent;
+
+    console.log(activeType);
+
     if (event.tagName === "BUTTON") {
       btnActive(rheaderBtns, event);
     }
-    fetch(`concert/region/${category}`)
+    fetch(`/concert/region/${activeType}/${category}`)
       .then((res) => res.json())
       .then((region) => dataActive(region));
   });

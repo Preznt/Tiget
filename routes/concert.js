@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   });
   // console.log(concert);
   const rConcert = await Concert.findAll({
-    where: { concert_loc: "서울" },
+    where: { concert_type: "국내", concert_loc: "서울" },
     order: [["concert_views", "DESC"]],
   });
 
@@ -42,7 +42,7 @@ router.get("/genre/:gCategory", async (req, res) => {
   try {
     const concert = await ConcertGenre.findAll({
       where: { genre_code: gCategory },
-      include: "f_concert",
+      include: Concert,
       required: false,
     });
     res.json(concert);
@@ -67,11 +67,29 @@ router.get("/recommend/:category", async (req, res) => {
   }
 });
 
-router.get("/region/:category", async (req, res) => {
+router.get("/region/:bigCategory", async (req, res) => {
+  const bigCategory = req.params.bigCategory;
+
+  console.log(category);
+  try {
+    const concert = await Concert.findAll({
+      where: { concert_type: bigCategory },
+    });
+    res.json(concert);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/region/:bigCategory/:category", async (req, res) => {
+  const bigCategory = req.params.bigCategory;
   const category = req.params.category;
 
+  console.log(category);
   try {
-    const concert = await Concert.findAll({ where: { concert_loc: category } });
+    const concert = await Concert.findAll({
+      where: { concert_type: bigCategory, concert_loc: category },
+    });
     res.json(concert);
   } catch (err) {
     console.log(err);
