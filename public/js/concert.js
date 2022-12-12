@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bannerImgview = (e) => {
     const targetImg = e.target;
     if (targetImg.tagName === "IMG") {
-      console.log(targetImg.src);
       const newImg = document.createElement("IMG");
       newImg.src = targetImg.src;
       imgView.appendChild(newImg);
@@ -58,16 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
   rheaderBox?.addEventListener("click", (e) => {
     const event = e.target;
     const category = event.textContent;
-    const activeType = document.querySelector(
-      ".header.box button.active"
-    ).textContent;
-
-    console.log(activeType);
 
     if (event.tagName === "BUTTON") {
       btnActive(rheaderBtns, event);
     }
-    fetch(`/concert/region/${activeType}/${category}`)
+    fetch(`/concert/region/${category}`)
       .then((res) => res.json())
       .then((region) => dataActive(region));
   });

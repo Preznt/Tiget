@@ -67,13 +67,13 @@ router.get("/recommend/:category", async (req, res) => {
   }
 });
 
-router.get("/region/:bigCategory", async (req, res) => {
-  const bigCategory = req.params.bigCategory;
+router.get("/region/:category", async (req, res) => {
+  const category = req.params.category;
 
   console.log(category);
   try {
     const concert = await Concert.findAll({
-      where: { concert_type: bigCategory },
+      where: { concert_loc: category },
     });
     res.json(concert);
   } catch (err) {
