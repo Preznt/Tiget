@@ -3,6 +3,8 @@ import boardList from "../models/index.js";
 import moment from "moment";
 import { Sequelize } from "sequelize";
 import session from "express-session";
+import sequelize from "sequelize";
+import { QueryTypes } from "sequelize";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -27,6 +29,8 @@ router.get("/board/:id", async (req, res) => {
   let replies;
 
   let replyContent = [];
+  const updateSql = `update board_detail set b_Views = b_Views +1 where seq = ${id}`;
+  await Board.sequelize.query(updateSql, { type: QueryTypes.UPDATE });
   try {
     replies = await Reply.findAll({
       where: { board_code: id },

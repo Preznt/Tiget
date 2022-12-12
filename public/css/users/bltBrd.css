@@ -82,10 +82,12 @@ div.pageContainer {
   display: flex;
   justify-content: center;
 }
-div.margin {
-  height: 100%;
-  padding-bottom: 20px;
+
+div.pageContainer button {
+  font-weight: 400;
+  width: 50px;
 }
+
 button.pagefirst,
 button.pageEnd {
   font-size: 18px;

@@ -41,7 +41,7 @@ html
             a#btn-modal
               i(class="fa fa-user-circle", aria-hidden="true")
           else 
-            li #{user.nickname} 님 Page
+            a(href="/profile") #{user.nickname} 님 Page
             button.logout 로그아웃
       div(id="modal", class="modal-overlay")
         div(class="modal-window")

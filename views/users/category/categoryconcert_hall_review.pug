@@ -5,11 +5,11 @@ tbody
             td= list.b_nickname
             td= list.b_title
             td= list.b_update_date
-            td 12
+            td= list.b_Views
     each board in boards
         tr(data-id= `${board.seq}`).item
             td= board.sort_board
             td= board.b_nickname
             td= board.b_title
             td= board.b_update_date
-            td 12
+            td= board.b_Views
