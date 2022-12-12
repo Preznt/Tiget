@@ -54,10 +54,7 @@ section.calendar.container#main2
                 input(type="checkbox", name="genre_code", value=`${genre.genre_code}`, id=`${genre.genre_name}`)
                 label(for=`${genre.genre_name}`)= genre.genre_name
         button(type="button")#btn_search_schedule 검색
-    if calendar === "schedule"
-      include ./schedule.pug
-    if calendar === "detail"
-      include ../detail.pug
+    include ./schedule.pug
   
   aside.calendar.my_schedule
     div.ticket_shape
@@ -79,7 +76,7 @@ section.calendar.container#main2
               div.name
               div.date
                 span.start_date
-                span.dash &nbsp;-&nbsp; 
+                span.dash &nbsp;~&nbsp; 
                 span.end_date
               div.place
         div.modal.button_box

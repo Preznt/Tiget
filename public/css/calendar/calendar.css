@@ -763,7 +763,7 @@ aside.calendar.my_schedule {
   border: 1px solid #c5a773;
   z-index: 1;
 }
-.ticket_shape.content ul a {
+.ticket_shape.content a {
   padding: 5px 0;
   color: white;
   user-select: none;
