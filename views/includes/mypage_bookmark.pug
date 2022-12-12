@@ -1,3 +1,4 @@
+link(rel="stylesheet", href="/css/mypage/bookmark.css")
 script(src="/js/bookmark.js")
 div.info.list
     div.neonsign Enjoy Your Life!
@@ -18,7 +19,7 @@ div.info.list
                 div.genre= list["genre_concerts.genre.genre_name"]
 
     h2 장르별 아티스트 추천 리스트
-    div.recommend_conlist
+    div.recommend_artlist
     each list in recommendArtList
         div.rcmdArt_list_box
             img(src=`${list.artist_img}`).image

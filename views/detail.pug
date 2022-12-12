@@ -4,33 +4,29 @@ block content
     script(src="/js/detail.js")
     section.scroll.detail
         div.detail.etc
-            span.type= conInfo.concert_type            
+            span.type= conInfo.concert_type    
+            span.loc= conInfo.concert_loc        
             span.views 조회수 #{conInfo.concert_views}
         div.detail.top
-            div.top.img
+            div.top.poster
                 img(src=`${conInfo.concert_poster}`)
             div.top.content(data-code=`${conInfo.concert_code}`)
-                input(type="checkbox")#bookmark
-                label(for="bookmark")
                 div.top.title 
+                    input(type="checkbox")#bookmark
+                    label(for="bookmark")
                     h2= conInfo.concert_name
-                    span.type= conInfo.concert_loc
                     a(href=`${conInfo.concert_ticketing}`, target="_blank")#ticketing
                         i(class="fa-solid fa-ticket") 예매하기 
                 div.top.desc
                     div.place.label 장소
                     div.place= conInfo.concert_place
-                    div.time.label 관람시간
-                    div.time
                     div.date.label 기간
                     div.date 
                         span.date.from= conInfo.start_date
                         span.date.dash &nbsp;~&nbsp;
                         span.date.to= conInfo.end_date
                     div.genre.label 장르
-                    div.genre= conInfo.genre_name
-                    div.price.label 가격
-                    div.price
+                    div.genre= conInfo["fk_concert.genre.genre_name"]
         div.detail.bottom
             h2.artist.detail 가수정보
             div.bottom.desc

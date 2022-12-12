@@ -29,43 +29,154 @@ const initModels = (sequelize) => {
   const user = _user(sequelize);
   const user_reply = _user_reply(sequelize);
 
-  reply.belongsTo(board_detail, { as: "f_board", foreignKey: "board_code" });
-  board_detail.hasMany(reply, { as: "f_reply", foreignKey: "board_code" });
+  reply.belongsTo(board_detail, {
+    as: "f_board",
+    foreignKey: "board_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  board_detail.hasMany(reply, {
+    as: "f_reply",
+    foreignKey: "board_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  reply.belongsTo(user, {
+    as: "f_user",
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  user.hasMany(reply, {
+    as: "fk_reply",
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
 
-  reply.belongsTo(user, { as: "f_user", foreignKey: "username" });
-  user.hasMany(reply, { as: "fk_reply", foreignKey: "username" });
-
-  concert_of_interest.belongsTo(user, { foreignKey: "username" });
-  user.hasMany(concert_of_interest, { foreignKey: "username" });
-  concert_of_interest.belongsTo(concert_info, { foreignKey: "concert_code" });
-  concert_info.hasMany(concert_of_interest, { foreignKey: "concert_code" });
-  artist_of_interest.belongsTo(user, { foreignKey: "username" });
-  user.hasMany(artist_of_interest, { foreignKey: "username" });
-  artist_of_interest.belongsTo(artist, { foreignKey: "artist_code" });
-  artist.hasMany(artist_of_interest, { foreignKey: "artist_code" });
-  genre_of_interest.belongsTo(user, { foreignKey: "username" });
-  user.hasMany(genre_of_interest, { foreignKey: "username" });
-  genre_of_interest.belongsTo(genre, { foreignKey: "genre_code" });
-  genre.hasMany(genre_of_interest, { foreignKey: "genre_code" });
+  concert_of_interest.belongsTo(user, {
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  user.hasMany(concert_of_interest, {
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  concert_of_interest.belongsTo(concert_info, {
+    foreignKey: "concert_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  concert_info.hasMany(concert_of_interest, {
+    foreignKey: "concert_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist_of_interest.belongsTo(user, {
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  user.hasMany(artist_of_interest, {
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist_of_interest.belongsTo(artist, {
+    foreignKey: "artist_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist.hasMany(artist_of_interest, {
+    foreignKey: "artist_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  genre_of_interest.belongsTo(user, {
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  user.hasMany(genre_of_interest, {
+    foreignKey: "username",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  genre_of_interest.belongsTo(genre, {
+    foreignKey: "genre_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  genre.hasMany(genre_of_interest, {
+    foreignKey: "genre_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
 
   genre_concert_model.belongsTo(concert_info, {
     as: "f_concert",
     foreignKey: "concert_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
   });
   concert_info.hasMany(genre_concert_model, {
-    // as: "fk_concert",
+    as: "fk_concert",
     foreignKey: "concert_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
   });
-  genre_concert_model.belongsTo(genre, { foreignKey: "genre_code" });
-  genre.hasMany(genre_concert_model, { foreignKey: "genre_code" });
-  artist_genre.belongsTo(artist, { foreignKey: "artist_code" });
-  artist.hasMany(artist_genre, { foreignKey: "artist_code" });
-  artist_genre.belongsTo(genre, { foreignKey: "genre_code" });
-  genre.hasMany(artist_genre, { foreignKey: "genre_code" });
-  concert_artist_model.belongsTo(concert_info, { foreignKey: "concert_code" });
-  concert_info.hasMany(concert_artist_model, { foreignKey: "concert_code" });
-  concert_artist_model.belongsTo(artist, { foreignKey: "artist_code" });
-  artist.hasMany(concert_artist_model, { foreignKey: "artist_code" });
+  genre_concert_model.belongsTo(genre, {
+    foreignKey: "genre_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  genre.hasMany(genre_concert_model, {
+    foreignKey: "genre_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist_genre.belongsTo(artist, {
+    foreignKey: "artist_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist.hasMany(artist_genre, {
+    foreignKey: "artist_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist_genre.belongsTo(genre, {
+    foreignKey: "genre_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  genre.hasMany(artist_genre, {
+    foreignKey: "genre_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  concert_artist_model.belongsTo(concert_info, {
+    foreignKey: "concert_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  concert_info.hasMany(concert_artist_model, {
+    foreignKey: "concert_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  concert_artist_model.belongsTo(artist, {
+    foreignKey: "artist_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
+  artist.hasMany(concert_artist_model, {
+    foreignKey: "artist_code",
+    onUpdate: "cascade",
+    onDelete: "cascade",
+  });
 
   return {
     holiday,

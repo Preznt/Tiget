@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
             poster.className = "poster";
             poster.src = ele.concert_poster;
 
+            let detail_box = document.createElement("DIV");
+            detail_box.className = "detail_box";
+
             let link = document.createElement("A");
             link.className = "name";
             link.textContent = ele.concert_name;
@@ -65,8 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ticketing.className = "ticketing";
             ticketing.textContent = "예매하기";
 
-            listBox.append(
-              poster,
+            detail_box.append(
               link,
               date,
               place,
@@ -75,6 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
               label,
               ticketing
             );
+
+            listBox.append(poster, detail_box);
             return listBox;
           });
           favoriteList.append(...data);
