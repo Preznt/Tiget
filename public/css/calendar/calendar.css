@@ -22,6 +22,10 @@ section.calendar.container {
   scroll-snap-align: start;
   padding: 120px 1% 1% 1%;
 }
+section.calendar.container * {
+  font-family: "Nanum Gothic";
+}
+
 /* 
 cf)
 한 요소에 margin-left: auto 를 주게 되면 
@@ -439,10 +443,10 @@ label[for="input_search_genre"]:hover .search_genre_dropdown_box {
   font-weight: 500;
 }
 .calendar .tbody .week div:nth-of-type(1) > .date_txt {
-  color: rgba(200, 32, 49, 1);
+  color: rgba(200, 32, 20, 1);
 }
 .calendar .tbody .week div:nth-last-of-type(1) > .date_txt {
-  color: blue;
+  color: rgba(32, 49, 200, 1);
 }
 .calendar .tbody .week div.today {
   background-color: rgba(100, 100, 100, 0.1);
@@ -452,11 +456,11 @@ label[for="input_search_genre"]:hover .search_genre_dropdown_box {
   color: white;
 }
 .calendar .tbody .week div:nth-of-type(1).today > .date_txt {
-  background-color: rgba(200, 32, 49, 1);
+  background-color: rgba(200, 32, 20, 1);
   color: white;
 }
 .calendar .tbody .week div:nth-last-of-type(1).today > .date_txt {
-  background-color: blue;
+  background-color: rgba(32, 49, 200, 1);
   color: white;
 }
 .calendar .tbody .week div > .holi_txt {
@@ -697,6 +701,26 @@ aside.calendar.my_schedule {
   user-select: none;
   border-radius: 5px 5px 20px 20px;
 }
+.ticket_shape.header .letter {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 75%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.ticket_shape.header .letter span {
+  display: inline-block;
+  height: 30px;
+  line-height: 40px;
+  font-family: "GangwonEduPowerExtraBoldA";
+  font-size: 1.2em;
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
 .ticket_shape.barcode {
   width: 10%;
   height: 80%;
@@ -769,20 +793,29 @@ aside.calendar.my_schedule {
   z-index: 1;
 }
 .ticket_shape.content a {
-  padding: 5px 0;
+  padding: 10px 0;
   color: white;
   user-select: none;
+  border-bottom: 1px solid transparent;
 }
 .ticket_shape.content a:before {
-  content: "\2022";
+  content: "\f3ff";
+  font-weight: 400;
+  font-family: "Font Awesome 6 Free";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
   color: rgba(200, 32, 49, 1);
   font-weight: bold;
   display: inline-block;
   width: 1em;
-  margin-left: -1em;
+  margin-right: 1em;
+  transform: rotateZ(-15deg);
 }
 .ticket_shape.content a:hover {
-  text-decoration: underline;
+  border-bottom: 1px solid #aaa;
   cursor: pointer;
 }
 .bg_image {
