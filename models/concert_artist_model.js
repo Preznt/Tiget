@@ -6,10 +6,12 @@ export default (sequelize) => {
       concert_code: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
       },
       artist_code: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
       },
     },
     {

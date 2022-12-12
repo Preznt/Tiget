@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     order: [["concert_views", "DESC"]],
   });
 
-  res.render("concert", { concert, rConcert });
+  res.render("concert", { concert, rConcert, body: 1 });
 });
 
 router.get("/:category", async (req, res) => {
@@ -27,7 +27,6 @@ router.get("/:category", async (req, res) => {
     const concert = await Concert.findAll({
       where: { concert_type: category },
       order: [["concert_views", "DESC"]],
-      limit: 4,
     });
     // console.log(concert);
     res.json(concert);
@@ -42,7 +41,7 @@ router.get("/genre/:gCategory", async (req, res) => {
   try {
     const concert = await ConcertGenre.findAll({
       where: { genre_code: gCategory },
-      include: Concert,
+      include: "f_concert",
       required: false,
     });
     res.json(concert);
@@ -81,19 +80,28 @@ router.get("/region/:category", async (req, res) => {
   }
 });
 
-router.get("/region/:bigCategory/:category", async (req, res) => {
-  const bigCategory = req.params.bigCategory;
-  const category = req.params.category;
+// 페스티벌 관련 라우터
 
-  console.log(category);
-  try {
-    const concert = await Concert.findAll({
-      where: { concert_type: bigCategory, concert_loc: category },
-    });
-    res.json(concert);
-  } catch (err) {
-    console.log(err);
-  }
+router.get("/type/festival", async (req, res) => {
+  const concert = await Concert.findAll({
+    where: { concert_type: "페스티벌" },
+    order: [["concert_views", "DESC"]],
+  });
+  const rConcert = await Concert.findAll({
+    where: { concert_type: "페스티벌", concert_loc: "서울" },
+    order: [["concert_views", "DESC"]],
+  });
+
+  res.render("concert", { concert, rConcert });
+});
+
+router.get("/festival/:region", async (req, res) => {
+  const region = req.params.region;
+  const rFestival = await Concert.findAll({
+    where: { concert_type: "페스티벌", concert_loc: region },
+    order: [["concert_views", "DESC"]],
+  });
+  res.json(rFestival);
 });
 
 export default router;
