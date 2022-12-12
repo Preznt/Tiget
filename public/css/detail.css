@@ -217,6 +217,10 @@ section.detail {
   background-color: transparent;
   display: none;
 }
+#bookmark + label {
+  cursor: pointer;
+  width: 30px;
+}
 #bookmark + label:before {
   content: "\f005";
   font-weight: 400;

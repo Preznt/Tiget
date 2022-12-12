@@ -1,27 +1,29 @@
 link(rel="stylesheet", href="/css/mypage/bookmark.css")
 script(src="/js/bookmark.js")
+- const name = nickname;
 div.info.list
     div.neonsign Enjoy Your Life!
+    h2.list_title 찜 목록
     div.bookmark_conlist
-    
-    h2 장르별 공연 추천 리스트
-    div.recommend_conlist
-    each list in recommendConList 
-        a(href=`/detail/${list.concert_code}`)
-            div.rcmdCon_list_box
-                img(src=`${list.concert_poster}`).poster
-                div.name= list.concert_name 
-                div.date
-                    span.start= list.start_date
-                    span.dash &nbsp;~&nbsp;
-                    span.end= list.end_date
-                div.place= list.concert_place
-                div.genre= list["genre_concerts.genre.genre_name"]
+    //- js 에서 fetch 데이터 추가
 
-    h2 장르별 아티스트 추천 리스트
+    h2.list_title #{name} 님께 추천하는 공연
+    div.recommend_conlist
+        each list in recommendConList
+            div.rcmdCon_list_box
+                a(href=`/detail/${list.concert_code}`)
+                    img(src=`${list.concert_poster}`).poster
+                    div.name= list.concert_name 
+                    div.date
+                        span.start= list.start_date
+                        span.dash &nbsp;~&nbsp;
+                        span.end= list.end_date
+                    div.place= list.concert_place
+                    div.genre= list["genre_concerts.genre.genre_name"]
+    h2.list_title #{name} 님께 추천하는 아티스트
     div.recommend_artlist
-    each list in recommendArtList
-        div.rcmdArt_list_box
-            img(src=`${list.artist_img}`).image
-            div.name= list.artist_name
-            div.genre= list["artist_genres.genre.genre_name"]
+        each list in recommendArtList
+            div.rcmdArt_list_box
+                img(src=`${list.artist_img}`).image
+                div.name= list.artist_name
+                div.genre= list["artist_genres.genre.genre_name"]

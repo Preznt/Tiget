@@ -1,43 +1,95 @@
+script(src="/js/favorite_genre.js") 
 form(method ="POST").genre_select
-    input(name= "username" placeholder="username을 입력해주세요" id="username")
     .pop
-        label(for="pop") 팝 
-        input(name= "genre" type="checkbox" id="pop" value="G0001" )
+        if info.filter((info) => info.dataValues.genre_code == "G0001") == ""
+            label(for="pop") 팝 
+            input(name= "genre" type="checkbox" id="pop" value="G0001" )
+        else
+            label(for="pop") 팝 
+            input(name= "genre" type="checkbox" id="pop" value="G0001" checked)
     .rock
-        label(for="rock") 락    
-        input(name= "genre" type="checkbox" id="rock", value="G0002")
+        if info.filter((info) => info.dataValues.genre_code == "G0002") == ""
+            label(for="rock") 락    
+            input(name= "genre" type="checkbox" id="rock", value="G0002" )
+        else
+            label(for="rock") 락    
+            input(name= "genre" type="checkbox" id="rock", value="G0002" checked)
     .trot
-        label(for="trot") 트로트
-        input(name= "genre" type="checkbox" id="trot", value="G0003")
+        if info.filter((info) => info.dataValues.genre_code === "G0003") == ""
+            label(for="trot") 트로트
+            input(name= "genre" type="checkbox" id="trot", value="G0003")
+        else
+            label(for="trot") 트로트
+            input(name= "genre" type="checkbox" id="trot", value="G0003" checked)
     .ballad
-        label(for="ballad") 발라드
-        input(name= "genre" type="checkbox" id="ballad", value="G0004")
+        if info.filter((info) => info.dataValues.genre_code === "G0004") == ""
+            label(for="ballad") 발라드
+            input(name= "genre" type="checkbox" id="ballad", value="G0004"  )
+        else
+            label(for="ballad") 발라드
+            input(name= "genre" type="checkbox" id="ballad", value="G0004" checked)
     .hiphop
-        label(for="hiphop") 힙합
-        input(name= "genre" type="checkbox" id="hiphop", value="G0005")
+        if info.filter((info) => info.dataValues.genre_code == "G0005") == ""
+            label(for="hiphop") 힙합
+            input(name= "genre" type="checkbox" id="hiphop", value="G0005" )
+        else
+            label(for="hiphop") 힙합
+            input(name= "genre" type="checkbox" id="hiphop", value="G0005" checked)
     .rnb
-        label(for="rnb") 알앤비
-        input(name= "genre" type="checkbox" id="rnb", value="G0006")
+        if info.filter((info) => info.dataValues.genre_code == "G0006") ==""
+            label(for="rnb") 알앤비
+            input(name= "genre" type="checkbox" id="rnb", value="G0006")
+        else
+            label(for="rnb") 알앤비
+            input(name= "genre" type="checkbox" id="rnb", value="G0006" checked)
     .folk_blues
-        label(for="folk_blues") 포크/블루스
-        input(name= "genre" type="checkbox" id="folk_blues", value="G0007")                        
+        if info.filter((info) => info.dataValues.genre_code == "G0007") == ""
+            label(for="folk_blues") 포크/블루스
+            input(name= "genre" type="checkbox" id="folk_blues", value="G0007")
+        else
+            label(for="folk_blues") 포크/블루스
+            input(name= "genre" type="checkbox" id="folk_blues", value="G0007" checked)
     .electronic
-        label(for="electronic") 일렉트로닉
-        input(name= "genre" type="checkbox" id="electronic", value="G0008")
+        if info.filter((info) => info.dataValues.genre_code == "G0008") == ""
+            label(for="electronic") 일렉트로닉
+            input(name= "genre" type="checkbox" id="electronic", value="G0008")
+        else
+            abel(for="electronic") 일렉트로닉
+            input(name= "genre" type="checkbox" id="electronic", value="G0008" checked)
     .classic
-        label(for="classic") 클래식
-        input(name= "genre" type="checkbox" id="classic", value="G0009")                                     
+        if info.filter((info) => info.dataValues.genre_code == "G0009") == ""
+            label(for="classic") 클래식
+            input(name= "genre" type="checkbox" id="classic", value="G0009")
+        else
+            label(for="classic") 클래식
+            input(name= "genre" type="checkbox" id="classic", value="G0009" checked)
     .jazz
-        label(for="jazz") 재즈
-        input(name= "genre" type="checkbox" id="jazz", value="G0010")                                
+        if info.filter((info) => info.dataValues.genre_code == "G0010") == ""
+            label(for="jazz") 재즈
+            input(name= "genre" type="checkbox" id="jazz", value="G0010")
+        else
+            label(for="jazz") 재즈
+            input(name= "genre" type="checkbox" id="jazz", value="G0010" checked)
     .musical
-        label(for="musical") 뮤지컬
-        input(name= "genre" type="checkbox" id="musical", value="G0011")                                     
+        if info.filter((info) => info.dataValues.genre_code == "G0011") ==""
+            label(for="musical") 뮤지컬
+            input(name= "genre" type="checkbox" id="musical", value="G0011")
+        else
+            label(for="musical") 뮤지컬
+            input(name= "genre" type="checkbox" id="musical", value="G0011" checked)
     .CCM
-        label(for="CCM") CCM
-        input(name= "genre" type="checkbox" id="CCM", value="G0012")
+        if info.filter((info) => info.dataValues.genre_code == "G0012") ==""
+            label(for="CCM") CCM
+            input(name= "genre" type="checkbox" id="CCM", value="G0012")
+        else
+            label(for="CCM") CCM
+            input(name= "genre" type="checkbox" id="CCM", value="G0012" checked)
     .inde
-        label(for="independent") 인디뮤직
-        input(name= "genre" type="checkbox", id="independent", value="G0013")   
+        if info.filter((info) => info.dataValues.genre_code == "G0013") == ""
+            label(for="independent") 인디뮤직
+            input(name= "genre" type="checkbox", id="independent", value="G0013")
+        else
+            label(for="independent") 인디뮤직
+            input(name= "genre" type="checkbox", id="independent", value="G0013" checked)
     .buttonBox
         button(type="button").genre_button 선호장르 저장
