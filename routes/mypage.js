@@ -1,12 +1,9 @@
 import express from "express";
 import DB from "../models/index.js";
-<<<<<<< HEAD
 import Sequelize from "sequelize";
 import sequelize from "sequelize";
 // 비교 연산자 사용
 import { Op } from "sequelize";
-=======
->>>>>>> main
 import moment from "moment";
 import session from "express-session";
 
