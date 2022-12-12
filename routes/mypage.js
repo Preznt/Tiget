@@ -8,10 +8,16 @@ import moment from "moment";
 import session from "express-session";
 
 const Users = DB.models.user;
-const IntCon = DB.models.concert_of_interest;
-const IntArt = DB.models.artist_of_interest;
-const IntGen = DB.models.genre_of_interest;
+const Concert = DB.models.concert_info;
+const Artist = DB.models.artist;
+const ArtGen = DB.models.artist_genre;
+const GenCon = DB.models.genre_concert_model;
+const InterCon = DB.models.concert_of_interest;
+const InterArt = DB.models.artist_of_interest;
+const InterGen = DB.models.genre_of_interest;
+const Genre = DB.models.genre;
 const dateFormat = "YYYY.MM.DD";
+const findDateFormat = "YYYY-MM-DD";
 
 const router = express.Router();
 
