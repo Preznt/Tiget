@@ -52,7 +52,7 @@ button {
 }
 
 #modal .content {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 0px 10px;
   text-shadow: 1px 1px 2px gray;
   color: white;
@@ -62,7 +62,7 @@ button {
 }
 div.login.url {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1.5fr 0.3fr 1.5fr 0.5fr 1.5fr;
   text-align: center;
 }
 form.login {
