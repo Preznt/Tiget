@@ -581,6 +581,10 @@ button.modal.btn_close:hover {
   background-color: transparent;
   display: none;
 }
+.modal#bookmark + label {
+  cursor: pointer;
+  width: 30px;
+}
 .modal#bookmark + label:before {
   position: absolute;
   top: 48px;
@@ -684,7 +688,7 @@ aside.calendar.my_schedule {
 .ticket_shape.header {
   width: 100%;
   flex: 1.5;
-  background-color: #c5a773;
+  background-color: red;
   position: relative;
   display: flex;
   justify-content: center;
@@ -761,7 +765,7 @@ aside.calendar.my_schedule {
   height: 95%;
   padding: 30px;
   border-radius: 20px;
-  border: 1px solid #c5a773;
+  border: 1px solid red;
   z-index: 1;
 }
 .ticket_shape.content a {
@@ -771,7 +775,7 @@ aside.calendar.my_schedule {
 }
 .ticket_shape.content a:before {
   content: "\2022";
-  color: #c5a773;
+  color: red;
   font-weight: bold;
   display: inline-block;
   width: 1em;

@@ -70,9 +70,6 @@ router.get("/:conCode", async (req, res) => {
       where: { concert_code: code },
     });
 
-    // 콘서트 데이터
-    // init-models.js 에 as 지정하면 이 코드가 맛이 가는데
-    // as를 여기에서 어떻게 사용하는지 모르겠어요
     let conResult = await Concert.findAll({
       raw: true,
       where: { concert_code: code },
