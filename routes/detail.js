@@ -18,26 +18,15 @@ const router = express.Router();
  */
 
 // 재귀함수 사용해서 함수 통합 가능?
-/**
- * sequelize 고유메서드를 사용할 경우
- * 데이터가 배열, 객체 리터럴 반복적으로 중첩
- * 따라서 객체 안 컬럼명: [요소1, 요소2 ...] 로 변환
- */
-const conRemoveNested = (data, group, subgroup, column) => {
-  // data의 깊은 복사 필요
-  // 초기 데이터는 배열
-  let lists = JSON.parse(JSON.stringify(data))[0];
+
+const conRemoveNested = (data, column) => {
   let array = [];
-  // 객체 선택 후 여기서부터 다시 배열이므로 map()
-  lists[group].map((obj) => {
-    // 다시 객체 선택
-    array.push(obj[subgroup][column]);
+  data.map((obj) => {
+    array.push(obj[column]);
   });
+  data[0][column] = array;
 
-  delete lists[group];
-  lists[column] = array;
-
-  return lists;
+  return data[0];
 };
 
 // sequelize.query 를 사용했을 때...
@@ -85,6 +74,7 @@ router.get("/:conCode", async (req, res) => {
     // init-models.js 에 as 지정하면 이 코드가 맛이 가는데
     // as를 여기에서 어떻게 사용하는지 모르겠어요
     let conResult = await Concert.findAll({
+      raw: true,
       where: { concert_code: code },
       attributes: [
         "concert_code",
@@ -100,15 +90,11 @@ router.get("/:conCode", async (req, res) => {
       ],
       include: {
         model: GenCon,
+        as: "fk_concert",
         include: { model: Genre, attributes: ["genre_name"] },
       },
     });
-    const conInfo = conRemoveNested(
-      conResult,
-      "genre_concerts",
-      "genre",
-      "genre_name"
-    );
+    const conInfo = conRemoveNested(conResult, "fk_concert.genre.genre_name");
 
     // let artQuery = await Concert.findAll({
     //   where: { concert_code: code },

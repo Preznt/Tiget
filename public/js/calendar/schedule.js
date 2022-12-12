@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnDetail = document.querySelector("a#btn_info");
   const btnTicketing = document.querySelector("a#btn_ticketing");
   const btnClose = document.querySelector("button.modal.btn_close");
-  const bookmark = document.querySelector("#input_bookmark");
+  const bookmark = document.querySelector("#bookmark");
   const favoriteList = document.querySelector("div.ticket_shape.content");
 
   const image = document.querySelector(".modal.image");

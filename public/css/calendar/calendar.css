@@ -575,12 +575,13 @@ button.modal.btn_close:hover {
 .modal.title .place {
   color: #ccc;
 }
-.modal#input_bookmark {
+.modal#bookmark {
   width: 0;
   height: 0;
   background-color: transparent;
+  display: none;
 }
-.modal#input_bookmark + label:before {
+.modal#bookmark + label:before {
   position: absolute;
   top: 48px;
   right: 25%;
@@ -595,7 +596,7 @@ button.modal.btn_close:hover {
   -webkit-font-smoothing: antialiased;
   color: orange;
 }
-.modal#input_bookmark:checked + label:before {
+.modal#bookmark:checked + label:before {
   font-weight: 900;
   animation: 0.5s ease-out pop;
 }
