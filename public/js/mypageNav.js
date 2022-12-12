@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "사용자 정보", url: `${baseURL}` },
     { name: "비밀번호 변경", url: `${baseURL}/pwChange/` },
     { name: "선호장르 설정", url: `${baseURL}/favoriteGenre` },
-    { name: "찜목록", url: `` },
+    { name: "찜목록", url: `${baseURL}/bookmark` },
     { name: "회원탈퇴", url: `${baseURL}/delete` },
   ];
   Nav?.addEventListener("click", (e) => {
