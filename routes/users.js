@@ -50,6 +50,7 @@ router.get("/bltBrd/page/:page", async (req, res) => {
   const boards = await Board.sequelize.query(sql, {
     type: QueryTypes.SELECT,
   });
+  console.log(boards);
   const boardsList = boards.filter((category) => {
     return category.sort_board != "공지사항";
   });
