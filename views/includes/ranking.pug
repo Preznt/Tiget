@@ -15,7 +15,7 @@ section.performance.info#ranking
         div.detail
                 div.poster1
                     - for(let i = 0; i < 2; i++)
-                        a(href=`http://localhost:3302/detail/${concerts[i].concert_code}`)
+                        a(href=`http://localhost:3002/detail/${concerts[i].concert_code}`)
                             img(src=`${concerts[i].concert_poster}`, alt="")
                             div
                                 div.title= concerts[i].concert_name
@@ -23,7 +23,7 @@ section.performance.info#ranking
     
                 div.poster2
                     - for(let i = 2; i < 4; i++)
-                        a(href="")
+                        a(href=`http://localhost:3002/detail/${concerts[i].concert_code}`)
                             img(src=`${concerts[i].concert_poster}`, alt="")
                             div
                                 div.title= concerts[i].concert_name
@@ -36,13 +36,13 @@ section.performance.info#ranking
             button(data-index="3") 페스티벌
         div.detail 
             div.big-poster
-                a(href="")
+                a(href=`http://localhost:3002/detail/${recommends[0].concert_code}`)
                     img(src=`${recommends[0].concert_poster}`, alt="")
                     div.title= recommends[0].concert_name
                     div.date= recommends[0].start_date + "-" + recommends[0].end_date
             div.sub-posters
                 - for(let i = 1; i < 3; i++)
-                        a(href="")
+                        a(href=`http://localhost:3002/detail/${recommends[i].concert_code}`)
                             img(src=`${recommends[i].concert_poster}`, alt="")
                             div
                                 div.title= recommends[i].concert_name

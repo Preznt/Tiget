@@ -12,11 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetImg = e.target;
     if (targetImg.tagName === "IMG") {
       const newImg = document.createElement("IMG");
-      newImg.src = targetImg.src;
-      imgView.appendChild(newImg);
+      const newA = document.createElement("A");
 
-      document.querySelector(".image-view img").classList.add("effect");
-      document.querySelector(".image-view img").remove();
+      newImg.src = targetImg.src;
+      newA.href = targetImg.closest("a").href;
+      newA.appendChild(newImg);
+      imgView.append(newA);
+
+      document.querySelector(".image-view a").remove();
     }
   };
 

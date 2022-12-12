@@ -23,7 +23,7 @@ block content
             div.swiper-scrollbar
                     div.pager-bg
                         - for(let i = 0; i < 15; i++)
-                            a(href="")
+                            a(href=`http://localhost:3002/detail/${concerts[i].concert_code}`)
                                 img(src=`${concerts[i].concert_poster}`, alt="")
         div.test 
             .main.button.box    
