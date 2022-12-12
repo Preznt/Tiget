@@ -88,19 +88,42 @@ router.get("/pwChange", chkSession, async (req, res) => {
     res.render("mypage", {
       body: "change_password",
       user: result,
+      username: user,
     });
   } catch (err) {
     res.json(err);
     console.error(err);
   }
 });
+
+router.get("/pwChange/:nowPw", async (req, res) => {
+  const pw = req.params.nowPw;
+  const user = req.session.user.username;
+  try {
+    const userPw = await Users.findAll({
+      where: {
+        username: user,
+        password: pw,
+      },
+    });
+    console.log(userPw);
+    if (userPw == "") {
+      res.json({ status: null });
+      return false;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 router.post("/pwChange", chkSession, async (req, res) => {
   const user = req.session.user.username;
   const { nowPw, newPw } = req.body;
+  console.log(user);
   try {
     const pwChk = await Users.findOne({ where: { password: nowPw } });
     if (pwChk == null) {
-      res.redirect("/mypage");
+      res.redirect("/mypage/pwChange");
       return false;
     }
   } catch (err) {
@@ -114,7 +137,9 @@ router.post("/pwChange", chkSession, async (req, res) => {
         where: { username: user },
       }
     );
-    res.redirect("/mypage");
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write("<script>alert('비밀번호가 변경되었습니다')</script>");
+    res.write("<script>location.href='/mypage'</script>");
   } catch (err) {
     console.error(err);
   }
