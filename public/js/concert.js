@@ -5,29 +5,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const rheaderBox = document.querySelector(".region.box");
   const rheaderBtns = document.querySelectorAll(".region.box button");
 
+  const rImgs = document.querySelectorAll("article.concert.region img");
+  const rTitles = document.querySelectorAll("article.concert.region div.title");
+  const rDates = document.querySelectorAll("article.concert.region div.date");
+
+  const imgView = document.querySelector("div.image-view");
+  const imgList = document.querySelector("div.image-list");
+
+  const bannerImgview = (e) => {
+    const targetImg = e.target;
+    if (targetImg.tagName === "IMG") {
+      console.log(targetImg.src);
+      const newImg = document.createElement("IMG");
+      newImg.src = targetImg.src;
+      imgView.appendChild(newImg);
+
+      document.querySelector(".image-view img").classList.add("effect");
+      document.querySelector(".image-view img").remove();
+    }
+  };
+
+  imgList?.addEventListener("mouseover", bannerImgview);
+
+  // 카테고리 변경 클릭시 CSS 변경
+  const btnActive = (btns, event) => {
+    const btnIndex = event.dataset.index;
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.remove("active");
+    }
+    btns[btnIndex].classList.add("active");
+  };
+
+  const dataActive = (region) => {
+    const length = rImgs.length;
+    for (let i = 0; i < length; i++) {
+      rImgs[i].src = region[i].concert_poster;
+      rTitles[i].textContent = region[i].concert_name;
+      rDates[i].textContent = `${region[i].start_date} - ${region[i].end_date}`;
+    }
+  };
   headerBox?.addEventListener("click", (e) => {
-    const btn = e.target;
-    const btnIndex = btn.dataset.index;
-    if (btn.tagName === "BUTTON") {
-      for (let i = 0; i < headerBtns.length; i++) {
-        headerBtns[i].classList.remove("active");
-      }
-      headerBtns[btnIndex].classList.add("active");
+    const event = e.target;
+    if (event.tagName === "BUTTON") {
+      btnActive(headerBtns, event);
     }
   });
 
   rheaderBox?.addEventListener("click", (e) => {
-    const btn = e.target;
-    const btnIndex = btn.dataset.index;
-    const region = btn.textContent;
-    if (btn.tagName === "BUTTON") {
-      for (let i = 0; i < rheaderBtns.length; i++) {
-        rheaderBtns[i].classList.remove("active");
-      }
-      rheaderBtns[btnIndex].classList.add("active");
+    const event = e.target;
+    const category = event.textContent;
+    console.log(category);
+    if (event.tagName === "BUTTON") {
+      btnActive(rheaderBtns, event);
     }
-    fetch(`/concert/${region}`)
-      .then((res) => res.json)
-      .then((region) => console.log(region));
+    fetch(`concert/region/${category}`)
+      .then((res) => res.json())
+      .then((region) => dataActive(region));
   });
 });

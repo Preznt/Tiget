@@ -5,10 +5,8 @@ section.performance.info {
 }
 
 div.ranking {
-  width: 20%;
   flex: 1;
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
@@ -39,7 +37,7 @@ div.title button.non-active {
   color: #ccc;
 }
 
-div.title button:hover {
+div.title button.hover:hover {
   color: #aaa;
 }
 
@@ -75,6 +73,12 @@ div.detail a {
   margin: 12px;
 }
 
+.detail div.big-poster a {
+  display: inline-block;
+  width: 370px;
+  margin: 12px;
+}
+
 div.ranking {
   scroll-snap-align: start;
 }
@@ -97,11 +101,11 @@ div.recommend div.detail .big-poster {
   flex: 1;
 }
 div.recommend div.detail .big-poster img {
-  width: 378px;
-  height: 558px;
+  width: 370px;
+  height: 550px;
 }
 
 div.recommend div.detail .sub-poster {
-  flex: 2;
+  flex: 1.5;
   align-items: flex-end;
 }
