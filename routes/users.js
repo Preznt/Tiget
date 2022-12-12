@@ -132,10 +132,14 @@ router.get("/bltBrd/detail", (req, res) => {
 router.get("/bltBrd/write", (req, res) => {
   res.render("users/write");
 });
+let nickname = 0;
 router.post(
   "/bltBrd/write",
   upload.single("c_image_file"),
   async (req, res) => {
+    if (req.session.user) {
+      nickname = req.session.user.nickname;
+    }
     const { b_title, sort_board, b_content } = req.body;
     const date = moment().format(dateFormat);
     const time = moment().format(timeFormat);
@@ -145,8 +149,9 @@ router.post(
       sort_board,
       b_content,
       b_img: req?.file?.filename,
-      b_nickname: "익명",
+      b_nickname: nickname || "익명",
       b_update_date,
+      b_Views: 0,
     };
     try {
       await Board.create(item);
@@ -171,7 +176,8 @@ router.post("/login", async (req, res) => {
     const pw = userInfo.password;
     if (pw !== user_pw) {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.write("<script>alert('비밀번호가 틀렸습니다')</script>");      
+      res.write("<script>alert('비밀번호가 틀렸습니다')</script>");
+      return res.write("<script>location.href='/main'</script>");
     }
   } else {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
@@ -181,7 +187,7 @@ router.post("/login", async (req, res) => {
   req.session.user = userInfo;
   console.log(req.session.user);
   req.session.save(() => {
-    res.redirect("/");
+    res.redirect("/main");
   });
 });
 
@@ -221,4 +227,19 @@ router.post("/join/register", async (req, res) => {
   }
   return res.redirect("/main");
 });
+
+router.get("/join/register/:email", async (req, res) => {
+  const email = req.params.email;
+  try {
+    const username = await User.findByPk(email);
+    if (username) {
+      return res.json({ status: "YES", message: "이미 사용중인 이메일입니다" });
+    } else {
+      return res.json({ status: null, message: "사용가능한 이메일입니다" });
+    }
+  } catch (err) {
+    res.send("SQL 오류");
+  }
+});
+
 export default router;

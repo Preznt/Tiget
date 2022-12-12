@@ -119,6 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const pagebtn = document.querySelector(`button[id='${currentPage}']`);
   (() => {
-    pagebtn.style.backgroundColor = "gray";
+    pagebtn.style.backgroundColor = "rgb(66, 188, 236)";
+    pagebtn.style.color = "white";
+    pagebtn.style.fontWeight = "900";
+    pagebtn.style.borderRadius = "50%";
+    pagebtn.style.width = "50px";
+    pagebtn.style.boxShadow = "0px 3px 8px 3px rgba(0,0,0,0.34)";
   })();
 });

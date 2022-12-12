@@ -40,6 +40,10 @@ export default (sequelize) => {
         type: Sequelize.DataTypes.STRING(255),
         allowNull: true,
       },
+      b_Views: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     {
       sequelize,
