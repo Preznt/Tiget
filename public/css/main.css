@@ -7,12 +7,25 @@ html {
   width: 100vw;
   height: 100vh;
 }
-
+@font-face {
+  font-family: "GangwonEduPowerExtraBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MICEGothic Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
 body {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #fff1eb 0%, #ace0f9 100%);
   position: relative;
+  font-family: "Nanum Gothic";
 }
 section.scroll {
   scroll-behavior: smooth !important;
@@ -29,7 +42,7 @@ section.scroll {
 header {
   flex-direction: row;
   padding: 0 30px;
-  z-index: 2;
+  z-index: 100;
   width: 100%;
   height: 100px;
   display: flex;
@@ -37,8 +50,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0);
-  transition: all ease-in 0.2s;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  transition: all cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.3s;
 }
 div.main {
   position: relative;
@@ -50,7 +63,6 @@ div.main {
   scroll-snap-align: start;
 }
 div.test {
-  background: linear-gradient(to bottom, #fff1eb 0%, #ace0f9 100%);
   top: 80%;
   width: 100%;
   height: 20%;
@@ -92,18 +104,53 @@ header .search {
 header .search > * {
   margin: 5px;
 }
-
-header.active {
-  background-color: #181818;
-}
-header a {
+header a,
+.user {
   color: white;
 }
 header .user {
-  font-size: 25pt;
+  font-size: 18pt;
+  cursor: pointer;
 }
+header.active {
+  background: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 1),
+    rgba(100, 20, 20, 1)
+  );
+}
+@keyframes changeBg {
+  0% {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0)
+    );
+    opacity: 0;
+    height: 0px;
+  }
+  100% {
+    background: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(100, 20, 20, 1)
+    );
+    opacity: 1;
+    height: 100px;
+  }
+}
+
 a {
   text-decoration: none;
+}
+
+button.login,
+button.logout {
+  padding: 8px 0;
+  width: 80px;
+  text-align: center;
+  font-size: 12pt;
+  border-radius: 5px;
 }
 
 div.left {

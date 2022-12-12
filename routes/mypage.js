@@ -1,5 +1,6 @@
 import express from "express";
 import DB from "../models/index.js";
+import Sequelize from "sequelize";
 import sequelize from "sequelize";
 // 비교 연산자 사용
 import { Op } from "sequelize";
@@ -133,6 +134,7 @@ router.post("/pwChange/:username", async (req, res) => {
 router.get("/bookmark", chkSession, async (req, res) => {
   try {
     const user = req.session.user.username;
+    const nickname = req.session.user.nickname;
     const today = moment().format(findDateFormat);
     /**
      * cf)
@@ -140,11 +142,15 @@ router.get("/bookmark", chkSession, async (req, res) => {
      * 따라서 null를 제외하도록 조건으로 직접 지정
      */
     // 선호 장르에 맞는 공연 추천
+    // ** 이미 찜한 공연은 보여주지 않으려면 어떤 조건을 추가해야 하는지?
     const recommendConList = await Concert.findAll({
       raw: true,
-      where: { end_date: { [Op.gte]: today } },
+      where: { start_date: { [Op.gte]: today } },
+      subQuery: false,
+      order: [Sequelize.fn("RAND")],
       include: {
         model: GenCon,
+        as: "fk_concert",
         where: { concert_code: { [Op.not]: null } },
         include: {
           model: Genre,
@@ -156,11 +162,15 @@ router.get("/bookmark", chkSession, async (req, res) => {
           },
         },
       },
+      limit: 6,
     });
 
     // 선호 장르에 맞는 아티스트 추천
+    // 중복되는 아티스트는 포함시키지 말 것
     const recommendArtList = await Artist.findAll({
       raw: true,
+      order: [Sequelize.fn("RAND")],
+      subQuery: false,
       include: {
         model: ArtGen,
         where: { artist_code: { [Op.not]: null } },
@@ -174,6 +184,7 @@ router.get("/bookmark", chkSession, async (req, res) => {
           },
         },
       },
+      limit: 4,
     });
 
     // 선호 장르 > 선호 아티스트(또는 아티스트 찜) > 추천 공연으로 넘어가야 할 것 같다
@@ -200,10 +211,11 @@ router.get("/bookmark", chkSession, async (req, res) => {
       body: "bookmark",
       recommendConList,
       recommendArtList,
+      nickname,
     });
   } catch (err) {
     console.error(err);
-    return res.send("USER INTEREST DATA SQL SELECT ERROR");
+    return res.send("USER RECOMMEND DATA SQL SELECT ERROR");
   }
 });
 
@@ -218,6 +230,10 @@ router.get("/bookmarklist", async (req, res) => {
       const dday = sequelize.fn("datediff", today, sequelize.col("start_date"));
       conList = await Concert.findAll({
         raw: true,
+        order: [
+          ["start_date", "ASC"],
+          ["concert_name", "ASC"],
+        ],
         attributes: [
           "concert_code",
           "concert_name",

@@ -12,26 +12,193 @@ div.info.list {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-style: italic;
+  font-family: "GangwonEduPowerExtraBoldA";
+}
+h2.list_title {
+  width: 90%;
+  margin: 0 auto 10px;
 }
 .bookmark_conlist,
 .recommend_conlist,
 .recommend_artlist {
   width: 90%;
   margin: 0 auto;
-  display: flex;
+  padding: 20px 0;
+}
+.bookmark_conlist,
+.recommend_conlist {
+  margin-bottom: 50px;
 }
 .bookmark_conlist {
+  display: flex;
   flex-direction: column;
 }
 .bookmark_conlist .bmk_list_box {
   width: 100%;
   height: 200px;
-  /* display: grid; */
-  /* grid-template-columns: 3fr 5fr; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
 }
 .bmk_list_box > * {
   display: inline-block;
 }
-.bmk_list_box img {
+.bmk_list_box .seq {
+  background-color: #181818;
+  width: 50px;
+  height: 50px;
+  color: white;
+  font-size: 14pt;
+  font-weight: 900;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  user-select: none;
+}
+.bmk_list_box .poster {
   height: 100%;
+  border-radius: 5px;
+}
+.bmk_list_box .detail_box {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.detail_box > * {
+  padding: 2px 0;
+}
+.detail_box .name {
+  font-size: 14pt;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #181818;
+  word-break: keep-all;
+}
+.detail_box .name:hover {
+  text-decoration: underline;
+}
+.detail_box .dday {
+  font-weight: 700;
+}
+#bookmark {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  display: none;
+}
+#bookmark + label {
+  cursor: pointer;
+  width: 30px;
+}
+#bookmark + label:before {
+  content: "\f005";
+  font-weight: 400;
+  font-size: 20pt;
+  font-family: "Font Awesome 6 Free";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  color: orange;
+}
+#bookmark:checked + label:before {
+  font-weight: 900;
+  animation: 0.5s ease-out pop;
+}
+.bmk_list_box .ticketing {
+  margin-left: auto;
+  padding: 1.2em;
+  width: 120px;
+  font-size: 12pt;
+  color: white;
+  border-radius: 5px;
+  background-color: #ff2e2e;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  text-align: center;
+  user-select: none;
+}
+.bmk_list_box .ticketing:before {
+  content: "\f145";
+  font-weight: 700;
+  font-family: "Font Awesome 6 Free";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+.bmk_list_box.ticketing:hover .ticketing:before {
+  animation: 0.5s infinite linear shake;
+}
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.recommend_conlist {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
+  gap: 15px;
+}
+.rcmdCon_list_box > * {
+  display: inline-block;
+}
+.rcmdCon_list_box {
+  min-width: 100%;
+}
+.rcmdCon_list_box a {
+  min-width: 100%;
+}
+.rcmdCon_list_box .poster {
+  min-width: 100%;
+  border-radius: 5px;
+}
+
+.rcmdCon_list_box:hover {
+  z-index: 5;
+}
+
+.recommend_artlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.rcmdArt_list_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  padding: 10px;
+}
+.rcmdArt_list_box .image {
+  min-width: 150px;
+  border-radius: 50%;
+  height: 150px;
+  margin-bottom: 10px;
+}
+.rcmdArt_list_box .name {
+  font-size: 14pt;
+  font-weight: 700;
 }
