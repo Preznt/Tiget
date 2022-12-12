@@ -8,22 +8,24 @@ block content
     section.concert.content 
         div.concert.header
             div.header.box
-                h1 공연
-                button.active(data-index="0") 국내
-                button(data-index="1") 내한
-            
+                if body == 1
+                    h1 공연
+                else 
+                    h1 페스티벌
+                if body == 1
+                    button.active(data-index="0") 국내
+                    button(data-index="1") 내한
+                    
         article.concert.banner
-
             div.image-view
-                img(src="//image.toast.com/aaaaab/ticketlink/TKL_6/TopBanner_개와고양이의시간.jpg")
+                img(src=`${concert[0].concert_poster}`)
             div.image-list
-                - for(let i = 0; i < 10 ; i++)
+                - for(let i = 0; i < 4 ; i++)
                     img(src=`${concert[i].concert_poster}`, alt="")
-        
         article.concert.info
             h2 공연정보
             div.concert.poster
-                - for(let i = 0; i < 5 ; i++)
+                - for(let i = 0; i < 4 ; i++)
                     a(href="")
                         img(src=`${concert[i].concert_poster}`, alt="")
                         div
@@ -31,7 +33,7 @@ block content
                             div.region= concert[i].concert_loc
                             div.date= concert[i].start_date + "-" + concert[i].end_date
             div.concert.poster
-                - for(let i = 5; i < 10 ; i++)
+                - for(let i = 0; i < 3 ; i++)
                     a(href="")
                         img(src=`${concert[i].concert_poster}`, alt="")
                         div
@@ -49,14 +51,14 @@ block content
                     button(data-index="4") 강원도
                     button(data-index="5") 제주
             div.region.poster
-                - for(let i = 0; i < 5 ; i++)
+                - for(let i = 0; i < 2 ; i++)
                     a(href="")
                         img(src=`${rConcert[i].concert_poster}`, alt="")
                         div
                             div.title= rConcert[i].concert_name
                             div.date= rConcert[i].start_date + "-" + rConcert[i].end_date
             div.region.poster
-                - for(let i = 5; i < 10 ; i++)
+                - for(let i = 0; i < 2 ; i++)
                     a(href="")
                         img(src=`${rConcert[i].concert_poster}`, alt="")
                         div
