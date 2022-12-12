@@ -3,6 +3,8 @@ import boardList from "../models/index.js";
 import moment from "moment";
 import { Sequelize } from "sequelize";
 import session from "express-session";
+import sequelize from "sequelize";
+import { QueryTypes } from "sequelize";
 
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
@@ -27,6 +29,8 @@ router.get("/board/:id", async (req, res) => {
   let replies;
 
   let replyContent = [];
+  const updateSql = `update board_detail set b_Views = b_Views +1 where seq = ${id}`;
+  await Board.sequelize.query(updateSql, { type: QueryTypes.UPDATE });
   try {
     replies = await Reply.findAll({
       where: { board_code: id },
@@ -107,25 +111,48 @@ router.post("/board/:boardSeq", async (req, res) => {
 
 router.get("/:loadFor", async (req, res) => {
   let loadFor = req.params.loadFor;
-  try {
-    const boardResult = await Board.findAll({
-      where: { sort_board: loadFor },
-      limit: 14,
-      include: "f_reply",
-    });
-    let replies = [];
-    for (let i = 0; i < boardResult.length; i++) {
-      replies.push(boardResult[i].f_reply.length);
+  // 전체게시판일시에 따로 불러오기
+  if (loadFor === "전체보기") {
+    try {
+      const boardResult = await Board.findAll({
+        limit: 14,
+        include: "f_reply",
+      });
+      let replies = [];
+      for (let i = 0; i < boardResult.length; i++) {
+        replies.push(boardResult[i].f_reply.length);
+      }
+
+      boardResult.concat(replies);
+
+      // console.log(boardResult);
+
+      return res.json(boardResult);
+    } catch (err) {
+      console.error(err);
+      return res.send("좀 더 수련해");
     }
+  } else {
+    try {
+      const boardResult = await Board.findAll({
+        where: { sort_board: loadFor },
+        limit: 14,
+        include: "f_reply",
+      });
+      let replies = [];
+      for (let i = 0; i < boardResult.length; i++) {
+        replies.push(boardResult[i].f_reply.length);
+      }
 
-    boardResult.concat(replies);
+      boardResult.concat(replies);
 
-    // console.log(boardResult);
+      // console.log(boardResult);
 
-    return res.json(boardResult);
-  } catch (err) {
-    console.error(err);
-    return res.send("좀 더 수련해");
+      return res.json(boardResult);
+    } catch (err) {
+      console.error(err);
+      return res.send("좀 더 수련해");
+    }
   }
 });
 

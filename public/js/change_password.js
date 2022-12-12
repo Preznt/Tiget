@@ -23,16 +23,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   changeBtn?.addEventListener("click", () => {
     const nowPw = pwInput.value;
-    let newPwVal = newPw.value;
-    let newPwChkVal = newPwChk.value;
+    const newPwVal = newPw.value;
+    const newPwChkVal = newPwChk.value;
     if (!nowPw) {
       alert("현재 비밀번호를 입력해주세요");
+      return false;
+    }
+    if (!newPwVal) {
+      alert("변경할 비밀번호를 입력해주세요");
       return false;
     }
     if (newPwVal !== newPwChkVal) {
       alert("변경할 비밀번호가 틀립니다");
       return false;
     }
+    if (newPwVal == nowPw) {
+      alert("현재 비밀번호와 변경할 비밀번호가 같습니다");
+      return false;
+    }
+    console.log(nowPw);
+    fetch(`/mypage/pwChange/${nowPw}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status == null) {
+          alert("현재 비밀번호가 틀립니다");
+          return false;
+        }
+      });
     password.submit();
   });
 });

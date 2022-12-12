@@ -142,6 +142,7 @@ header.active {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 button.login,

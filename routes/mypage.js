@@ -1,26 +1,20 @@
 import express from "express";
 import DB from "../models/index.js";
+<<<<<<< HEAD
 import Sequelize from "sequelize";
 import sequelize from "sequelize";
 // 비교 연산자 사용
 import { Op } from "sequelize";
+=======
+>>>>>>> main
 import moment from "moment";
 import session from "express-session";
-import concert_artist_model from "../models/concert_artist_model.js";
-import artist from "../models/artist.js";
-import genre from "../models/genre.js";
 
 const Users = DB.models.user;
-const Concert = DB.models.concert_info;
-const Artist = DB.models.artist;
-const InterCon = DB.models.concert_of_interest;
-const InterArt = DB.models.artist_of_interest;
-const InterGen = DB.models.genre_of_interest;
-const GenCon = DB.models.genre_concert_model;
-const ArtGen = DB.models.artist_genre;
-const Genre = DB.models.genre;
+const IntCon = DB.models.concert_of_interest;
+const IntArt = DB.models.artist_of_interest;
+const IntGen = DB.models.genre_of_interest;
 const dateFormat = "YYYY.MM.DD";
-const findDateFormat = "YYYY-MM-DD";
 
 const router = express.Router();
 
@@ -34,9 +28,8 @@ const chkSession = (req, res, next) => {
   }
 };
 
-router.get("/", chkSession, (req, res) => {
-  const user = req.session.user;
-  return res.render("mypage", { body: "users", users: {} });
+router.get("/", chkSession, async (req, res) => {
+  return res.redirect("/profile");
 });
 
 router.get("/delete", chkSession, (req, res) => {
@@ -82,9 +75,9 @@ router.get("/delete/:username", chkSession, async (req, res) => {
       },
       { where: { username: username } }
     );
-    const delIntCon = await InterCon.destroy({ where: { username: username } });
-    const delIntArt = await InterArt.destroy({ where: { username: username } });
-    const delIntGen = await InterGen.destroy({ where: { username: username } });
+    const delIntCon = await IntCon.destroy({ where: { username: username } });
+    const delIntArt = await IntArt.destroy({ where: { username: username } });
+    const delIntGen = await IntGen.destroy({ where: { username: username } });
     console.log(delUser);
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write("<script>alert('성공적으로 탈퇴되었습니다.')</script>");
@@ -95,23 +88,49 @@ router.get("/delete/:username", chkSession, async (req, res) => {
     return res.send("예기치 않은 문제가 생겼습니다. 다시 시도해주세요.");
   }
 });
-router.get("/pwChange/:username", async (req, res) => {
-  const username = req.params.username;
+router.get("/pwChange", chkSession, async (req, res) => {
+  const user = req.session.user.username;
   try {
-    const result = await Users.findByPk(username);
-    res.render("mypage", { body: "change_password", user: result });
+    const result = await Users.findByPk(user);
+    res.render("mypage", {
+      body: "change_password",
+      user: result,
+      username: user,
+    });
   } catch (err) {
     res.json(err);
     console.error(err);
   }
 });
-router.post("/pwChange/:username", async (req, res) => {
-  const username = req.params.username;
+
+router.get("/pwChange/:nowPw", async (req, res) => {
+  const pw = req.params.nowPw;
+  const user = req.session.user.username;
+  try {
+    const userPw = await Users.findAll({
+      where: {
+        username: user,
+        password: pw,
+      },
+    });
+    console.log(userPw);
+    if (userPw == "") {
+      res.json({ status: null });
+      return false;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.post("/pwChange", chkSession, async (req, res) => {
+  const user = req.session.user.username;
   const { nowPw, newPw } = req.body;
+  console.log(user);
   try {
     const pwChk = await Users.findOne({ where: { password: nowPw } });
     if (pwChk == null) {
-      res.redirect("/mypage");
+      res.redirect("/mypage/pwChange");
       return false;
     }
   } catch (err) {
@@ -122,10 +141,12 @@ router.post("/pwChange/:username", async (req, res) => {
     await Users.update(
       { password: newPw },
       {
-        where: { username: username },
+        where: { username: user },
       }
     );
-    res.redirect("/mypage");
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write("<script>alert('비밀번호가 변경되었습니다')</script>");
+    res.write("<script>location.href='/mypage'</script>");
   } catch (err) {
     console.error(err);
   }
@@ -257,4 +278,7 @@ router.get("/bookmarklist", async (req, res) => {
   }
 });
 
+router.get("/favoriteGenre", (req, res) => {
+  res.redirect("/favoriteGenre");
+});
 export default router;

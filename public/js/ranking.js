@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rankingDates = document.querySelectorAll(
     ".ranking div.detail div.date"
   );
+  const rankingURL = document.querySelectorAll(".ranking div.detail a");
 
   const genre = ["POP", "발라드", "인디", "재즈", "락"];
   const genreCode = ["G0001", "G0004", "G0013", "G0010", "G0002"];
@@ -25,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (titleName === "장르별 랭킹") {
         btnPerform.classList.add("non-active");
+        btnPerform.classList.add("hover");
+        btnGenre.classList.remove("hover");
         btnGenre.style.color = "black";
         subtitleBox.textContent = "";
 
@@ -45,6 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
         dataActive(gConcerts);
       } else {
         btnPerform.classList.remove("non-active");
+        btnPerform.classList.remove("hover");
+        btnGenre.classList.add("hover");
         btnGenre.style.color = "#ccc";
         subtitleBox.textContent = "";
 
@@ -90,16 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
       rankingDates[
         i
       ].textContent = `${concert.start_date} - ${concert.end_date}`;
+      console.log(concert.concert_code);
+      rankingURL[
+        i
+      ].href = `http://localhost:3002/detail/${concert.concert_code}`;
     }
-
-    // rankingTitles.map((title, index) => {
-    //   const concert = concerts[index];
-    //   title.textContent = concert;
-    //   rankingImgs[index].src = concert.concert_poster;
-    //   rankingDates[
-    //     index
-    //   ].textContent = `${concert.start_date} - ${concert.end_date}`;
-    // });
   };
 
   // 해당 카테고리에 대한 데이터 가져오기
