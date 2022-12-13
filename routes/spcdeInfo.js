@@ -17,6 +17,7 @@ const url =
 const serviceKey = "서비스키";
 
 // 내년 국경일(공휴일 + 제헌절) 정보 업데이트
+// ** 일괄 업데이트 시 수정할 것
 let currentYear = new Date().getFullYear() + 1;
 
 let queryParams = `?${encodeURIComponent("serviceKey")}=${serviceKey}`;
@@ -37,6 +38,7 @@ const option = {
 
 // cron 표현식, 초 분 시 일 월 년
 // 매일 자정마다 scheduler 실행, 기본키 중복된 경우 update
+// ** 일괄 업데이트 시 */5 * * * * * (5초마다 실행) 으로 교체
 const saveHoli = scheduler.scheduleJob("0 0 0 * * *", () => {
   request(option, async (error, response, body) => {
     // console.log("Status", response.statusCode);

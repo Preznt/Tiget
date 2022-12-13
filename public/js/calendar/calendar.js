@@ -174,8 +174,15 @@ document.addEventListener("DOMContentLoaded", () => {
     showNum();
 
     // 공휴일 데이터 표시
-    for (let td of document.querySelectorAll("td")) {
-      const tdClassArr = Array.from(td.classList);
+    const tds = Array.from(document.querySelectorAll(".date"));
+    for (let td of tds) {
+      let tdClassArr = Array.from(td.classList);
+      tdClassArr = tdClassArr.map((tdClass) => {
+        if (tdClass.includes("-")) {
+          tdClass = tdClass.replaceAll("-", "");
+        }
+        return tdClass;
+      });
       let dateTxt = td.querySelector(".date_txt");
       let holiTxt = document.createElement("div");
       holiTxt.classList.add("holi_txt");
