@@ -24,9 +24,9 @@ html
         div.menu
           ul
             li 
-              a(href="") 콘서트
+              a(href="/concert") 콘서트
             li
-              a(href="") 페스티벌
+              a(href="/concert/type/festival") 페스티벌
             li 
               a(href="/users/bltBrd") 커뮤니티
         form(method="POST", action="/list/search").search
@@ -52,11 +52,11 @@ html
             form(method="post", action="http://localhost:3002/users/login").login 
               input(class="user_id" name="user_id", type="text", placeholder="USERNAME")
               input(class="user_pw" name="user_pw", type="password", placeholder="PASSWORD")
-              button(type="button", name="login", class="login") 로그인
+              button(type="button", name="login", class="login1") 로그인
           div.login.url
             a(href="/users/join").join 회원가입
             div.login &nbsp;|&nbsp;
-            a(href="/users/loss/username").username 아이디 찾기
+            div.username
             div.login &nbsp;|&nbsp;
             a(href="/users/loss/password").password 비밀번호 찾기
             

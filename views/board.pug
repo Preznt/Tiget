@@ -13,19 +13,19 @@ block content
                 div.div= `${result.sort_board}`
             .secondcontainer
                 span 제목
-                div= `${result.b_title}`
+                div.div= `${result.b_title}`
             .textcontainer
-                div= `${result.b_content}`
+                div.div= `${result.b_content}`
             .replycontainer(data-seq=result.seq)     
             each user  in users
-                div.reply
-                    img(src=(`/uploads/${user.profile_image}`) || "null").imgexample 
+                div.div.reply
+                    img(src=(`/uploads/${user.profile_image}`) || "" onerror="javascript:this.src='../../images/profile.png'").imgexample 
                     .example 
                         div.replyinfo
                             span 작성일시  : #{user.r_update_date}
                             span 작성자  : #{user.nickname}
                         div.replies= user.r_content                    
                     
-            div.replywrite                    
+            div.div.replywrite                    
                 input(name="content" placeholder="          댓글을 입력하세요.")#input
                 button(type="button").replyAdd 댓글추가
