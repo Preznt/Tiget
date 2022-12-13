@@ -104,6 +104,13 @@ header .search {
 header .search > * {
   margin: 5px;
 }
+header #btn_search {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: white;
+  font-size: 14pt;
+}
 header a,
 .user {
   color: white;

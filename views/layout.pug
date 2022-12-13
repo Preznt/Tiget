@@ -29,9 +29,9 @@ html
               a(href="") 페스티벌
             li 
               a(href="/users/bltBrd") 커뮤니티
-        div.search
-          input(placeholder= "공연정보를 입력해주세요")
-          a(href="") 
+        form(method="POST", action="/list/search").search
+          input(placeholder= "공연정보를 입력해주세요", name="value")
+          button(type="submit")#btn_search
             i(class="fa fa-search", aria-hidden="true")
         div.switch
           label.switch

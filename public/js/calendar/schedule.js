@@ -89,20 +89,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (interCon === false || null) {
       bookmark.checked = false;
     }
+    modalOpen();
   };
 
   // 이벤트 버블링 이용, schedule 클릭 시 modal 창과 bgBlur 띄우기
-  calendar?.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target.className === "schedule") {
-      modalOpen();
-    }
-  });
-  tbody?.addEventListener("click", async (e) => {
+  // calendar?.addEventListener("click", (e) => {
+  //   const target = e.target;
+  //   if (target.className === "schedule") {
+
+  //   }
+  // });
+  calendar?.addEventListener("click", async (e) => {
     const target = e.target;
     if (target.className === "schedule") {
       thisCode = target.dataset.code;
-      const data = chkInfo(thisCode);
+      const data = await chkInfo(thisCode);
     }
   });
 

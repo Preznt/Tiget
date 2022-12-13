@@ -45,6 +45,36 @@ const Chkcond = (data) => {
   return query;
 };
 
+router.post("/search", async (req, res) => {
+  const value = req.body.value;
+  console.log(value);
+
+  const query = `SELECT *
+  FROM concert_info Con
+    INNER JOIN concert_artist ConArt
+      ON Con.concert_code = ConArt.concert_code
+    INNER JOIN artist Art
+      ON ConArt.artist_code = Art.artist_code
+    INNER JOIN genre_concert GenCon
+      ON Con.concert_code = GenCon.concert_code
+    INNER JOIN genre Gen
+      ON GenCon.genre_code = Gen.genre_code 
+  WHERE (concert_name LIKE :value)
+   OR (artist_name LIKE :value)
+   OR (concert_loc LIKE :value)
+   OR (genre_name LIKE :value)
+  GROUP BY Con.concert_code`;
+
+  const listData = await DB.sequelize.query(query, {
+    replacements: { value: `%${value}%` },
+    type: QueryTypes.SELECT,
+  });
+
+  const listCount = listData.length;
+
+  return res.render("list", { body: "list", listData, listCount });
+});
+
 router.post("/", async (req, res) => {
   const data = req.body;
   let {

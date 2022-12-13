@@ -49,13 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let dates = document.querySelectorAll(".date");
     for (let date of dates) {
       const classArr = date.className;
-      // artist_name 만 다르고 concert_code 가 같은 데이터는 continue 처리
       let lastconCode;
       for (let data of conData) {
         const concert = {
           conCode: data.concert_code,
           conName: data.concert_name,
-          artName: data.artist_name,
           start: data.start_date,
           end: data.end_date,
         };
@@ -70,12 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
           const diffDate = calcDate(concert.start, concert.end);
           while (i < diffDate) {
             if (!d.nextSibling) {
-              d = d.parentNode.nextSibling.firstChild;
+              d = d.parentNode?.nextSibling?.firstChild;
             } else {
               d = d.nextSibling;
             }
             const nextSchedule = addSchedule(concert);
-            d.appendChild(nextSchedule);
+            // 공연 기간이 길지만 달력 날짜는 더 이어지지 않을 때
+            // d는 undefined 가 되므로 조건문으로 지정해야
+            if (d !== undefined) {
+              d.appendChild(nextSchedule);
+            }
             i++;
           }
         } else {

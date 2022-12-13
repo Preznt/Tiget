@@ -19,9 +19,7 @@ section.calendar.container#main2
           h1.month
         button.next
         button.today today
-      form(method="POST").search_box
-        input(type="text", placeholder="공연 일정 검색").input_search
-        button(type="button").btn_search
+      div.search_box
         button(type="button").btn_search_detail 상세 
           div.btn_search_detail_arrow.active
     div.search_detail_dropdown_box.visible
@@ -70,7 +68,7 @@ section.calendar.container#main2
         div.bg_image
   div.calendar.modal
     div.calendar.modal_content
-        button(type="button").modal.btn_close X
+        button(type="button").modal.btn_close
         img.modal.image
         div.modal.desc
             input(type="checkbox", name="bookmark", value="true").modal#bookmark
@@ -79,7 +77,7 @@ section.calendar.container#main2
               div.name
               div.date
                 span.start_date
-                span.dash &nbsp;~&nbsp; 
+                span.dash &nbsp;~&nbsp;
                 span.end_date
               div.place
         div.modal.button_box
