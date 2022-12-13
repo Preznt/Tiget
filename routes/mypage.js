@@ -78,9 +78,9 @@ router.get("/delete/:username", chkSession, async (req, res) => {
       },
       { where: { username: username } }
     );
-    const delIntCon = await IntCon.destroy({ where: { username: username } });
-    const delIntArt = await IntArt.destroy({ where: { username: username } });
-    const delIntGen = await IntGen.destroy({ where: { username: username } });
+    const delIntCon = await InterCon.destroy({ where: { username: username } });
+    const delIntArt = await InterArt.destroy({ where: { username: username } });
+    const delIntGen = await InterGen.destroy({ where: { username: username } });
     console.log(delUser);
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write("<script>alert('성공적으로 탈퇴되었습니다.')</script>");
@@ -216,7 +216,7 @@ router.get("/bookmark", chkSession, async (req, res) => {
     // // 선호 아티스트 목록
     // const artList = await Artist.findAll({
     //   attributes: ["artist_code", "artist_name"],
-    //   include: { model: IntArt, where: { username: user } },
+    //   include: { model: InterArt, where: { username: user } },
     // });
 
     // // 선호 아티스트에 따른 공연 목록
