@@ -3,7 +3,8 @@ article.bltBrd {
   scroll-snap-align: start;
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 120%;
+  margin-top: 100px;
 }
 div.main {
   width: 80%;
@@ -20,10 +21,44 @@ article.bltBrd div.bltBrd.table {
 thead tr.title,
 tbody tr.item {
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 5fr 1fr 0.5fr;
-  border: 1px solid #aaa;
+  grid-template-columns: 1fr 1fr 4fr 1.5fr 0.5fr;
 }
-
+thead tr.title {
+  border-bottom: 2px solid #181818;
+  padding: 0.4em 0;
+}
+tbody tr.item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+thead tr.title th,
+tbody tr.item td {
+  padding: 0.5em 1em;
+  white-space: nowrap;
+}
+thead tr.title th {
+  text-align: center;
+}
+tbody tr.item td {
+  border-bottom: 1px solid #aaa;
+}
+tr.title th:nth-of-type(1),
+tr.item td:nth-of-type(1) {
+  min-width: 107.2px;
+}
+tr.item td:nth-of-type(1),
+tr.item td:nth-of-type(2),
+tr.item td:nth-of-type(4),
+tr.item td:nth-of-type(5) {
+  text-align: center;
+}
+tr.item td:nth-of-type(1) {
+  font-weight: 700;
+}
+tr.item td:nth-of-type(2),
+tr.item td:nth-of-type(3) {
+  padding: 0.5em 2em;
+}
 table.bltBrd.table,
 div.button.box,
 div.bltBrd.category {
@@ -47,12 +82,12 @@ nav.main ul {
 nav.main li {
   padding: 12px 16px;
   border: 2px solid #bbb;
-  color: gray;
   border-radius: 30px;
   margin: 10px;
   text-align: center;
   color: black;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 div.button.box {
@@ -81,6 +116,7 @@ div.categorysearch button {
 div.pageContainer {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 div.pageContainer button {
