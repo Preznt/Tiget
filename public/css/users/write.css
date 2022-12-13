@@ -3,7 +3,7 @@ div.write.main {
   scroll-snap-align: start;
   width: 80%;
   height: 100%;
-  margin: auto;
+  margin: 30px auto 0px auto;
 }
 div.write.insert {
   display: flex;

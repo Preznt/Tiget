@@ -63,6 +63,7 @@ div.main {
   scroll-snap-align: start;
 }
 div.test {
+  background-color: white;
   top: 80%;
   width: 100%;
   height: 20%;

@@ -4,6 +4,7 @@ import DB from "../models/index.js";
 import moment from "moment";
 import sequelize from "sequelize";
 import { QueryTypes } from "sequelize";
+import nodemailer from "nodemailer";
 const dateFormat = "YYYY-MM-DD";
 const timeFormat = "HH:mm:ss";
 const Board = DB.models.board_detail;
@@ -243,4 +244,59 @@ router.get("/join/register/:email", async (req, res) => {
   }
 });
 
+router.get("/loss/password", async (req, res) => {
+  res.render("lossPw");
+});
+
+router.post("/loss/password", async (req, res, next) => {
+  const email = req.body.email;
+  const number = Math.floor(Math.random() * 1000000) + 100000;
+  if (number > 1000000) {
+    number = number - 100000;
+  }
+
+  const username = await User.findByPk(email);
+
+  if (!username) {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write("<script>alert('회원정보가 없습니다')</script>");
+    return res.write("<script>location.href='/users/loss/password'</script>");
+  }
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "아이디@gmail.com", // gmail 계정 아이디를 입력
+      pass: "비밀번호", // gmail 계정의 비밀번호를 입력
+    },
+  });
+
+  const mailOptions = {
+    from: "아이디@gmail.com", // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
+    to: email, // 수신 메일 주소
+    subject: "비밀번호변경 링크", // 제목
+    text: `http://localhost:3002/users/pwChange/${String(number)}/${email}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
+  res.render("lossPw");
+});
+router.get("/pwChange/:number/:email", (req, res) => {
+  res.render("pwChange");
+});
+router.post("/pwChange/:number/:email", async (req, res) => {
+  const email = req.params.email;
+  const pw = req.body.pw;
+  await User.update({ password: pw }, { where: { username: email } });
+  res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+  res.write("<script>alert('비밀번호가 변경되었습니다')</script>");
+  return res.write("<script>location.href='/main'</script>");
+});
 export default router;
