@@ -1,9 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (t) => {
   const rankBox = document.querySelector("div.ranking");
   const mainHeader = document.querySelector("header.main");
   const navButtons = document.querySelector("div.main.button.box");
   const boardSort = document.querySelector(".categorylist");
   const tbodyList = document.querySelector("tbody.boardcontainer.tbody");
+  const replyCount = document.querySelector(".reply_count");
+  const idModal = document.querySelectorAll(".nickname");
 
   //   td = document.createElement("td")
   //   td.textContent = data.b_title
@@ -34,14 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       td = document.createElement("TD");
       td.classList = "board title";
-      td.textContent = data.b_title;
-      // console.log(td.textContent);
-      tr.appendChild(td);
       let span = document.createElement("SPAN");
+      span.textContent = data.b_title;
+      let A = document.createElement("A");
+      A.className = "reply_count";
       if (data.f_reply.length >= 1) {
-        span.textContent = data.f_reply.length;
+        A.textContent = "[" + data.f_reply.length + "]";
       }
-      tr.appendChild(span);
+      td.appendChild(span);
+      td.appendChild(A);
+      tr.appendChild(td);
 
       td = document.createElement("TD");
       td.classList = "board nickname";
@@ -70,9 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   boardSort?.addEventListener("click", async (b) => {
     const target = b.target;
-    const option = {
-      method: "POST",
-    };
+
     if (target.tagName === "DIV") {
       let loadFor = target.textContent;
       console.log(loadFor);
@@ -90,6 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       }
     } else return false;
+    const buttons = document.querySelectorAll("div.category");
+
+    buttons.forEach((button) => {
+      button.classList.remove("active");
+    });
+    b.target.classList.add("active");
   });
   tbodyList?.addEventListener("click", (e) => {
     const target = e.target;
@@ -99,6 +107,47 @@ document.addEventListener("DOMContentLoaded", () => {
       const boardSeq = target.closest("TR").dataset.id;
 
       document.location.href = `/forum/board/${boardSeq}`;
+    } else if (target.tagName === "A") {
+      const boardSeq = target.closest("TR").dataset.id;
+      document.location.href = `/forum/board/${boardSeq}`;
+      const cookie = (name, value, exp) => {
+        let date = new Date();
+        date.setTime(date.getTime() + exp * 5000);
+        document.cookie =
+          name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+      };
+      cookie("reply", "true", 1);
     }
   });
+
+  for (let id = 0; id < idModal.length; id++) {
+    idModal[id]?.addEventListener("click", (e) => {
+      const idmodal = document.createElement("DIV");
+      idmodal.style.position = "absolute";
+      idmodal.style.top = "20%";
+      idmodal.style.left = "100%";
+      idmodal.style.height = "40px";
+      idmodal.style.width = "150px";
+      idmodal.style.display = "flex";
+      idmodal.style.flexDirection = "column";
+      idmodal.style.backgroundColor = "black";
+      idmodal.style.color = "white";
+
+      let div = document.createElement("DIV");
+      div.style.backgroundImage = "url(/images/tv_1280.png)";
+      div.textContent = "게시글 검색";
+      div.className = "idmodal searchpost";
+      div.style.textAlign = "center";
+      div.style.cursor = "pointer";
+      idmodal.appendChild(div);
+      div = document.createElement("DIV");
+      div.style.backgroundImage = "url(/images/keyboard_1280.png)";
+      div.className = "idmodal searchreply";
+      div.textContent = "댓글 검색";
+      div.style.textAlign = "center";
+      div.style.cursor = "pointer";
+      idmodal.appendChild(div);
+      e.target.appendChild(idmodal);
+    });
+  }
 });
