@@ -421,6 +421,7 @@ label[for="input_search_genre"]:hover .search_genre_dropdown_box {
   transition: background-color ease-out 0.1s;
   min-height: 100px;
   padding-bottom: 5px;
+  position: relative;
 }
 .calendar .tbody .week .date:nth-of-type(1) {
   border-left: 0;
@@ -464,8 +465,8 @@ label[for="input_search_genre"]:hover .search_genre_dropdown_box {
 }
 .calendar .tbody .week .date > .holi_txt {
   position: absolute;
-  top: 6%;
-  left: 20%;
+  top: 8px;
+  left: 30px;
   font-size: 10pt;
 }
 .calendar .tbody .week .date.prevMonth,
