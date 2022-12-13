@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    script(src="/js/users/pwChange.js") 
+    link(rel="stylesheet", href="../css/users/pwChange.css")
+    form(method="post").pwChange
+        div.pwChange
+            input(placeholder="변경할 비밀번호를 입력해주세요" type="password" name="pw").pw
+            input(placeholder="다시한번 입력해주세요" type="password").rePw
+            button(type="button") 변경

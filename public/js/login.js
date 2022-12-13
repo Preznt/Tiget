@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnLogin = document.querySelector("button.login");
+  const btnLogin = document.querySelector("button.login1");
   const idInput = document.querySelector("input.user_id");
   const pwInput = document.querySelector("input.user_pw");
 

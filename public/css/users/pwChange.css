@@ -1,0 +1,11 @@
+div.pwChange {
+  width: 20%;
+  margin: 10% auto 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+div.pwChange input,
+div.pwChange button {
+  padding: 12px 16px;
+  margin-bottom: 15px;
+}
