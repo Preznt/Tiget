@@ -6,6 +6,11 @@ article.bltBrd {
   height: 120%;
   margin-top: 100px;
 }
+.bltBrd.category div {
+  font-family: "GangwonEduPowerExtraBoldA";
+  font-size: 25pt;
+  margin-bottom: 15px;
+}
 div.main {
   width: 80%;
   margin: auto;
