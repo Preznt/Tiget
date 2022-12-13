@@ -1,7 +1,7 @@
 link(rel="stylesheet" href="/css/mypage/profile.css")
 
-
-form.setinline(method="post" enctype="multipart/form-data")
+form.setinline(method="post" enctype="multipart/form-data")    
+    h2 사용자 정보
     img.profile.img(src=(`/uploads/${user.profile_image}`) "" onerror="javascript:this.src='../../images/profile.png'" )
     form(method="POST", enctype="multipart/form-data" )
         input.emailid(name="username" value=`이메일 ID : ${user.username}` readonly)

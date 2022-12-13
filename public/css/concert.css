@@ -6,6 +6,7 @@ section.concert.content {
 }
 
 section.concert.content h2 {
+  font-family: "GangwonEduPowerExtraBoldA";
   font-size: 35px;
   padding: 10px;
   border-bottom: 1px solid #ccc;
@@ -50,8 +51,9 @@ section.concert.content button.active {
 
 .header.box h1,
 .region.box h1 {
+  font-family: "GangwonEduPowerExtraBoldA";
   font-size: 35px;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 /* 배너 부분 */

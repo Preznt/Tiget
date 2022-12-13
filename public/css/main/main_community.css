@@ -9,14 +9,13 @@
 h3.title {
   font-size: 3em;
   margin: 24px auto 0px 15%;
-  font-family: "Nanum Myeongjo", serif;
+  font-family: "GangwonEduPowerExtraBoldA", serif;
 }
 .container {
   margin: auto;
   width: 80%;
   height: 100%;
   display: flex;
-  font-family: "Nanum Myeongjo", serif;
 }
 .categorylist {
   flex: 1;
@@ -95,10 +94,9 @@ td {
 .buttonbox {
   margin-left: auto;
   margin-right: 10%;
-  padding: 0.5em; 
+  padding: 0.5em;
 }
 
 .buttonbox a {
   text-decoration: none;
 }
-
