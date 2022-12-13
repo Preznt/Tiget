@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let detail_box = document.createElement("DIV");
             detail_box.className = "detail_box";
-            detail_box.dataset.code = ele.concert_code;
 
             let link = document.createElement("A");
             link.className = "name";
@@ -64,12 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let bookmark = document.createElement("INPUT");
             bookmark.type = "checkbox";
-            bookmark.id = "bookmark";
+            bookmark.id = `bookmark${ele.concert_code}`;
             bookmark.checked = true;
+            bookmark.dataset.code = ele.concert_code;
 
             // label 의 for 속성은 JS 에서 htmlFor 로 설정
             let label = document.createElement("LABEL");
-            label.htmlFor = "bookmark";
+            label.htmlFor = `bookmark${ele.concert_code}`;
 
             detail_box.append(link, date, place, dday, bookmark, label);
 
@@ -90,13 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   favoriteList?.addEventListener("click", async (e) => {
     const target = e.target;
-    if (target.id === "bookmark") {
+    if (target.tagName === "INPUT") {
       if (!confirm("해당 공연을 찜 목록에서 삭제할까요?")) {
         target.checked = true;
         return false;
       } else {
         const value = target.checked;
-        const thisCode = target.closest("DIV").dataset.code;
+        const thisCode = target.dataset.code;
         const fetchOption = {
           method: "POST",
           body: JSON.stringify({ value, thisCode }),
@@ -106,12 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
           .then((res) => res.text())
           .then((text) => {
             if (text === "insert") {
-              bookmark.checked = true;
+              target.checked = true;
               showIntCon();
               return false;
             }
             if (text === "delete") {
-              bookmark.checked = false;
+              target.checked = false;
               showIntCon();
               return false;
             }
