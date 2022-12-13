@@ -1,11 +1,8 @@
 import express from "express";
 import boardList from "../models/index.js";
 import moment from "moment";
-import { Sequelize } from "sequelize";
-import session from "express-session";
 import sequelize from "sequelize";
 import { QueryTypes } from "sequelize";
-
 const date_format = moment().format("YY-MM-DD");
 const time_format = moment().format("h:mm:ss");
 const Board = boardList.models.board_detail;
@@ -17,8 +14,14 @@ const USER_REPLY = boardList.models.user_reply;
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("포럼입니다");
+router.get("/", async (req, res) => {
+  try {
+    const result = await Board.findAll({ include: "f_reply", limit: 15 });
+    console.log(result);
+    return res.json(result);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 let userID;
@@ -26,6 +29,7 @@ router.get("/board/:id", async (req, res) => {
   // console.log(req.session.user);
   const id = req.params.id;
   userID = req.session.user;
+  console.log(id);
   let replies;
 
   let replyContent = [];
@@ -48,6 +52,7 @@ router.get("/board/:id", async (req, res) => {
       board_code: replies[i].board_code,
       username: replies[i].username,
       nickname: replies[i].nickname,
+      r_content: replies[i].r_content,
       r_update_date: replies[i].r_update_date,
       r_modified_date: replies[i].r_modified_date,
       r_remove_date: replies[i].r_remove_date,
@@ -69,18 +74,12 @@ router.post("/board/:boardSeq", async (req, res) => {
   const { boardSeq, replyContent } = req.body;
   userID = req.session.user;
   // console.log(userID);
-  // console.log(req.body);
-  // console.log(boardSeq, replyContent);
-  console.log(userID);
-
-  // console.log(reply);
-
   if (userID == undefined) {
-    // res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    // res.write("<script>alert('로그인이 필요한 서비스입니다.')</script>");
-    // return res.write("<script>location.href='/main'</script>");
-    res.status(401).send("로그인이 필요합니다");
+    return res.redirect("/");
+  } else {
+    console.log(userID);
   }
+
   const reply = {
     board_code: boardSeq,
     nickname: userID.nickname,
@@ -93,7 +92,7 @@ router.post("/board/:boardSeq", async (req, res) => {
   };
 
   try {
-    const result = await Reply.create(reply);
+    await Reply.create(reply);
   } catch (err) {
     console.log(err);
   }

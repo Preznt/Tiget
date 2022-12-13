@@ -47,6 +47,7 @@ const Chkcond = (data) => {
 
 router.post("/", async (req, res) => {
   const data = req.body;
+  console.log(data);
   let {
     start_date,
     end_date,

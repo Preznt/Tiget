@@ -70,15 +70,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   boardSort?.addEventListener("click", async (b) => {
     const target = b.target;
+    const option = {
+      method: "POST",
+    };
     if (target.tagName === "DIV") {
       let loadFor = target.textContent;
       console.log(loadFor);
-      await fetch(`/forum/${loadFor}`)
-        .then((res) => res.json())
-        .then((datas) => {
-          console.log(datas);
-          showBoard(datas);
-        });
+      if (loadFor !== "전체보기") {
+        await fetch(`/forum/${loadFor}`)
+          .then((res) => res.json())
+          .then((datas) => {
+            showBoard(datas);
+          });
+      } else {
+        await fetch(`/forum`)
+          .then((res) => res.json())
+          .then((datas) => {
+            showBoard(datas);
+          });
+      }
     } else return false;
   });
   tbodyList?.addEventListener("click", (e) => {

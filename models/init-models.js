@@ -83,6 +83,14 @@ const initModels = (sequelize) => {
     foreignKey: "genre_code",
   });
 
+  genre_of_interest.belongsTo(genre, {
+    as: "GG_genre",
+    foreignKey: "genre_code",
+  });
+  genre.hasMany(genre_of_interest, {
+    as: "GG_genre_interest",
+    foreignKey: "genre_code",
+  });
   genre_concert_model.belongsTo(concert_info, {
     as: "f_concert",
     foreignKey: "concert_code",
