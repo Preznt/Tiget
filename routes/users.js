@@ -245,7 +245,7 @@ router.get("/join/register/:email", async (req, res) => {
 });
 
 router.get("/loss/password", async (req, res) => {
-  res.render("lossPw");
+  res.render("users/lossPw");
 });
 
 router.post("/loss/password", async (req, res, next) => {
@@ -286,10 +286,10 @@ router.post("/loss/password", async (req, res, next) => {
     }
   });
 
-  res.render("lossPw");
+  res.render("users/lossPw");
 });
 router.get("/pwChange/:number/:email", (req, res) => {
-  res.render("pwChange");
+  res.render("users/pwChange");
 });
 router.post("/pwChange/:number/:email", async (req, res) => {
   const email = req.params.email;
