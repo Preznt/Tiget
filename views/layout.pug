@@ -30,7 +30,7 @@ html
             li 
               a(href="/users/bltBrd") 커뮤니티
         div.search
-          input(placeholder= "공연정보를 입력해주세요")
+          input(name="search" placeholder= "공연이름을 입력해주세요")
           a(href="") 
             i(class="fa fa-search", aria-hidden="true")
         div.switch
@@ -42,7 +42,7 @@ html
             a#btn-modal
               i(class="fa fa-user-circle", aria-hidden="true")
           else 
-            a(href="/profile") #{user.nickname} 님 Page
+            a(href="/profile") #{user.nickname} 님
             button.logout 로그아웃
       div(id="modal", class="modal-overlay")
         div(class="modal-window")

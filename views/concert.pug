@@ -47,12 +47,6 @@ block content
                             div.title= concert[i].concert_name
                             div.region= concert[i].concert_loc
                             div.date= concert[i].start_date + "-" + concert[i].end_date
-            div.pageContainer
-                button.pagefirst first
-                button.pagePrev <
-                div.pagecon
-                button.pageNext >
-                button.pageEnd last
         article.concert.region
             div.region
                 div.region.box
@@ -77,9 +71,4 @@ block content
                         div
                             div.title= rConcert[i].concert_name
                             div.date= rConcert[i].start_date + "-" + rConcert[i].end_date
-            div.pageContainer
-                button.pagefirst first
-                button.pagePrev <
-                div.pagecon
-                button.pageNext >
-                button.pageEnd last              
+            

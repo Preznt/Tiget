@@ -5,6 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const boardSort = document.querySelector(".categorylist");
   const tbodyList = document.querySelector("tbody.boardcontainer.tbody");
 
+  const searchInput = document.querySelector("header div.search input");
+
+  const enterkey = (e) => {
+    if (e.keyCode == 13) {
+      document.location.href = `/list/${searchInput.value}`;
+    }
+  };
+
+  searchInput.addEventListener("keydown", enterkey);
+
   //   td = document.createElement("td")
   //   td.textContent = data.b_title
   //   tr.appendChild(td)

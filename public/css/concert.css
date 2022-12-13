@@ -101,6 +101,8 @@ article.concert.info {
 div.concert.poster,
 div.region.poster {
   white-space: nowrap;
+  width: 1150px;
+  overflow: hidden;
 }
 
 div.concert.poster a,

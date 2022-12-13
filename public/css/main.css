@@ -22,15 +22,15 @@ html {
   font-style: normal;
 }
 @font-face {
-  font-family: "PyeongChangPeace-Bold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2")
-    format("woff2");
-  font-weight: 700;
+  font-family: "establishRetrosansOTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff")
+    format("woff");
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "establishRetrosansOTF";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff")
+  font-family: "SBAggroB";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff")
     format("woff");
   font-weight: normal;
   font-style: normal;
@@ -69,8 +69,8 @@ header {
 }
 
 header h1 {
-  font-family: "establishRetrosansOTF";
-  letter-spacing: 2.5px;
+  font-family: "GangwonEduPowerExtraBoldA";
+  /* letter-spacing: 2.5px; */
 }
 div.main {
   position: relative;

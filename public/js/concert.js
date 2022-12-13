@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerImg.src = banner[0].concert_poster;
     for (let i = 0; i < length; i++) {
       imgs[i].src = banner[i].concert_poster;
+      imgs[i].closest(
+        "a"
+      ).href = `http://localhost:3002/detail/${banner[i].concert_code}`;
     }
   };
 
@@ -73,6 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
       cDates[
         i
       ].textContent = `${concert[i].start_date} - ${concert[i].end_date}`;
+      cImgs[i].closest(
+        "a"
+      ).href = `http://localhost:3002/detail/${concert[i].concert_code}`;
     }
   };
   headerBox?.addEventListener("click", async (e) => {
@@ -81,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
       btnActive(headerBtns, event);
       const response = await fetch(`/concert/${event.textContent}`);
       const resJson = await response.json();
-      console.log(resJson);
 
       cDataActive(resJson);
       bannerActive(resJson);
