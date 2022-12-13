@@ -18,6 +18,7 @@ div.recommend {
 
 div.title button,
 div.recommend div.recommend-title {
+  font-family: "establishRetrosansOTF";
   border: none;
   font-size: 30px;
   background-color: transparent;

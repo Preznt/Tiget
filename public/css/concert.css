@@ -65,7 +65,7 @@ article.concert.banner {
 
 .image-list {
   position: absolute;
-  bottom: 13%;
+  bottom: 9%;
 }
 
 .image-list img {
@@ -76,16 +76,13 @@ article.concert.banner {
   opacity: 0.8;
 }
 
+.image-list a:nth-of-type(1) {
+  margin-left: 30px;
+}
+
 .image-list img:hover {
   opacity: 1;
   border: 2.5px solid white;
-}
-
-.image-list img.effect {
-  transition: 1s;
-}
-.image-list img:nth-of-type(1) {
-  margin-left: 30px;
 }
 
 /* 공연 정보 부분 */

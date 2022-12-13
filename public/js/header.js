@@ -6,15 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (pathname !== "/main") {
     header.classList.add("active");
+    header.style.animation = "none";
   }
-
-  sec?.addEventListener("scroll", () => {
-    let y = scroll.getBoundingClientRect();
-    if (pathname === "/main" && y.y <= 200) {
-      header.classList.add("active");
-      header.style.animation = "0.3s ease-out changeBg";
-    } else {
-      header.classList.remove("active");
-    }
-  });
+  if (pathname === "/main") {
+    sec?.addEventListener("scroll", () => {
+      let y = scroll?.getBoundingClientRect();
+      if (y.y <= 200) {
+        header.classList.add("active");
+      } else {
+        header.classList.remove("active");
+      }
+    });
+  }
 });
