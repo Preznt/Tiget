@@ -1,11 +1,50 @@
 link(rel="stylesheet" href="/css/mypage/profile.css")
-script(src="/js/profile.js")
+
 
 form.setinline(method="post" enctype="multipart/form-data")
-    img.profile.img(src=(`/uploads/${user.profile_image}`) ||  "src=(`/uploads/profile.png`") 
+    img.profile.img(src=(`/uploads/${user.profile_image}`) "" onerror="javascript:this.src='../../images/profile.png'" )
     form(method="POST", enctype="multipart/form-data" )
-        input.emailid(name="username" value=`${user.username}` readonly)
-        input.nickname(value=`${user.nickname}` readonly)
+        input.emailid(name="username" value=`이메일 ID : ${user.username}` readonly)
+        input.nickname(value=`닉네임 : ${user.nickname}` readonly)
         div.profilebutton        
             input(type="file", name="b_upfile", accept="image/*")#b_upfile
-        button.profilebutton(type="button" value="image") 프로필이미지 변경
+        button.profilebutton(type="submit" value="image") 프로필이미지 변경
+    .myGenre 나의 선호장르
+        each user in userGenre  
+            div.genre(data-genre_code=user.genre_code)=  `${user['GG_genre.genre_name']}` || "" 
+    .profilebutton.myPost 내가 쓴 글 보러가기
+    .profilebutton.myReply 내가 쓴 댓글 보러가기
+    .modal.post
+        .head
+            h2 나의 게시글
+            span.close.post x
+        .table
+            table
+                thead.head
+                    tr  
+                        th 게시판 
+                        th 제목
+                        th 작성일시
+                tbody.body.post
+                 each post in Result 
+                    tr.result.post(data-seq=post.seq)
+                        td.post= post.sort_board
+                        td.post= post.b_title 
+                        td.post= post.b_update_date 
+    .modal.reply
+        .head
+            h2 나의 댓글
+            span.close.reply x
+        .table
+            table
+                thead.head
+                    tr  
+                        th 게시글 번호
+                        th 제목
+                        th 작성일시
+                tbody.body.reply                 
+                    each reply in Reply 
+                        tr.result.reply(data-r_seq=reply.board_code)
+                            td.reply= reply.board_code
+                            td.reply= reply.r_content 
+                            td.reply= reply.r_update_date 

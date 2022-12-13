@@ -50,6 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const boardSeq = replycontainer.dataset.seq;
     const replyContent = replyInput.value;
     // console.log(boardSeq, replyContent);
+    if (!replyContent) {
+      alert("내용을 입력해주세요");
+      return false;
+    }
     const option = {
       method: "POST",
       body: JSON.stringify({ boardSeq, replyContent }),

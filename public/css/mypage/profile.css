@@ -17,14 +17,21 @@
   display: inline-block;
 }
 .emailid {
+  width: 300px;
   position: absolute;
   top: 5%;
   left: 35%;
+  border: none;
+  outline: none;
+  background-color: inherit;
 }
 .nickname {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 35%;
+  border: none;
+  outline: none;
+  background-color: inherit;
 }
 div.profilebutton {
   position: absolute;
@@ -43,4 +50,90 @@ button.profilebutton {
 button.profilebutton:hover {
   background-color: black;
   color: white;
+}
+.profilebutton {
+  cursor: pointer;
+  padding: 2px;
+  font-weight: 900;
+}
+.profilebutton.myPost {
+  position: absolute;
+  top: 35%;
+  left: 61%;
+}
+.profilebutton.myReply {
+  position: absolute;
+  top: 40%;
+  left: 61%;
+}
+.myGenre {
+  position: absolute;
+  top: 45%;
+  left: 61%;
+}
+
+.modal {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 60%;
+  height: 50%;
+  display: none;
+  background-color: antiquewhite;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  flex-direction: column;
+  border-radius: 10px;
+}
+.head {
+  display: flex;
+  width: 100%;
+}
+h2 {
+  font-size: 18px;
+  line-height: 40px;
+}
+span.close {
+  display: inline;
+  margin-left: auto;
+  margin-right: 12px;
+  font-size: 24px;
+  line-height: 40px;
+  cursor: pointer;
+}
+.modal table {
+  margin: 12px auto;
+  width: 100%;
+  height: 100%;
+}
+thead.head {
+  height: 10%;
+  width: 100%;
+  display: flex;
+}
+.modal tr {
+  width: 100%;
+  display: flex;
+}
+
+.modal td,
+th {
+  flex: 1;
+}
+.modal td:nth-of-type(2),
+.modal th:nth-of-type(2) {
+  flex: 5;
+}
+table tbody {
+  width: 100%;
+  height: 100%;
+}
+tr.result {
+  display: flex;
+}
+
+td.reply,
+td.post {
+  cursor: pointer;
 }
