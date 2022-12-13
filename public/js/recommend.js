@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ".recommend div.detail div.date"
   );
 
+  const recommendURL = document.querySelectorAll(".recommend div.detail a");
+
   // 공연별 카테고리 버튼 클릭했을 때 css 변경
   const btnActive = (event) => {
     const btnIndex = event.dataset.index;
@@ -32,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
       recommendDates[
         i
       ].textContent = `${recommend.start_date} - ${recommend.end_date}`;
+      recommendURL[
+        i
+      ].href = `http://localhost:3002/detail/${recommend.concert_code}`;
     }
   };
 

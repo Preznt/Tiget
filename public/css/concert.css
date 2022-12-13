@@ -6,6 +6,7 @@ section.concert.content {
 }
 
 section.concert.content h2 {
+  font-family: "GangwonEduPowerExtraBoldA";
   font-size: 35px;
   padding: 10px;
   border-bottom: 1px solid #ccc;
@@ -50,8 +51,9 @@ section.concert.content button.active {
 
 .header.box h1,
 .region.box h1 {
+  font-family: "GangwonEduPowerExtraBoldA";
   font-size: 35px;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 /* 배너 부분 */
@@ -65,7 +67,7 @@ article.concert.banner {
 
 .image-list {
   position: absolute;
-  bottom: 13%;
+  bottom: 9%;
 }
 
 .image-list img {
@@ -76,16 +78,13 @@ article.concert.banner {
   opacity: 0.8;
 }
 
+.image-list a:nth-of-type(1) {
+  margin-left: 30px;
+}
+
 .image-list img:hover {
   opacity: 1;
   border: 2.5px solid white;
-}
-
-.image-list img.effect {
-  transition: 1s;
-}
-.image-list img:nth-of-type(1) {
-  margin-left: 30px;
 }
 
 /* 공연 정보 부분 */
@@ -104,6 +103,8 @@ article.concert.info {
 div.concert.poster,
 div.region.poster {
   white-space: nowrap;
+  width: 1150px;
+  overflow: hidden;
 }
 
 div.concert.poster a,

@@ -12,11 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetImg = e.target;
     if (targetImg.tagName === "IMG") {
       const newImg = document.createElement("IMG");
-      newImg.src = targetImg.src;
-      imgView.appendChild(newImg);
+      const newA = document.createElement("A");
 
-      document.querySelector(".image-view img").classList.add("effect");
-      document.querySelector(".image-view img").remove();
+      newImg.src = targetImg.src;
+      newA.href = targetImg.closest("a").href;
+      newA.appendChild(newImg);
+      imgView.append(newA);
+
+      document.querySelector(".image-view a").remove();
     }
   };
 
@@ -39,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerImg.src = banner[0].concert_poster;
     for (let i = 0; i < length; i++) {
       imgs[i].src = banner[i].concert_poster;
+      imgs[i].closest(
+        "a"
+      ).href = `http://localhost:3002/detail/${banner[i].concert_code}`;
     }
   };
 
@@ -70,6 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
       cDates[
         i
       ].textContent = `${concert[i].start_date} - ${concert[i].end_date}`;
+      cImgs[i].closest(
+        "a"
+      ).href = `http://localhost:3002/detail/${concert[i].concert_code}`;
     }
   };
   headerBox?.addEventListener("click", async (e) => {
@@ -78,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
       btnActive(headerBtns, event);
       const response = await fetch(`/concert/${event.textContent}`);
       const resJson = await response.json();
-      console.log(resJson);
 
       cDataActive(resJson);
       bannerActive(resJson);

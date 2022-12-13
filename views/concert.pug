@@ -18,23 +18,30 @@ block content
                     
         article.concert.banner
             div.image-view
-                img(src=`${concert[0].concert_poster}`)
+                a(href=`http://localhost:3002/detail/${concert[0].concert_code}`) 
+                    img(src=`${concert[0].concert_poster}`)
             div.image-list
-                - for(let i = 0; i < 4 ; i++)
-                    img(src=`${concert[i].concert_poster}`, alt="")
+                if body == 1
+                    - for(let i = 0; i < concert.length - 27 ; i++)
+                        a(href=`http://localhost:3002/detail/${concert[i].concert_code}`)
+                            img(src=`${concert[i].concert_poster}`, alt="")
+                else
+                    - for(let i = 0; i < concert.length ; i++)
+                        a(href=`http://localhost:3002/detail/${concert[i].concert_code}`)
+                            img(src=`${concert[i].concert_poster}`, alt="")
         article.concert.info
             h2 공연정보
             div.concert.poster
-                - for(let i = 0; i < 4 ; i++)
-                    a(href="")
+                - for(let i = 0; i < concert.length/2 ; i++)
+                    a(href=`http://localhost:3002/detail/${concert[i].concert_code}`)
                         img(src=`${concert[i].concert_poster}`, alt="")
                         div
                             div.title= concert[i].concert_name
                             div.region= concert[i].concert_loc
                             div.date= concert[i].start_date + "-" + concert[i].end_date
             div.concert.poster
-                - for(let i = 0; i < 3 ; i++)
-                    a(href="")
+                - for(let i = Math.floor(concert.length/2); i < concert.length ; i++)
+                    a(href=`http://localhost:3002/detail/${concert[i].concert_code}`)
                         img(src=`${concert[i].concert_poster}`, alt="")
                         div
                             div.title= concert[i].concert_name
@@ -51,16 +58,17 @@ block content
                     button(data-index="4") 강원도
                     button(data-index="5") 제주
             div.region.poster
-                - for(let i = 0; i < 2 ; i++)
-                    a(href="")
+                - for(let i = 0; i < rConcert.length/2 ; i++)
+                    a(href=`http://localhost:3002/detail/${rConcert[i].concert_code}`)
                         img(src=`${rConcert[i].concert_poster}`, alt="")
                         div
                             div.title= rConcert[i].concert_name
                             div.date= rConcert[i].start_date + "-" + rConcert[i].end_date
             div.region.poster
-                - for(let i = 0; i < 2 ; i++)
-                    a(href="")
+                - for(let i = Math.floor(rConcert.length/2); i < rConcert.length ; i++)
+                    a(href=`http://localhost:3002/detail/${rConcert[i].concert_code}`)
                         img(src=`${rConcert[i].concert_poster}`, alt="")
                         div
                             div.title= rConcert[i].concert_name
-                            div.date= rConcert[i].start_date + "-" + rConcert[i].end_date               
+                            div.date= rConcert[i].start_date + "-" + rConcert[i].end_date
+            

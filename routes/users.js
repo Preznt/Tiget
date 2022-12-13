@@ -266,13 +266,13 @@ router.post("/loss/password", async (req, res, next) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "아이디@gmail.com", // gmail 계정 아이디를 입력
-      pass: "비밀번호", // gmail 계정의 비밀번호를 입력
+      user: "bjw1403@gmail.com", // gmail 계정 아이디를 입력
+      pass: "pygbnglxbvhidrly", // gmail 계정의 비밀번호를 입력
     },
   });
 
   const mailOptions = {
-    from: "아이디@gmail.com", // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
+    from: "bjw1403@gmail.com", // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
     to: email, // 수신 메일 주소
     subject: "비밀번호변경 링크", // 제목
     text: `http://localhost:3002/users/pwChange/${String(number)}/${email}`,
