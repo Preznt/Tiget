@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const replyInput = document.querySelector("#input");
   const replyPlace = document.querySelector("div.replycontainer");
 
+  const scrollintoview = () => {
+    const searchReply = document.querySelector("#replycontainer");
+    const searchReplyTop =
+      window.pageYOffset + searchReply.getBoundingClientRect().top;
+    searchReply.scrollIntoView();
+  };
+  if (!document.cookie) {
+    return;
+  } else {
+    scrollintoview();
+  }
+
   const ShowReply = (replies) => {
     console.log(replies);
 
