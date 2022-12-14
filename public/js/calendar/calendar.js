@@ -86,9 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showSchedule = (conData) => {
     let schedule;
-    let dates = document.querySelectorAll(".date");
+    let dates = Array.from(document.querySelectorAll(".date"));
     for (let date of dates) {
-      const classArr = date.className;
+      let classArr = Array.from(date.classList);
+      // 앞뒤로 이상한 빈 값으로 추가된다?
+      classArr = classArr.filter((ele) => ele.includes("-"));
+      classArr = String(classArr);
       let lastconCode;
       for (let data of conData) {
         const concert = {
@@ -100,26 +103,30 @@ document.addEventListener("DOMContentLoaded", () => {
         if (concert.conCode === lastconCode) {
           continue;
         }
-        if (matchDay(classArr, concert.start)) {
+        if (
+          new Date(classArr) >= new Date(concert.start) &&
+          new Date(classArr) <= new Date(concert.end)
+        ) {
+          // let i = 0;
+          let d = date;
+          // const diffDate = calcDate(concert.start, concert.end);
+          // while (i < diffDate) {
+          if (!d.nextSibling) {
+            d = d.parentNode?.nextSibling?.firstChild;
+          } else {
+            d = d.nextSibling;
+            console.log(d);
+          }
           schedule = addSchedule(concert);
           date.appendChild(schedule);
-          let i = 0;
-          let d = date;
-          const diffDate = calcDate(concert.start, concert.end);
-          while (i < diffDate) {
-            if (!d.nextSibling) {
-              d = d.parentNode?.nextSibling?.firstChild;
-            } else {
-              d = d.nextSibling;
-            }
-            const nextSchedule = addSchedule(concert);
-            // 공연 기간이 길지만 달력 날짜는 더 이어지지 않을 때
-            // d는 undefined 가 되므로 조건문으로 지정해야
-            if (d !== undefined) {
-              d.appendChild(nextSchedule);
-            }
-            i++;
-          }
+          // const nextSchedule = addSchedule(concert);
+          // 공연 기간이 길지만 달력 날짜는 더 이어지지 않을 때
+          // d는 undefined 가 되므로 조건문으로 지정해야
+          // if (d !== undefined) {
+          //   d.appendChild(nextSchedule);
+          // }
+          //   i++;
+          // }
         } else {
           continue;
         }
