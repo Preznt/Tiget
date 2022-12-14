@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return schedule;
   };
 
-  const calcDate = (start, end) => {
-    let diffDate = new Date(end).getTime() - new Date(start).getTime();
-    diffDate = diffDate / (1000 * 3600 * 24);
-    return diffDate;
-  };
+  // const calcDate = (start, end) => {
+  //   let diffDate = new Date(end).getTime() - new Date(start).getTime();
+  //   diffDate = diffDate / (1000 * 3600 * 24);
+  //   return diffDate;
+  // };
 
   const toDateFormatting = (year, month, date) => {
     return `${year}-${String(month).padStart(2, 0)}-${String(date).padStart(
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextVal = {
       year: valDay.year,
       month: valDay.month + 1,
-      date: 1,
+      date: 31,
     };
     if (valDay.month === 12) {
       nextVal.year = valDay.year + 1;
@@ -89,9 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let dates = Array.from(document.querySelectorAll(".date"));
     for (let date of dates) {
       let classArr = Array.from(date.classList);
-      // 앞뒤로 이상한 빈 값으로 추가된다?
-      classArr = classArr.filter((ele) => ele.includes("-"));
-      classArr = String(classArr);
+      classArr = String(classArr.filter((ele) => ele.includes("-")));
+      if (classArr === "") {
+        continue;
+      }
       let lastconCode;
       for (let data of conData) {
         const concert = {
@@ -107,26 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
           new Date(classArr) >= new Date(concert.start) &&
           new Date(classArr) <= new Date(concert.end)
         ) {
-          // let i = 0;
           let d = date;
-          // const diffDate = calcDate(concert.start, concert.end);
-          // while (i < diffDate) {
           if (!d.nextSibling) {
             d = d.parentNode?.nextSibling?.firstChild;
           } else {
             d = d.nextSibling;
-            console.log(d);
           }
           schedule = addSchedule(concert);
           date.appendChild(schedule);
-          // const nextSchedule = addSchedule(concert);
-          // 공연 기간이 길지만 달력 날짜는 더 이어지지 않을 때
-          // d는 undefined 가 되므로 조건문으로 지정해야
-          // if (d !== undefined) {
-          //   d.appendChild(nextSchedule);
-          // }
-          //   i++;
-          // }
         } else {
           continue;
         }
@@ -137,10 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
   const showDate = async (valDay) => {
-    const todayVal = `${today.year}-${String(today.month).padStart(
-      2,
-      0
-    )}-${String(today.date).padStart(2, 0)}`;
+    const todayVal = toDateFormatting(today.year, today.month, today.date);
+
     // lastDate: 이번 달 마지막 날짜 = 이번 달 날짜의 총 개수
     const lastDate = new Date(valDay.year, valDay.month, 0).getDate();
     // prevLastDate: 저번 달 마지막 날짜

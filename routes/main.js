@@ -32,10 +32,6 @@ router.get("/", async (req, res, next) => {
     { eng: "jeju", kor: "제주" },
   ];
 
-  const conData = await Concert.findAll({
-    attributes: ["concert_code", "concert_name", "start_date", "end_date"],
-  });
-
   const genreData = await Genre.findAll();
 
   const concerts = await Concert.findAll({
@@ -54,7 +50,6 @@ router.get("/", async (req, res, next) => {
     locData,
     genreData,
     boards: "",
-    conData,
     concerts,
     recommends,
   });
@@ -69,6 +64,7 @@ router.post("/schedule", async (req, res) => {
     // 이번 달을 기준으로 3달치 공연 데이터를 가져옴
     const conData = await Concert.findAll({
       attributes: ["concert_code", "concert_name", "start_date", "end_date"],
+      raw: true,
       where: {
         [Op.or]: [
           { start_date: { [Op.between]: [prev, next] } },
