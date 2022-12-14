@@ -43,8 +43,48 @@ document.addEventListener("DOMContentLoaded", () => {
     return diffDate;
   };
 
-  // pug 파일에서 가져온 concertData
-  const showSchedule = () => {
+  const toDateFormatting = (year, month, date) => {
+    return `${year}-${String(month).padStart(2, 0)}-${String(date).padStart(
+      2,
+      0
+    )}`;
+  };
+
+  // calendar 를 넘길 때 데이터 fetch
+  const fetchSchedule = async (valDay) => {
+    const prevVal = {
+      year: valDay.year,
+      month: valDay.month - 1,
+      date: 1,
+    };
+    const nextVal = {
+      year: valDay.year,
+      month: valDay.month + 1,
+      date: 1,
+    };
+    if (valDay.month === 12) {
+      nextVal.year = valDay.year + 1;
+      nextVal.month = 1;
+    }
+    if (valDay.month === 1) {
+      prevVal.year = valDay.year - 1;
+      prevVal.month = 12;
+    }
+    const prev = toDateFormatting(prevVal.year, prevVal.month, prevVal.date);
+    const next = toDateFormatting(nextVal.year, nextVal.month, nextVal.date);
+
+    fetchOption = {
+      method: "POST",
+      body: JSON.stringify({ prev, next }),
+      headers: { "Content-Type": "application/json" },
+    };
+    const result = await fetch("/main/schedule", fetchOption).then((res) =>
+      res.json()
+    );
+    return result;
+  };
+
+  const showSchedule = (conData) => {
     let schedule;
     let dates = document.querySelectorAll(".date");
     for (let date of dates) {
@@ -89,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // !! showDate 함수를 기능별로 분할해야 함 !!
-  const showDate = () => {
+  const showDate = async (valDay) => {
     const todayVal = `${today.year}-${String(today.month).padStart(
       2,
       0
@@ -197,11 +237,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
-
-    showSchedule();
+    const result = await fetchSchedule(valDay);
+    showSchedule(result);
   };
 
-  showDate();
+  showDate(valDay);
 
   btnPrev?.addEventListener("click", () => {
     valDay.month--;
@@ -210,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
       valDay.year--;
     }
     showNum();
-    showDate();
+    showDate(valDay);
   });
   btnNext?.addEventListener("click", () => {
     valDay.month++;
@@ -219,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
       valDay.year++;
     }
     showNum();
-    showDate();
+    showDate(valDay);
   });
   btnToday?.addEventListener("click", () => {
     valDay.year = today.year;

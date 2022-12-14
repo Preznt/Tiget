@@ -32,7 +32,6 @@ router.get("/", async (req, res, next) => {
     { eng: "jeju", kor: "제주" },
   ];
 
-  // calendar 스케줄 표시
   const conData = await Concert.findAll({
     attributes: ["concert_code", "concert_name", "start_date", "end_date"],
   });
@@ -59,6 +58,28 @@ router.get("/", async (req, res, next) => {
     concerts,
     recommends,
   });
+});
+
+// calendar schedule 표시 fetch 메서드
+router.post("/schedule", async (req, res) => {
+  try {
+    let prev = req.body.prev;
+    let next = req.body.next;
+
+    // 이번 달을 기준으로 3달치 공연 데이터를 가져옴
+    const conData = await Concert.findAll({
+      attributes: ["concert_code", "concert_name", "start_date", "end_date"],
+      where: {
+        [Op.or]: [
+          { start_date: { [Op.between]: [prev, next] } },
+          { end_date: { [Op.between]: [prev, next] } },
+        ],
+      },
+    });
+    return res.send(conData);
+  } catch (err) {
+    return res.send("SCHEDULE DATA FETCH ERROR");
+  }
 });
 
 // 찜 목록 fetch 메서드
