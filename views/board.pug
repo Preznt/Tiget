@@ -4,6 +4,7 @@ block content
     script(src="/js/board/reply.js") 
     link(rel="stylesheet" href="/css/main/board.css")
     .overflow
+        
         .boardContainer
             .firstcontainer
                 span.span 작성자:
@@ -17,15 +18,15 @@ block content
             .textcontainer
                 div.div= `${result.b_content}`
             .replycontainer#replycontainer
-            each user  in users
-                div.div.reply
-                    img(src=(`/uploads/${user.profile_image}`) || "" onerror="javascript:this.src='../../images/profile.png'").imgexample 
-                    .example 
-                        div.replyinfo
-                            span 작성일시  : #{user.r_update_date}
-                            span 작성자  : 
-                            span.nickname #{user.nickname}
-                        div.replies= user.r_content         
+                each user  in users
+                    div.div.reply
+                        img(src=(`/uploads/${user.profile_image}`) || "" onerror="javascript:this.src='../../images/profile.png'").imgexample 
+                        .example 
+                            div.replyinfo
+                                span 작성일시  : #{user.r_update_date}
+                                span 작성자  : 
+                                span.nickname #{user.nickname}
+                            div.replies= user.r_content         
             div.div.replywrite                    
                 input(name="content" placeholder="          댓글을 입력하세요.")#input
                 button(type="button").replyAdd 댓글추가

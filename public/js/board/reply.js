@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchReply = document.querySelector("#replycontainer");
     const searchReplyTop =
       window.pageYOffset + searchReply.getBoundingClientRect().top;
-    searchReply.scrollIntoView();
+    // searchReply.scrollIntoView();
+    document.location.href = "#replycontainer";
   };
   if (!document.cookie) {
     return;

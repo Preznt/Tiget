@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const changeButton = document.querySelector("button.profilebutton");
   const postButton = document.querySelector("div.profilebutton.myPost");
   const postModal = document.querySelector(".modal.post");
   const replyButton = document.querySelector(".profilebutton.myReply");
@@ -10,6 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const postTD = document.querySelector("tbody.body.post");
   const genreDiv = document.querySelectorAll("div.genre");
   const Form = document.querySelector(".myGenre");
+  changeButton?.addEventListener("click", () => {
+    if (!document.querySelector("#b_upfile").value) {
+      alert("이미지를 선택해주세요");
+    } else {
+      document.querySelector(".setinline").submit();
+    }
+  });
   buttons?.addEventListener("click", (e) => {
     const target = e.target;
     if (target.tagName === "LI") {

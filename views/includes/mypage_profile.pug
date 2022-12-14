@@ -8,7 +8,7 @@ form.setinline(method="post" enctype="multipart/form-data")
         input.nickname(value=`닉네임 : ${user.nickname}` readonly)
         div.profilebutton        
             input(type="file", name="b_upfile", accept="image/*")#b_upfile
-        button.profilebutton(type="submit" value="image") 프로필이미지 변경
+        button.profilebutton(type="button" value="image") 프로필이미지 변경
         .myGenre 나의 선호장르
             each user in userGenre  
                 div.genre(data-genre_code=user.genre_code)=  `${user['GG_genre.genre_name']}` || "" 

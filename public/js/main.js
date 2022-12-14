@@ -121,20 +121,22 @@ document.addEventListener("DOMContentLoaded", (t) => {
   });
 
   for (let id = 0; id < idModal.length; id++) {
+    idModal.textContent = "";
     idModal[id]?.addEventListener("click", (e) => {
-      const idmodal = document.createElement("DIV");
+      let idmodal = document.createElement("DIV");
       idmodal.style.position = "absolute";
       idmodal.style.top = "20%";
       idmodal.style.left = "100%";
-      idmodal.style.height = "40px";
+      idmodal.style.height = "60px";
       idmodal.style.width = "150px";
       idmodal.style.display = "flex";
       idmodal.style.flexDirection = "column";
       idmodal.style.backgroundColor = "black";
       idmodal.style.color = "white";
+      idmodal.className = "idmodal";
 
       let div = document.createElement("DIV");
-      div.style.backgroundImage = "url(/images/tv_1280.png)";
+      div.style.backgroundImage = "url(../../public/images/tv_1280.png)";
       div.textContent = "게시글 검색";
       div.className = "idmodal searchpost";
       div.style.textAlign = "center";
@@ -147,7 +149,25 @@ document.addEventListener("DOMContentLoaded", (t) => {
       div.style.textAlign = "center";
       div.style.cursor = "pointer";
       idmodal.appendChild(div);
+      div = document.createElement("DIV");
+      div.className = "idmodal close";
+      div.style.textAlign = "center";
+      div.textContent = "닫기";
+      div.style.cursor = "pointer";
+      idmodal.appendChild(div);
       e.target.appendChild(idmodal);
+
+      console.log(e.target.className);
+      if (e.target.className == "idmodal close") {
+        console.log("help");
+      }
     });
   }
+
+  window.addEventListener("click", (e) => {
+    if (e.target.className === "scroll") {
+      console.log(e.target.className);
+      idmodal.style.display = "none";
+    }
+  });
 });
