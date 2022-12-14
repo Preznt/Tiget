@@ -20,7 +20,7 @@
   width: 300px;
   position: absolute;
   top: 5%;
-  left: 25%;
+  left: 30%;
   border: none;
   outline: none;
   background-color: inherit;
@@ -28,7 +28,7 @@
 .nickname {
   position: absolute;
   top: 10%;
-  left: 25%;
+  left: 30%;
   border: none;
   outline: none;
   background-color: inherit;
@@ -36,12 +36,12 @@
 div.profilebutton {
   position: absolute;
   top: 25%;
-  left: 5%;
+  left: 2%;
 }
 button.profilebutton {
   position: absolute;
   top: 32%;
-  left: 5%;
+  left: 3%;
   padding: 0.5em;
   background-color: white;
   border-radius: 10px;
@@ -58,25 +58,34 @@ button.profilebutton:hover {
 }
 .profilebutton.myPost {
   position: absolute;
-  top: 35%;
-  left: 50%;
+  top: 20%;
+  left: 35%;
 }
 .profilebutton.myReply {
   position: absolute;
-  top: 40%;
-  left: 50%;
+  top: 25%;
+  left: 35%;
 }
 .myGenre {
   position: absolute;
-  top: 45%;
-  left: 50%;
+  top: 30%;
+  left: 35%;
 }
-
+div.genre {
+  font-weight: 900;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: all 0.7s;
+}
+div.genre:hover {
+  color: blue;
+  text-decoration: underline;
+}
 .modal {
   position: absolute;
-  top: 20%;
-  left: 30%;
-  width: 60%;
+  top: 10%;
+  left: 15%;
+  width: 80%;
   height: 50%;
   display: none;
   background-color: antiquewhite;
@@ -120,7 +129,10 @@ thead.head {
 .modal td,
 th {
   flex: 1;
+  border-bottom: 1px solid black;
+  margin-bottom: 8px;
 }
+
 .modal td:nth-of-type(2),
 .modal th:nth-of-type(2) {
   flex: 5;
