@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
     // console.log(Result);
     res.render("mypage", {
       body: "users",
-      users: userInfo,
+      user: userInfo,
       userGenre,
       Result,
       Reply,

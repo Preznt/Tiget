@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    subtitleBtns = document.querySelectorAll(".ranking div.sub-title button");
+    // subtitleBtns = document.querySelectorAll(".ranking div.sub-title button");
     subtitleBtns[0].classList.add("active");
   });
 
