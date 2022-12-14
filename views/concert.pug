@@ -31,7 +31,9 @@ block content
                             img(src=`${concert[i].concert_poster}`, alt="")
         article.concert.info
             h2 공연정보
-            div.concert.poster
+            ul.contents
+            div.buttons
+            //- div.concert.poster
                 - for(let i = 0; i < concert.length/2 ; i++)
                     a(href=`http://localhost:3002/detail/${concert[i].concert_code}`)
                         img(src=`${concert[i].concert_poster}`, alt="")
@@ -39,7 +41,7 @@ block content
                             div.title= concert[i].concert_name
                             div.region= concert[i].concert_loc
                             div.date= concert[i].start_date + "-" + concert[i].end_date
-            div.concert.poster
+            //- div.concert.poster
                 - for(let i = Math.floor(concert.length/2); i < concert.length ; i++)
                     a(href=`http://localhost:3002/detail/${concert[i].concert_code}`)
                         img(src=`${concert[i].concert_poster}`, alt="")
@@ -56,7 +58,8 @@ block content
                     button(data-index="2") 경상도
                     button(data-index="3") 전라도
                     button(data-index="4") 강원도
-                    button(data-index="5") 제주
+                    button(data-index="5") 충청도
+                    button(data-index="6") 제주
             div.region.poster
                 - for(let i = 0; i < rConcert.length/2 ; i++)
                     a(href=`http://localhost:3002/detail/${rConcert[i].concert_code}`)
