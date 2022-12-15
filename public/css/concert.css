@@ -122,3 +122,16 @@ div.region.poster div.title {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+/* 페이지네이션 관련 */
+article.concert.info a {
+  display: inline-block;
+  margin: 35px 30px 10px 2px;
+  width: 200px;
+}
+
+article.concert.info div.contents div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

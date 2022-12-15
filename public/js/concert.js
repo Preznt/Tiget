@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 페이지네인션 구현중
-  const contents = document.querySelector("article.concert.info ul.contents");
+  const contents = document.querySelector("article.concert.info div.contents");
   const buttons = document.querySelector("article.concert.info div.buttons");
 
   const numOfContent = 40;
@@ -124,12 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const makeContent = (id, region) => {
     const content = document.createElement("a");
+    content.href = `http://localhost:3002/detail/${
+      region[id - 1].concert_code
+    }`;
     content.classList.add("content");
     content.innerHTML = `
-      <img src= ${region[id - 1].concert_poster}/>
+      <img src= ${region[id - 1].concert_poster}>
       <div class="content__title">${region[id - 1].concert_name}</span>
       <div class="content__name">${region[id - 1].concert_loc}</span>
-      <div class="content__date">2022.01.01</span>
+      <div class="content__date">${region[id - 1].start_date} ~ ${
+      region[id - 1].end_date
+    }</span>
     `;
     return content;
   };
