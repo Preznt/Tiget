@@ -44,6 +44,7 @@ router.get("/genre/:gCategory", async (req, res) => {
       include: "f_concert",
       required: false,
     });
+    console.log(concert);
     res.json(concert);
   } catch (err) {
     console.log(err);
